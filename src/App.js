@@ -45,28 +45,16 @@ class App extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener("load", this.handleLoad());
+    this.handleLoad(2000)
   }
-
-  handleLoad() {
-    console.log("Loaded");
-    setTimeout(
-      this.setState({
-        loader: false
-      }),
-      5000
-    );
-  }
-  handleChange() {
-    console.log(radioValue);
-    const csBackground = "linear-gradient(200deg, #0b3081 10%, #000000 100%)";
-    const filmBackground = "linear-gradient(200deg, #0b8171 10%, #000000 100%)";
-    if (document.getElementById("cs").checked) {
-      document.body.style.backgroundImage = csBackground;
-    } else {
-      document.body.style.backgroundImage = filmBackground;
-      radioValue = "film";
-    }
+  sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
+  handleLoad = async (milliseconds) => {
+    await this.sleep(milliseconds)
+    this.setState({
+      loader : false
+    })
   }
   render() {
     if (this.state.loader) {
@@ -77,22 +65,12 @@ class App extends Component {
         //<Col span={8} offset={4}><Animator></Animator></Col>
         <React.Fragment>
           <Layout style={{ background: "transparent" }}>
-            <Sider
-            breakpoint="lg"
-            collapsedWidth="0"
-            onBreakpoint={broken => {
-              console.log(broken);
-            }}
-            onCollapse={(collapsed, type) => {
-              console.log(collapsed, type);
-            }}
-          >
               <Menubar></Menubar>
-            </Sider>
+            
             <Layout style={{ background: "transparent" }}>
             <Content style={{ background: "transparent" }}>
               <Row type="flex" justify="center" align="middle">
-              <Col lg={{span : 12, offset : 5}} sm={{span : 6, offset : 3}}>
+              <Col lg={{span : 10, offset : 5}} sm={{span : 6, offset : 3}}>
                 <Paper
                   elevation={0}
                   style={{
@@ -106,14 +84,14 @@ class App extends Component {
                 </Col>
               </Row>
               <Row type="flex" justify="center" align="middle">
-              <Col span={12} offset={5}>
+              <Col span={10} offset={5}>
                 <Paper elevation={0} style={{ background: "transparent" }}>
                   <NameDrawer></NameDrawer>
                 </Paper>
                 </Col>
               </Row>
               <Row type="flex" justify="center" align="middle">
-              <Col span={18} offset={5}>
+              <Col span={16} offset={7}>
                 <Typewriter></Typewriter>
                 </Col>
               </Row>
