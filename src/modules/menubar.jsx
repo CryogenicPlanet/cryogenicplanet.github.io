@@ -42,6 +42,10 @@ class Menubar extends Component {
                   <Icon type="video-camera" />
                   <span className="nav-text">Filmography</span>
                 </Menu.Item>
+                <Menu.Item key="8">
+                  <Icon type="camera" />
+                  <span className="nav-text">Photography</span>
+                </Menu.Item>
                 <Menu.Item key="3">
                   <Icon type="user" />
                   <span className="nav-text">About me</span>
@@ -62,10 +66,7 @@ class Menubar extends Component {
                   <Icon type="team" />
                   <span className="nav-text">Contact</span>
                 </Menu.Item>
-                <Menu.Item key="8">
-                  <Icon type="shop" />
-                  <span className="nav-text">nav 8</span>
-                </Menu.Item>
+                
               </Menu>
             </Sider>
         );

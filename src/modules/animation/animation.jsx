@@ -138,7 +138,7 @@ anime.timeline({loop: true})
   })
   .add({
     targets: '.ml11 .line',
-    translateX: [0, document.querySelector('.ml11 .letters').getBoundingClientRect().width + 10],
+    translateX: [0, document.querySelector('.ml11 .letters').getBoundingClientRect().width + 20],
     easing: "easeOutExpo",
     duration: 700,
     delay: 100
@@ -237,29 +237,44 @@ class Typewriter extends Component {
      type: type
     };
    }
+   sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
   componentDidMount(){
-    var typewriter = document.getElementById('typewriter1');
-    var Construction = document.getElementById('typewriter2')
-    typewriter = this.setupTypewriter(typewriter);
-    Construction = this.setupTypewriter(Construction)
-    typewriter.type()
-    Construction.type()
+    var n = 5 ;
+    for (var i = 1; i < n+1; i++){
+      let typewriter = document.getElementById('typewriter' + i)
+      console.log(typewriter)
+      typewriter = this.setupTypewriter(typewriter);
+      typewriter.type()
+      this.sleep(250)
+    }
+    
+   // var typewriter = document.getElementById('typewriter1');
+   // var Construction = document.getElementById('typewriter2')
+    
+   // Construction = this.setupTypewriter(Construction)
+    
+   // Construction.type()
   }
   render(){
     return (
       <Fragment>
-<pre id="typewriter1" style={{overflowX: 'hidden;'}}>
-<span class="var-highlight">Rahul Tarak</span>  = &#123;
-type: <span class="string-highlight">'[Software Engineer', 'Filmmaker']</span>,
-age: <span class="string-highlight">'19'</span>,
-School: <span class="string-highlight">'UofT'</span>
-}	
-;;
+<pre id="typewriter1" class="typewriter" style={{overflowX: 'hidden;'}}>
+<span class="comment-highlight">class</span><span class="var-highlight"> RahulTarak</span><span class="comment-highlight">  implements SoftwareEngineer, Filmmaker </span> &#123;;
 </pre>
-<pre id="typewriter2" style={{overflowX: 'hidden;'}}>
-<span class="var-highlight">Website </span>  = &#123;
-status : <span class="string-highlight">'Under Construction'</span> 
-};;
+<pre id="typewriter2" class="typewriter" style={{overflowX: 'hidden;'}}>
+<span class="comment-highlight">private String</span><span class="var-highlight"> programmingExperience </span>=<span class="string-highlight"> "7 years";</span>
+</pre>
+<pre id="typewriter3" class="typewriter" style={{overflowX: 'hidden;'}}>
+<span class="comment-highlight">private String</span><span class="var-highlight"> education </span>= <span class="string-highlight"> "University of Toronto"</span>;;
+</pre>
+<pre id="typewriter4" class="typewriter" style={{overflowX: 'hidden;'}}>
+<span class="comment-highlight">private String</span><span class="var-highlight"> degree </span>= <span class="string-highlight"> "Honors Computer Science"</span>;;
+</pre>
+<pre id="typewriter5" class="typewriter" style={{overflowX: 'hidden;'}}>
+<span class="comment-highlight">private int</span><span class="var-highlight"> graduation </span>= <span class="string-highlight"> 2023</span>;
+};
 </pre>
 </Fragment>
     )

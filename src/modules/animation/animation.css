@@ -57,11 +57,12 @@
     font-size:1vw;
 }
 .comment-highlight {
-  color:lightgrey;
+  color:skyblue;
   font-size:1vw;
 }
 #typewriter {
     font-size: 1vw; 
+    
     margin: 0;
     font-family: "Courier New";
 }

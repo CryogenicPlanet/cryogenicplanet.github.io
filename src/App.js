@@ -10,11 +10,10 @@ import {
   Card,
   Avatar
 } from "antd";
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
 import Loader, { loader } from "./modules/loading";
 import Menubar from "./modules/menubar";
+import About from "./modules/about"
 import * as Scroll from "react-scroll";
 import {
   Link,
@@ -90,10 +89,15 @@ class App extends Component {
                 </Paper>
                 </Col>
               </Row>
-              <Row type="flex" justify="center" align="middle">
+            {/*  <Row type="flex" justify="center" align="middle">
               <Col span={16} offset={7}>
                 <Typewriter></Typewriter>
                 </Col>
+                </Row> */}
+              <Row  type="flex" justify="center" align="middle" style={{paddingTop : "16%"}}>
+                  <Col span={12} offset={3}>
+                  <About></About>
+                  </Col>
               </Row>
             </Content>
           </Layout>
