@@ -52,3 +52,27 @@
     display: inline-block;
     line-height: 1em;
   }
+  .var-highlight {
+    color: #C0AD60;
+    font-size:1vw;
+}
+
+.string-highlight {
+    color: rgba(253, 149, 90, 0.8);
+    font-size:1vw;
+}
+.comment-highlight {
+  color:lightgrey;
+  font-size:1vw;
+}
+#typewriter {
+    /* font-size: 2vw; */
+    margin: 0;
+    font-family: "Courier New";
+}
+
+#typewriter:after {
+    content: "|";
+    -webkit-animation: blink 500ms linear infinite alternate;
+    animation: blink 500ms linear infinite alternate;
+}
