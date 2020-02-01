@@ -17,12 +17,20 @@ class Menubar extends Component {
         return (
             
             <Sider
-              style={{
-                overflow: 'auto',
-                height: '100vh',
-                position: 'fixed',
-                left: 0,
-              }}
+            style={{
+              overflow: 'auto',
+              height: '100vh',
+              position: 'fixed',
+              left: 0,
+            }}
+            breakpoint="lg"
+            collapsedWidth="0"
+            onBreakpoint={broken => {
+              console.log(broken);
+            }}
+            onCollapse={(collapsed, type) => {
+              console.log(collapsed, type);
+            }}
             >
               <div className="logo" />
               <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
