@@ -44,8 +44,10 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.handleLoad(2000)
+    this.handleLoad(1000)
+
   }
+  
   sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
@@ -67,7 +69,7 @@ class App extends Component {
               <Menubar></Menubar>
             
             <Layout style={{ background: "transparent" }}>
-            <Content style={{ background: "transparent" }}>
+            <Content style={{ background: "transparent" }} name="home">
               <Row type="flex" justify="center" align="middle">
               <Col lg={{span : 10, offset : 5}} sm={{span : 6, offset : 3}}>
                 <Paper
@@ -89,11 +91,16 @@ class App extends Component {
                 </Paper>
                 </Col>
               </Row>
-            {/*  <Row type="flex" justify="center" align="middle">
-              <Col span={16} offset={7}>
-                <Typewriter></Typewriter>
+              <Row type="flex" justify="center" align="middle">
+              <Col span={8} offset={2}>
+              <Row type="flex" justify="space-between" align="middle">
+              <a href="https://github.com/CryogenicPlanet"><Icon type="github" style={{fontSize : "2vw"}}/></a>
+              <a href="https://www.linkedin.com/in/rahul-tarak/"><Icon type="linkedin" style={{fontSize : "2vw"}}/></a>
+              <a href="https://www.youtube.com/channel/UC49yeT9WnpVdIdmo4ZYUteQ"><Icon type="youtube" style={{fontSize : "2vw"}}/></a>
+              <a href="https://www.instagram.com/cryogenicplanet/"><Icon type="instagram" style={{fontSize : "2vw"}}/></a>
+              </Row> 
                 </Col>
-                </Row> */}
+                </Row> 
               <Row  type="flex" justify="center" align="middle" style={{paddingTop : "16%"}}>
                   <Col span={12} offset={3}>
                   <About></About>
