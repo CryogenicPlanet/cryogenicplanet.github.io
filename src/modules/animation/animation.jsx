@@ -241,7 +241,7 @@ class Typewriter extends Component {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
   componentDidMount(){
-    var n = 5 ;
+    var n = 6 ;
     for (var i = 1; i < n+1; i++){
       let typewriter = document.getElementById('typewriter' + i)
       console.log(typewriter)
@@ -274,8 +274,12 @@ class Typewriter extends Component {
 </pre>
 <pre id="typewriter5" class="typewriter" style={{overflowX: 'hidden;'}}>
 <span class="comment-highlight">private int</span><span class="var-highlight"> graduation </span>= <span class="string-highlight"> 2023</span>;
-};
+};;
 </pre>
+<pre id="typewriter6" class="typewriter" style={{overflowX: 'hidden;'}}>
+<span class="comment-highlight">Object</span><span class="var-highlight"> website </span>= <span class="string-highlight"> 'Under Construction'</span>;;
+</pre>
+
 </Fragment>
     )
   }
