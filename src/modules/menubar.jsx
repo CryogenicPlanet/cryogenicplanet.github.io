@@ -107,14 +107,16 @@ class Menubar extends Component {
                   <span className="nav-text">Photography</span>
                 </Menu.Item>
                 <Menu.Item key="3">
-                <Link activeClass="active" className="about" to="about" spy={true} smooth={true} duration={500} >
+                <Link activeClass="active" className="about" to="about" spy={true} smooth={true} duration={1200} >
                   <Icon type="user" />
                   <span className="nav-text">About me</span>
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="4">
+                <Link  className="experience" to="experience" spy={true} smooth={true} duration={1400} >
                   <Icon type="bar-chart" />
                   <span className="nav-text">Work Experience</span>
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="5">
                   <Icon type="cloud-o" />

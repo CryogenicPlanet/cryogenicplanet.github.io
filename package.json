@@ -24,6 +24,7 @@
     "react-pose": "^4.0.10",
     "react-scripts": "3.3.0",
     "react-scroll": "^1.7.16",
+    "react-scrollspy": "^3.4.2",
     "serve": "^11.3.0"
   },
   "scripts": {

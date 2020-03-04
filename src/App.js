@@ -14,6 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import Loader, { loader } from "./modules/loading";
 import Menubar from "./modules/menubar";
 import About from "./modules/about"
+import Experience from "./modules/experience/experience"
 import * as Scroll from "react-scroll";
 import {
   Link,
@@ -24,6 +25,7 @@ import {
   scroller
 } from "react-scroll";
 import "./App.less";
+import Scrollspy from 'react-scrollspy'
 import { render } from "@testing-library/react";
 import {
   Animator,
@@ -47,6 +49,7 @@ class App extends Component {
     this.handleLoad(1000)
 
   }
+  
   
   sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -84,6 +87,7 @@ class App extends Component {
                 </Paper>
                 </Col>
               </Row>
+              
               <Row type="flex" justify="center" align="middle">
               <Col span={10} offset={5}>
                 <Paper elevation={0} style={{ background: "transparent" }}>
@@ -99,13 +103,32 @@ class App extends Component {
               <a href="https://www.youtube.com/channel/UC49yeT9WnpVdIdmo4ZYUteQ"><Icon type="youtube" style={{fontSize : "2vw"}}/></a>
               <a href="https://www.instagram.com/cryogenicplanet/"><Icon type="instagram" style={{fontSize : "2vw"}}/></a>
               </Row> 
-                </Col>
-                </Row> 
-              <Row  type="flex" justify="center" align="middle" style={{paddingTop : "16%"}}>
+              </Col>
+              </Row>
+              <div style={{paddingTop : "16%"}}></div>
+              <Paper elevation={0} style={{background : "#212121"}}>
+              <Element name="about" className="element"> 
+              <Row  type="flex" justify="center" align="middle" style={{paddingTop : "1%"}}>
+                  <Title>About Me</Title>
+              </Row>
+              <Row  type="flex" justify="center" align="middle">
                   <Col span={12} offset={3}>
+                  
                   <About></About>
+                  
                   </Col>
               </Row>
+              </Element>
+              </Paper>
+              <Paper elevation={0} style={{background : "#212121"}}>
+              <Row  type="flex" justify="center" align="middle" style={{paddingTop : "5%"}}>
+                  <Col>
+                  <Element name="experience" className="element">
+                  <Experience></Experience>
+                  </Element>
+                  </Col>
+              </Row>
+              </Paper>
             </Content>
           </Layout>
           </Layout>
