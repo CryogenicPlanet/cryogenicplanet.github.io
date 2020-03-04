@@ -15,6 +15,7 @@ import Loader, { loader } from "./modules/loading";
 import Menubar from "./modules/menubar";
 import About from "./modules/about"
 import Experience from "./modules/experience/experience"
+import Skills from "./modules/skills/skills"
 import * as Scroll from "react-scroll";
 import {
   Link,
@@ -121,13 +122,25 @@ class App extends Component {
               </Element>
               </Paper>
               <Paper elevation={0} style={{background : "#212121"}}>
-              <Row  type="flex" justify="center" align="middle" style={{paddingTop : "5%"}}>
-                  <Col>
-                  <Element name="experience" className="element">
-                  <Experience></Experience>
-                  </Element>
-                  </Col>
-              </Row>
+                <Row  type="flex" justify="center" align="middle" style={{paddingTop : "5%"}}>
+                    <Col>
+                      <Element name="experience" className="element">
+                        <Experience></Experience>
+                      </Element>
+                    </Col>
+                </Row>
+              </Paper>
+              <Paper elevation={0} style={{background : "#212121"}}>
+                <Row  type="flex" justify="center" align="middle" style={{paddingTop : "5%"}}>
+                    <Col>
+                      <Element name="skills" className="element">
+                      <Row  type="flex" justify="center" align="middle" style={{paddingTop : "1%"}}>
+                        <Title>Skills</Title>
+                      </Row>
+                        <Skills></Skills>
+                      </Element>
+                    </Col>
+                </Row>
               </Paper>
             </Content>
           </Layout>

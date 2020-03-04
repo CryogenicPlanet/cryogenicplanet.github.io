@@ -1,0 +1,84 @@
+{
+    "languages": [{
+            "name": "Javascript",
+            "percent": 90
+        },
+        {
+            "name": "C",
+            "percent": 75
+        },
+        {
+            "name": "C++",
+            "percent": 70
+        },
+        {
+            "name": "Java",
+            "percent": 85
+        },
+        {
+            "name": "Python",
+            "percent": 80
+        },
+        {
+            "name": "SQL",
+            "percent": 80
+        },
+        {
+            "name" : "HTML",
+            "percent" : 90
+        },
+        {
+            "name" : "CSS",
+            "percent" : 65
+        }
+    ],
+    "frameworks" : [
+        {
+            "name" : "Node.js",
+            "percent": 95
+        },
+        {
+            "name" : "Express",
+            "percent": 80
+        },
+        {
+            "name" : "Angular",
+            "percent" : 80
+        },
+        {
+            "name" : "React",
+            "percent" : 60
+        },
+        {
+            "name" : "Flask",
+            "percent" : 55
+        },
+        {
+            "name" : "MySQL",
+            "percent" : 90
+        }
+
+
+    ],
+    "other" : [
+        {
+            "name" : "GIT",
+            "percent" : 80
+        },{
+            "name" : "Linux",
+            "percent" : 80
+        }, {
+            "name" : "GCP",
+            "percent" : 70
+        }, {
+            "name" : "Jupyter",
+            "percent" : 90
+        }, {
+            "name" : "Numpy",
+            "percent" : 90
+        }, {
+            "name" : "Arduino",
+            "percent" : 85
+        }
+    ]
+}
