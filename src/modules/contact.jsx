@@ -31,7 +31,7 @@ class Contact extends Component {
     
         return (
             <Row  type="flex" justify="center" align="middle">
-            <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages}>
+            <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages} data-netlify="true">
             <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
@@ -54,11 +54,9 @@ class Contact extends Component {
               <Input.TextArea />
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-              <Tooltip title="Under Construction">
-              <Button type="primary" htmlType="submit" disabled>
+              <Button type="primary" htmlType="submit">
                 Submit
               </Button>
-              </Tooltip>
             </Form.Item>
           </Form>
           </Row>
