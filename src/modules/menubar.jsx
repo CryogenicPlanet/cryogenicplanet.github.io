@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Layout, Menu, Icon} from 'antd';
+import { Layout, Menu, Icon} from 'antd';
 import {
   Link,
-  Element,
   Events,
   animateScroll as scroll,
-  scrollSpy,
   scroller
 } from "react-scroll";
-const { Header, Content, Footer, Sider } = Layout;
-const {SubMenu} = Menu;
+const { Sider } = Layout;
 
 
 class Menubar extends Component {
@@ -23,7 +20,7 @@ class Menubar extends Component {
       this.scrollToTop = this.scrollToTop.bind(this);
     }
     componentDidUpdate(prevProps){
-      if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+      if((this.props.screenWidth !== prevProps.screenWidth)||(this.props.isMobile !== prevProps.isMobile)){
         this.setState({
           screenWidth : this.props.screenWidth,
           isMobile : this.props.isMobile
@@ -91,7 +88,7 @@ class Menubar extends Component {
               left: 0,
             }}
             breakpoint="xl"
-            collapsedWidth= {this.state.screenWidth  > 600 && this.state.isMobile == false ? "8.5vw" : "0%"}
+            collapsedWidth= {this.state.screenWidth  > 600 && this.state.isMobile === false ? "8.5vw" : "0%"}
             onBreakpoint={broken => {
               console.log(broken);
             }}

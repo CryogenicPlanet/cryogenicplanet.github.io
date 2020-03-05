@@ -1,39 +1,26 @@
 import React, { Component } from "react";
 import {
-  Button,
   Col,
   Row,
-  Menu,
   Icon,
   Layout,
   Typography,
-  Card,
-  Avatar
 } from "antd";
 import Paper from "@material-ui/core/Paper";
-import Loader, { loader } from "./modules/loading";
+import Loader from "./modules/loading";
 import Menubar from "./modules/menubar";
 import About from "./modules/about"
 import Experience from "./modules/experience/experience"
 import Skills from "./modules/skills/skills"
 import Contact from "./modules/contact"
 import Projects from "./modules/projects/projects"
-import * as Scroll from "react-scroll";
 import {
-  Link,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller
+  Element
 } from "react-scroll";
 import "./App.less";
-import Scrollspy from 'react-scrollspy'
-import { render } from "@testing-library/react";
 import {
   Animator,
-  NameDrawer,
-  Typewriter
+  NameDrawer
 } from "./modules/animation/animation";
 
 const HeartSvg = () => (
@@ -48,11 +35,8 @@ const NetlifySvg = () => (
 );
 const HeartIcon = props => <Icon component={HeartSvg} {...props} />;
 const NetlifyIcon = props => <Icon component={NetlifySvg} {...props} />;
-const { Header, Content, Sider, Footer } = Layout;
-const { Meta } = Card;
-const { Text, Title,Paragraph } = Typography;
-const brackets = "<>";
-var radioValue;
+const { Content, Footer } = Layout;
+const { Title,Paragraph } = Typography;
 class App extends Component {
   state = {
     loader: true,
@@ -90,19 +74,19 @@ class App extends Component {
     }
    
     if(window.innerWidth > 768){
-      if((this.state.screenType != 0) && (this.state.screenType != null)){
+      if((this.state.screenType !== 0) && (this.state.screenType !== null)){
         this.setState({ screenWidth: window.innerWidth,screenType : 0 });
         //window.location.reload(false)
       }
     this.setState({ screenWidth: window.innerWidth,screenType : 0 });
     } else if(window.innerWidth > 600) {
-      if((this.state.screenType != 1) && (this.state.screenType != null)){
+      if((this.state.screenType !== 1) && (this.state.screenType !== null)){
         this.setState({screenWidth : window.innerWidth, iconSize : "4vw",smallIconSize : "3vw",screenType : 1})
         //window.location.reload(false)
       }
       this.setState({screenWidth : window.innerWidth, iconSize : "4vw",smallIconSize : "3vw",screenType : 1})
     } else {
-      if((this.state.screenType != 2) && (this.state.screenType != null)){
+      if((this.state.screenType !== 2) && (this.state.screenType !== null)){
         this.setState({screenWidth : window.innerWidth, iconSize : "7vw",smallIconSize:"6vw",screenType : 2})
         //window.location.reload(false)
       }
@@ -131,7 +115,7 @@ class App extends Component {
               <Menubar screenWidth={this.state.screenWidth} isMobile={this.state.isMobile}></Menubar>
             
             <Layout style={{ background: "transparent" }}>
-            <Content style={this.state.screenWidth > 600 && this.state.isMobile == false ? { background: "transparent" } : {background : "#212121"}} name="home">
+            <Content style={this.state.screenWidth > 600 && this.state.isMobile === false ? { background: "transparent" } : {background : "#212121"}} name="home">
               <Row type="flex" justify="center" align="middle">
               <Col lg={{span : 10, offset : 5}} sm={{span : 10, offset : 3}}>
                 <Paper
@@ -224,10 +208,10 @@ class App extends Component {
             </Content>
             <Footer>
             <Row  type="flex" justify="center" align="middle">
-                <Paragraph> {`<> `} with  <HeartIcon style={{ color: 'hotpink' }} /> by <a href="https://github.com/CryogenicPlanet" target="_blank">CryogenicPlanet</a></Paragraph>
+                <Paragraph> {`<> `} with  <HeartIcon style={{ color: 'hotpink' }} /> by <a href="https://github.com/CryogenicPlanet" target="_blank" rel="noopener noreferrer">CryogenicPlanet</a></Paragraph>
               </Row>  
               <Row  type="flex" justify="center" align="middle">
-                <Paragraph>Powered by <a href="https://www.netlify.com/" target="_blank"><NetlifyIcon></NetlifyIcon></a></Paragraph>
+                <Paragraph>Powered by <a href="https://www.netlify.com/" target="_blank" rel="noopener noreferrer"><NetlifyIcon></NetlifyIcon></a></Paragraph>
               </Row>
               <Row  type="flex" justify="center" align="middle">
               CryogenicPlanet © 2020

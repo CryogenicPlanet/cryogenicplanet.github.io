@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from 'react'
-import {Input, Row,Col, Form, InputNumber, Button, Select, Tooltip } from 'antd'
+import React, {Component} from 'react'
+import {Input, Row, Form, Button, Select } from 'antd'
 
 const {TextArea} = Input;
 const { Option } = Select;
@@ -52,7 +52,7 @@ class Contact extends Component {
             </Select>
             </Form.Item>
             <Form.Item name={['contact', 'message']} label="Message" rules={{required : true}}>
-              <Input.TextArea />
+              <TextArea />
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
               <Button type="primary" htmlType="submit">

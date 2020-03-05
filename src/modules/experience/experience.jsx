@@ -1,16 +1,16 @@
 import React, {Component, Fragment} from "react"
 import data from "./data"
-import {Col, Row, Layout, List,Avatar,Typography, Icon, Tooltip} from 'antd'
+import {Col, Row, List,Typography, Icon, Tooltip} from 'antd'
 //import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
-const {Title,Paragraph} = Typography
+const {Title} = Typography
 
-var databody;
+
 class Experience extends Component {
   state = {
     fontSize : this.props.fontSize
   }
   componentDidUpdate(prevProps){
-    if(this.props.fontSize != prevProps.fontSize){
+    if(this.props.fontSize !== prevProps.fontSize){
       this.setState({
         fontSize : this.props.fontSize
       })
@@ -44,7 +44,7 @@ class Experience extends Component {
                       return(
                       <Col span={4}>
                       <Tooltip title={link.prompt}>
-                      <a href={link.href} target="_blank"><Icon type={link.type} style={{fontSize : this.state.fontSize}}/></a>
+                      <a href={link.href} target="_blank" rel="noopener noreferrer"><Icon type={link.type} style={{fontSize : this.state.fontSize}}/></a>
                       </Tooltip>
                       </Col>);
                     })}
@@ -61,7 +61,7 @@ class Experience extends Component {
                           <p>{description}</p>
                       );
                     })}
-                    {item.languages != null ? <p><b>{`Languages used ${item.languages}`}</b></p> : <p></p> }
+                    {item.languages !== null ? <p><b>{`Languages used ${item.languages}`}</b></p> : <p></p> }
                 </List.Item>
               )}></List>
             </Col>

@@ -1,11 +1,10 @@
 import React, {Component, Fragment} from "react"
 import data from "./data"
 import Image from 'material-ui-image';
-import {Col, Row, Layout, List,Avatar,Typography, Icon, Tooltip, Button, Alert} from 'antd'
+import {Col, Row, List,Typography, Icon, Tooltip, Button} from 'antd'
 //import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
-const {Title,Paragraph} = Typography
+const {Title} = Typography
 
-var databody;
 class Projects extends Component {
     state = {
         extraProject : false,
@@ -19,7 +18,7 @@ class Projects extends Component {
         })
     }
     componentDidUpdate(prevProps){
-        if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+        if((this.props.screenWidth !== prevProps.screenWidth)||(this.props.isMobile !== prevProps.isMobile)){
           this.setState({
             screenWidth : this.props.screenWidth,
             isMobile : this.props.isMobile
@@ -41,7 +40,7 @@ class Projects extends Component {
                 dataSource={data}
                 renderItem={item => (
                 <Fragment>
-                <div>{this.state.screenWidth < 769 || this.state.isMobile == true ?
+                <div>{this.state.screenWidth < 769 || this.state.isMobile === true ?
                 <Image
                 src={item.image}
                 onClick={() => console.log('onClick')}
@@ -64,7 +63,7 @@ class Projects extends Component {
                       return(
                       <Col span={4}>
                       <Tooltip title={link.prompt}>
-                      <a href={link.href} target="_blank"><Icon type={link.type} style={{fontSize : this.state.fontSize}}/></a>
+                      <a href={link.href} target="_blank" rel="noopener noreferrer"><Icon type={link.type} style={{fontSize : this.state.fontSize}}/></a>
                       </Tooltip>
                       </Col>);
                     })}
@@ -72,7 +71,7 @@ class Projects extends Component {
                     </Row>
                     
                   ]}
-                  extra={this.state.screenWidth > 768 && this.state.isMobile == false ?
+                  extra={this.state.screenWidth > 768 && this.state.isMobile === false ?
                         <a href={item.links[0].href}><img
                             style = {{width : "13vw"}}
                             alt="logo"

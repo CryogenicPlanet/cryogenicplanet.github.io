@@ -1,7 +1,6 @@
 import React, {Component,Fragment} from 'react'
 import {Row,Progress,Col,Typography,List} from 'antd'
 import data from './data'
-import { T } from 'antd/lib/upload/utils'
 const {Title, Paragraph} = Typography
 class Skills extends Component {
     state = {
@@ -9,7 +8,7 @@ class Skills extends Component {
         isMobile : this.props.isMobile
     }
     componentDidUpdate(prevProps){
-        if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+        if((this.props.screenWidth !== prevProps.screenWidth)||(this.props.isMobile !== prevProps.isMobile)){
           this.setState({
             screenWidth : this.props.screenWidth,
             isMobile : this.props.isMobile
@@ -26,7 +25,7 @@ class Skills extends Component {
                 data.languages.map((item,index)=>{
                     return(
                     <Fragment>
-                    {this.state.screenWidth > 500 && this.state.isMobile == false ?
+                    {this.state.screenWidth > 500 && this.state.isMobile === false ?
                     <Col span={6} offset={3}>
                     <Progress
                         type="dashboard"
@@ -75,7 +74,7 @@ class Skills extends Component {
                 {data.other.map((item,index)=>{
                     return(
                     <Fragment>
-                    {this.state.screenWidth > 500 && this.state.isMobile == false ?
+                    {this.state.screenWidth > 500 && this.state.isMobile === false ?
                     <Col span={3}>
                     
                     <Fragment>

@@ -3,18 +3,16 @@ import {Typewriter} from "./animation/animation"
 import {
     Col,
     Row,
-    Typography,
     Card,
     Avatar
   } from "antd";
-const {Title} = Typography
   class about extends Component {
     state = {
       screenwidth : this.props.screenwidth,
       isMobile : this.props.isMobile
     }
     componentDidUpdate(prevProps){
-      if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+      if((this.props.screenWidth !== prevProps.screenWidth)||(this.props.isMobile !== prevProps.isMobile)){
         this.setState({
           screenWidth : this.props.screenWidth,
           isMobile : this.props.isMobile

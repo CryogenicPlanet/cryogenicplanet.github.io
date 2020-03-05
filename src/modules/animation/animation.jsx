@@ -1,13 +1,12 @@
 import React, { Component,Fragment } from 'react';
-import {Typography,Row,Col} from 'antd';
+import {Row,Col} from 'antd';
 import './animation.css';
 import anime from './anime-master/lib/anime.es.js';
-const { Text, Title } = Typography;
 
 class Animator extends Component {
   state = { pathIndex: 0, screenWidth : this.props.screenWidth, isMobile : this.props.isMobile };
   componentDidUpdate(prevProps){
-    if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+    if((this.props.screenWidth !== prevProps.screenWidth)||(this.props.isMobile !== prevProps.isMobile)){
       this.setState({
         screenWidth : this.props.screenWidth,
         isMobile : this.props.isMobile
@@ -15,7 +14,7 @@ class Animator extends Component {
     }
   }
   componentDidMount() {
-    if((this.state.screenWidth > 600)&&(this.state.isMobile == false)){
+    if((this.state.screenWidth > 600)&&(this.state.isMobile === false)){
     const staggerVisualizerEl = document.querySelector('.stagger-visualizer');
     const fragment = document.createDocumentFragment();
     const numberOfElements = 81;
@@ -115,7 +114,7 @@ class Animator extends Component {
   render() {
     return (
       <Fragment>
-        <div>{this.state.screenWidth > 600 && this.state.isMobile == false ?  
+        <div>{this.state.screenWidth > 600 && this.state.isMobile === false ?  
         <Row  type="flex" justify="center" align="middle">
         <Col span={16}>
         <div class="stagger-visualizer"></div>
@@ -133,7 +132,7 @@ class NameDrawer extends Component{
     isMobile : this.props.isMobile
   }
   componentDidUpdate(prevProps){
-    if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+    if((this.props.screenWidth !== prevProps.screenWidth)||(this.props.isMobile !== prevProps.isMobile)){
       this.setState({
         screenWidth : this.props.screenWidth,
         isMobile : this.props.isMobile
@@ -191,7 +190,7 @@ anime.timeline({loop: true})
         return(
             <Fragment>
               <div>
-              {this.state.screenWidth > 600 && this.state.isMobile == false ? 
+              {this.state.screenWidth > 600 && this.state.isMobile === false ? 
               
             <h1 class="ml11">
             <span class="text-wrapper">
@@ -314,7 +313,7 @@ class Typewriter extends Component {
    // Construction.type()
   }
   componentDidUpdate(prevProps){
-    if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+    if((this.props.screenWidth !== prevProps.screenWidth)||(this.props.isMobile !== prevProps.isMobile)){
       this.setState({
         screenWidth : this.props.screenWidth,
         isMobile : this.props.isMobile
