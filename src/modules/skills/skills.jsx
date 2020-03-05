@@ -14,7 +14,7 @@ class Skills extends Component {
                 data.languages.map((item,index)=>{
                     return(
                     <Fragment>
-                    {this.props.screenWidth > 400 ?
+                    {this.props.screenWidth > 500 ?
                     <Col span={6} offset={3}>
                     <Progress
                         type="dashboard"
@@ -63,7 +63,7 @@ class Skills extends Component {
                 {data.other.map((item,index)=>{
                     return(
                     <Fragment>
-                    {this.props.screenWidth > 400 ?
+                    {this.props.screenWidth > 500 ?
                     <Col span={3}>
                     
                     <Fragment>
