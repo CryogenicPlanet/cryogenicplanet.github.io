@@ -6,6 +6,16 @@ const {Title,Paragraph} = Typography
 
 var databody;
 class Experience extends Component {
+  state = {
+    fontSize : this.props.fontSize
+  }
+  componentDidUpdate(prevProps){
+    if(this.props.fontSize != prevProps.fontSize){
+      this.setState({
+        fontSize : this.props.fontSize
+      })
+    }
+  }
   render() {
     return (
       <section color="black">
@@ -27,14 +37,14 @@ class Experience extends Component {
                       <Fragment>
                       <Col span={4}>
                       <Tooltip title="Learn More">
-                      <a href={`#${item.title.name}`} disabled><Icon type="more" style={{fontSize : this.props.fontSize}} rotate="90"/></a>
+                      <a href={`#${item.title.name}`} disabled><Icon type="more" style={{fontSize : this.state.fontSize}} rotate="90"/></a>
                       </Tooltip>
                       </Col>
                       {item.links.map((link,index)=>{
                       return(
                       <Col span={4}>
                       <Tooltip title={link.prompt}>
-                      <a href={link.href} target="_blank"><Icon type={link.type} style={{fontSize : this.props.fontSize}}/></a>
+                      <a href={link.href} target="_blank"><Icon type={link.type} style={{fontSize : this.state.fontSize}}/></a>
                       </Tooltip>
                       </Col>);
                     })}

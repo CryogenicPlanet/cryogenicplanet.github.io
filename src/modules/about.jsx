@@ -9,10 +9,22 @@ import {
   } from "antd";
 const {Title} = Typography
   class about extends Component {
+    state = {
+      screenwidth : this.props.screenwidth,
+      isMobile : this.props.isMobile
+    }
+    componentDidUpdate(prevProps){
+      if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+        this.setState({
+          screenWidth : this.props.screenWidth,
+          isMobile : this.props.isMobile
+        })
+      }
+    }
     render(){
         return(
         <Card name="about" style={{background : "#212121",borderWidth:"0"}}>
-        {this.props.screenwidth > 768 ?
+        {this.state.screenwidth > 768 ?
         <Row  type="flex" justify="start" align="middle">
         
         <Col span={4}>
@@ -20,11 +32,11 @@ const {Title} = Typography
         </Col>
         
         <Col>
-        <Typewriter screenwidth={this.props.screenwidth}></Typewriter></Col>
+        <Typewriter screenwidth={this.state.screenwidth} isMobile={this.state.isMobile}></Typewriter></Col>
         </Row>
         : <Row  type="flex" justify="center" align="middle">
            <Col>
-          <Typewriter screenwidth={this.props.screenwidth}></Typewriter></Col>
+          <Typewriter screenwidth={this.state.screenwidth} isMobile={this.state.isMobile}></Typewriter></Col>
           </Row>
           }
         </Card>

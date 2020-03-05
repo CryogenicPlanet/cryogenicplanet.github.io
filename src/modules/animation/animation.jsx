@@ -5,9 +5,17 @@ import anime from './anime-master/lib/anime.es.js';
 const { Text, Title } = Typography;
 
 class Animator extends Component {
-  state = { pathIndex: 0 };
+  state = { pathIndex: 0, screenWidth : this.props.screenWidth, isMobile : this.props.isMobile };
+  componentDidUpdate(prevProps){
+    if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+      this.setState({
+        screenWidth : this.props.screenWidth,
+        isMobile : this.props.isMobile
+      })
+    }
+  }
   componentDidMount() {
-    if(this.props.screenWidth > 600){
+    if((this.state.screenWidth > 600)&&(this.state.isMobile == false)){
     const staggerVisualizerEl = document.querySelector('.stagger-visualizer');
     const fragment = document.createDocumentFragment();
     const numberOfElements = 81;
@@ -107,7 +115,7 @@ class Animator extends Component {
   render() {
     return (
       <Fragment>
-        <div>{this.props.screenWidth > 600 ?  
+        <div>{this.state.screenWidth > 600 && this.state.isMobile == false ?  
         <Row  type="flex" justify="center" align="middle">
         <Col span={16}>
         <div class="stagger-visualizer"></div>
@@ -120,6 +128,18 @@ class Animator extends Component {
 }
 
 class NameDrawer extends Component{
+  state = {
+    screenWidth : this.props.screenWidth,
+    isMobile : this.props.isMobile
+  }
+  componentDidUpdate(prevProps){
+    if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+      this.setState({
+        screenWidth : this.props.screenWidth,
+        isMobile : this.props.isMobile
+      })
+    }
+  }
     componentDidMount(){
         console.log("Called nameDrawer")
         const svgPath = document.querySelectorAll('.path');
@@ -171,7 +191,7 @@ anime.timeline({loop: true})
         return(
             <Fragment>
               <div>
-              {this.props.screenWidth > 600 ? 
+              {this.state.screenWidth > 600 && this.state.isMobile == false ? 
               
             <h1 class="ml11">
             <span class="text-wrapper">
@@ -203,6 +223,10 @@ anime.timeline({loop: true})
 }
 
 class Typewriter extends Component {
+  state = {
+    screenWidth : this.props.screenWidth,
+    isMobile : this.props.isMobile
+  }
   setupTypewriter(t) {
     var HTML = t.innerHTML;
  
@@ -281,6 +305,7 @@ class Typewriter extends Component {
       this.sleep(250)
     }
     
+    
    // var typewriter = document.getElementById('typewriter1');
    // var Construction = document.getElementById('typewriter2')
     
@@ -288,9 +313,17 @@ class Typewriter extends Component {
     
    // Construction.type()
   }
+  componentDidUpdate(prevProps){
+    if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+      this.setState({
+        screenWidth : this.props.screenWidth,
+        isMobile : this.props.isMobile
+      })
+    }
+  }
   render(){
 
-    if(this.props.screenWidth < 600) {
+    if(this.state.screenWidth < 600 ) {
       var newSize = "6vw"
       var comment = document.getElementsByClassName("comment-highlight");
       comment.fontSize = newSize

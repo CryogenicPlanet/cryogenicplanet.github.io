@@ -4,6 +4,18 @@ import data from './data'
 import { T } from 'antd/lib/upload/utils'
 const {Title, Paragraph} = Typography
 class Skills extends Component {
+    state = {
+        screenWidth : this.props.screenWidth,
+        isMobile : this.props.isMobile
+    }
+    componentDidUpdate(prevProps){
+        if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+          this.setState({
+            screenWidth : this.props.screenWidth,
+            isMobile : this.props.isMobile
+          })
+        }
+      }
     render(){
         return(
             <Fragment>
@@ -14,7 +26,7 @@ class Skills extends Component {
                 data.languages.map((item,index)=>{
                     return(
                     <Fragment>
-                    {this.props.screenWidth > 500 ?
+                    {this.state.screenWidth > 500 && this.state.isMobile == false ?
                     <Col span={6} offset={3}>
                     <Progress
                         type="dashboard"
@@ -63,7 +75,7 @@ class Skills extends Component {
                 {data.other.map((item,index)=>{
                     return(
                     <Fragment>
-                    {this.props.screenWidth > 500 ?
+                    {this.state.screenWidth > 500 && this.state.isMobile == false ?
                     <Col span={3}>
                     
                     <Fragment>

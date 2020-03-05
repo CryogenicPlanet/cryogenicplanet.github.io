@@ -14,13 +14,22 @@ const {SubMenu} = Menu;
 
 class Menubar extends Component {
     state = {
-        collapsed : false
+        collapsed : false,
+        screenWidth : this.props.screenWidth,
+        isMobile : this.props.isMobile
     }
     constructor(props) {
       super(props);
       this.scrollToTop = this.scrollToTop.bind(this);
     }
-  
+    componentDidUpdate(prevProps){
+      if((this.props.screenWidth != prevProps.screenWidth)||(this.props.isMobile != prevProps.isMobile)){
+        this.setState({
+          screenWidth : this.props.screenWidth,
+          isMobile : this.props.isMobile
+        })
+      }
+    }
     componentDidMount() {
   
       Events.scrollEvent.register('begin', function () {
@@ -82,7 +91,7 @@ class Menubar extends Component {
               left: 0,
             }}
             breakpoint="xl"
-            collapsedWidth= {this.props.screenWidth  > 600 ? "8.5vw" : "0%"}
+            collapsedWidth= {this.state.screenWidth  > 600 && this.state.isMobile == false ? "8.5vw" : "0%"}
             onBreakpoint={broken => {
               console.log(broken);
             }}
