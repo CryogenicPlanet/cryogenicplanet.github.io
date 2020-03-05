@@ -123,8 +123,10 @@ class Menubar extends Component {
                   <span className="nav-text">Projects</span>
                 </Menu.Item>
                 <Menu.Item key="6">
+                <Link  className="skills" to="skills" spy={true} smooth={true} duration={1600} >
                   <Icon type="appstore-o" />
                   <span className="nav-text">Skills</span>
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="7">
                   <Icon type="team" />
