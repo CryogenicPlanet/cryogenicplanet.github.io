@@ -60,7 +60,6 @@ class Skills extends Component {
                     <Title level={3}>Other</Title>
                 </Row>
                  <Row  type="flex" justify="space-between" align="middle">
-                <Col span={18}>
                 {data.other.map((item,index)=>{
                     return(
                     <Fragment>
@@ -92,7 +91,6 @@ class Skills extends Component {
                     );
                     
                 })}
-                </Col>
                 </Row> 
                 </Fragment>
             )
