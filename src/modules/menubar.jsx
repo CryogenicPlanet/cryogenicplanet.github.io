@@ -81,8 +81,8 @@ class Menubar extends Component {
               position: 'fixed',
               left: 0,
             }}
-            breakpoint="lg"
-            collapsedWidth="0"
+            breakpoint="xl"
+            collapsedWidth="8%"
             onBreakpoint={broken => {
               console.log(broken);
             }}

@@ -146,7 +146,7 @@ class App extends Component {
               </Paper>
               <Paper elevation={0} style={{background : "#212121"}}>
                 <Row  type="flex" justify="center" align="middle" style={{paddingTop : "5%"}}>
-                    <Col>
+                    <Col span={16}>
                       <Element name="projects" className="element">
                         <Projects></Projects>
                       </Element>
@@ -155,7 +155,7 @@ class App extends Component {
               </Paper>
               <Paper elevation={0} style={{background : "#212121"}}>
                 <Row  type="flex" justify="center" align="middle" style={{paddingTop : "5%"}}>
-                    <Col>
+                    <Col span={16}>
                       <Element name="skills" className="element">
                       <Row  type="flex" justify="center" align="middle" style={{paddingTop : "1%"}}>
                         <Title>Skills</Title>
