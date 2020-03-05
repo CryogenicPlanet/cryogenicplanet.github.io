@@ -6,6 +6,7 @@
     align-items: center;
     width: 23.4375vw;
     height: 23.4375vw;
+
   }
   
   .stagger-visualizer div {
@@ -47,6 +48,50 @@
     display: inline-block;
     line-height: 0.8333333333333334vw;
   }
+
+ @media only screen and (max-width:400px){
+  .var-highlight {
+    color: #C0AD60;
+    font-size:2.8vw;
+}
+
+.string-highlight {
+    color: rgba(253, 149, 90, 0.8);
+    font-size:2.8vw;
+}
+.comment-highlight {
+  color:skyblue;
+  font-size:2.8vw;
+}
+#typewriter {
+    font-size: 2.8vw; 
+    
+    margin: 0;
+    font-family: "Courier New";
+}
+}
+@media only screen and (min-width:400px) and (max-width:768px){
+  .var-highlight {
+    color: #C0AD60;
+    font-size:1.9vw;
+}
+
+.string-highlight {
+    color: rgba(253, 149, 90, 0.8);
+    font-size:1.9vw;
+}
+.comment-highlight {
+  color:skyblue;
+  font-size:1.9vw;
+}
+#typewriter {
+    font-size: 1.9vw; 
+    
+    margin: 0;
+    font-family: "Courier New";
+}
+}
+@media only screen and (min-width:769px) {
   .var-highlight {
     color: #C0AD60;
     font-size:1vw;
@@ -66,6 +111,8 @@
     margin: 0;
     font-family: "Courier New";
 }
+}
+  
 
 #typewriter:after {
     content: "|";

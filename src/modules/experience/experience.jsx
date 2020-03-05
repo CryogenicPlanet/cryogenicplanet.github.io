@@ -27,14 +27,14 @@ class Experience extends Component {
                       <Fragment>
                       <Col span={4}>
                       <Tooltip title="Learn More">
-                      <a href={`#${item.title.name}`} disabled><Icon type="more" style={{fontSize : "1.5vw",}} rotate="90"/></a>
+                      <a href={`#${item.title.name}`} disabled><Icon type="more" style={{fontSize : this.props.fontSize}} rotate="90"/></a>
                       </Tooltip>
                       </Col>
                       {item.links.map((link,index)=>{
                       return(
                       <Col span={4}>
                       <Tooltip title={link.prompt}>
-                      <a href={link.href} target="_blank"><Icon type={link.type} style={{fontSize : "1.5vw",}}/></a>
+                      <a href={link.href} target="_blank"><Icon type={link.type} style={{fontSize : this.props.fontSize}}/></a>
                       </Tooltip>
                       </Col>);
                     })}

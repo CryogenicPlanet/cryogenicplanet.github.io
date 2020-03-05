@@ -82,7 +82,7 @@ class Menubar extends Component {
               left: 0,
             }}
             breakpoint="xl"
-            collapsedWidth="8%"
+            collapsedWidth= {this.props.screenWidth  > 600 ? "8.5vw" : "0%"}
             onBreakpoint={broken => {
               console.log(broken);
             }}

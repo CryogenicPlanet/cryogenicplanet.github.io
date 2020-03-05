@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from "react"
 import data from "./data"
+import Image from 'material-ui-image';
 import {Col, Row, Layout, List,Avatar,Typography, Icon, Tooltip, Button, Alert} from 'antd'
 //import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 const {Title,Paragraph} = Typography
@@ -16,6 +17,7 @@ class Projects extends Component {
     }
   render() {
     return (
+    <Fragment>
       <section color="black">
         <Row  type="flex" justify="center" align="middle">
            <Title>Projects</Title>
@@ -27,7 +29,16 @@ class Projects extends Component {
                 size="large"
                 dataSource={data}
                 renderItem={item => (
-                  
+                <Fragment>
+                <div>{this.props.screenWidth < 769 ?
+                <Image
+                src={item.image}
+                onClick={() => console.log('onClick')}
+                aspectRatio={(16/9)}
+                disableSpinner
+              />
+                 : null}
+                </div>
                 <List.Item
                   key={item.title.name}
                   actions={[
@@ -35,14 +46,14 @@ class Projects extends Component {
                       <Fragment>
                       <Col span={4}>
                       <Tooltip title="Learn More">
-                      <a href={`#${item.id}`} disabled><Icon type="more" style={{fontSize : "1.5vw",}} rotate="90"/></a>
+                      <a href={`#${item.id}`} disabled><Icon type="more" style={{fontSize : this.props.fontSize,}} rotate="90"/></a>
                       </Tooltip>
                       </Col>
                       {item.links.map((link,index)=>{
                       return(
                       <Col span={4}>
                       <Tooltip title={link.prompt}>
-                      <a href={link.href} target="_blank"><Icon type={link.type} style={{fontSize : "1.5vw"}}/></a>
+                      <a href={link.href} target="_blank"><Icon type={link.type} style={{fontSize : this.props.fontSize}}/></a>
                       </Tooltip>
                       </Col>);
                     })}
@@ -50,12 +61,12 @@ class Projects extends Component {
                     </Row>
                     
                   ]}
-                  extra={
+                  extra={this.props.screenWidth > 768 ?
                         <a href={item.links[0].href}><img
                             style = {{width : "13vw"}}
                             alt="logo"
                             src={item.image}
-                        /></a>
+                        /></a> : null
                   }
                   >
                   <List.Item.Meta
@@ -67,7 +78,9 @@ class Projects extends Component {
                       );
                     })}
                     {item.languages != null ? <p><b>{`Languages used ${item.languages}`}</b></p> : <p></p> }
+                    
                 </List.Item>
+                </Fragment>
               )}></List>
             </Col>
           </Row>
@@ -79,6 +92,7 @@ class Projects extends Component {
             </Tooltip>
           </Row>
         </section>
+        </Fragment>
     );
   }
 }

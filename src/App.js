@@ -57,14 +57,29 @@ class App extends Component {
   state = {
     loader: true,
     searchResults: [],
-    radioValue: "cs"
+    radioValue: "cs",
+    screenWidth : window.innerWidth,
+    iconSize : "2vw",
+    smallIconSize : "1.5vw"
   };
 
   componentDidMount() {
+    window.addEventListener("resize", this.updateWindowDimensions());
     this.handleLoad(1000)
 
   }
-  
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateWindowDimensions)
+  }
+  updateWindowDimensions() {
+    if(window.innerWidth > 768){
+    this.setState({ screenWidth: window.innerWidth });
+    } else if(window.innerWidth > 600) {
+      this.setState({screenWidth : window.innerWidth, iconSize : "4vw",smallIconSize : "3vw"})
+    } else {
+      this.setState({screenWidth : window.innerWidth, iconSize : "7vw",smallIconSize:"6vw"})
+    }
+ }
   
   sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -84,12 +99,12 @@ class App extends Component {
         //<Col span={8} offset={4}><Animator></Animator></Col>
         <React.Fragment>
           <Layout style={{ background: "transparent" }}>
-              <Menubar></Menubar>
+              <Menubar screenWidth={this.state.screenWidth}></Menubar>
             
             <Layout style={{ background: "transparent" }}>
-            <Content style={{ background: "transparent" }} name="home">
+            <Content style={this.state.screenWidth > 600 ? { background: "transparent" } : {background : "#212121"}} name="home">
               <Row type="flex" justify="center" align="middle">
-              <Col lg={{span : 10, offset : 5}} sm={{span : 6, offset : 3}}>
+              <Col lg={{span : 10, offset : 5}} sm={{span : 10, offset : 3}}>
                 <Paper
                   elevation={0}
                   style={{
@@ -98,7 +113,7 @@ class App extends Component {
                     paddingTop: "8%"
                   }}
                 >
-                  <Animator></Animator>
+                  <Animator screenWidth={this.state.screenWidth}></Animator>
                 </Paper>
                 </Col>
               </Row>
@@ -106,17 +121,17 @@ class App extends Component {
               <Row type="flex" justify="center" align="middle">
               <Col span={10} offset={5}>
                 <Paper elevation={0} style={{ background: "transparent" }}>
-                  <NameDrawer></NameDrawer>
+                  <NameDrawer screenWidth={this.state.screenWidth}></NameDrawer>
                 </Paper>
                 </Col>
               </Row>
               <Row type="flex" justify="center" align="middle">
               <Col span={8} offset={2}>
               <Row type="flex" justify="space-between" align="middle">
-              <a href="https://github.com/CryogenicPlanet"><Icon type="github" style={{fontSize : "2vw"}}/></a>
-              <a href="https://www.linkedin.com/in/rahul-tarak/"><Icon type="linkedin" style={{fontSize : "2vw"}}/></a>
-              <a href="https://www.youtube.com/channel/UC49yeT9WnpVdIdmo4ZYUteQ"><Icon type="youtube" style={{fontSize : "2vw"}}/></a>
-              <a href="https://www.instagram.com/cryogenicplanet/"><Icon type="instagram" style={{fontSize : "2vw"}}/></a>
+              <a href="https://github.com/CryogenicPlanet"><Icon type="github" style={{fontSize : this.state.iconSize}}/></a>
+              <a href="https://www.linkedin.com/in/rahul-tarak/"><Icon type="linkedin" style={{fontSize : this.state.iconSize}}/></a>
+              <a href="https://www.youtube.com/channel/UC49yeT9WnpVdIdmo4ZYUteQ"><Icon type="youtube" style={{fontSize : this.state.iconSize}}/></a>
+              <a href="https://www.instagram.com/cryogenicplanet/"><Icon type="instagram" style={{fontSize : this.state.iconSize}}/></a>
               </Row> 
               </Col>
               </Row>
@@ -129,7 +144,7 @@ class App extends Component {
               <Row  type="flex" justify="center" align="middle">
                   <Col span={12} offset={3}>
                   
-                  <About></About>
+                  <About screenWidth={this.state.screenWidth}></About>
                   
                   </Col>
               </Row>
@@ -137,9 +152,9 @@ class App extends Component {
               </Paper>
               <Paper elevation={0} style={{background : "#212121"}}>
                 <Row  type="flex" justify="center" align="middle" style={{paddingTop : "5%"}}>
-                    <Col>
+                    <Col span={16}>
                       <Element name="experience" className="element">
-                        <Experience></Experience>
+                        <Experience fontSize={this.state.smallIconSize}></Experience>
                       </Element>
                     </Col>
                 </Row>
@@ -148,7 +163,7 @@ class App extends Component {
                 <Row  type="flex" justify="center" align="middle" style={{paddingTop : "5%"}}>
                     <Col span={16}>
                       <Element name="projects" className="element">
-                        <Projects></Projects>
+                        <Projects fontSize={this.state.smallIconSize} screenWidth={this.state.screenWidth}></Projects>
                       </Element>
                     </Col>
                 </Row>
@@ -160,7 +175,7 @@ class App extends Component {
                       <Row  type="flex" justify="center" align="middle" style={{paddingTop : "1%"}}>
                         <Title>Skills</Title>
                       </Row>
-                        <Skills></Skills>
+                        <Skills screenWidth={this.state.screenWidth}></Skills>
                       </Element>
                     </Col>
                 </Row>

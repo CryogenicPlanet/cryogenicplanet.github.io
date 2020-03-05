@@ -1,5 +1,5 @@
 import React, { Component,Fragment } from 'react';
-import {Typography} from 'antd';
+import {Typography,Row,Col} from 'antd';
 import './animation.css';
 import anime from './anime-master/lib/anime.es.js';
 const { Text, Title } = Typography;
@@ -7,6 +7,7 @@ const { Text, Title } = Typography;
 class Animator extends Component {
   state = { pathIndex: 0 };
   componentDidMount() {
+    if(this.props.screenWidth > 600){
     const staggerVisualizerEl = document.querySelector('.stagger-visualizer');
     const fragment = document.createDocumentFragment();
     const numberOfElements = 81;
@@ -101,10 +102,18 @@ class Animator extends Component {
   
     staggersAnimation.play();
   }
+}
+
   render() {
     return (
       <Fragment>
+        <div>{this.props.screenWidth > 600 ?  
+        <Row  type="flex" justify="center" align="middle">
+        <Col span={16}>
         <div class="stagger-visualizer"></div>
+        </Col>
+        </Row>
+        : <p></p> }</div>
       </Fragment>
     );
   }
@@ -125,9 +134,10 @@ const svgText = anime({
   delay: (el, i) => { return i * 500 }
 });
 // Wrap every letter in a span
-var textWrapper = document.querySelector('.ml11 .letters');
-textWrapper.innerHTML = textWrapper.textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
-
+var textWrapper = document.querySelectorAll('.ml11 .letters');
+for(var text of textWrapper){
+text.innerHTML = text.textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
+}
 anime.timeline({loop: true})
   .add({
     targets: '.ml11 .line',
@@ -160,12 +170,33 @@ anime.timeline({loop: true})
     render(){
         return(
             <Fragment>
+              <div>
+              {this.props.screenWidth > 600 ? 
+              
             <h1 class="ml11">
-  <span class="text-wrapper">
-    <span class="line line1"></span>
-    <span class="letters" style={{color : "#fff",textAlign: 'center' }}>Hello, I'm Rahul Tarak</span>
-  </span>
-</h1>  
+            <span class="text-wrapper">
+              <span class="line line1"></span>
+              <span class="letters" style={{color : "#fff",textAlign: 'center' }}>Hello, I'm Rahul Tarak</span>
+            </span>
+            </h1>  
+            :
+            <Row  type="flex" align="middle">
+            <Col span={16}>
+            <h1 class="ml11" style={{fontSize:"9vw"}}>
+            <span class="text-wrapper">
+              <span class="line line1"></span>
+              <Row  type="flex" justify="center" align="middle">
+              <span class="letters" style={{color : "#fff" }}>Hello, I'm </span>
+              </Row>
+              <Row  type="flex" justify="center" align="middle">
+              <span class="letters" style={{color : "#fff" }}>Rahul Tarak</span>
+              </Row>
+            </span>
+            </h1>
+            </Col>
+            </Row>  
+    }
+</div>
 </Fragment>                  
     )}
 
@@ -258,6 +289,17 @@ class Typewriter extends Component {
    // Construction.type()
   }
   render(){
+
+    if(this.props.screenWidth < 600) {
+      var newSize = "6vw"
+      var comment = document.getElementsByClassName("comment-highlight");
+      comment.fontSize = newSize
+      var varHighlight = document.getElementsByClassName("var-highlight");
+      varHighlight.fontSize = newSize
+      var string = document.getElementsByClassName("string-highlight");
+      string.fontSize = newSize
+      console.log("Changing Size")
+    }
     return (
       <Fragment>
 <pre id="typewriter1" class="typewriter" style={{overflowX: 'hidden;'}}>
@@ -279,7 +321,6 @@ class Typewriter extends Component {
 <pre id="typewriter6" class="typewriter" style={{overflowX: 'hidden;'}}>
 <span class="comment-highlight">Object</span><span class="var-highlight"> website </span>= <span class="string-highlight"> 'Under Construction'</span>;;
 </pre>
-
 </Fragment>
     )
   }
