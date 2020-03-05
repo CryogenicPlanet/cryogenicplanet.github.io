@@ -31,7 +31,8 @@ class Contact extends Component {
     
         return (
             <Row  type="flex" justify="center" align="middle">
-            <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages} data-netlify="true">
+            <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages} method="post" netlify netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="contact" />
             <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
