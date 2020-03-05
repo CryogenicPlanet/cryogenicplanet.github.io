@@ -91,18 +91,18 @@ class Menubar extends Component {
             }}
             >
               <div className="logo" />
-              <Menu theme="dark" mode="inline" defaultSelectedKeys={['8']}>
+              <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                 <Menu.Item key="1">
                 <a onClick={this.scrollToTop}>
                   <Icon type="home" />
                   <span className="nav-text">Home</span>
                   </a>
                 </Menu.Item>
-                <Menu.Item key="2">
+                <Menu.Item key="2" disabled>
                   <Icon type="video-camera" />
                   <span className="nav-text">Filmography</span>
                 </Menu.Item>
-                <Menu.Item key="8">
+                <Menu.Item key="8" disabled>
                   <Icon type="camera" />
                   <span className="nav-text">Photography</span>
                 </Menu.Item>
@@ -119,8 +119,10 @@ class Menubar extends Component {
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="5">
+                <Link  className="projects" to="projects" spy={true} smooth={true} duration={1500} >
                   <Icon type="cloud-o" />
                   <span className="nav-text">Projects</span>
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="6">
                 <Link  className="skills" to="skills" spy={true} smooth={true} duration={1600} >
@@ -129,8 +131,10 @@ class Menubar extends Component {
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="7">
+                <Link  className="contact" to="contact" spy={true} smooth={true} duration={1600} >
                   <Icon type="team" />
                   <span className="nav-text">Contact</span>
+                  </Link>
                 </Menu.Item>
                 
               </Menu>
