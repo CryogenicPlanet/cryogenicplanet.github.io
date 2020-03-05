@@ -11,6 +11,9 @@
         "description" : [
             "Managed a Student Run, Non Profit Organisation for over five year, with twenty plus members",
             "Conducted fundraisers to generate over $10,000 for various causes"
+        ],
+        "links" : [
+            {"href" : "http://sparkachange.github.io/", "type" : "link", "prompt" : "Official Website"}
         ]
     },
     {
@@ -25,7 +28,10 @@
         "description" : [
             "Developed a solution to withdraw money from ATM using NFC on your phone"
         ],
-        "languages" : "Java(Android), Node.js, MySQL"
+        "languages" : "Java(Android), Node.js, MySQL",
+        "links" : [
+            {"href" : "https://bangaloremirror.indiatimes.com/bangalore/others/city-students-develop-phone-based-atm/articleshow/63493145.cms", "type" : "link", "prompt" : "News Report"}
+        ]
     },
     {
         "title" : {
@@ -40,6 +46,10 @@
             "Lead a team of five students to build a peer to peer book sharing platform,",
             "which was built under the supervision and mentorship of Cisco."
         ],
-        "languages" : "Node.js, Express.js, Angular.js, MySQL"
+        "languages" : "Node.js, Express.js, Angular.js, MySQL",
+        "links" : [
+            {"href":"https://github.com/CryogenicPlanet/Stanza-Cisco-Internship", "type" : "github","prompt" : "Git Repository"},
+            {"href" : "http://stanzabooks.herokuapp.com/#!/login", "type" : "link", "prompt" : "Official Website"}
+        ]
     }
 ]

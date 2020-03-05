@@ -1,8 +1,8 @@
-import React, {Component} from "react"
+import React, {Component, Fragment} from "react"
 import data from "./data"
-import {Col, Row, Layout, List,Avatar,Typography} from 'antd'
+import {Col, Row, Layout, List,Avatar,Typography, Icon, Tooltip} from 'antd'
 //import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
-const {Title} = Typography
+const {Title,Paragraph} = Typography
 
 var databody;
 class Experience extends Component {
@@ -21,8 +21,27 @@ class Experience extends Component {
                 renderItem={item => (
                   
                 <List.Item
-                  key={item.title}
-                  //actions={}
+                  key={item.title.name}
+                  actions={[
+                    <Row  type="flex" justify="space-between" align="middle">
+                      <Fragment>
+                      <Col span={4}>
+                      <Tooltip title="Learn More">
+                      <a href={`#${item.title.name}`} disabled><Icon type="more" style={{fontSize : "1.5vw",}} rotate="90"/></a>
+                      </Tooltip>
+                      </Col>
+                      {item.links.map((link,index)=>{
+                      return(
+                      <Col span={4}>
+                      <Tooltip title={link.prompt}>
+                      <a href={link.href} target="_blank"><Icon type={link.type} style={{fontSize : "1.5vw",}}/></a>
+                      </Tooltip>
+                      </Col>);
+                    })}
+                    </Fragment>
+                    </Row>
+                    
+                  ]}
                   >
                   <List.Item.Meta
                     title={< a href = {item.title.href} > {item.title.name} </a>}

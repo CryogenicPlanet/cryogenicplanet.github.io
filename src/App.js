@@ -17,6 +17,7 @@ import About from "./modules/about"
 import Experience from "./modules/experience/experience"
 import Skills from "./modules/skills/skills"
 import Contact from "./modules/contact"
+import Projects from "./modules/projects/projects"
 import * as Scroll from "react-scroll";
 import {
   Link,
@@ -127,6 +128,15 @@ class App extends Component {
                     <Col>
                       <Element name="experience" className="element">
                         <Experience></Experience>
+                      </Element>
+                    </Col>
+                </Row>
+              </Paper>
+              <Paper elevation={0} style={{background : "#212121"}}>
+                <Row  type="flex" justify="center" align="middle" style={{paddingTop : "5%"}}>
+                    <Col>
+                      <Element name="projects" className="element">
+                        <Projects></Projects>
                       </Element>
                     </Col>
                 </Row>
