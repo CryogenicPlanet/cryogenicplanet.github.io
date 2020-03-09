@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Icon} from 'antd';
 import {
-  Link,
   Events,
   animateScroll as scroll,
   scroller
 } from "react-scroll";
+import {Link} from 'react-router-dom'
 const { Sider } = Layout;
 
 
@@ -109,9 +109,11 @@ class Menubar extends Component {
                   <Icon type="video-camera" />
                   <span className="nav-text">Filmography</span>
                 </Menu.Item>
-                <Menu.Item key="8" disabled>
+                <Menu.Item key="8" >
+                  <Link to="/photography">
                   <Icon type="camera" />
                   <span className="nav-text">Photography</span>
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="3">
                 {/* <Link activeClass="active" className="a" to="about" spy={true} smooth={true} duration={1200} > */}

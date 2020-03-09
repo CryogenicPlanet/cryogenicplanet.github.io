@@ -48,7 +48,9 @@ class Contact extends Component {
       })
     }
     capthcaExpired = () => {
-      recaptchaInstance.reset();  
+      this.setState({
+        submit : true
+      })
     }
      onFinish = values => {
         console.log(values);
