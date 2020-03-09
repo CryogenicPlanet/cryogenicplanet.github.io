@@ -85,6 +85,12 @@ class Contact extends Component {
             <Form.Item label="Message" rules={{required : true}}>
               <TextArea  name="message" value={message} onChange={this.handleChange}/>
             </Form.Item>
+            <Recaptcha
+              sitekey="6Lf_yt8UAAAAABBSn1s2ObArK7-bEkwoJf7F6w3T"
+              render="explicit"
+              onloadCallback={this.capthca}
+              theme="dark"
+            />
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
               <Button type="primary" htmlType="submit" disabled={this.state.submit}>
                 Submit
