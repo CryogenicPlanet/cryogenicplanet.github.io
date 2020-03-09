@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Input, Row, Form, Button, Select } from 'antd'
+import {Input, Row, Form, Button, Select,message } from 'antd'
 
 const {TextArea} = Input;
 const { Option } = Select;
@@ -21,28 +21,50 @@ const layout = {
   };
   
 
-    
+  const encode = (data) => {
+    return Object.keys(data)
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+  }
 
 class Contact extends Component {
+    state = {
+      name : "",
+      email : "",
+      subject : "",
+      reason : "",
+      message : ""
+    }
      onFinish = values => {
         console.log(values);
       };
+      handleSubmit = e => {
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({ "form-name": "contact", ...this.state })
+        })
+          .then(() => message.success("Sucessfully Submited"))
+          .catch(error => alert(error));
+  
+        e.preventDefault();
+      };
+      handleChange = e => this.setState({ [e.target.name]: e.target.value });
       render() {
     
         return (
             <Row  type="flex" justify="center" align="middle">
-            <Form {...layout} name="nest-messages" onFinish={this.onFinish} validateMessages={validateMessages} method="POST" netlify netlify-honeypot="bot-field" data-netlify="true">
-            <input type="hidden" name="form-name" value="contact" />
-            <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
+            <Form {...layout} name="contact" onSubmit={this.handleSubmit} onFinish={this.onFinish} validateMessages={validateMessages}>
+            <Form.Item name="name" label="Name"  onChange={this.handleChange} rules={[{ required: true }]}>
               <Input />
             </Form.Item>
-            <Form.Item name={['contact', 'email']} label="Email" rules={[{ type: 'email',required : true }]}>
+            <Form.Item name="email"  onChange={this.handleChange} label="Email" rules={[{ type: 'email',required : true }]}>
               <Input />
             </Form.Item>
-            <Form.Item name={['contact', 'subject']} label="Subject" rules={[{ required: true }]}>
+            <Form.Item name="subject" onChange={this.handleChange} label="Subject" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
-            <Form.Item name={['contact', 'reason']} label="Reason" rules={[{ required: true }]}>
+            <Form.Item name="reason" onChange={this.handleChange} label="Reason" rules={[{ required: true }]}>
             <Select defaultValue="hi">
                 <Option value="hi">Say Hi!</Option>
                 <Option value="business">Business</Option>
@@ -51,7 +73,7 @@ class Contact extends Component {
                 <Option value="other">Other</Option>
             </Select>
             </Form.Item>
-            <Form.Item name={['contact', 'message']} label="Message" rules={{required : true}}>
+            <Form.Item name='message' onChange={this.handleChange} label="Message" rules={{required : true}}>
               <TextArea />
             </Form.Item>
             <div data-netlify-recaptcha="true"></div>
