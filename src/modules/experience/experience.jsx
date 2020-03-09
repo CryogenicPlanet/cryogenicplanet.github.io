@@ -61,7 +61,7 @@ class Experience extends Component {
                           <p>{description}</p>
                       );
                     })}
-                    {item.languages !== null ? <p><b>{`Languages used ${item.languages}`}</b></p> : <p></p> }
+                    {item.languages  ? <p><b>{`Languages used ${item.languages}`}</b></p> : <p></p> }
                 </List.Item>
               )}></List>
             </Col>
