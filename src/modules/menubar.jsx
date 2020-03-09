@@ -110,10 +110,10 @@ class Menubar extends Component {
                   <span className="nav-text">Filmography</span>
                 </Menu.Item>
                 <Menu.Item key="8" >
-                  <Link to="/photography">
+                  <a href="https://photography.cryogenicplanet.tech">
                   <Icon type="camera" />
                   <span className="nav-text">Photography</span>
-                  </Link>
+                  </a>
                 </Menu.Item>
                 <Menu.Item key="3">
                 {/* <Link activeClass="active" className="a" to="about" spy={true} smooth={true} duration={1200} > */}

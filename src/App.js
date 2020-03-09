@@ -62,9 +62,6 @@ class App extends Component {
       <Fragment>
       <Router>
         <Switch>
-        <Route path="/photography">
-          <Photography></Photography>
-        </Route>
         <Route path="/">
           <Home {...this.state} />
         </Route>
