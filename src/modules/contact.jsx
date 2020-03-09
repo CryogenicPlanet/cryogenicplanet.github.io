@@ -86,7 +86,7 @@ class Contact extends Component {
               <TextArea  name="message" value={message} onChange={this.handleChange}/>
             </Form.Item>
             <Recaptcha
-              sitekey="6Lf_yt8UAAAAABBSn1s2ObArK7-bEkwoJf7F6w3T"
+              sitekey="6Lciz98UAAAAAGYHMh5Pw7e9D9woEsqlD6HPujQG"
               render="explicit"
               onloadCallback={this.capthca}
               theme="dark"
