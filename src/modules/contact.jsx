@@ -35,7 +35,7 @@ class Contact extends Component {
       subject : "",
       reason : "hi",
       message : "",
-      submit : false
+      submit : true
     }
     capthca = () => {
       this.setState({
@@ -46,7 +46,6 @@ class Contact extends Component {
         console.log(values);
       };
       handleSubmit = e => {
-        console.log(this.state)
         fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
