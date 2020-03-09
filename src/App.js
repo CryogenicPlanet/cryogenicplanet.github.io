@@ -6,7 +6,6 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import Photography from './modules/photography/photography';
 class App extends Component {
   state = {
     isMobile : false,
