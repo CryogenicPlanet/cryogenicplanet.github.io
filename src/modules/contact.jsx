@@ -54,6 +54,7 @@ class Contact extends Component {
             <Form.Item name={['contact', 'message']} label="Message" rules={{required : true}}>
               <TextArea />
             </Form.Item>
+            <div data-netlify-recaptcha="true"></div>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
               <Button type="primary" htmlType="submit">
                 Submit
