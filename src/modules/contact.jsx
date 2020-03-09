@@ -4,7 +4,7 @@ import Recaptcha from 'react-recaptcha'
 
 const {TextArea} = Input;
 const { Option } = Select;
-
+let recaptchaInstance;
 const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -35,12 +35,20 @@ class Contact extends Component {
       subject : "",
       reason : "hi",
       message : "",
-      submit : true
+      submit : false
     }
-    capthca = () => {
+    capthcaLoad = () => {
+      this.setState({
+        submit : true
+      })
+    }
+    capthcaVerify = () => {
       this.setState({
         submit : false
       })
+    }
+    capthcaExpired = () => {
+      recaptchaInstance.reset();  
     }
      onFinish = values => {
         console.log(values);
@@ -87,7 +95,10 @@ class Contact extends Component {
             <Recaptcha
               sitekey="6Lciz98UAAAAAGYHMh5Pw7e9D9woEsqlD6HPujQG"
               render="explicit"
-              onloadCallback={this.capthca}
+              ref={e => recaptchaInstance = e}
+              onloadCallback={this.capthcaLoad}
+              verifyCallback={this.capthcaVerify}
+              expiredCallback ={this.capthcaExpired}
               theme="dark"
             />
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
