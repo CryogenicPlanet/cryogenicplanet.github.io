@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Input, Row, Form, Button, Select,message } from 'antd'
+import Recaptcha from 'react-recaptcha'
 
 const {TextArea} = Input;
 const { Option } = Select;
@@ -33,7 +34,13 @@ class Contact extends Component {
       email : "",
       subject : "",
       reason : "",
-      message : ""
+      message : "",
+      submit : true
+    }
+    capthca = () => {
+      this.setState({
+        submit : false
+      })
     }
      onFinish = values => {
         console.log(values);
@@ -76,9 +83,14 @@ class Contact extends Component {
             <Form.Item name='message' onChange={this.handleChange} label="Message" rules={{required : true}}>
               <TextArea />
             </Form.Item>
-            <div data-netlify-recaptcha="true"></div>
+            <Recaptcha
+              sitekey="6Lf_yt8UAAAAABBSn1s2ObArK7-bEkwoJf7F6w3T"
+              render="explicit"
+              onloadCallback={this.capthca}
+              theme="dark"
+            />
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" disabled={this.state.submit}>
                 Submit
               </Button>
             </Form.Item>
