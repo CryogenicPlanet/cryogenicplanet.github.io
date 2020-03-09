@@ -41,11 +41,12 @@ class Menubar extends Component {
     scrollToTop() {
       scroll.scrollToTop();
     }
-    scrollTo() {
-      scroller.scrollTo('scroll-to-element', {
-        duration: 800,
+    scrollTo = (element,speed) => e => {
+      scroller.scrollTo(element, {
+        duration: speed,
         delay: 0,
-        smooth: 'easeInOutQuart'
+        smooth: 'easeInOutQuart',
+        spy : true
       })
     }
     scrollToWithContainer() {
@@ -113,34 +114,45 @@ class Menubar extends Component {
                   <span className="nav-text">Photography</span>
                 </Menu.Item>
                 <Menu.Item key="3">
-                <Link activeClass="active" className="about" to="about" spy={true} smooth={true} duration={1200} >
+                {/* <Link activeClass="active" className="a" to="about" spy={true} smooth={true} duration={1200} > */}
+                  <a onClick={this.scrollTo('about',1200)}>             
                   <Icon type="user" />
                   <span className="nav-text">About me</span>
-                  </Link>
+                  </a>
+                  {/* </Link> */}
                 </Menu.Item>
                 <Menu.Item key="4">
-                <Link  className="experience" to="experience" spy={true} smooth={true} duration={1400} >
+                {/* <Link  className="experience" to="experience" spy={true} smooth={true} duration={1400} > */}
+                  <a onClick={this.scrollTo('experience',1400)}>               
                   <Icon type="bar-chart" />
                   <span className="nav-text">Work Experience</span>
-                  </Link>
+                  </a>
+  
+                  {/* </Link> */}
                 </Menu.Item>
                 <Menu.Item key="5">
-                <Link  className="projects" to="projects" spy={true} smooth={true} duration={1500} >
+                {/* <Link  className="projects" to="projects" spy={true} smooth={true} duration={1500} > */}
+                  <a onClick={this.scrollTo('projects',1500)}>
                   <Icon type="cloud-o" />
                   <span className="nav-text">Projects</span>
-                  </Link>
+                  </a>
+                  {/* </Link> */}
                 </Menu.Item>
                 <Menu.Item key="6">
-                <Link  className="skills" to="skills" spy={true} smooth={true} duration={1600} >
+                {/* <Link  className="skills" to="skills" spy={true} smooth={true} duration={1600} > */}
+                  <a onClick={this.scrollTo('skills',1600)}>
                   <Icon type="appstore-o" />
                   <span className="nav-text">Skills</span>
-                  </Link>
+                  </a>
+                  {/* </Link> */}
                 </Menu.Item>
                 <Menu.Item key="7">
-                <Link  className="contact" to="contact" spy={true} smooth={true} duration={1600} >
+                {/* <Link  className="contact" to="contact" spy={true} smooth={true} duration={1600} > */}
+                  <a onClick={this.scrollTo('contact',1600)}>
                   <Icon type="team" />
                   <span className="nav-text">Contact</span>
-                  </Link>
+                  </a>
+                  {/* </Link> */}
                 </Menu.Item>
                 
               </Menu>
