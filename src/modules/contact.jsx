@@ -33,9 +33,9 @@ class Contact extends Component {
       name : "",
       email : "",
       subject : "",
-      reason : "",
+      reason : "hi",
       message : "",
-      submit : true
+      submit : false
     }
     capthca = () => {
       this.setState({
@@ -46,6 +46,7 @@ class Contact extends Component {
         console.log(values);
       };
       handleSubmit = e => {
+        console.log(this.state)
         fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -56,23 +57,24 @@ class Contact extends Component {
   
         e.preventDefault();
       };
-      handleChange = e => this.setState({ [e.target.name]: e.target.value });
+      handleChange = e => {console.log(`${e.target.name} Input Changed`);this.setState({ [e.target.name]: e.target.value });}
       render() {
-    
+        const {name,email,subject,reason,message} = this.state
         return (
+            
             <Row  type="flex" justify="center" align="middle">
             <Form {...layout} name="contact" onSubmit={this.handleSubmit} onFinish={this.onFinish} validateMessages={validateMessages}>
-            <Form.Item name="name" label="Name"  onChange={this.handleChange} rules={[{ required: true }]}>
-              <Input />
+            <Form.Item label="Name" rules={[{ required: true }]}>
+              <Input name="name" value={name} onChange={this.handleChange}/>
             </Form.Item>
-            <Form.Item name="email"  onChange={this.handleChange} label="Email" rules={[{ type: 'email',required : true }]}>
-              <Input />
+            <Form.Item  label="Email" rules={[{ type: 'email',required : true }]}>
+              <Input name="email" value={email} onChange={this.handleChange}/>
             </Form.Item>
-            <Form.Item name="subject" onChange={this.handleChange} label="Subject" rules={[{ required: true }]}>
-              <Input />
+            <Form.Item  label="Subject" rules={[{ required: true }]}>
+              <Input name="subject" value={subject} onChange={this.handleChange}/>
             </Form.Item>
-            <Form.Item name="reason" onChange={this.handleChange} label="Reason" rules={[{ required: true }]}>
-            <Select defaultValue="hi">
+            <Form.Item  label="Reason" rules={[{ required: true }]}>
+            <Select defaultValue="hi" name="reason" value={reason} onChange={this.handleChange}>
                 <Option value="hi">Say Hi!</Option>
                 <Option value="business">Business</Option>
                 <Option value="dev">Software Development</Option>
@@ -80,8 +82,8 @@ class Contact extends Component {
                 <Option value="other">Other</Option>
             </Select>
             </Form.Item>
-            <Form.Item name='message' onChange={this.handleChange} label="Message" rules={{required : true}}>
-              <TextArea />
+            <Form.Item label="Message" rules={{required : true}}>
+              <TextArea  name="message" value={message} onChange={this.handleChange}/>
             </Form.Item>
             <Recaptcha
               sitekey="6Lf_yt8UAAAAABBSn1s2ObArK7-bEkwoJf7F6w3T"
