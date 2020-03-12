@@ -43,6 +43,7 @@ class Contact extends Component {
       })
     }
     capthcaVerify = () => {
+      console.log("Verified Capthca")
       this.setState({
         submit : false
       })
@@ -54,6 +55,7 @@ class Contact extends Component {
     }
      onFinish = values => {
         console.log(values);
+        message.success("Sucessfully Submited")
       };
       handleSubmit = e => {
         console.log("Submiting")
@@ -62,7 +64,7 @@ class Contact extends Component {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: encode({ "form-name": "contact", ...this.state })
         })
-          .then(() => message.success("Sucessfully Submited"))
+          .then(() => console.log("Submitted"))
           .catch(error => alert(error));
   
         e.preventDefault();
@@ -95,7 +97,7 @@ class Contact extends Component {
             <Form.Item label="Message" rules={{required : true}}>
               <TextArea  name="message" value={message} onChange={this.handleChange}/>
             </Form.Item>
-             <Recaptcha
+             {/* <Recaptcha
               sitekey="6Lciz98UAAAAAGYHMh5Pw7e9D9woEsqlD6HPujQG"
               render="explicit"
               ref={e => recaptchaInstance = e}
@@ -103,7 +105,7 @@ class Contact extends Component {
               verifyCallback={this.capthcaVerify}
               expiredCallback ={this.capthcaExpired}
               theme="dark"
-            />
+            /> */}
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
               <Button type="primary" htmlType="submit" disabled={this.state.submit}>
                 Submit
