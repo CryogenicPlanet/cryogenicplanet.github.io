@@ -159,7 +159,7 @@ class Menubar extends Component {
                 </Menu.Item>
                 <Menu.Item key="9">
                 {/* <Link  className="contact" to="contact" spy={true} smooth={true} duration={1600} > */}
-                  <a onClick={process.env.PUBLIC_URL + "/files/techincal_resume.pdf"}>
+                  <a href={process.env.PUBLIC_URL + "/files/techincal_resume.pdf"}>
                   <Icon type="form" />
                   <span className="nav-text">Resume</span>
                   </a>
