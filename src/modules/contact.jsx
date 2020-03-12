@@ -94,7 +94,7 @@ class Contact extends Component {
             <Form.Item label="Message" rules={{required : true}}>
               <TextArea  name="message" value={message} onChange={this.handleChange}/>
             </Form.Item>
-            {/* <Recaptcha
+             <Recaptcha
               sitekey="6Lciz98UAAAAAGYHMh5Pw7e9D9woEsqlD6HPujQG"
               render="explicit"
               ref={e => recaptchaInstance = e}
@@ -102,8 +102,7 @@ class Contact extends Component {
               verifyCallback={this.capthcaVerify}
               expiredCallback ={this.capthcaExpired}
               theme="dark"
-            /> */}
-             <div data-netlify-recaptcha="true"></div>
+            />
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
               <Button type="primary" htmlType="submit" disabled={this.state.submit}>
                 Submit
