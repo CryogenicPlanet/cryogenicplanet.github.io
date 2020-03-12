@@ -55,7 +55,7 @@ class Contact extends Component {
     }
      onFinish = values => {
         console.log(values);
-        message.success("Sucessfully Submited")
+        
       };
       handleSubmit = e => {
         console.log("Submiting")
@@ -64,8 +64,8 @@ class Contact extends Component {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: encode({ "form-name": "contact", ...this.state })
         })
-          .then(() => console.log("Submitted"))
-          .catch(error => alert(error));
+          .then(() => message.success("Sucessfully Submited"))
+          .catch(error => message.error(error));
   
         e.preventDefault();
       };
