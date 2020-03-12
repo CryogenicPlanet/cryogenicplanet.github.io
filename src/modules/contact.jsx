@@ -56,6 +56,7 @@ class Contact extends Component {
         console.log(values);
       };
       handleSubmit = e => {
+        console.log("Submiting")
         fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
