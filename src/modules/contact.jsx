@@ -64,7 +64,7 @@ class Contact extends Component {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: encode({ "form-name": "contact", ...this.state })
         })
-          .then(() => message.success("Sucessfully Submited"))
+          .then(() => {message.success("Sucessfully Submited"); this.setState({submit : true})})
           .catch(error => message.error(error));
   
         e.preventDefault();
