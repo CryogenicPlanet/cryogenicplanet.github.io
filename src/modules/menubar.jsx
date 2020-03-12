@@ -79,6 +79,7 @@ class Menubar extends Component {
       Events.scrollEvent.remove('end');
     }
     render() {
+      console.log(process.env.PUBLIC_URL + "/files/techincal_resume.pdf")
         return (
             
             <Sider
@@ -153,6 +154,14 @@ class Menubar extends Component {
                   <a onClick={this.scrollTo('contact',1600)}>
                   <Icon type="team" />
                   <span className="nav-text">Contact</span>
+                  </a>
+                  {/* </Link> */}
+                </Menu.Item>
+                <Menu.Item key="9">
+                {/* <Link  className="contact" to="contact" spy={true} smooth={true} duration={1600} > */}
+                  <a onClick={process.env.PUBLIC_URL + "/files/techincal_resume.pdf"}>
+                  <Icon type="form" />
+                  <span className="nav-text">Resume</span>
                   </a>
                   {/* </Link> */}
                 </Menu.Item>
