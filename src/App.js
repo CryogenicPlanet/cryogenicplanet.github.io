@@ -63,8 +63,12 @@ class App extends Component {
       <Fragment>
       <Router>
         <Switch>
+          <Route path="/Links" component={() => { 
+          window.location.href = 'https://linktr.ee/rahul_tarak'; 
+          return null;
+          }}/>    
           <Route path="/publications">
-            <p>Publication</p>
+            <p>Work in Progress</p>
           </Route>
         <Route path="/">
           <Home {...this.state} />
