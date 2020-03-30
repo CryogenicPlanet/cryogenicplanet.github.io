@@ -49,7 +49,7 @@ class Home extends Component {
     isMobile : this.props.isMobile
   };
   componentDidMount(){
-    this.handleLoad(1000)
+    this.handleLoad(1000);
   }
   componentDidUpdate(prevProps){
     if((this.props.screenWidth !== prevProps.screenWidth)||(this.props.isMobile !== prevProps.isMobile)){
@@ -81,7 +81,7 @@ class Home extends Component {
         //<Col span={8} offset={4}><Animator></Animator></Col>
         <React.Fragment>
           <Layout style={{ background: "transparent" }}>
-              <Menubar screenWidth={this.state.screenWidth} isMobile={this.state.isMobile}></Menubar>
+            <Menubar screenWidth={this.state.screenWidth} isMobile={this.state.isMobile}></Menubar>
             
             <Layout style={{ background: "transparent" }}>
             <Content style={this.state.screenWidth > 600 && this.state.isMobile === false ? { background: "transparent" } : {background : "#212121"}} name="home">
@@ -164,6 +164,13 @@ class Home extends Component {
               </Paper>
               <Paper elevation={0} style={{background : "#212121"}}>
                 <Row  type="flex" justify="center" align="middle" style={{paddingTop : "5%"}}>
+                  <Col>
+                  <div id="medium-widget"></div>
+                  </Col>
+                </Row>
+              </Paper>
+              <Paper elevation={0} style={{background : "#212121"}}>
+                <Row  type="flex" justify="center" align="middle" style={{paddingTop : "5%"}}>
                     <Col>
                       <Element name="contact" className="element">
                       <Row  type="flex" justify="center" align="middle" style={{paddingTop : "1%"}}>
@@ -183,7 +190,7 @@ class Home extends Component {
                 <Paragraph>Powered by <a href="https://www.netlify.com/" target="_blank" rel="noopener noreferrer"><NetlifyIcon></NetlifyIcon></a></Paragraph>
               </Row>
               <Row  type="flex" justify="center" align="middle">
-              CryogenicPlanet © 2020
+              Rahul Tarak © 2020
               </Row>
             </Footer>
           </Layout>

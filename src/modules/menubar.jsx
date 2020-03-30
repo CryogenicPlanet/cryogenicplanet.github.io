@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Layout, Menu, Icon} from 'antd';
+import React, { Component, Fragment } from 'react';
+import { Layout, Drawer,Button,Menu, Icon} from 'antd';
 import {
   Events,
   animateScroll as scroll,
@@ -13,11 +13,12 @@ class Menubar extends Component {
     state = {
         collapsed : false,
         screenWidth : this.props.screenWidth,
-        isMobile : this.props.isMobile
+        isMobile : this.props.isMobile,
+        visible : false
     }
     constructor(props) {
       super(props);
-      this.scrollToTop = this.scrollToTop.bind(this);
+      //this.scrollToTop = this.scrollToTop.bind(this);
     }
     componentDidUpdate(prevProps){
       if((this.props.screenWidth !== prevProps.screenWidth)||(this.props.isMobile !== prevProps.isMobile)){
@@ -27,79 +28,129 @@ class Menubar extends Component {
         })
       }
     }
-    componentDidMount() {
-  
-      Events.scrollEvent.register('begin', function () {
-        console.log("begin", arguments);
+    showDrawer = () => {
+      this.setState({
+        visible: true,
       });
+    };
   
-      Events.scrollEvent.register('end', function () {
-        console.log("end", arguments);
+    onClose = () => {
+      this.setState({
+        visible: false,
       });
-      this.scrollToTop()
-    }
-    scrollToTop() {
-      scroll.scrollToTop();
-    }
-    scrollTo = (element,speed) => e => {
-      scroller.scrollTo(element, {
-        duration: speed,
-        delay: 0,
-        smooth: 'easeInOutQuart',
-        spy : true
-      })
-    }
-    scrollToWithContainer() {
-  
-      let goToContainer = new Promise((resolve, reject) => {
-  
-        Events.scrollEvent.register('end', () => {
-          resolve();
-          Events.scrollEvent.remove('end');
-        });
-  
-        scroller.scrollTo('scroll-container', {
-          duration: 800,
-          delay: 0,
-          smooth: 'easeInOutQuart'
-        });
-  
-      });
-  
-      goToContainer.then(() =>
-        scroller.scrollTo('scroll-container-second-element', {
-          duration: 800,
-          delay: 0,
-          smooth: 'easeInOutQuart',
-          containerId: 'scroll-container'
-        }));
-    }
-    componentWillUnmount() {
-      Events.scrollEvent.remove('begin');
-      Events.scrollEvent.remove('end');
-    }
+    };
+   
     render() {
       console.log(process.env.PUBLIC_URL + "/files/techincal_resume.pdf")
+      if(this.state.collapsed == false){
         return (
-            
-            <Sider
+          <Sider
             style={{
               overflow: 'auto',
               height: '100vh',
               position: 'fixed',
               left: 0,
             }}
-            breakpoint="xl"
-            collapsedWidth= {this.state.screenWidth  > 600 && this.state.isMobile === false ? "8.5vw" : "0%"}
+            breakpoint="md"
+            // collapsedWidth= {this.state.screenWidth  > 600 && this.state.isMobile === false ? "8.5vw" : "0"}
+            collapsedWidth = "0"
             onBreakpoint={broken => {
+              console.log("Breakpoint")
               console.log(broken);
             }}
             onCollapse={(collapsed, type) => {
+              this.setState({
+                collapsed : true
+              })
               console.log(collapsed, type);
             }}
             >
               <div className="logo" />
-              <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+              <Nav></Nav>
+            </Sider>
+        );
+          } else {
+            console.log("Returing Drawer");
+            return(
+              <Fragment>
+              <Button type="primary" style={{position : 'fixed', overflow: 'auto', paddingTop : "1%"}} onClick={this.showDrawer}>
+              <Icon type="menu" />
+        </Button>
+              <Drawer
+          title="CryogenicPlanet"
+          placement= "top"
+          closable={false}
+          onClose={this.onClose}
+          visible={this.state.visible}
+        >
+          <Nav></Nav>
+        </Drawer>
+        </Fragment>
+            );
+          }
+    }
+}
+
+class Nav extends Component{
+  constructor(props) {
+    super(props);
+    this.scrollToTop = this.scrollToTop.bind(this);
+  }
+  componentDidMount() {
+  
+    Events.scrollEvent.register('begin', function () {
+      console.log("begin", arguments);
+    });
+
+    Events.scrollEvent.register('end', function () {
+      console.log("end", arguments);
+    });
+    this.scrollToTop()
+  }
+  
+  componentWillUnmount() {
+    Events.scrollEvent.remove('begin');
+    Events.scrollEvent.remove('end');
+  }
+  scrollToTop() {
+    scroll.scrollToTop();
+  }
+  scrollTo = (element,speed) => e => {
+    scroller.scrollTo(element, {
+      duration: speed,
+      delay: 0,
+      smooth: 'easeInOutQuart',
+      spy : true
+    })
+  }
+  scrollToWithContainer() {
+
+    let goToContainer = new Promise((resolve, reject) => {
+
+      Events.scrollEvent.register('end', () => {
+        resolve();
+        Events.scrollEvent.remove('end');
+      });
+
+      scroller.scrollTo('scroll-container', {
+        duration: 800,
+        delay: 0,
+        smooth: 'easeInOutQuart'
+      });
+
+    });
+
+    goToContainer.then(() =>
+      scroller.scrollTo('scroll-container-second-element', {
+        duration: 800,
+        delay: 0,
+        smooth: 'easeInOutQuart',
+        containerId: 'scroll-container'
+      }));
+  }
+  render(){
+    return(
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                 <Menu.Item key="1">
                 <a onClick={this.scrollToTop}>
                   <Icon type="home" />
@@ -166,9 +217,9 @@ class Menubar extends Component {
                   {/* </Link> */}
                 </Menu.Item>
               </Menu>
-            </Sider>
-        );
-    }
+    );
+  }
 }
+
 
 export default Menubar;
