@@ -114,6 +114,7 @@ class Home extends Component {
               <a href="https://www.linkedin.com/in/rahul-tarak/" target="_blank" rel="noopener noreferrer"><Icon type="linkedin" style={{fontSize : this.state.iconSize}}/></a>
               <a href="https://www.youtube.com/channel/UC49yeT9WnpVdIdmo4ZYUteQ" target="_blank" rel="noopener noreferrer"><Icon type="youtube" style={{fontSize : this.state.iconSize}}/></a>
               <a href="https://www.instagram.com/cryogenicplanet/" target="_blank" rel="noopener noreferrer"><Icon type="instagram" style={{fontSize : this.state.iconSize}}/></a>
+              <a href="https://medium.com/@rahultarak" target="_blank"  rel="noopener noreferrer"><Icon type="medium" style={{fontSize : this.state.iconSize}}/></a>
               </Row> 
               </Col>
               </Row>
