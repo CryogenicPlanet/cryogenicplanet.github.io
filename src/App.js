@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 
 import Home from './home'
+// import Publications from './modules/publications/publications'
 import {
   BrowserRouter as Router,
   Switch,
@@ -62,6 +63,9 @@ class App extends Component {
       <Fragment>
       <Router>
         <Switch>
+          <Route path="/publications">
+            <p>Publication</p>
+          </Route>
         <Route path="/">
           <Home {...this.state} />
         </Route>
