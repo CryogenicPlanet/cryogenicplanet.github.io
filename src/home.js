@@ -67,15 +67,18 @@ class Home extends Component {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
   handleLoad = async (milliseconds) => {
+    
     await this.sleep(milliseconds)
     this.setState({
       loader : false
+      
     })
   }
   render() {
     if (this.state.loader) {
       return <Loader show={this.state.loader} />;
     } else {
+
       return (
         // <div className="search"><Search/></div>
         //<Col span={8} offset={4}><Animator></Animator></Col>
