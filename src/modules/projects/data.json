@@ -2,7 +2,7 @@
     {
         "id" : "researchPaper",
         "title" : {
-            "name" : "Investigating the vertical ozone profile, with aspecific focus on the ground level andtropospheric ozone over Bangalore",
+            "name" : "Investigating the vertical ozone profile, with a specific focus on the ground level and tropospheric ozone over Bangalore",
             "href" : "https://www.cfrce.com/images/Investigating_the_vertical_ozone_profile_with_a_specific_focus_on_the_ground_level_and_tropospheric_.pdf"
         },
         "position" : "Author of Research Paper",
@@ -14,7 +14,7 @@
             "Collected Ozone Data in Bangalore using custom payload from ground level to 30 kms",
             "Built a real time, embedded circuit in C, to collect data, and tested circuit for rigorous temperatures of - 80 ° C",
             "Complied and Analyzed the data from 18 hours of flight",
-            "Published Research in CFCRE, Won PES Amateur Scientist Award for Reseach"
+            "Published Research in CFCRE, Won PES Amateur Scientist Award for Research"
         ],
         "languages" : "C, Python, Arduino(C), Matlab",
         "links" : [
@@ -36,7 +36,7 @@
         "location" : "Bangalore,India",
         "description" : [
             "Created Bangalore's First Overnight High School Hackathon for Oakridge Int School",
-            "Conducted Oak Codefest in 2018,2019,2020 as a platform for high school developers to network and learn from the best in the industy",
+            "Conducted Oak Codefest in 2018,2019,2020 as a platform for high school developers to network and learn from the best in the industry",
             "Collaborated with Companies like IBM, Cisco, HGS, Digital Ocean, Y4PT, ACE Learning and more."
         ],
         "image" : "https://raw.githubusercontent.com/oakblr/oakblr.github.io/master/images/winners.jpg",
