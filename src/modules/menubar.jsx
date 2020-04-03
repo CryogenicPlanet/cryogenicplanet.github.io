@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Layout, Drawer, Button, Menu, Icon } from "antd";
 import { Events, animateScroll as scroll, scroller } from "react-scroll";
 import { Link } from "react-router-dom";
+import SubMenu from "antd/lib/menu/SubMenu";
 const { Sider } = Layout;
 
 class Menubar extends Component {
@@ -64,7 +65,7 @@ class Menubar extends Component {
           }}
         >
           <div className="logo" />
-          <Nav></Nav>
+          <Nav mode="vertical"></Nav>
         </Sider>
       );
     } else {
@@ -85,7 +86,7 @@ class Menubar extends Component {
             onClose={this.onClose}
             visible={this.state.visible}
           >
-            <Nav></Nav>
+            <Nav mode="inline" onClose={this.onClose}></Nav>
           </Drawer>
         </Fragment>
       );
@@ -94,9 +95,19 @@ class Menubar extends Component {
 }
 
 class Nav extends Component {
+  state = {
+    mode: this.props.mode
+  };
   constructor(props) {
     super(props);
     this.scrollToTop = this.scrollToTop.bind(this);
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.mode != prevProps.mode) {
+      this.setState({
+        state: this.props.mode
+      });
+    }
   }
   componentDidMount() {
     Events.scrollEvent.register("begin", function() {
@@ -123,6 +134,9 @@ class Nav extends Component {
       smooth: "easeInOutQuart",
       spy: true
     });
+    if(this.state.mode == "inline"){
+     this.props.onClose(); 
+    }
   };
   scrollToWithContainer() {
     let goToContainer = new Promise((resolve, reject) => {
@@ -149,7 +163,7 @@ class Nav extends Component {
   }
   render() {
     return (
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+      <Menu theme="dark" mode={this.state.mode} defaultSelectedKeys={["1"]}>
         <Menu.Item key="1">
           <a onClick={this.scrollToTop}>
             <Icon type="home" />
@@ -158,8 +172,8 @@ class Nav extends Component {
         </Menu.Item>
         <Menu.Item key="2">
           <a href="https://film.cryogenicplanet.tech">
-          <Icon type="video-camera" />
-          <span className="nav-text">Filmography</span>
+            <Icon type="video-camera" />
+            <span className="nav-text">Filmography</span>
           </a>
         </Menu.Item>
         <Menu.Item key="8">
@@ -217,6 +231,21 @@ class Nav extends Component {
           </a>
           {/* </Link> */}
         </Menu.Item>
+        <SubMenu
+          title={
+            <span>
+              <Icon type="more" rotate="90"></Icon>
+              <span className="nav-text">Extras </span>
+            </span>
+          }
+        >
+          <Menu.Item key="10">
+            <a href="https://lorenz.cryogenicplanet.tech/">
+              <Icon type="heat-map" />
+              <span className="nav-text">Lorenz Simulator</span>
+            </a>
+          </Menu.Item>
+        </SubMenu>
       </Menu>
     );
   }

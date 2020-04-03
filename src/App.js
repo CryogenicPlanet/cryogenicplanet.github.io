@@ -95,6 +95,13 @@ class App extends Component {
       <Fragment>
         <Router>
           <Switch>
+          <Route
+              path="/sitemap"
+              component={() => {
+                window.location.href = process.env.PUBLIC_URL + "/files/sitemap.xml";
+                return null;
+              }}
+            />
             <Route
               path="/Links"
               component={() => {
