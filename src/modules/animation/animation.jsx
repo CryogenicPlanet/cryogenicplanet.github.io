@@ -348,7 +348,7 @@ class Typewriter extends Component {
 </pre>
 <pre id="typewriter5" class="typewriter" style={{overflowX: 'hidden;'}}>
 <span class="comment-highlight">private int</span><span class="var-highlight"> graduation </span>= <span class="string-highlight"> 2023</span>;
-&rbrace;;;
+};;
 </pre>
 <pre id="typewriter6" class="typewriter" style={{overflowX: 'hidden;'}}>
 <span class="comment-highlight">Object</span><span class="var-highlight"> website </span>= <span class="string-highlight"> 'Under Construction'</span>;;
