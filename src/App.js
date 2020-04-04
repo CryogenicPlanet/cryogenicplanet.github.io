@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 
 import Home from "./home";
+import MoreProjects from './modules/projects/moreProjects'
+import FourOFour from './modules/404.jsx'
 // TODO Publications
 // import Publications from './modules/publications/publications'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -109,12 +111,17 @@ class App extends Component {
                 return null;
               }}
             />
-            <Route path="/publications">
+            <Route
+              path="/Projects">
+                <MoreProjects></MoreProjects>
+              </Route>
+            <Route path="/Publications">
               <p>Work in Progress</p>
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Home {...this.state} />
             </Route>
+            <Route component={FourOFour}></Route>
           </Switch>
         </Router>
       </Fragment>
