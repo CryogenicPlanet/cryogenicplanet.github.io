@@ -1,1 +1,9 @@
 @import '~antd/dist/antd.css';
+
+::-webkit-scrollbar {
+    width: 100px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #ccc;
+  }

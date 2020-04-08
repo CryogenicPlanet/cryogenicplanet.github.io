@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row, Icon, Layout, Typography } from "antd";
+import { Col, Row, Icon, Layout, Typography, BackTop } from "antd";
 import Paper from "@material-ui/core/Paper";
 import Loader from "./modules/loading";
 import Menubar from "./modules/menubar";
@@ -74,6 +74,7 @@ class Home extends Component {
         // <div className="search"><Search/></div>
         //<Col span={8} offset={4}><Animator></Animator></Col>
         <React.Fragment>
+          
           <Layout style={{ background: "transparent" }}>
             <Menubar
               screenWidth={this.state.screenWidth}
@@ -294,6 +295,7 @@ class Home extends Component {
                   </Row>
                 </Paper>
               </Content>
+              <BackTop />
               <Footer>
                 <Row type="flex" justify="center" align="middle">
                   <Paragraph>
