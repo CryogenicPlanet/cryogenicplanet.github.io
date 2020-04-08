@@ -215,6 +215,14 @@ class Nav extends Component {
           </a>
           {/* </Link> */}
         </Menu.Item>
+        <Menu.Item key="11">
+          {/* <Link  className="contact" to="contact" spy={true} smooth={true} duration={1600} > */}
+          <a onClick={this.scrollTo("medium", 1600)}>
+            <Icon type="medium" />
+            <span className="nav-text">Medium Posts</span>
+          </a>
+          {/* </Link> */}
+        </Menu.Item>
         <Menu.Item key="7">
           {/* <Link  className="contact" to="contact" spy={true} smooth={true} duration={1600} > */}
           <a onClick={this.scrollTo("contact", 1600)}>
