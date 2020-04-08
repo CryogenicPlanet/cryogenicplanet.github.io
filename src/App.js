@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import React, { Component, Fragment } from "react";
 
 import Home from "./home";
@@ -7,14 +8,15 @@ import FourOFour from './modules/404.jsx'
 // import Publications from './modules/publications/publications'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 class App extends Component {
-  state = {
+  
+  state =  {
     isMobile: false,
     screenWidth: window.innerWidth,
     iconSize: "2vw",
     smallIconSize: "1.5vw",
     screenType: null
   };
-  mobilecheck = function() {
+  mobilecheck = () => {
     var check = false;
     (function(a) {
       // Regex for checking if device is mobile does not need spell check
@@ -32,7 +34,9 @@ class App extends Component {
     })(navigator.userAgent || navigator.vendor || window.opera);
     return check;
   };
+   
   componentDidMount() {
+    
     window.addEventListener("resize", this.updateWindowDimensions());
     this.setState({
       isMobile: this.mobilecheck()
