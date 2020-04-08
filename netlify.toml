@@ -1,4 +1,2 @@
 [[plugins]]
 package = "@netlify/plugin-sitemap"
-[[plugins]]
-package = "netlify-plugin-checklinks"
