@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable react/prop-types */
 import React, { Component, Fragment } from "react";
 import data from "./data";
 import Image from "material-ui-image";
@@ -70,7 +72,7 @@ class Projects extends Component {
                                 </a>
                               </Tooltip>
                             </Col>
-                            {item.links.map((link, index) => {
+                            {item.links.map((link) => {
                               return (
                                 <Col span={4}>
                                   <Tooltip title={link.prompt}>
@@ -112,7 +114,7 @@ class Projects extends Component {
                         }
                         description={`${item.position} | From ${item.startDate} to ${item.endDate} in ${item.location}`}
                       />
-                      {item.description.map((description, index) => {
+                      {item.description.map((description) => {
                         return <p>{description}</p>;
                       })}
                       {item.languages != null ? (

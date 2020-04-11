@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from "react";
 import { Col, Row, Icon, Layout, Typography, BackTop } from "antd";
 import Paper from "@material-ui/core/Paper";

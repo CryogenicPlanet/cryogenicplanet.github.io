@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from "react";
 import { Typewriter } from "./animation/animation";
 import { Col, Row, Card, Avatar } from "antd";

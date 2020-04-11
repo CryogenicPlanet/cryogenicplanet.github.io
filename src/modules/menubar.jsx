@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 import React, { Component, Fragment } from "react";
 import { Layout, Drawer, Button, Menu, Icon } from "antd";
 import { Events, animateScroll as scroll, scroller } from "react-scroll";
@@ -35,6 +37,7 @@ class Menubar extends Component {
   };
 
   render() {
+    // eslint-disable-next-line no-undef
     console.log(process.env.PUBLIC_URL + "/files/techincal_resume.pdf");
     if (this.state.collapsed === false) {
       return (
@@ -122,6 +125,7 @@ class Nav extends Component {
   scrollToTop() {
     scroll.scrollToTop();
   }
+  // eslint-disable-next-line no-unused-vars
   scrollTo = (element, speed) => e => {
     scroller.scrollTo(element, {
       duration: speed,
@@ -134,6 +138,7 @@ class Nav extends Component {
     }
   };
   scrollToWithContainer() {
+    // eslint-disable-next-line no-unused-vars
     let goToContainer = new Promise((resolve, reject) => {
       Events.scrollEvent.register("end", () => {
         resolve();

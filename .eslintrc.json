@@ -3,6 +3,8 @@
         "browser": true,
         "es6": true
     },
+    "parser": "babel-eslint",
+   
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"
@@ -12,11 +14,13 @@
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
         "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
+            "jsx": true,
+            "modules": true,
+            "experimentalObjectRestSpread": true
+        }
     },
     "plugins": [
         "react"
