@@ -323,19 +323,21 @@ class Typewriter extends Component {
   render(){
 
     if(this.state.screenWidth < 600 ) {
-      var newSize = "6vw"
+      var newSize = "5vw"
       var comment = document.getElementsByClassName("comment-highlight");
       comment.fontSize = newSize
       var varHighlight = document.getElementsByClassName("var-highlight");
       varHighlight.fontSize = newSize
       var string = document.getElementsByClassName("string-highlight");
+      var normal = document.getElementsByClassName("normal-highlight");
+      normal.fontSize = newSize
       string.fontSize = newSize
       console.log("Changing Size")
     }
     return (
       <Fragment>
 <pre id="typewriter1" class="typewriter" style={{overflowX: 'hidden;'}}>
-<span class="comment-highlight">class</span><span class="var-highlight"> RahulTarak</span><span class="comment-highlight">  implements SoftwareEngineer, Filmmaker </span> &#123;;
+<span class="comment-highlight">class</span><span class="var-highlight"> RahulTarak</span><span class="comment-highlight">  implements SoftwareEngineer, Filmmaker </span>&#123;;
 </pre>
 <pre id="typewriter2" class="typewriter" style={{overflowX: 'hidden;'}}>
 <span class="comment-highlight">private String</span><span class="var-highlight"> programmingExperience </span>=<span class="string-highlight"> "7 years";</span>
@@ -348,7 +350,7 @@ class Typewriter extends Component {
 </pre>
 <pre id="typewriter5" class="typewriter" style={{overflowX: 'hidden;'}}>
 <span class="comment-highlight">private int</span><span class="var-highlight"> graduation </span>= <span class="string-highlight"> 2023</span>;
-};;
+<span class="normal-highlight">{" }"};</span>
 </pre>
 <pre id="typewriter6" class="typewriter" style={{overflowX: 'hidden;'}}>
 <span class="comment-highlight">Object</span><span class="var-highlight"> website </span>= <span class="string-highlight"> 'Under Construction'</span>;;

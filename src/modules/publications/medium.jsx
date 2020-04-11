@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-import { Row, Col, Typography } from "antd";
+import { Row, Col } from "antd";
 
-const {Title} =  Typography
+//const {Title} =  Typography
 class Medium extends Component {
   render() {
     return (
