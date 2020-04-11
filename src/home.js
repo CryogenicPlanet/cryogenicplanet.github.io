@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from "react";
 import { Col, Row, Icon, Layout, Typography, BackTop } from "antd";
 import Paper from "@material-ui/core/Paper";
@@ -268,7 +269,9 @@ class Home extends Component {
                       <Title>Medium Posts</Title>
                     </Row>
                     <Row type="flex" justify="center" align="middle">
+                      <Col span={20}>
                       <Medium></Medium>
+                      </Col>
                     </Row>
                   </Element>
                 </Paper>

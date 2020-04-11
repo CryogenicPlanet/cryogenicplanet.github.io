@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable react/prop-types */
 import React, { Component, Fragment } from "react";
 import data from "./data";
 import { Col, Row, List, Typography, Icon, Tooltip } from "antd";
@@ -44,7 +46,7 @@ class Experience extends Component {
                             </a>
                           </Tooltip>
                         </Col>
-                        {item.links.map((link, index) => {
+                        {item.links.map((link) => {
                           return (
                             <Col span={4}>
                               <Tooltip title={link.prompt}>
@@ -70,7 +72,7 @@ class Experience extends Component {
                     title={<a href={item.title.href}> {item.title.name} </a>}
                     description={`${item.position} | From ${item.startDate} to ${item.endDate} in ${item.location}`}
                   />
-                  {item.description.map((description, index) => {
+                  {item.description.map((description) => {
                     return <p>{description}</p>;
                   })}
                   {item.languages ? (

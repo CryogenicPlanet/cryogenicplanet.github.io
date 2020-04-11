@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Input, Row, Form, Button, Select, message } from "antd";
-import Recaptcha from "react-recaptcha";
+//import Recaptcha from "react-recaptcha";
 
 const { TextArea } = Input;
 const { Option } = Select;
-let recaptchaInstance;
+//let recaptchaInstance;
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 }
@@ -16,9 +16,9 @@ const validateMessages = {
     email: "Not a validate email!",
     number: "Not a validate number!"
   },
-  number: {
-    range: "Must be between ${min} and ${max}"
-  }
+  // number: {
+  //   range: "Must be between ${min} and ${max}"
+  // }
 };
 
 const encode = data => {
@@ -57,6 +57,7 @@ class Contact extends Component {
   };
   handleSubmit = e => {
     console.log("Submiting");
+    //console.log(...this.state)
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -72,8 +73,14 @@ class Contact extends Component {
   };
   handleChange = e => {
     console.log(`${e.target.name} Input Changed`);
-    this.setState({ [e.target.name]: e.target.value });
+    const eTargent = e.target
+    
+    
+    this.setState({ [eTargent.name]: eTargent.value });
   };
+  handleReason = e => {
+    this.setState({reason : e})
+  }
   render() {
     const { name, email, subject, reason, message } = this.state;
     return (
@@ -103,7 +110,7 @@ class Contact extends Component {
               defaultValue="hi"
               name="reason"
               value={reason}
-              onChange={this.handleChange}
+              onChange={this.handleReason}
             >
               <Option value="hi">Say Hi!</Option>
               <Option value="business">Business</Option>

@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable react/prop-types */
 import React, { Component, Fragment } from "react";
 import { Row, Progress, Col, Typography, List } from "antd";
 import data from "./data";
@@ -25,7 +27,7 @@ class Skills extends Component {
           <Title level={3}>Languages</Title>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
-          {data.languages.map((item, index) => {
+          {data.languages.map((item) => {
             return (
               <Fragment>
                 {this.state.screenWidth > 500 &&
@@ -35,6 +37,7 @@ class Skills extends Component {
                       type="dashboard"
                       size="small"
                       percent={item.percent}
+                      // eslint-disable-next-line no-unused-vars
                       format={percent => `${item.name}`}
                     />
                   </Col>
@@ -44,6 +47,7 @@ class Skills extends Component {
                     <Progress
                       type="line"
                       percent={item.percent}
+                       // eslint-disable-next-line no-unused-vars
                       format={percent => ``}
                     />
                   </Col>
@@ -56,7 +60,7 @@ class Skills extends Component {
           <Title level={3}>Frameworks</Title>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
-          {data.frameworks.map((item, index) => {
+          {data.frameworks.map((item) => {
             return (
               <Fragment>
                 <Col span={8}>
@@ -64,6 +68,7 @@ class Skills extends Component {
                   <Progress
                     type="line"
                     percent={item.percent}
+                     // eslint-disable-next-line no-unused-vars
                     format={percent => ``}
                   />
                 </Col>
@@ -80,7 +85,7 @@ class Skills extends Component {
           <Title level={3}>Other</Title>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
-          {data.other.map((item, index) => {
+          {data.other.map((item) => {
             return (
               <Fragment>
                 {this.state.screenWidth > 500 &&
@@ -91,6 +96,7 @@ class Skills extends Component {
                       <Progress
                         size="small"
                         percent={item.percent}
+                         // eslint-disable-next-line no-unused-vars
                         format={percent => ``}
                       />
                     </Fragment>

@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 import React, { Component, Fragment } from "react";
 import { Layout, Drawer, Button, Menu, Icon } from "antd";
 import { Events, animateScroll as scroll, scroller } from "react-scroll";
-import { Link } from "react-router-dom";
 import SubMenu from "antd/lib/menu/SubMenu";
 const { Sider } = Layout;
 
@@ -12,10 +13,6 @@ class Menubar extends Component {
     isMobile: this.props.isMobile,
     visible: false
   };
-  constructor(props) {
-    super(props);
-    //this.scrollToTop = this.scrollToTop.bind(this);
-  }
   componentDidUpdate(prevProps) {
     if (
       this.props.screenWidth !== prevProps.screenWidth ||
@@ -40,8 +37,9 @@ class Menubar extends Component {
   };
 
   render() {
+    // eslint-disable-next-line no-undef
     console.log(process.env.PUBLIC_URL + "/files/techincal_resume.pdf");
-    if (this.state.collapsed == false) {
+    if (this.state.collapsed === false) {
       return (
         <Sider
           style={{
@@ -103,7 +101,7 @@ class Nav extends Component {
     this.scrollToTop = this.scrollToTop.bind(this);
   }
   componentDidUpdate(prevProps) {
-    if (this.props.mode != prevProps.mode) {
+    if (this.props.mode !== prevProps.mode) {
       this.setState({
         state: this.props.mode
       });
@@ -127,6 +125,7 @@ class Nav extends Component {
   scrollToTop() {
     scroll.scrollToTop();
   }
+  // eslint-disable-next-line no-unused-vars
   scrollTo = (element, speed) => e => {
     scroller.scrollTo(element, {
       duration: speed,
@@ -134,11 +133,12 @@ class Nav extends Component {
       smooth: "easeInOutQuart",
       spy: true
     });
-    if(this.state.mode == "inline"){
+    if(this.state.mode === "inline"){
      this.props.onClose(); 
     }
   };
   scrollToWithContainer() {
+    // eslint-disable-next-line no-unused-vars
     let goToContainer = new Promise((resolve, reject) => {
       Events.scrollEvent.register("end", () => {
         resolve();
