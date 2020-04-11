@@ -268,7 +268,9 @@ class Home extends Component {
                       <Title>Medium Posts</Title>
                     </Row>
                     <Row type="flex" justify="center" align="middle">
+                      <Col span={20}>
                       <Medium></Medium>
+                      </Col>
                     </Row>
                   </Element>
                 </Paper>
