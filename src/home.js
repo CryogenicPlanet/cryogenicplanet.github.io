@@ -75,7 +75,6 @@ class Home extends Component {
         // <div className="search"><Search/></div>
         //<Col span={8} offset={4}><Animator></Animator></Col>
         <React.Fragment>
-          
           <Layout style={{ background: "transparent" }}>
             <Menubar
               screenWidth={this.state.screenWidth}
@@ -270,7 +269,7 @@ class Home extends Component {
                     </Row>
                     <Row type="flex" justify="center" align="middle">
                       <Col span={20}>
-                      <Medium></Medium>
+                        <Medium></Medium>
                       </Col>
                     </Row>
                   </Element>
