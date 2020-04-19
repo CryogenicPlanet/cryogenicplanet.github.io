@@ -6,13 +6,8 @@ import MoreProjects from "./modules/projects/moreProjects";
 import FourOFour from "./modules/404.jsx";
 // TODO Publications
 // import Publications from './modules/publications/publications'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  message,
-} from "react-router-dom";
-import { Input, Row, Form, Button } from "antd";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Input, Row, Form, Button, message } from "antd";
 //import Recaptcha from "react-recaptcha";
 
 const layout = {
