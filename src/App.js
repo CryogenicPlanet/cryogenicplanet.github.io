@@ -7,8 +7,10 @@ import FourOFour from "./modules/404.jsx";
 // TODO Publications
 // import Publications from './modules/publications/publications'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Input, Row, Form, Button, message } from "antd";
+import { Input, Row, Form, Button, message, Typography } from "antd";
 //import Recaptcha from "react-recaptcha";
+
+const { Text } = Typography;
 
 const layout = {
   labelCol: { span: 8 },
