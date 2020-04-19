@@ -12,6 +12,12 @@ import { Input, Row, Form, Button, message, Typography } from "antd";
 
 const { Text } = Typography;
 
+const encode = (data) => {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
+
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -120,7 +126,7 @@ class App extends Component {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...this.state }),
+      body: encode({ "form-name": "a22", ...this.state }),
     })
       .then(() => {
         message.success("Sucessfully Added As A Signatory");
