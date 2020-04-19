@@ -7,10 +7,13 @@ import FourOFour from "./modules/404.jsx";
 // TODO Publications
 // import Publications from './modules/publications/publications'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Input, Row, Form, Button, Select, message } from "antd";
+import { Input, Row, Form, Button } from "antd";
 //import Recaptcha from "react-recaptcha";
 
-const { TextArea } = Input;
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
 class App extends Component {
   state = {
     isMobile: false,
@@ -18,9 +21,10 @@ class App extends Component {
     iconSize: "2vw",
     smallIconSize: "1.5vw",
     screenType: null,
-    name : "",
-    studentNo : ""
+    studentName: "",
+    studentNo: "",
   };
+
   mobilecheck = () => {
     var check = false;
     (function (a) {
@@ -99,32 +103,32 @@ class App extends Component {
         screenType: 2,
       });
     }
-    handleChange = e => {
-      console.log(`${e.target.name} Input Changed`);
-      const eTargent = e.target
-      
-      
-      this.setState({ [eTargent.name]: eTargent.value });
-    };
-    handleSubmit = e => {
-      console.log("Submiting");
-      //console.log(...this.state)
-      window.location.href = ` mailto:molloy@cs.toronto.edu?subject=A22%20Post%20Requirments&body=Dear%20sir%0D%0A%0D%0AI%20${this.state.name}%20(Student%20Number%20${this.state.studentNo})%20a%20fall%202019%20first%20year%20student%20applying%20for%20CMS%20POSt.%20I%20would%20like%20to%20make%20an%20argument%20for%20why%20you%20should%20reconsider%20dropping%20A22%20from%20POSt.%0D%0A%0D%0AFirst%2C%20Linear%20Algebra%20as%20a%20concept%20is%20quite%20vital%20to%20understanding%20of%20more%20complex%20topics%20in%20Computer%20Science%20in%20Artificial%20Intelligence%2C%20Computer%20Graphics%2C%20etc%20as%20you%20surely%20know%20and%20thus%20this%20course%20is%20till%20a%20great%20indicator%20of%20someones%20ability%20to%20perform%20in%20upper%20year%20computer%20science.%20Furthermore%2C%20Linear%20Algebra%20is%20a%20very%20different%20completely%20new%20course%20to%20most%20student%20and%20thus%20is%20extremely%20challenging%20and%20takes%20a%20lot%20of%20effort%20on%20our%20part%20as%20students%20to%20comprehend%20and%20understand%20the%20course%20material.%20Most%20student%2C%20put%20in%20extreme%20amounts%20of%20time%20and%20focus%20on%20this%20course%20as%20most%20of%20the%20material%20was%20completely%20new%20to%20students%2C%20and%20disregarding%20the%20course%20from%20POSt%20would%20make%20the%20time%20spent%20on%20Linear%20Algebra%20and%20not%20MATA37%20or%20CSCA48%20in%20vain.%0D%0A%0D%0AAdditionally%2C%20Students%20after%20making%20these%20large%20time%20commitments%20to%20the%20course%20actually%20did%20quite%20well%20in%20our%20assignments%20and%20midterm%2C%20MATA22%20had%20the%20highest%20midterm%20average%20across%20the%20three%20course%2C%20especially%20contrast%20to%20the%20average%20CSCA48%20had%20where%20almost%20half%20the%20class%20failed%20the%20midterm.%20This%20is%20to%20say%20that%20many%20if%20not%20most%20student%20are%20dependent%20on%20their%20A22%20marks%20to%20make%20POSt.%20And%20by%20changing%20the%20requirements%20so%20late%2C%20it%20is%20not%20possible%20for%20students%20to%20refocus%20their%20time%20to%20make%20up%20those%20marks%20in%20CSCA48(final%20already%20over)%20and%20MATA37.%0D%0A%0D%0AWhile%2C%20we%20as%20students%20understand%20the%20incredible%20strain%20on%20the%20professor%20and%20the%20department%20to%20ensure%20the%20course%20if%20fairly%20evaluated%20and%20to%20ensure%20the%20academic%20integrity%20of%20the%20course%2C%20these%20decisions%20should%20not%20come%20at%20the%20expense%20of%20the%20students%20best%20interest.%20Instead%20of%20suggestion%20potential%20solution%2C%20I%20am%20confident%20that%20our%20department%20is%20capable%20of%20making%20much%20smarter%20decision%2C%20than%20we%20are%20as%20the%20student%20body%2C%20and%20would%20urge%20you%20to%20reconsider%20this%20decision%20to%20focus%20on%20benefiting%20the%20student%20body.%0D%0A%0D%0AI%20would%20like%20to%20conclude%20by%20saying%20remove%20A22%20would%20be%20catastrophic%20for%20most%20students%20aspirations%20to%20make%20subject%20POSt%20and%20would%20disregard%20all%20the%20time%20and%20effort%20countless%20students%20have%20poured%20into%20this%20course.%0D%0A%0D%0AThank%20you%20for%20taking%20the%20time%20to%20indulge%20my%20request%2C%20and%20I%20hope%20you%20reconsider%20the%20impact%20this%20decision%20has%20on%20student%20and%20their%20aspirations%20in%20this%20department%20moving%20forward.`;
-      return null;
-      
   }
+  handleChange = (e) => {
+    console.log(`${e.target.name} Input Changed`);
+    const eTargent = e.target;
+
+    this.setState({ [eTargent.name]: eTargent.value });
+  };
+  handleSubmit = (e) => {
+    console.log("Submiting");
+    //console.log(...this.state)
+    //window.location.href = ` mailto:molloy@cs.toronto.edu?subject=A22%20Post%20Requirments&body=Dear%20sir%0D%0A%0D%0AI%20${this.state.studentName}%20(Student%20Number%20${this.state.studentNo})%20a%20fall%202019%20first%20year%20student%20applying%20for%20CMS%20POSt.%20I%20would%20like%20to%20make%20an%20argument%20for%20why%20you%20should%20reconsider%20dropping%20A22%20from%20POSt.%0D%0A%0D%0AFirst%2C%20Linear%20Algebra%20as%20a%20concept%20is%20quite%20vital%20to%20understanding%20of%20more%20complex%20topics%20in%20Computer%20Science%20in%20Artificial%20Intelligence%2C%20Computer%20Graphics%2C%20etc%20as%20you%20surely%20know%20and%20thus%20this%20course%20is%20till%20a%20great%20indicator%20of%20someones%20ability%20to%20perform%20in%20upper%20year%20computer%20science.%20Furthermore%2C%20Linear%20Algebra%20is%20a%20very%20different%20completely%20new%20course%20to%20most%20student%20and%20thus%20is%20extremely%20challenging%20and%20takes%20a%20lot%20of%20effort%20on%20our%20part%20as%20students%20to%20comprehend%20and%20understand%20the%20course%20material.%20Most%20student%2C%20put%20in%20extreme%20amounts%20of%20time%20and%20focus%20on%20this%20course%20as%20most%20of%20the%20material%20was%20completely%20new%20to%20students%2C%20and%20disregarding%20the%20course%20from%20POSt%20would%20make%20the%20time%20spent%20on%20Linear%20Algebra%20and%20not%20MATA37%20or%20CSCA48%20in%20vain.%0D%0A%0D%0AAdditionally%2C%20Students%20after%20making%20these%20large%20time%20commitments%20to%20the%20course%20actually%20did%20quite%20well%20in%20our%20assignments%20and%20midterm%2C%20MATA22%20had%20the%20highest%20midterm%20average%20across%20the%20three%20course%2C%20especially%20contrast%20to%20the%20average%20CSCA48%20had%20where%20almost%20half%20the%20class%20failed%20the%20midterm.%20This%20is%20to%20say%20that%20many%20if%20not%20most%20student%20are%20dependent%20on%20their%20A22%20marks%20to%20make%20POSt.%20And%20by%20changing%20the%20requirements%20so%20late%2C%20it%20is%20not%20possible%20for%20students%20to%20refocus%20their%20time%20to%20make%20up%20those%20marks%20in%20CSCA48(final%20already%20over)%20and%20MATA37.%0D%0A%0D%0AWhile%2C%20we%20as%20students%20understand%20the%20incredible%20strain%20on%20the%20professor%20and%20the%20department%20to%20ensure%20the%20course%20if%20fairly%20evaluated%20and%20to%20ensure%20the%20academic%20integrity%20of%20the%20course%2C%20these%20decisions%20should%20not%20come%20at%20the%20expense%20of%20the%20students%20best%20interest.%20Instead%20of%20suggestion%20potential%20solution%2C%20I%20am%20confident%20that%20our%20department%20is%20capable%20of%20making%20much%20smarter%20decision%2C%20than%20we%20are%20as%20the%20student%20body%2C%20and%20would%20urge%20you%20to%20reconsider%20this%20decision%20to%20focus%20on%20benefiting%20the%20student%20body.%0D%0A%0D%0AI%20would%20like%20to%20conclude%20by%20saying%20remove%20A22%20would%20be%20catastrophic%20for%20most%20students%20aspirations%20to%20make%20subject%20POSt%20and%20would%20disregard%20all%20the%20time%20and%20effort%20countless%20students%20have%20poured%20into%20this%20course.%0D%0A%0D%0AThank%20you%20for%20taking%20the%20time%20to%20indulge%20my%20request%2C%20and%20I%20hope%20you%20reconsider%20the%20impact%20this%20decision%20has%20on%20student%20and%20their%20aspirations%20in%20this%20department%20moving%20forward.`;
+    return null;
+  };
+
   render() {
     return (
       <Fragment>
         <Router>
           <Switch>
-            <Route path="/a22Post">
+            <Route path="/linAlg">
               <Row type="flex" justify="center" align="middle">
                 <Form {...layout} name="contact" onSubmit={this.handleSubmit}>
                   <Form.Item label="Name" rules={[{ required: true }]}>
                     <Input
-                      name="name"
-                      value={this.state.name}
+                      name="studentName"
+                      value={this.state.studentName}
                       onChange={this.handleChange}
                     />
                   </Form.Item>
