@@ -1,16 +1,17 @@
 {
-    "short_name": "CryogenicPlanet",
-    "name": "CryogenicPlanet.tech",
-    "description": "Personal Web Space for Rahul Tarak",
-    "author" : "Rahul Tarak",
-    "icons": [
-        {
-          "src": "%PUBLIC_URL%/images/laptop.svg",
-          "type": "image/svg"
-        }],
-    "start_url": "/",
-    "background_color": "#0b8171",
-    "display": "standalone",
-    "scope": "/",
-    "theme_color": "@black"
-  }
+  "short_name": "CryogenicPlanet",
+  "name": "CryogenicPlanet.tech",
+  "description": "Personal Web Space for Rahul Tarak",
+  "author": "Rahul Tarak",
+  "icons": [
+    {
+      "src": "%PUBLIC_URL%/images/laptop.svg",
+      "type": "image/svg"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0b8171",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "@black"
+}
