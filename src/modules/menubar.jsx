@@ -11,7 +11,7 @@ class Menubar extends Component {
     collapsed: false,
     screenWidth: this.props.screenWidth,
     isMobile: this.props.isMobile,
-    visible: false
+    visible: false,
   };
   componentDidUpdate(prevProps) {
     if (
@@ -20,19 +20,19 @@ class Menubar extends Component {
     ) {
       this.setState({
         screenWidth: this.props.screenWidth,
-        isMobile: this.props.isMobile
+        isMobile: this.props.isMobile,
       });
     }
   }
   showDrawer = () => {
     this.setState({
-      visible: true
+      visible: true,
     });
   };
 
   onClose = () => {
     this.setState({
-      visible: false
+      visible: false,
     });
   };
 
@@ -46,18 +46,18 @@ class Menubar extends Component {
             overflow: "auto",
             height: "100vh",
             position: "fixed",
-            left: 0
+            left: 0,
           }}
           breakpoint="md"
           // collapsedWidth= {this.state.screenWidth  > 600 && this.state.isMobile === false ? "8.5vw" : "0"}
           collapsedWidth="0"
-          onBreakpoint={broken => {
-            console.log("Breakpoint");
-            console.log(broken);
+          onBreakpoint={(broken) => {
+            //console.log("Breakpoint");
+            //console.log(broken);
           }}
           onCollapse={(collapsed, type) => {
             this.setState({
-              collapsed: true
+              collapsed: true,
             });
             console.log(collapsed, type);
           }}
@@ -94,7 +94,7 @@ class Menubar extends Component {
 
 class Nav extends Component {
   state = {
-    mode: this.props.mode
+    mode: this.props.mode,
   };
   constructor(props) {
     super(props);
@@ -103,19 +103,27 @@ class Nav extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.mode !== prevProps.mode) {
       this.setState({
-        state: this.props.mode
+        state: this.props.mode,
       });
     }
   }
   componentDidMount() {
-    Events.scrollEvent.register("begin", function() {
+    Events.scrollEvent.register("begin", function () {
       console.log("begin", arguments);
     });
 
-    Events.scrollEvent.register("end", function() {
+    Events.scrollEvent.register("end", function () {
       console.log("end", arguments);
     });
-    this.scrollToTop();
+
+    let hash = window.location.hash;
+    if (hash) {
+      hash = hash.slice(1, hash.length);
+      console.log("Nav -> componentDidMount -> hash", hash);
+      setTimeout(this.scrollTo(hash, 1000), 100);
+    } else {
+      this.scrollToTop();
+    }
   }
 
   componentWillUnmount() {
@@ -123,18 +131,21 @@ class Nav extends Component {
     Events.scrollEvent.remove("end");
   }
   scrollToTop() {
+    window.history.pushState("Top", "New Location", `/`);
     scroll.scrollToTop();
   }
   // eslint-disable-next-line no-unused-vars
-  scrollTo = (element, speed) => e => {
+  scrollTo = (element, speed) => (e) => {
+    //console.log("Nav -> scrollTo -> element", element);
+    window.history.pushState(element, "New Location", `/#${element}`);
     scroller.scrollTo(element, {
       duration: speed,
       delay: 0,
       smooth: "easeInOutQuart",
-      spy: true
+      spy: true,
     });
-    if(this.state.mode === "inline"){
-     this.props.onClose(); 
+    if (this.state.mode === "inline") {
+      this.props.onClose();
     }
   };
   scrollToWithContainer() {
@@ -148,7 +159,7 @@ class Nav extends Component {
       scroller.scrollTo("scroll-container", {
         duration: 800,
         delay: 0,
-        smooth: "easeInOutQuart"
+        smooth: "easeInOutQuart",
       });
     });
 
@@ -157,7 +168,7 @@ class Nav extends Component {
         duration: 800,
         delay: 0,
         smooth: "easeInOutQuart",
-        containerId: "scroll-container"
+        containerId: "scroll-container",
       })
     );
   }
