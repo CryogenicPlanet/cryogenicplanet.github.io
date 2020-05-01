@@ -132,7 +132,7 @@ class App extends Component {
             <Route path="/Publications">
               <p>Work in Progress</p>
             </Route>
-            <Route exact path="/">
+            <Route path="/">
               <Home {...this.state} />
             </Route>
             <Route component={FourOFour}></Route>
