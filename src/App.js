@@ -135,7 +135,7 @@ class App extends Component {
             <Route path="/">
               <Home {...this.state} />
             </Route>
-            <Route component={FourOFour}></Route>
+            {/* <Route component={FourOFour}></Route> */}
           </Switch>
         </Router>
       </Fragment>

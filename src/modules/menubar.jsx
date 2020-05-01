@@ -116,13 +116,11 @@ class Nav extends Component {
       console.log("end", arguments);
     });
 
-    let pathName = window.location.pathname;
-
-    if (pathName) {
-      pathName = pathName.split("/");
-      pathName = pathName[1];
-      console.log("Nav -> componentDidMount -> pathName", pathName);
-      setTimeout(this.scrollTo(pathName, 1000), 100);
+    let hash = window.location.hash;
+    if (hash) {
+      hash = hash.slice(1, hash.length);
+      console.log("Nav -> componentDidMount -> hash", hash);
+      setTimeout(this.scrollTo(hash, 1000), 100);
     } else {
       this.scrollToTop();
     }
@@ -139,7 +137,7 @@ class Nav extends Component {
   // eslint-disable-next-line no-unused-vars
   scrollTo = (element, speed) => (e) => {
     //console.log("Nav -> scrollTo -> element", element);
-    window.history.pushState(element, "New Location", `/${element}`);
+    window.history.pushState(element, "New Location", `/#${element}`);
     scroller.scrollTo(element, {
       duration: speed,
       delay: 0,
