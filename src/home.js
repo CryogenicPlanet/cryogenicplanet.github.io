@@ -265,6 +265,24 @@ class Home extends Component {
                       justify="center"
                       style={{ paddingTop: "5%" }}
                     >
+                      <Title level={4}>Recent Programming Activity</Title>
+                    </Row>
+                    <Row type="flex" justify="center" align="middle">
+                      <Col span={this.state.isMobile ? 20 : 10}>
+                        <figure>
+                          <embed src="https://wakatime.com/share/@d7e92697-136f-4ee8-a98b-d90c5867ef4f/4ebeff2b-fe85-4eed-afb1-addc1994da02.svg"></embed>
+                        </figure>
+                      </Col>
+                    </Row>
+                  </Element>
+                </Paper>
+                <Paper elevation={0} style={{ background: "#212121" }}>
+                  <Element name="medium" className="element">
+                    <Row
+                      type="flex"
+                      justify="center"
+                      style={{ paddingTop: "5%" }}
+                    >
                       <Title>Medium Posts</Title>
                     </Row>
                     <Row type="flex" justify="center" align="middle">
@@ -274,6 +292,7 @@ class Home extends Component {
                     </Row>
                   </Element>
                 </Paper>
+
                 <Paper elevation={0} style={{ background: "#212121" }}>
                   <Row
                     type="flex"
