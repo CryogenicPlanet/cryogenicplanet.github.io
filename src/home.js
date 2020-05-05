@@ -268,7 +268,7 @@ class Home extends Component {
                       <Title level={4}>Recent Programming Activity</Title>
                     </Row>
                     <Row type="flex" justify="center" align="middle">
-                      <Col span={10}>
+                      <Col span={this.state.isMobile ? 20 : 10}>
                         <figure>
                           <embed src="https://wakatime.com/share/@d7e92697-136f-4ee8-a98b-d90c5867ef4f/4ebeff2b-fe85-4eed-afb1-addc1994da02.svg"></embed>
                         </figure>
