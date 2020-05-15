@@ -7,6 +7,7 @@ import FourOFour from "./modules/404.jsx";
 // TODO Publications
 // import Publications from './modules/publications/publications'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ProjectTerminal from "./modules/projects/projectsTerminal";
 //import Recaptcha from "react-recaptcha";
 
 class App extends Component {
@@ -126,8 +127,8 @@ class App extends Component {
                 return null;
               }}
             />
-            <Route path="/Projects">
-              <MoreProjects></MoreProjects>
+            <Route path="/Terminal">
+              <ProjectTerminal></ProjectTerminal>
             </Route>
             <Route path="/Publications">
               <p>Work in Progress</p>
