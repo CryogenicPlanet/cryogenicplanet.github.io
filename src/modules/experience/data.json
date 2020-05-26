@@ -1,6 +1,39 @@
 [
   {
     "title": {
+      "name": "Mozilla",
+      "href": "https://twittersourcebot.tech/"
+    },
+    "position": "Builder @ FixTheInternet Spring Open Lab",
+    "location": "Remote",
+    "startDate": "April 2020",
+    "endDate": "Jun 2020",
+    "description": [
+      "Developed a Twitter Bot which fact checks a tweet by finding a credible source for the information in it and cites its",
+      "This project was built in 8 weeks in an Mozilla's Spring Open Lab Incubator, where I was the Lead Developer"
+    ],
+    "languages": "Node.js, Express.js, Python(Tornado), MongoDb",
+    "links": [
+      {
+        "href": "https://github.com/Mozilla-Open-Lab-Etwas/Twitter-Source-Bot",
+        "type": "github",
+        "prompt": "Git Repository"
+      },
+      {
+        "href": "https://twittersourcebot.tech/",
+        "type": "link",
+        "prompt": "Official Website"
+      },
+      {
+        "href": "https://twitter.com/whosaidthis_bot",
+        "type": "twitter",
+        "prompt": "Twitter Bot"
+      }
+    ]
+  },
+
+  {
+    "title": {
       "name": "Spark A Change",
       "href": "http://sparkachange.github.io/"
     },

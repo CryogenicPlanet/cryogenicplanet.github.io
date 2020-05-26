@@ -3,6 +3,7 @@
 import React, { Component, Fragment } from "react";
 import { Layout, Drawer, Button, Menu, Icon } from "antd";
 import { Events, animateScroll as scroll, scroller } from "react-scroll";
+import { Link } from "react-router-dom";
 import SubMenu from "antd/lib/menu/SubMenu";
 const { Sider } = Layout;
 
@@ -263,6 +264,12 @@ class Nav extends Component {
               <Icon type="heat-map" />
               <span className="nav-text">Lorenz Simulator</span>
             </a>
+          </Menu.Item>
+          <Menu.Item key="11">
+            <Link to="/Terminal">
+              <Icon type="code" />
+              <span className="nav-text">Terminal</span>
+            </Link>
           </Menu.Item>
         </SubMenu>
       </Menu>

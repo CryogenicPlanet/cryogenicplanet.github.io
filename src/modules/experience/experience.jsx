@@ -8,12 +8,12 @@ const { Title } = Typography;
 
 class Experience extends Component {
   state = {
-    fontSize: this.props.fontSize
+    fontSize: this.props.fontSize,
   };
   componentDidUpdate(prevProps) {
     if (this.props.fontSize !== prevProps.fontSize) {
       this.setState({
-        fontSize: this.props.fontSize
+        fontSize: this.props.fontSize,
       });
     }
   }
@@ -29,7 +29,7 @@ class Experience extends Component {
               itemLayout="vertical"
               size="large"
               dataSource={data}
-              renderItem={item => (
+              renderItem={(item) => (
                 <List.Item
                   key={item.title.name}
                   actions={[
@@ -65,12 +65,18 @@ class Experience extends Component {
                           );
                         })}
                       </Fragment>
-                    </Row>
+                    </Row>,
                   ]}
                 >
                   <List.Item.Meta
                     title={<a href={item.title.href}> {item.title.name} </a>}
-                    description={`${item.position} | From ${item.startDate} to ${item.endDate} in ${item.location}`}
+                    description={`${item.position} | From ${
+                      item.startDate
+                    } to ${item.endDate} ${
+                      item.location === "Remote"
+                        ? "| Remote"
+                        : "in " + item.location
+                    }`}
                   />
                   {item.description.map((description) => {
                     return <p>{description}</p>;
