@@ -1,49 +1,79 @@
 [
-    {
-        "id" : "researchPaper",
-        "title" : {
-            "name" : "Investigating the vertical ozone profile, with a specific focus on the ground level and tropospheric ozone over Bangalore",
-            "href" : "https://www.cfrce.com/images/Investigating_the_vertical_ozone_profile_with_a_specific_focus_on_the_ground_level_and_tropospheric_.pdf"
-        },
-        "position" : "Author of Research Paper",
-        "startDate" : "Feb 2018",
-        "endDate" : "Feb 2019",
-        "location" : "Bangalore,India",
-        "description" : [
-            "Collaborated with the Indian Institute of Astrophysics and Society for Space Education, Research and Development (SSERD)",
-            "Collected Ozone Data in Bangalore using custom payload from ground level to 30 kms",
-            "Built a real time, embedded circuit in C, to collect data, and tested circuit for rigorous temperatures of - 80 ° C",
-            "Complied and Analyzed the data from 18 hours of flight",
-            "Published Research in CFCRE, Won PES Amateur Scientist Award for Research"
-        ],
-        "languages" : "C, Python, Arduino(C), Matlab",
-        "links" : [
-            {"href" : "https://www.cfrce.com/images/Investigating_the_vertical_ozone_profile_with_a_specific_focus_on_the_ground_level_and_tropospheric_.pdf", "type" : "book", "prompt": "Published Paper"},
-            {"href" : "https://www.youtube.com/watch?v=FlWJOSd4DnY", "type" : "youtube","prompt" :"Official Video"},
-            {"href" : "https://timesofindia.indiatimes.com/life-style/spotlight/student-researchers-analyse-ozone-concentration-in-bengaluru/articleshow/66134890.cms","type": "link", "prompt": "News Report"}
-        ],
-        "image" : "https://timesofindia.indiatimes.com/thumb/msid-66134890,width-800,height-600,resizemode-4/66134890.jpg"
-    }, 
-    {
-        "id" : "codefest",
-        "title" : {
-            "name" : "Oak Codefest",
-            "href" : "http://codefest.oakridge.in/"
-        },
-        "position" : "Founder and Organizer",
-        "startDate" : "Aug 2017",
-        "endDate" : "Jul 2019",
-        "location" : "Bangalore,India",
-        "description" : [
-            "Created Bangalore's First Overnight High School Hackathon for Oakridge Int School",
-            "Conducted Oak Codefest in 2018,2019,2020 as a platform for high school developers to network and learn from the best in the industry",
-            "Collaborated with Companies like IBM, Cisco, HGS, Digital Ocean, Y4PT, ACE Learning and more."
-        ],
-        "image" : "https://raw.githubusercontent.com/oakblr/oakblr.github.io/master/images/winners.jpg",
-        "links" : [
-            {"href" : "http://codefest.oakridge.in/", "type" : "link", "prompt" : "Official Website"},
-            {"href": "https://www.youtube.com/watch?v=EMpHOXm7sAg" ,"type" : "youtube", "prompt": "Official Trailer Codefest 2020"},
-            {"href" : "https://github.com/oakblr/oakblr.github.io", "type" : "github", "prompt": "Git Repository"}
-        ]
-    }
+  {
+    "id": "whoSaidThis?",
+    "parallax": "twitterBanner.png"
+  },
+  {
+    "id": "researchPaper",
+    "parallax": "balloon.jpg",
+    "title": {
+      "name": "Investigating the vertical ozone profile, with a specific focus on the ground level and tropospheric ozone over Bangalore",
+      "href": "https://www.cfrce.com/images/Investigating_the_vertical_ozone_profile_with_a_specific_focus_on_the_ground_level_and_tropospheric_.pdf"
+    },
+    "position": "Author of Research Paper",
+    "startDate": "Feb 2018",
+    "endDate": "Feb 2019",
+    "location": "Bangalore,India",
+    "description": [
+      "Collaborated with the Indian Institute of Astrophysics and Society for Space Education, Research and Development (SSERD)",
+      "Collected Ozone Data in Bangalore using custom payload from ground level to 30 kms",
+      "Built a real time, embedded circuit in C, to collect data, and tested circuit for rigorous temperatures of - 80 ° C",
+      "Complied and Analyzed the data from 18 hours of flight",
+      "Published Research in CFCRE, Won PES Amateur Scientist Award for Research"
+    ],
+    "languages": "C, Python, Arduino(C), Matlab",
+    "links": [
+      {
+        "href": "https://www.cfrce.com/images/Investigating_the_vertical_ozone_profile_with_a_specific_focus_on_the_ground_level_and_tropospheric_.pdf",
+        "type": "book",
+        "prompt": "Published Paper"
+      },
+      {
+        "href": "https://www.youtube.com/watch?v=FlWJOSd4DnY",
+        "type": "youtube",
+        "prompt": "Official Video"
+      },
+      {
+        "href": "https://timesofindia.indiatimes.com/life-style/spotlight/student-researchers-analyse-ozone-concentration-in-bengaluru/articleshow/66134890.cms",
+        "type": "link",
+        "prompt": "News Report"
+      }
+    ],
+    "image": "https://timesofindia.indiatimes.com/thumb/msid-66134890,width-800,height-600,resizemode-4/66134890.jpg"
+  },
+  {
+    "id": "codefest",
+    "parallax": "codefest.png",
+    "title": {
+      "name": "Oak Codefest",
+      "href": "http://codefest.oakridge.in/"
+    },
+    "position": "Founder and Organizer",
+    "startDate": "Aug 2017",
+    "endDate": "Jul 2019",
+    "location": "Bangalore,India",
+    "description": [
+      "Created Bangalore's First Overnight High School Hackathon for Oakridge Int School",
+      "Conducted Oak Codefest in 2018,2019,2020 as a platform for high school developers to network and learn from the best in the industry",
+      "Collaborated with Companies like IBM, Cisco, HGS, Digital Ocean, Y4PT, ACE Learning and more."
+    ],
+    "image": "https://raw.githubusercontent.com/oakblr/oakblr.github.io/master/images/winners.jpg",
+    "links": [
+      {
+        "href": "http://codefest.oakridge.in/",
+        "type": "link",
+        "prompt": "Official Website"
+      },
+      {
+        "href": "https://www.youtube.com/watch?v=EMpHOXm7sAg",
+        "type": "youtube",
+        "prompt": "Official Trailer Codefest 2020"
+      },
+      {
+        "href": "https://github.com/oakblr/oakblr.github.io",
+        "type": "github",
+        "prompt": "Git Repository"
+      }
+    ]
+  }
 ]
