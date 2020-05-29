@@ -17,6 +17,7 @@ class App extends Component {
     iconSize: "2vw",
     smallIconSize: "1.5vw",
     screenType: null,
+    isIpad: false,
   };
 
   mobilecheck = () => {
@@ -42,6 +43,7 @@ class App extends Component {
     window.addEventListener("resize", this.updateWindowDimensions());
     this.setState({
       isMobile: this.mobilecheck(),
+      isIpad: this.mobilecheck() ? false : this.state.isIpad,
     });
   }
   componentWillUnmount() {
@@ -52,18 +54,32 @@ class App extends Component {
     if (mobile) {
       this.setState({
         isMobile: mobile,
+        isIpad: false,
         iconSize: "4vw",
         smallIconSize: "3vw",
         screenType: 2,
       });
     }
 
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 1024) {
+      this.setState({
+        screenWidth: window.innerWidth,
+        screenType: -1,
+      });
+    } else if (window.innerWidth > 768) {
       if (this.state.screenType !== 0 && this.state.screenType !== null) {
-        this.setState({ screenWidth: window.innerWidth, screenType: 0 });
+        this.setState({
+          screenWidth: window.innerWidth,
+          screenType: 0,
+          isIpad: true,
+        });
         //window.location.reload(false)
       }
-      this.setState({ screenWidth: window.innerWidth, screenType: 0 });
+      this.setState({
+        screenWidth: window.innerWidth,
+        screenType: 0,
+        isIpad: true,
+      });
     } else if (window.innerWidth > 600) {
       if (this.state.screenType !== 1 && this.state.screenType !== null) {
         this.setState({
@@ -71,6 +87,7 @@ class App extends Component {
           iconSize: "4vw",
           smallIconSize: "3vw",
           screenType: 1,
+          isIpad: false,
         });
         //window.location.reload(false)
       }
@@ -79,6 +96,7 @@ class App extends Component {
         iconSize: "4vw",
         smallIconSize: "3vw",
         screenType: 1,
+        isIpad: false,
       });
     } else {
       if (this.state.screenType !== 2 && this.state.screenType !== null) {
@@ -87,6 +105,7 @@ class App extends Component {
           iconSize: "7vw",
           smallIconSize: "6vw",
           screenType: 2,
+          isIpad: false,
         });
         //window.location.reload(false)
       }
@@ -95,6 +114,7 @@ class App extends Component {
         iconSize: "7vw",
         smallIconSize: "6vw",
         screenType: 2,
+        isIpad: false,
       });
     }
   }
@@ -124,6 +144,7 @@ class App extends Component {
               component={(props) => (
                 <ProjectPage
                   iconSize={this.state.iconSize}
+                  isMobile={this.state.isMobile}
                   {...props}
                 ></ProjectPage>
               )}

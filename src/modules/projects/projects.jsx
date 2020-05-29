@@ -15,12 +15,18 @@ class Projects extends Component {
     fontSize: this.props.fontSize,
     screenWidth: this.props.screenWidth,
     isMobile: this.props.isMobile,
+    isIpad: false,
   };
   moreProjects = () => {
     this.setState({
       extraProject: true,
     });
   };
+  componentDidMount() {
+    if (this.state.screenWidth <= 1024 && !this.state.isMobile) {
+      this.setState({ isIpad: true });
+    }
+  }
   componentDidUpdate(prevProps) {
     if (
       this.props.screenWidth !== prevProps.screenWidth ||
@@ -57,12 +63,65 @@ class Projects extends Component {
                       objectFit: "cover",
                       overflow: "hidden",
                     }}
-                    strength={150}
+                    strength={this.state.isMobile ? 50 : 150}
                   >
+                    {!this.state.isMobile ? (
+                      <Card
+                        bordered={false}
+                        style={{
+                          width: "20vw",
+                          backgroundColor: " rgba(96, 125, 139,0.55)",
+                        }}
+                      >
+                        <Title
+                          ellipsis
+                          level={3}
+                          style={{ opacity: 1, color: "white" }}
+                        >
+                          {project.title.name}
+                        </Title>
+                        <p style={{ color: "white" }}>{project.slogan}</p>
+                        <Button type="primary" href={`/Projects/${project.id}`}>
+                          Learn More!
+                        </Button>
+                      </Card>
+                    ) : null}
+                  </Parallax>
+                  {this.state.isMobile ? (
+                    <Card
+                      bordered={false}
+                      style={{
+                        width: "40w",
+                        backgroundColor: " rgba(96, 125, 139,0.55)",
+                        paddingBottom: "10%",
+                      }}
+                    >
+                      <Title
+                        ellipsis
+                        level={3}
+                        style={{ opacity: 1, color: "white" }}
+                      >
+                        {project.title.name}
+                      </Title>
+                      <p style={{ color: "white" }}>{project.slogan}</p>
+                      <Button type="primary" href={`/Projects/${project.id}`}>
+                        Learn More!
+                      </Button>
+                    </Card>
+                  ) : null}
+                </Fragment>
+              );
+            } else {
+              // Video File
+              return (
+                <Fragment>
+                  {!this.state.isMobile ? (
                     <Card
                       bordered={false}
                       style={{
                         width: "20vw",
+                        zIndex: 10,
+                        position: "absolute",
                         backgroundColor: " rgba(96, 125, 139,0.55)",
                       }}
                     >
@@ -78,34 +137,7 @@ class Projects extends Component {
                         Learn More!
                       </Button>
                     </Card>
-                  </Parallax>
-                </Fragment>
-              );
-            } else {
-              // Video File
-              return (
-                <Fragment>
-                  <Card
-                    bordered={false}
-                    style={{
-                      width: "20vw",
-                      zIndex: 10,
-                      position: "absolute",
-                      backgroundColor: " rgba(96, 125, 139,0.55)",
-                    }}
-                  >
-                    <Title
-                      ellipsis
-                      level={3}
-                      style={{ opacity: 1, color: "white" }}
-                    >
-                      {project.title.name}
-                    </Title>
-                    <p style={{ color: "white" }}>{project.slogan}</p>
-                    <Button type="primary" href={`/Projects/${project.id}`}>
-                      Learn More!
-                    </Button>
-                  </Card>
+                  ) : null}
                   <video
                     style={{
                       maxHeight: "25vw",
@@ -134,6 +166,28 @@ class Projects extends Component {
                       type="video/mp4"
                     ></source>
                   </video>
+                  {this.state.isMobile ? (
+                    <Card
+                      bordered={false}
+                      style={{
+                        width: "60vw",
+                        backgroundColor: " rgba(96, 125, 139,0.55)",
+                        paddingBottom: "10%",
+                      }}
+                    >
+                      <Title
+                        ellipsis
+                        level={3}
+                        style={{ opacity: 1, color: "white" }}
+                      >
+                        {project.title.name}
+                      </Title>
+                      <p style={{ color: "white" }}>{project.slogan}</p>
+                      <Button type="primary" href={`/Projects/${project.id}`}>
+                        Learn More!
+                      </Button>
+                    </Card>
+                  ) : null}
                 </Fragment>
               );
             }

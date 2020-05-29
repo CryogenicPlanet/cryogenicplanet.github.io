@@ -26,7 +26,8 @@ const { Header, Footer, Sider, Content } = Layout;
 class ProjectPage extends Component {
   state = {
     projectId: this.props.match.params.projectId,
-    iconSize: this.props.iconSize,
+    iconSize: "5vw",
+    isMobile: this.props.isMobile,
   };
 
   componentDidMount() {
@@ -45,6 +46,16 @@ class ProjectPage extends Component {
     if (currentProject === null) {
       this.setState({ notFound: true });
     }
+    if (this.state.isMobile) {
+      let body = document.body;
+      body.style = `
+      display: flex;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+  `;
+      this.setState({ iconSize: "10vw" });
+    }
   }
 
   renderIcons = (icons) => {
@@ -53,7 +64,11 @@ class ProjectPage extends Component {
         <Col>
           <img
             alt={icon}
-            style={{ width: "5vw", height: "5vw", paddingTop: "3%" }}
+            style={{
+              width: this.state.iconSize,
+              height: this.state.iconSize,
+              paddingTop: "3%",
+            }}
             src={process.env.PUBLIC_URL + `/images/langs/${icon}`}
           />
         </Col>
@@ -67,7 +82,11 @@ class ProjectPage extends Component {
     return (
       <Fragment>
         <BackgroundAnimation
-          style={{ opacity: 0.3, position: "absoulute", zIndex: -1 }}
+          style={
+            this.state.isMobile
+              ? { opacity: 0.5, position: "absoulute", zIndex: -1 }
+              : { opacity: 0.3, position: "absoulute", zIndex: -1 }
+          }
         ></BackgroundAnimation>
         {this.state.notFound || !project ? (
           <FourOFour></FourOFour>
@@ -95,10 +114,17 @@ class ProjectPage extends Component {
                         );
                       })}
                       bordered={false}
-                      style={{
-                        width: "40vw",
-                        backgroundColor: "rgba(96, 125, 139,0.55)",
-                      }}
+                      style={
+                        this.state.isMobile
+                          ? {
+                              width: "90vw",
+                              backgroundColor: "rgba(96, 125, 139,0.55)",
+                            }
+                          : {
+                              width: "40vw",
+                              backgroundColor: "rgba(96, 125, 139,0.55)",
+                            }
+                      }
                     >
                       <Row type="flex" justify="center" align="middle">
                         <a
