@@ -3,7 +3,7 @@ import React, { Component, Fragment } from "react";
 
 import Home from "./home";
 import MoreProjects from "./modules/projects/moreProjects";
-import FourOFour from "./modules/404.jsx";
+import ProjectPage from "./modules/projects/projectPage";
 // TODO Publications
 // import Publications from './modules/publications/publications'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -17,8 +17,6 @@ class App extends Component {
     iconSize: "2vw",
     smallIconSize: "1.5vw",
     screenType: null,
-    studentName: "",
-    studentNo: "",
   };
 
   mobilecheck = () => {
@@ -120,6 +118,16 @@ class App extends Component {
                 return null;
               }}
             />
+            <Route
+              exact
+              path="/Projects/:projectId"
+              component={(props) => (
+                <ProjectPage
+                  iconSize={this.state.iconSize}
+                  {...props}
+                ></ProjectPage>
+              )}
+            ></Route>
             <Route
               path="/Links"
               component={() => {
