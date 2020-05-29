@@ -73,7 +73,7 @@ class Projects extends Component {
                       {project.title.name}
                     </Title>
                     <p style={{ color: "white" }}>{project.slogan}</p>
-                    <Button type="primary" danger>
+                    <Button type="primary" href={`/Projects/${project.id}`}>
                       Learn More!
                     </Button>
                   </Card>

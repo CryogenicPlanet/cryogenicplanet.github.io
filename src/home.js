@@ -41,6 +41,11 @@ class Home extends Component {
     isMobile: this.props.isMobile,
   };
   componentDidMount() {
+    let body = document.body;
+
+    body.style = `
+    background-image: linear-gradient(200deg, #0b8171 10%, #000000 100%);
+  `;
     this.handleLoad(1000);
   }
   componentDidUpdate(prevProps) {

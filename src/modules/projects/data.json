@@ -1,20 +1,61 @@
 [
   {
-    "id": "whoSaidThis?",
+    "id": "whoSaidThis",
     "title": {
       "name": "Who Said This?"
     },
     "parallax": "twitterBanner.png",
-    "slogan": "Build A Twitter Bot"
+    "slogan": "Ever read a tweet and felt out of the loop? Or perhaps you've wondered if what you're reading is inaccurate?",
+    "description": [
+      "A bot designed to fact-check information on Twitter by finding its sources. "
+    ],
+    "special": "<a href='https://www.producthunt.com/posts/who-said-this?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-who-said-this' target='_blank'><img src='https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=202831&theme=dark' alt='Who said this? - Find a tweet's source, without leaving Twitter. | Product Hunt Embed' style='width: 250px; height: 54px;' width='250px' height='54px' /></a>",
+    "languages": ["nodejs.svg", "mongodb.svg", "python.svg"],
+    "collaborators": [
+      {
+        "name": "Rithvik Mahindra",
+        "link": "https://www.linkedin.com/in/rithvik-mahindra/"
+      },
+      {
+        "name": "Arnav Bansal",
+        "link": "https://github.com/lunaroyster"
+      },
+      {
+        "name": "Gaurang Bharti",
+        "link": "https://www.linkedin.com/in/gaurang-bharti-269441181/"
+      },
+      {
+        "name": "Baalateja Kataru",
+        "link": "https://github.com/BK-Modding"
+      }
+    ],
+    "links": [
+      {
+        "href": "https://twitter.com/whosaidthis_bot?ref_src=twsrc%5Etfw",
+        "type": "twitter",
+        "prompt": "Twitter"
+      },
+      {
+        "href": "https://twittersourcebot.tech/",
+        "type": "link",
+        "prompt": "Official Website"
+      },
+      {
+        "href": "https://github.com/Mozilla-Open-Lab-Etwas/Twitter-Source-Bot",
+        "type": "github",
+        "prompt": "Source Code"
+      }
+    ]
   },
   {
     "id": "researchPaper",
     "parallax": "balloon.gif",
     "title": {
       "name": "Ozone Research Paper",
+      "long": "Investigating the vertical ozone profile, with a specific focus on the ground level and tropospheric ozone over Bangalore",
       "href": "https://www.cfrce.com/images/Investigating_the_vertical_ozone_profile_with_a_specific_focus_on_the_ground_level_and_tropospheric_.pdf"
     },
-    "slogan": "Published Research in CFCRE, Won PES Amateur Scientist Award for Research",
+    "slogan": "Published Research about Ozone Concentration in CFCRE. Won PES Amateur Scientist Award for this paper",
     "position": "Author of Research Paper",
     "startDate": "Feb 2018",
     "endDate": "Feb 2019",
@@ -26,7 +67,21 @@
       "Complied and Analyzed the data from 18 hours of flight",
       "Published Research in CFCRE, Won PES Amateur Scientist Award for Research"
     ],
-    "languages": "C, Python, Arduino(C), Matlab",
+    "languages": ["c.svg", "python.svg", "arduino.svg"],
+    "collaborators": [
+      {
+        "name": "Rithvik Mahindra",
+        "link": "https://www.linkedin.com/in/rithvik-mahindra/"
+      },
+      {
+        "name": "Aman Saxena",
+        "link": "https://www.linkedin.com/in/aman-saxena-um/"
+      },
+      {
+        "name": "Govind Nair",
+        "link": "https://www.linkedin.com/in/govind-nair-b22225198/"
+      }
+    ],
     "links": [
       {
         "href": "https://www.cfrce.com/images/Investigating_the_vertical_ozone_profile_with_a_specific_focus_on_the_ground_level_and_tropospheric_.pdf",
@@ -79,6 +134,24 @@
         "href": "https://github.com/oakblr/oakblr.github.io",
         "type": "github",
         "prompt": "Git Repository"
+      }
+    ],
+    "collaborators": [
+      {
+        "name": "Rithvik Mahindra",
+        "link": "https://www.linkedin.com/in/rithvik-mahindra/"
+      },
+      {
+        "name": "Gaurang Bharti",
+        "link": "https://www.linkedin.com/in/gaurang-bharti-269441181/"
+      },
+      {
+        "name": "Baalateja Kataru",
+        "link": "https://github.com/BK-Modding"
+      },
+      {
+        "name": "Yeshwant K",
+        "link": "https://www.linkedin.com/in/yeshwant-kethineni-aa9368195/"
       }
     ]
   }
