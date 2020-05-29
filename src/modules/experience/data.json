@@ -6,6 +6,7 @@
     },
     "position": "Builder @ FixTheInternet Spring Open Lab",
     "location": "Remote",
+    "image": "moz-logo-1color-white-rgb.png",
     "startDate": "April 2020",
     "endDate": "Jun 2020",
     "description": [
@@ -39,6 +40,7 @@
     },
     "position": "Co Founder",
     "location": "Bangalore,India",
+    "image": "sparkachange.png",
     "startDate": "Dec 2014",
     "endDate": "Jul 2019",
     "description": [
@@ -62,6 +64,7 @@
     "location": "Bangalore,India",
     "startDate": "Feb 2018",
     "endDate": "Jun 2018",
+    "image": "visa.png",
     "description": [
       "Developed a solution to withdraw money from ATM using NFC on your phone"
     ],
@@ -80,6 +83,7 @@
       "href": "https://github.com/CryogenicPlanet/Stanza-Cisco-Internship"
     },
     "position": "Software Development Intern",
+    "image": "cisco.png",
     "location": "Bangalore,India",
     "startDate": "Jul 2017",
     "endDate": "Feb 2018",
