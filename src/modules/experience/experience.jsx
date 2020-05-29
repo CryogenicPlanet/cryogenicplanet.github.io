@@ -67,6 +67,15 @@ class Experience extends Component {
                       </Fragment>
                     </Row>,
                   ]}
+                  extra={
+                    <a href={item.links[0].href}>
+                      <img
+                        style={{ width: "13vw" }}
+                        alt="logo"
+                        src={`${process.env.PUBLIC_URL}/images/experiences/${item.image}`}
+                      />
+                    </a>
+                  }
                 >
                   <List.Item.Meta
                     title={<a href={item.title.href}> {item.title.name} </a>}
