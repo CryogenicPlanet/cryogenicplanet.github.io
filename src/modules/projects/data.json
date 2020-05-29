@@ -1,15 +1,20 @@
 [
   {
     "id": "whoSaidThis?",
-    "parallax": "twitterBanner.png"
+    "title": {
+      "name": "Who Said This?"
+    },
+    "parallax": "twitterBanner.png",
+    "slogan": "Build A Twitter Bot"
   },
   {
     "id": "researchPaper",
-    "parallax": "balloon.jpg",
+    "parallax": "balloon.gif",
     "title": {
-      "name": "Investigating the vertical ozone profile, with a specific focus on the ground level and tropospheric ozone over Bangalore",
+      "name": "Ozone Research Paper",
       "href": "https://www.cfrce.com/images/Investigating_the_vertical_ozone_profile_with_a_specific_focus_on_the_ground_level_and_tropospheric_.pdf"
     },
+    "slogan": "Published Research in CFCRE, Won PES Amateur Scientist Award for Research",
     "position": "Author of Research Paper",
     "startDate": "Feb 2018",
     "endDate": "Feb 2019",
@@ -52,6 +57,7 @@
     "startDate": "Aug 2017",
     "endDate": "Jul 2019",
     "location": "Bangalore,India",
+    "slogan": "Hosted Bangalore's First 24 hour Overnight High School Hackathon",
     "description": [
       "Created Bangalore's First Overnight High School Hackathon for Oakridge Int School",
       "Conducted Oak Codefest in 2018,2019,2020 as a platform for high school developers to network and learn from the best in the industry",

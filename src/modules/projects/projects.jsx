@@ -3,8 +3,9 @@
 import React, { Component, Fragment } from "react";
 import data from "./data";
 import Image from "material-ui-image";
-import { Col, Row, List, Typography, Icon, Tooltip, Button } from "antd";
+import { Col, Row, List, Typography, Icon, Tooltip, Button, Card } from "antd";
 import { Parallax, Background } from "react-parallax";
+import Paragraph from "antd/lib/skeleton/Paragraph";
 //import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
@@ -56,7 +57,27 @@ class Projects extends Component {
                     overflow: "hidden",
                   }}
                   strength={150}
-                ></Parallax>
+                >
+                  <Card
+                    bordered={false}
+                    style={{
+                      width: "20vw",
+                      backgroundColor: " rgba(96, 125, 139,0.55)",
+                    }}
+                  >
+                    <Title
+                      ellipsis
+                      level={3}
+                      style={{ opacity: 1, color: "white" }}
+                    >
+                      {project.title.name}
+                    </Title>
+                    <p style={{ color: "white" }}>{project.slogan}</p>
+                    <Button type="primary" danger>
+                      Learn More!
+                    </Button>
+                  </Card>
+                </Parallax>
               </Fragment>
             );
           })}
