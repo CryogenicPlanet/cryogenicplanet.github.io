@@ -2,23 +2,27 @@
 import React, { Component, Fragment } from "react";
 
 import Home from "./home";
-import MoreProjects from './modules/projects/moreProjects'
-import FourOFour from './modules/404.jsx'
+import MoreProjects from "./modules/projects/moreProjects";
+import ProjectPage from "./modules/projects/projectPage";
 // TODO Publications
 // import Publications from './modules/publications/publications'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ProjectTerminal from "./modules/projects/projectsTerminal";
+//import Recaptcha from "react-recaptcha";
+
 class App extends Component {
-  
-  state =  {
+  state = {
     isMobile: false,
     screenWidth: window.innerWidth,
     iconSize: "2vw",
     smallIconSize: "1.5vw",
-    screenType: null
+    screenType: null,
+    isIpad: false,
   };
+
   mobilecheck = () => {
     var check = false;
-    (function(a) {
+    (function (a) {
       // Regex for checking if device is mobile does not need spell check
       /* cSpell:disable */
       if (
@@ -29,17 +33,17 @@ class App extends Component {
           a.substr(0, 4)
         )
       )
-      /* cSpell:enable */
+        /* cSpell:enable */
         check = true;
     })(navigator.userAgent || navigator.vendor || window.opera);
     return check;
   };
-   
+
   componentDidMount() {
-    
     window.addEventListener("resize", this.updateWindowDimensions());
     this.setState({
-      isMobile: this.mobilecheck()
+      isMobile: this.mobilecheck(),
+      isIpad: this.mobilecheck() ? false : this.state.isIpad,
     });
   }
   componentWillUnmount() {
@@ -50,25 +54,40 @@ class App extends Component {
     if (mobile) {
       this.setState({
         isMobile: mobile,
+        isIpad: false,
         iconSize: "4vw",
         smallIconSize: "3vw",
-        screenType: 2
+        screenType: 2,
       });
     }
 
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 1024) {
+      this.setState({
+        screenWidth: window.innerWidth,
+        screenType: -1,
+      });
+    } else if (window.innerWidth > 768) {
       if (this.state.screenType !== 0 && this.state.screenType !== null) {
-        this.setState({ screenWidth: window.innerWidth, screenType: 0 });
+        this.setState({
+          screenWidth: window.innerWidth,
+          screenType: 0,
+          isIpad: true,
+        });
         //window.location.reload(false)
       }
-      this.setState({ screenWidth: window.innerWidth, screenType: 0 });
+      this.setState({
+        screenWidth: window.innerWidth,
+        screenType: 0,
+        isIpad: true,
+      });
     } else if (window.innerWidth > 600) {
       if (this.state.screenType !== 1 && this.state.screenType !== null) {
         this.setState({
           screenWidth: window.innerWidth,
           iconSize: "4vw",
           smallIconSize: "3vw",
-          screenType: 1
+          screenType: 1,
+          isIpad: false,
         });
         //window.location.reload(false)
       }
@@ -76,7 +95,8 @@ class App extends Component {
         screenWidth: window.innerWidth,
         iconSize: "4vw",
         smallIconSize: "3vw",
-        screenType: 1
+        screenType: 1,
+        isIpad: false,
       });
     } else {
       if (this.state.screenType !== 2 && this.state.screenType !== null) {
@@ -84,7 +104,8 @@ class App extends Component {
           screenWidth: window.innerWidth,
           iconSize: "7vw",
           smallIconSize: "6vw",
-          screenType: 2
+          screenType: 2,
+          isIpad: false,
         });
         //window.location.reload(false)
       }
@@ -92,22 +113,42 @@ class App extends Component {
         screenWidth: window.innerWidth,
         iconSize: "7vw",
         smallIconSize: "6vw",
-        screenType: 2
+        screenType: 2,
+        isIpad: false,
       });
     }
   }
+  handleChange = (e) => {
+    console.log(`${e.target.name} Input Changed`);
+    const eTargent = e.target;
+
+    this.setState({ [eTargent.name]: eTargent.value });
+  };
+
   render() {
     return (
       <Fragment>
         <Router>
           <Switch>
-          <Route
+            <Route
               path="/sitemap"
               component={() => {
-                window.location.href = process.env.PUBLIC_URL + "/files/sitemap.xml";
+                window.location.href =
+                  process.env.PUBLIC_URL + "/files/sitemap.xml";
                 return null;
               }}
             />
+            <Route
+              exact
+              path="/Projects/:projectId"
+              component={(props) => (
+                <ProjectPage
+                  iconSize={this.state.iconSize}
+                  isMobile={this.state.isMobile}
+                  {...props}
+                ></ProjectPage>
+              )}
+            ></Route>
             <Route
               path="/Links"
               component={() => {
@@ -115,17 +156,16 @@ class App extends Component {
                 return null;
               }}
             />
-            <Route
-              path="/Projects">
-                <MoreProjects></MoreProjects>
-              </Route>
+            <Route path="/Terminal">
+              <ProjectTerminal></ProjectTerminal>
+            </Route>
             <Route path="/Publications">
               <p>Work in Progress</p>
             </Route>
-            <Route exact path="/">
+            <Route path="/">
               <Home {...this.state} />
             </Route>
-            <Route component={FourOFour}></Route>
+            {/* <Route component={FourOFour}></Route> */}
           </Switch>
         </Router>
       </Fragment>

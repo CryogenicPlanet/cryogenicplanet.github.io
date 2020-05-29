@@ -3,7 +3,9 @@
 import React, { Component, Fragment } from "react";
 import data from "./data";
 import Image from "material-ui-image";
-import { Col, Row, List, Typography, Icon, Tooltip, Button } from "antd";
+import { Col, Row, List, Typography, Icon, Tooltip, Button, Card } from "antd";
+import { Parallax, Background } from "react-parallax";
+import Paragraph from "antd/lib/skeleton/Paragraph";
 //import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
@@ -12,13 +14,19 @@ class Projects extends Component {
     extraProject: false,
     fontSize: this.props.fontSize,
     screenWidth: this.props.screenWidth,
-    isMobile: this.props.isMobile
+    isMobile: this.props.isMobile,
+    isIpad: false,
   };
   moreProjects = () => {
     this.setState({
-      extraProject: true
+      extraProject: true,
     });
   };
+  componentDidMount() {
+    if (this.state.screenWidth <= 1024 && !this.state.isMobile) {
+      this.setState({ isIpad: true });
+    }
+  }
   componentDidUpdate(prevProps) {
     if (
       this.props.screenWidth !== prevProps.screenWidth ||
@@ -26,7 +34,7 @@ class Projects extends Component {
     ) {
       this.setState({
         screenWidth: this.props.screenWidth,
-        isMobile: this.props.isMobile
+        isMobile: this.props.isMobile,
       });
     }
   }
@@ -37,99 +45,154 @@ class Projects extends Component {
           <Row type="flex" justify="center" align="middle">
             <Title>Projects</Title>
           </Row>
-          <Row type="flex" justify="center" align="middle">
-            <Col>
-              <List
-                itemLayout="vertical"
-                size="large"
-                dataSource={data}
-                renderItem={item => (
-                  <Fragment>
-                    <div>
-                      {this.state.screenWidth < 769 ||
-                      this.state.isMobile === true ? (
-                        <Image
-                          src={item.image}
-                          onClick={() => console.log("onClick")}
-                          aspectRatio={16 / 9}
-                          disableSpinner
-                        />
-                      ) : null}
-                    </div>
-                    <List.Item
-                      key={item.title.name}
-                      actions={[
-                        <Row type="flex" justify="space-between" align="middle">
-                          <Fragment>
-                            <Col span={4}>
-                              <Tooltip title="Learn More">
-                                <a href={`#${item.id}`} disabled>
-                                  <Icon
-                                    type="more"
-                                    style={{ fontSize: this.state.fontSize }}
-                                    rotate="90"
-                                  />
-                                </a>
-                              </Tooltip>
-                            </Col>
-                            {item.links.map((link) => {
-                              return (
-                                <Col span={4}>
-                                  <Tooltip title={link.prompt}>
-                                    <a
-                                      href={link.href}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      <Icon
-                                        type={link.type}
-                                        style={{
-                                          fontSize: this.state.fontSize
-                                        }}
-                                      />
-                                    </a>
-                                  </Tooltip>
-                                </Col>
-                              );
-                            })}
-                          </Fragment>
-                        </Row>
-                      ]}
-                      extra={
-                        this.state.screenWidth > 768 &&
-                        this.state.isMobile === false ? (
-                          <a href={item.links[0].href}>
-                            <img
-                              style={{ width: "13vw" }}
-                              alt="logo"
-                              src={item.image}
-                            />
-                          </a>
-                        ) : null
-                      }
+
+          {data.map((project) => {
+            if (project.parallax) {
+              return (
+                <Fragment>
+                  <Parallax
+                    bgImage={
+                      process.env.PUBLIC_URL +
+                      `/images/projects/${project.parallax}`
+                    }
+                    style={{ height: "25vw", paddingBottom: "5%" }}
+                    blur={{ min: -15, max: 15 }}
+                    bgImageStyle={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      overflow: "hidden",
+                    }}
+                    strength={this.state.isMobile ? 50 : 150}
+                  >
+                    {!this.state.isMobile ? (
+                      <Card
+                        bordered={false}
+                        style={{
+                          width: "20vw",
+                          backgroundColor: " rgba(96, 125, 139,0.55)",
+                        }}
+                      >
+                        <Title
+                          ellipsis
+                          level={3}
+                          style={{ opacity: 1, color: "white" }}
+                        >
+                          {project.title.name}
+                        </Title>
+                        <p style={{ color: "white" }}>{project.slogan}</p>
+                        <Button type="primary" href={`/Projects/${project.id}`}>
+                          Learn More!
+                        </Button>
+                      </Card>
+                    ) : null}
+                  </Parallax>
+                  {this.state.isMobile ? (
+                    <Card
+                      bordered={false}
+                      style={{
+                        width: "40w",
+                        backgroundColor: " rgba(96, 125, 139,0.55)",
+                        paddingBottom: "10%",
+                      }}
                     >
-                      <List.Item.Meta
-                        title={
-                          <a href={item.title.href}> {item.title.name} </a>
-                        }
-                        description={`${item.position} | From ${item.startDate} to ${item.endDate} in ${item.location}`}
-                      />
-                      {item.description.map((description) => {
-                        return <p>{description}</p>;
-                      })}
-                      {item.languages != null ? (
-                        <p>
-                          <b>{`Languages used ${item.languages}`}</b>
-                        </p>
-                      ) : (
-                        <p></p>
-                      )}
-                    </List.Item>
-                  </Fragment>
-                )}
-              ></List>
-            </Col>
-          </Row>
+                      <Title
+                        ellipsis
+                        level={3}
+                        style={{ opacity: 1, color: "white" }}
+                      >
+                        {project.title.name}
+                      </Title>
+                      <p style={{ color: "white" }}>{project.slogan}</p>
+                      <Button type="primary" href={`/Projects/${project.id}`}>
+                        Learn More!
+                      </Button>
+                    </Card>
+                  ) : null}
+                </Fragment>
+              );
+            } else {
+              // Video File
+              return (
+                <Fragment>
+                  {!this.state.isMobile ? (
+                    <Card
+                      bordered={false}
+                      style={{
+                        width: "20vw",
+                        zIndex: 10,
+                        position: "absolute",
+                        backgroundColor: " rgba(96, 125, 139,0.55)",
+                      }}
+                    >
+                      <Title
+                        ellipsis
+                        level={3}
+                        style={{ opacity: 1, color: "white" }}
+                      >
+                        {project.title.name}
+                      </Title>
+                      <p style={{ color: "white" }}>{project.slogan}</p>
+                      <Button type="primary" href={`/Projects/${project.id}`}>
+                        Learn More!
+                      </Button>
+                    </Card>
+                  ) : null}
+                  <video
+                    style={{
+                      maxHeight: "25vw",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      overflow: "hidden",
+                    }}
+                    playsinline
+                    autoPlay
+                    loop
+                    muted
+                  >
+                    <source
+                      src={
+                        process.env.PUBLIC_URL +
+                        `/images/projects/${project.video}.webm`
+                      }
+                      type="video/webm"
+                    ></source>
+                    <source
+                      src={
+                        process.env.PUBLIC_URL +
+                        `/images/projects/${project.video}.mp4`
+                      }
+                      type="video/mp4"
+                    ></source>
+                  </video>
+                  {this.state.isMobile ? (
+                    <Card
+                      bordered={false}
+                      style={{
+                        width: "60vw",
+                        backgroundColor: " rgba(96, 125, 139,0.55)",
+                        paddingBottom: "10%",
+                      }}
+                    >
+                      <Title
+                        ellipsis
+                        level={3}
+                        style={{ opacity: 1, color: "white" }}
+                      >
+                        {project.title.name}
+                      </Title>
+                      <p style={{ color: "white" }}>{project.slogan}</p>
+                      <Button type="primary" href={`/Projects/${project.id}`}>
+                        Learn More!
+                      </Button>
+                    </Card>
+                  ) : null}
+                </Fragment>
+              );
+            }
+          })}
+
           <Row type="flex" justify="center" align="middle">
             <Tooltip title="Under Construction">
               <Button type="dashed" block disabled onClick={this.moreProjects}>
