@@ -28,6 +28,7 @@
     "react-breakpoints": "^3.0.3",
     "react-dom": "^16.12.0",
     "react-loading-spinkit": "^0.1.8",
+    "react-parallax": "^3.0.3",
     "react-pose": "^4.0.10",
     "react-recaptcha": "^2.3.10",
     "react-router-dom": "^5.1.2",

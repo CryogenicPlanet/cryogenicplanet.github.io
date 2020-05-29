@@ -9,11 +9,13 @@ const { Title } = Typography;
 class Experience extends Component {
   state = {
     fontSize: this.props.fontSize,
+    isMobile: this.props.isMobile,
   };
   componentDidUpdate(prevProps) {
     if (this.props.fontSize !== prevProps.fontSize) {
       this.setState({
         fontSize: this.props.fontSize,
+        isMobile: this.props.isMobile,
       });
     }
   }
@@ -67,6 +69,15 @@ class Experience extends Component {
                       </Fragment>
                     </Row>,
                   ]}
+                  extra={
+                    <a href={item.links[0].href}>
+                      <img
+                        style={{ width: this.state.isMobile ? "30vw" : "13vw" }}
+                        alt="logo"
+                        src={`${process.env.PUBLIC_URL}/images/experiences/${item.image}`}
+                      />
+                    </a>
+                  }
                 >
                   <List.Item.Meta
                     title={<a href={item.title.href}> {item.title.name} </a>}
