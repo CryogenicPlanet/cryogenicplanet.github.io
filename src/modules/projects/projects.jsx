@@ -41,27 +41,56 @@ class Projects extends Component {
           </Row>
 
           {data.map((project) => {
-            return (
-              <Fragment>
-                <Parallax
-                  bgImage={
-                    process.env.PUBLIC_URL +
-                    `/images/projects/${project.parallax}`
-                  }
-                  style={{ height: "25vw", paddingBottom: "5%" }}
-                  blur={{ min: -15, max: 15 }}
-                  bgImageStyle={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    overflow: "hidden",
-                  }}
-                  strength={150}
-                >
+            if (project.parallax) {
+              return (
+                <Fragment>
+                  <Parallax
+                    bgImage={
+                      process.env.PUBLIC_URL +
+                      `/images/projects/${project.parallax}`
+                    }
+                    style={{ height: "25vw", paddingBottom: "5%" }}
+                    blur={{ min: -15, max: 15 }}
+                    bgImageStyle={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      overflow: "hidden",
+                    }}
+                    strength={150}
+                  >
+                    <Card
+                      bordered={false}
+                      style={{
+                        width: "20vw",
+                        backgroundColor: " rgba(96, 125, 139,0.55)",
+                      }}
+                    >
+                      <Title
+                        ellipsis
+                        level={3}
+                        style={{ opacity: 1, color: "white" }}
+                      >
+                        {project.title.name}
+                      </Title>
+                      <p style={{ color: "white" }}>{project.slogan}</p>
+                      <Button type="primary" href={`/Projects/${project.id}`}>
+                        Learn More!
+                      </Button>
+                    </Card>
+                  </Parallax>
+                </Fragment>
+              );
+            } else {
+              // Video File
+              return (
+                <Fragment>
                   <Card
                     bordered={false}
                     style={{
                       width: "20vw",
+                      zIndex: 10,
+                      position: "absolute",
                       backgroundColor: " rgba(96, 125, 139,0.55)",
                     }}
                   >
@@ -77,9 +106,37 @@ class Projects extends Component {
                       Learn More!
                     </Button>
                   </Card>
-                </Parallax>
-              </Fragment>
-            );
+                  <video
+                    style={{
+                      maxHeight: "25vw",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      overflow: "hidden",
+                    }}
+                    playsinline
+                    autoPlay
+                    loop
+                    muted
+                  >
+                    <source
+                      src={
+                        process.env.PUBLIC_URL +
+                        `/images/projects/${project.video}.webm`
+                      }
+                      type="video/webm"
+                    ></source>
+                    <source
+                      src={
+                        process.env.PUBLIC_URL +
+                        `/images/projects/${project.video}.mp4`
+                      }
+                      type="video/mp4"
+                    ></source>
+                  </video>
+                </Fragment>
+              );
+            }
           })}
 
           <Row type="flex" justify="center" align="middle">

@@ -49,7 +49,8 @@
   },
   {
     "id": "researchPaper",
-    "parallax": "balloon.gif",
+    "parallax": "",
+    "video": "balloon",
     "title": {
       "name": "Ozone Research Paper",
       "long": "Investigating the vertical ozone profile, with a specific focus on the ground level and tropospheric ozone over Bangalore",
