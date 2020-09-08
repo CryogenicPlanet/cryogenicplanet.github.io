@@ -2,9 +2,9 @@
 /* eslint-disable react/prop-types */
 import React, { Component, Fragment } from "react";
 import { Row, Progress, Col, Typography, List } from "antd";
-import data from "./data";
+import data from "./data.json";
 const { Title, Paragraph } = Typography;
-class Skills extends Component {
+class Skills extends Component<{ screenWidth: number, isMobile: boolean }> {
   state = {
     screenWidth: this.props.screenWidth,
     isMobile: this.props.isMobile
@@ -31,27 +31,27 @@ class Skills extends Component {
             return (
               <Fragment>
                 {this.state.screenWidth > 500 &&
-                this.state.isMobile === false ? (
-                  <Col span={6} offset={3}>
-                    <Progress
-                      type="dashboard"
-                      size="small"
-                      percent={item.percent}
-                      // eslint-disable-next-line no-unused-vars
-                      format={percent => `${item.name}`}
-                    />
-                  </Col>
-                ) : (
-                  <Col span={8}>
-                    <Paragraph>{item.name}</Paragraph>
-                    <Progress
-                      type="line"
-                      percent={item.percent}
-                       // eslint-disable-next-line no-unused-vars
-                      format={percent => ``}
-                    />
-                  </Col>
-                )}
+                  this.state.isMobile === false ? (
+                    <Col span={6} offset={3}>
+                      <Progress
+                        type="dashboard"
+                        size="small"
+                        percent={item.percent}
+                        // eslint-disable-next-line no-unused-vars
+                        format={percent => `${item.name}`}
+                      />
+                    </Col>
+                  ) : (
+                    <Col span={8}>
+                      <Paragraph>{item.name}</Paragraph>
+                      <Progress
+                        type="line"
+                        percent={item.percent}
+                        // eslint-disable-next-line no-unused-vars
+                        format={percent => ``}
+                      />
+                    </Col>
+                  )}
               </Fragment>
             );
           })}
@@ -68,7 +68,7 @@ class Skills extends Component {
                   <Progress
                     type="line"
                     percent={item.percent}
-                     // eslint-disable-next-line no-unused-vars
+                    // eslint-disable-next-line no-unused-vars
                     format={percent => ``}
                   />
                 </Col>
@@ -89,27 +89,27 @@ class Skills extends Component {
             return (
               <Fragment>
                 {this.state.screenWidth > 500 &&
-                this.state.isMobile === false ? (
-                  <Col span={3}>
-                    <Fragment>
-                      <Paragraph>{item.name}</Paragraph>
-                      <Progress
-                        size="small"
-                        percent={item.percent}
-                         // eslint-disable-next-line no-unused-vars
-                        format={percent => ``}
-                      />
-                    </Fragment>
-                  </Col>
-                ) : (
-                  <List size="small" bordered>
-                    <List.Item>
-                      <Row type="flex" justify="center" align="middle">
+                  this.state.isMobile === false ? (
+                    <Col span={3}>
+                      <Fragment>
                         <Paragraph>{item.name}</Paragraph>
-                      </Row>
-                    </List.Item>
-                  </List>
-                )}
+                        <Progress
+                          size="small"
+                          percent={item.percent}
+                          // eslint-disable-next-line no-unused-vars
+                          format={percent => ``}
+                        />
+                      </Fragment>
+                    </Col>
+                  ) : (
+                    <List size="small" bordered>
+                      <List.Item>
+                        <Row type="flex" justify="center" align="middle">
+                          <Paragraph>{item.name}</Paragraph>
+                        </Row>
+                      </List.Item>
+                    </List>
+                  )}
               </Fragment>
             );
           })}

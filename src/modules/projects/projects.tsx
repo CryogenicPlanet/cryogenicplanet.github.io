@@ -1,127 +1,68 @@
+// @ts-ignore
+import React, { useState, useEffect } from "react";
+import { Row, Typography, Tooltip, Button, Card } from "antd";
+import { Parallax, } from "react-parallax";
+import data from "./data.json";
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
-import React, { Component, Fragment } from "react";
-import data from "./data";
-import Image from "material-ui-image";
-import { Col, Row, List, Typography, Icon, Tooltip, Button, Card } from "antd";
-import { Parallax, Background } from "react-parallax";
-import Paragraph from "antd/lib/skeleton/Paragraph";
-//import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+
+// import Image from "material-ui-image";
+
 const { Title } = Typography;
 
-class Projects extends Component {
-  state = {
-    extraProject: false,
-    fontSize: this.props.fontSize,
-    screenWidth: this.props.screenWidth,
-    isMobile: this.props.isMobile,
-    isIpad: false,
-  };
-  moreProjects = () => {
-    this.setState({
-      extraProject: true,
-    });
-  };
-  componentDidMount() {
-    if (this.state.screenWidth <= 1024 && !this.state.isMobile) {
-      this.setState({ isIpad: true });
-    }
-  }
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.screenWidth !== prevProps.screenWidth ||
-      this.props.isMobile !== prevProps.isMobile
-    ) {
-      this.setState({
-        screenWidth: this.props.screenWidth,
-        isMobile: this.props.isMobile,
-      });
-    }
-  }
-  render() {
-    return (
-      <Fragment>
-        <section color="black">
-          <Row type="flex" justify="center" align="middle">
-            <Title>Projects</Title>
-          </Row>
+type ProjectProps = {
 
-          {data.map((project) => {
-            if (project.parallax) {
-              return (
-                <Fragment>
-                  <Parallax
-                    bgImage={
-                      process.env.PUBLIC_URL +
-                      `/images/projects/${project.parallax}`
-                    }
-                    style={{ height: "25vw", paddingBottom: "5%" }}
-                    blur={{ min: -15, max: 15 }}
-                    bgImageStyle={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      overflow: "hidden",
-                    }}
-                    strength={this.state.isMobile ? 50 : 150}
-                  >
-                    {!this.state.isMobile ? (
-                      <Card
-                        bordered={false}
-                        style={{
-                          width: "20vw",
-                          backgroundColor: " rgba(96, 125, 139,0.55)",
-                        }}
-                      >
-                        <Title
-                          ellipsis
-                          level={3}
-                          style={{ opacity: 1, color: "white" }}
-                        >
-                          {project.title.name}
-                        </Title>
-                        <p style={{ color: "white" }}>{project.slogan}</p>
-                        <Button type="primary" href={`/Projects/${project.id}`}>
-                          Learn More!
-                        </Button>
-                      </Card>
-                    ) : null}
-                  </Parallax>
-                  {this.state.isMobile ? (
-                    <Card
-                      bordered={false}
-                      style={{
-                        width: "40w",
-                        backgroundColor: " rgba(96, 125, 139,0.55)",
-                        paddingBottom: "10%",
-                      }}
-                    >
-                      <Title
-                        ellipsis
-                        level={3}
-                        style={{ opacity: 1, color: "white" }}
-                      >
-                        {project.title.name}
-                      </Title>
-                      <p style={{ color: "white" }}>{project.slogan}</p>
-                      <Button type="primary" href={`/Projects/${project.id}`}>
-                        Learn More!
-                      </Button>
-                    </Card>
-                  ) : null}
-                </Fragment>
-              );
-            } else {
-              // Video File
-              return (
-                <Fragment>
-                  {!this.state.isMobile ? (
+  screenWidth: number
+  isMobile: boolean
+}
+
+const Projects = ({ isMobile, screenWidth }: ProjectProps) => {
+
+
+  const [extraProject, setExtraProject] = useState(false)
+  const [isIpad, setIsIpad] = useState(false)
+
+  const moreProjects = () => {
+    setExtraProject(true)
+  };
+  useEffect(() => {
+    if (screenWidth <= 1024 && !isMobile) {
+      setIsIpad(true)
+    }
+  }, [])
+
+
+  return (
+    <>
+      <section color="black">
+        <Row type="flex" justify="center" align="middle">
+          <Title>Projects</Title>
+        </Row>
+
+        {data.map((project) => {
+          if (project.parallax) {
+            return (
+              <>
+                <Parallax
+                  bgImage={
+                    process.env.PUBLIC_URL +
+                    `/images/projects/${project.parallax}`
+                  }
+                  style={{ height: "25vw", paddingBottom: "5%" }}
+                  blur={{ min: -15, max: 15 }}
+                  bgImageStyle={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    overflow: "hidden",
+                  }}
+                  strength={isMobile ? 50 : 150}
+                >
+                  {!isMobile ? (
                     <Card
                       bordered={false}
                       style={{
                         width: "20vw",
-                        zIndex: 10,
-                        position: "absolute",
                         backgroundColor: " rgba(96, 125, 139,0.55)",
                       }}
                     >
@@ -135,75 +76,127 @@ class Projects extends Component {
                       <p style={{ color: "white" }}>{project.slogan}</p>
                       <Button type="primary" href={`/Projects/${project.id}`}>
                         Learn More!
-                      </Button>
+                        </Button>
                     </Card>
                   ) : null}
-                  <video
+                </Parallax>
+                {isMobile ? (
+                  <Card
+                    bordered={false}
                     style={{
-                      maxHeight: "25vw",
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      overflow: "hidden",
+                      width: "40w",
+                      backgroundColor: " rgba(96, 125, 139,0.55)",
+                      paddingBottom: "10%",
                     }}
-                    playsinline
-                    autoPlay
-                    loop
-                    muted
                   >
-                    <source
-                      src={
-                        process.env.PUBLIC_URL +
-                        `/images/projects/${project.video}.webm`
-                      }
-                      type="video/webm"
-                    ></source>
-                    <source
-                      src={
-                        process.env.PUBLIC_URL +
-                        `/images/projects/${project.video}.mp4`
-                      }
-                      type="video/mp4"
-                    ></source>
-                  </video>
-                  {this.state.isMobile ? (
-                    <Card
-                      bordered={false}
-                      style={{
-                        width: "60vw",
-                        backgroundColor: " rgba(96, 125, 139,0.55)",
-                        paddingBottom: "10%",
-                      }}
+                    <Title
+                      ellipsis
+                      level={3}
+                      style={{ opacity: 1, color: "white" }}
                     >
-                      <Title
-                        ellipsis
-                        level={3}
-                        style={{ opacity: 1, color: "white" }}
-                      >
-                        {project.title.name}
-                      </Title>
-                      <p style={{ color: "white" }}>{project.slogan}</p>
-                      <Button type="primary" href={`/Projects/${project.id}`}>
-                        Learn More!
+                      {project.title.name}
+                    </Title>
+                    <p style={{ color: "white" }}>{project.slogan}</p>
+                    <Button type="primary" href={`/Projects/${project.id}`}>
+                      Learn More!
                       </Button>
-                    </Card>
-                  ) : null}
-                </Fragment>
-              );
-            }
-          })}
+                  </Card>
+                ) : null}
+              </>
+            );
+          } else {
+            // Video File
+            return (
+              <>
+                {!isMobile ? (
+                  <Card
+                    bordered={false}
+                    style={{
+                      width: "20vw",
+                      zIndex: 10,
+                      position: "absolute",
+                      backgroundColor: " rgba(96, 125, 139,0.55)",
+                    }}
+                  >
+                    <Title
+                      ellipsis
+                      level={3}
+                      style={{ opacity: 1, color: "white" }}
+                    >
+                      {project.title.name}
+                    </Title>
+                    <p style={{ color: "white" }}>{project.slogan}</p>
+                    <Button type="primary" href={`/Projects/${project.id}`}>
+                      Learn More!
+                      </Button>
+                  </Card>
+                ) : null}
+                <video
+                  style={{
+                    maxHeight: "25vw",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    overflow: "hidden",
+                  }}
+                  playsInline
+                  autoPlay
+                  loop
+                  muted
+                >
+                  <source
+                    src={
+                      process.env.PUBLIC_URL +
+                      `/images/projects/${project.video}.webm`
+                    }
+                    type="video/webm"
+                  ></source>
+                  <source
+                    src={
+                      process.env.PUBLIC_URL +
+                      `/images/projects/${project.video}.mp4`
+                    }
+                    type="video/mp4"
+                  ></source>
+                </video>
+                {isMobile ? (
+                  <Card
+                    bordered={false}
+                    style={{
+                      width: "60vw",
+                      backgroundColor: " rgba(96, 125, 139,0.55)",
+                      paddingBottom: "10%",
+                    }}
+                  >
+                    <Title
+                      ellipsis
+                      level={3}
+                      style={{ opacity: 1, color: "white" }}
+                    >
+                      {project.title.name}
+                    </Title>
+                    <p style={{ color: "white" }}>{project.slogan}</p>
+                    <Button type="primary" href={`/Projects/${project.id}`}>
+                      Learn More!
+                      </Button>
+                  </Card>
+                ) : null}
+              </>
+            );
+          }
+        })}
 
-          <Row type="flex" justify="center" align="middle">
-            <Tooltip title="Under Construction">
-              <Button type="dashed" block disabled onClick={this.moreProjects}>
-                More Projects
+        <Row type="flex" justify="center" align="middle">
+          <Tooltip title="Under Construction">
+            <Button type="dashed" block disabled onClick={moreProjects}>
+              More Projects
               </Button>
-            </Tooltip>
-          </Row>
-        </section>
-      </Fragment>
-    );
-  }
+          </Tooltip>
+        </Row>
+      </section>
+    </>
+  );
+
 }
 
 export default Projects;

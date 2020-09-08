@@ -1,8 +1,10 @@
 /* eslint-disable no-useless-escape */
+
+
 import React, { Component, Fragment } from "react";
 
 import Home from "./home";
-import MoreProjects from "./modules/projects/moreProjects";
+// import MoreProjects from "./modules/projects/moreProjects";
 import ProjectPage from "./modules/projects/projectPage";
 // TODO Publications
 // import Publications from './modules/publications/publications'
@@ -10,7 +12,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProjectTerminal from "./modules/projects/projectsTerminal";
 //import Recaptcha from "react-recaptcha";
 
-class App extends Component {
+class MainRouter extends Component {
   state = {
     isMobile: false,
     screenWidth: window.innerWidth,
@@ -35,20 +37,11 @@ class App extends Component {
       )
         /* cSpell:enable */
         check = true;
+      //@ts-ignore 
     })(navigator.userAgent || navigator.vendor || window.opera);
     return check;
   };
 
-  componentDidMount() {
-    window.addEventListener("resize", this.updateWindowDimensions());
-    this.setState({
-      isMobile: this.mobilecheck(),
-      isIpad: this.mobilecheck() ? false : this.state.isIpad,
-    });
-  }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateWindowDimensions);
-  }
   updateWindowDimensions() {
     var mobile = this.mobilecheck();
     if (mobile) {
@@ -118,11 +111,23 @@ class App extends Component {
       });
     }
   }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.updateWindowDimensions);
+    this.setState({
+      isMobile: this.mobilecheck(),
+      isIpad: this.mobilecheck() ? false : this.state.isIpad,
+    });
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateWindowDimensions);
+  }
+
   handleChange = (e) => {
     console.log(`${e.target.name} Input Changed`);
-    const eTargent = e.target;
+    const eTarget = e.target;
 
-    this.setState({ [eTargent.name]: eTargent.value });
+    this.setState({ [eTarget.name]: eTarget.value });
   };
 
   render() {
@@ -172,4 +177,4 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default MainRouter;

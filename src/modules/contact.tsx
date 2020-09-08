@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { Component } from "react";
 import { Input, Row, Form, Button, Select, message } from "antd";
 //import Recaptcha from "react-recaptcha";
@@ -74,12 +75,12 @@ class Contact extends Component {
   handleChange = e => {
     console.log(`${e.target.name} Input Changed`);
     const eTargent = e.target
-    
-    
+
+
     this.setState({ [eTargent.name]: eTargent.value });
   };
   handleReason = e => {
-    this.setState({reason : e})
+    this.setState({ reason: e })
   }
   render() {
     const { name, email, subject, reason, message } = this.state;

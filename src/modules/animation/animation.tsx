@@ -6,7 +6,7 @@ import { Row, Col } from "antd";
 import "./animation.css";
 import anime from "./anime-master/lib/anime.es.js";
 
-class Animator extends Component {
+class Animator extends Component<{ screenWidth: number, isMobile: boolean }> {
   state = {
     pathIndex: 0,
     screenWidth: this.props.screenWidth,
@@ -152,15 +152,15 @@ class Animator extends Component {
               </Col>
             </Row>
           ) : (
-            <p></p>
-          )}
+              <p></p>
+            )}
         </div>
       </Fragment>
     );
   }
 }
 
-class NameDrawer extends Component {
+class NameDrawer extends Component<{ screenWidth: number, isMobile: boolean }> {
   state = {
     screenWidth: this.props.screenWidth,
     isMobile: this.props.isMobile,
@@ -190,8 +190,8 @@ class NameDrawer extends Component {
     //   delay: (el, i) => { return i * 500 }
     // });
     // Wrap every letter in a span
-    var textWrapper = document.querySelectorAll(".ml11 .letters");
-    for (var text of textWrapper) {
+    let textWrapper = document.querySelectorAll(".ml11 .letters");
+    for (let text of textWrapper) {
       text.innerHTML = text.textContent.replace(
         /([^\x00-\x80]|\w)/g,
         "<span class='letter'>$&</span>"
@@ -250,212 +250,37 @@ class NameDrawer extends Component {
               </span>
             </h1>
           ) : (
-            <Row type="flex" align="middle">
-              <Col span={16}>
-                <h1 className="ml11" style={{ fontSize: "9vw" }}>
-                  <span className="text-wrapper">
-                    <span className="line line1"></span>
-                    <Row type="flex" justify="center" align="middle">
-                      <span className="letters" style={{ color: "#fff" }}>
-                        Hello, I&apos;m{" "}
+              <Row type="flex" align="middle">
+                <Col span={16}>
+                  <h1 className="ml11" style={{ fontSize: "9vw" }}>
+                    <span className="text-wrapper">
+                      <span className="line line1"></span>
+                      <Row type="flex" justify="center" align="middle">
+                        <span className="letters" style={{ color: "#fff" }}>
+                          Hello, I&apos;m{" "}
+                        </span>
+                      </Row>
+                      <Row type="flex" justify="center" align="middle">
+                        <span className="letters" style={{ color: "#fff" }}>
+                          Rahul Tarak
                       </span>
-                    </Row>
-                    <Row type="flex" justify="center" align="middle">
-                      <span className="letters" style={{ color: "#fff" }}>
-                        Rahul Tarak
-                      </span>
-                    </Row>
-                  </span>
-                </h1>
-              </Col>
-            </Row>
-          )}
+                      </Row>
+                    </span>
+                  </h1>
+                </Col>
+              </Row>
+            )}
         </div>
       </Fragment>
     );
   }
 }
 
-class Typewriter extends Component {
-  state = {
-    screenWidth: this.props.screenWidth,
-    isMobile: this.props.isMobile,
-  };
-  setupTypewriter(t) {
-    var HTML = t.innerHTML;
 
-    t.innerHTML = "";
-
-    var cursorPosition = 0,
-      tag = "",
-      writingTag = false,
-      tagOpen = false,
-      typeSpeed = 100,
-      tempTypeSpeed = 0;
-
-    var type = function () {
-      if (writingTag === true) {
-        tag += HTML[cursorPosition];
-      }
-
-      if (HTML[cursorPosition] === "<") {
-        tempTypeSpeed = 0;
-        if (tagOpen) {
-          tagOpen = false;
-          writingTag = true;
-        } else {
-          tag = "";
-          tagOpen = true;
-          writingTag = true;
-          tag += HTML[cursorPosition];
-        }
-      }
-      if (!writingTag && tagOpen) {
-        tag.innerHTML += HTML[cursorPosition];
-      }
-      if (!writingTag && !tagOpen) {
-        if (HTML[cursorPosition] === " ") {
-          tempTypeSpeed = 0;
-        } else {
-          tempTypeSpeed = Math.random() * typeSpeed + 50;
-        }
-        t.innerHTML += HTML[cursorPosition];
-      }
-      if (writingTag === true && HTML[cursorPosition] === ">") {
-        tempTypeSpeed = Math.random() * typeSpeed + 50;
-        writingTag = false;
-        if (tagOpen) {
-          var newSpan = document.createElement("span");
-          t.appendChild(newSpan);
-          newSpan.innerHTML = tag;
-          tag = newSpan.firstChild;
-        }
-      }
-
-      cursorPosition += 1;
-      if (cursorPosition < HTML.length - 1) {
-        setTimeout(type, tempTypeSpeed);
-      }
-    };
-
-    return {
-      type: type,
-    };
-  }
-  sleep = (milliseconds) => {
-    return new Promise((resolve) => setTimeout(resolve, milliseconds));
-  };
-  componentDidMount() {
-    var n = 6;
-    for (var i = 1; i < n + 1; i++) {
-      let typewriter = document.getElementById("typewriter" + i);
-      console.log(typewriter);
-      typewriter = this.setupTypewriter(typewriter);
-      typewriter.type();
-      this.sleep(250);
-    }
-
-    // var typewriter = document.getElementById('typewriter1');
-    // var Construction = document.getElementById('typewriter2')
-
-    // Construction = this.setupTypewriter(Construction)
-
-    // Construction.type()
-  }
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.screenWidth !== prevProps.screenWidth ||
-      this.props.isMobile !== prevProps.isMobile
-    ) {
-      this.setState({
-        screenWidth: this.props.screenWidth,
-        isMobile: this.props.isMobile,
-      });
-    }
-  }
-  render() {
-    if (this.state.screenWidth < 600) {
-      var newSize = "5vw";
-      var comment = document.getElementsByClassName("comment-highlight");
-      comment.fontSize = newSize;
-      var varHighlight = document.getElementsByClassName("var-highlight");
-      varHighlight.fontSize = newSize;
-      var string = document.getElementsByClassName("string-highlight");
-      var normal = document.getElementsByClassName("normal-highlight");
-      normal.fontSize = newSize;
-      string.fontSize = newSize;
-      console.log("Changing Size");
-    }
-    return (
-      <Fragment>
-        <pre
-          id="typewriter1"
-          className="typewriter"
-          style={{ overflowX: "hidden;" }}
-        >
-          <span className="comment-highlight">class</span>
-          <span className="var-highlight"> RahulTarak</span>
-          <span className="comment-highlight">
-            {" "}
-            implements SoftwareEngineer, Filmmaker{" "}
-          </span>
-          &#123;;
-        </pre>
-        <pre
-          id="typewriter2"
-          className="typewriter"
-          style={{ overflowX: "hidden;" }}
-        >
-          <span className="comment-highlight">private String</span>
-          <span className="var-highlight"> programmingExperience </span>=
-          <span className="string-highlight"> "7 years";</span>
-        </pre>
-        <pre
-          id="typewriter3"
-          className="typewriter"
-          style={{ overflowX: "hidden;" }}
-        >
-          <span className="comment-highlight">private String</span>
-          <span className="var-highlight"> education </span>={" "}
-          <span className="string-highlight"> "University of Toronto"</span>;;
-        </pre>
-        <pre
-          id="typewriter4"
-          className="typewriter"
-          style={{ overflowX: "hidden;" }}
-        >
-          <span className="comment-highlight">private String</span>
-          <span className="var-highlight"> degree </span>={" "}
-          <span className="string-highlight"> "Honors Computer Science"</span>;;
-        </pre>
-        <pre
-          id="typewriter5"
-          className="typewriter"
-          style={{ overflowX: "hidden;" }}
-        >
-          <span className="comment-highlight">private int</span>
-          <span className="var-highlight"> graduation </span>={" "}
-          <span className="string-highlight"> 2023</span>;
-          <span className="normal-highlight">{" }"};</span>
-        </pre>
-        <pre
-          id="typewriter6"
-          className="typewriter"
-          style={{ overflowX: "hidden;" }}
-        >
-          <span className="comment-highlight">Object</span>
-          <span className="var-highlight"> website </span>={" "}
-          <span className="string-highlight"> 'Under Construction'</span>;;
-        </pre>
-      </Fragment>
-    );
-  }
-}
-
-class BackgroundAnimation extends Component {
+class BackgroundAnimation extends Component<{ style: any }> {
   componentDidMount() {
     let body = document.body;
-
+    // @ts-ignore
     body.style = `
       display: flex;
       position: absolute;
@@ -484,7 +309,7 @@ class BackgroundAnimation extends Component {
 
   render() {
     return (
-      <div class="anim" style={this.props.style}>
+      <div className="anim" style={this.props.style}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800">
           <g fill="none" fill-rule="evenodd">
             <path
@@ -708,4 +533,4 @@ class BackgroundAnimation extends Component {
   }
 }
 
-export { NameDrawer, Animator, Typewriter, BackgroundAnimation };
+export { NameDrawer, Animator, BackgroundAnimation };

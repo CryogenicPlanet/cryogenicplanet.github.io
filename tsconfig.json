@@ -1,23 +1,25 @@
 {
+  "extends": "./tsconfig.extended.json",
   "compilerOptions": {
-    "module": "esnext",
-    "target": "es5",
-    "sourceMap": true,
-    "allowJs": false,
-    "skipLibCheck": false,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "target": "ES2017",
+    "module": "ESNEXT",
+    "jsx": "preserve",
     "strict": false,
-    "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noEmit": true,
-    "jsx": "preserve",
-    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "lib": [
-      "es2018",
-      "dom"
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "noEmitOnError": true,
+    "experimentalDecorators": true,
     "isolatedModules": true
   },
   "exclude": [

@@ -1,14 +1,12 @@
 {
     "env": {
         "browser": true,
+        "node": true,
         "es6": true
     },
-    "parser": "babel-eslint",
-   
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
+    "parser": "@typescript-eslint/parser",
+
+    "extends": ["plugin:react/recommended"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -18,13 +16,18 @@
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true,
+            "tsx": true,
             "modules": true,
             "experimentalObjectRestSpread": true
         }
     },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-    }
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            }
+        }
+    },
+    "plugins": ["react", "react-hooks", "eslint-plugin-prettier"],
+    "rules": {}
 }

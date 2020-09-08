@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Loading from "react-loading-spinkit";
 
-class Loader extends Component {
+class Loader extends Component<{ show: boolean }> {
   render() {
     return (
       <div style={{ height: "100vh", width: "100vw" }}>
