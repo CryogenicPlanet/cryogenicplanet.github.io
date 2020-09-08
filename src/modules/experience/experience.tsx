@@ -51,7 +51,7 @@ class Experience extends Component<{ fontSize: string, isMobile: boolean }> {
                         </Col>
                         {item.links.map((link) => {
                           return (
-                            <Col span={4}>
+                            <Col span={4} style={{ paddingLeft: '1%' }}>
                               <Tooltip title={link.prompt}>
                                 <a
                                   href={link.href}

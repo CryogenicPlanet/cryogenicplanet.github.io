@@ -1,5 +1,28 @@
 [
   {
+    "id": "videoTranscoder",
+    "title": {
+      "name": "VideoTranscode.space"
+    },
+    "parallax": "videoTranscoderBanner.png",
+    "slogan": "A video transcoder and converter built using Web Assembly and FFMPEG to transcode and convert videos right in your browser while protecting your privacy.",
+    "description": [
+      "A video transcoder and converter built using Web Assembly and FFMPEG to transcode and convert videos right in your browser while protecting your privacy."
+    ],
+    "links": [
+      {
+        "href": "https://videotranscode.space",
+        "type": "link",
+        "prompt": "Project Website"
+      },
+      {
+        "href": "https://github.com/Etwas-Builders/Video-Transcoder",
+        "type": "github",
+        "prompt": "Github"
+      }
+    ]
+  },
+  {
     "id": "whoSaidThis",
     "title": {
       "name": "Who Said This?"

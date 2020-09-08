@@ -178,6 +178,12 @@ class Nav extends Component<{ mode: string, onClose?: () => void }> {
             <span className="nav-text">Photography</span>
           </a>
         </Menu.Item>
+        <Menu.Item key="10">
+          <a href="https://open.thevarsity.ca">
+            <Icon type="book" />
+            <span className="nav-text">Blog</span>
+          </a>
+        </Menu.Item>
         <Menu.Item key="3">
           {/* <Link activeClass="active" className="a" to="about" spy={true} smooth={true} duration={1200} > */}
           <a onClick={this.scrollTo("about", 1200)}>

@@ -1,7 +1,35 @@
 [
   {
     "title": {
-      "name": "Mozilla",
+      "name": "Varsity Publications",
+      "href": "https://open.thevarsity.ca"
+    },
+    "position": "Lead Backend Engineer",
+    "location": "Toronto, Ontario",
+    "startDate": "Jun 2020",
+    "endDate": "Present",
+    "description": [
+      "Developing and Maintaining all of The Varsity Publications infrastructure as the main backend engineer.",
+      "Responsible for thevarsity.ca which gets over 80,000 unique visitors per month, along with all of the other projects the varsity has"
+    ],
+    "image": "varsity.svg",
+    "languages": "Node.js, Typescript, React, Svelte, Gatsby, WordPress",
+    "links": [
+      {
+        "href": "https://thevarsity.ca",
+        "type": "link",
+        "prompt": "Official Website"
+      },
+      {
+        "href": "https://open.thevarsity.ca",
+        "type": "link",
+        "prompt": "Varsity Engineering Blog"
+      }
+    ]
+  },
+  {
+    "title": {
+      "name": "Mozilla Builders",
       "href": "https://twittersourcebot.tech/"
     },
     "position": "Builder @ FixTheInternet Spring Open Lab",
