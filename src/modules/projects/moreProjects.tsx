@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import data from "./moreData";
+import data from "./moreData.json";
 import { Tabs, Card, Row, Col } from "antd";
 
 const { TabPane } = Tabs;
@@ -28,30 +28,30 @@ const contentListNoTitle = {
 class MoreProjects extends Component {
   state = {
     key: "tab1",
-    n : 3,
+    n: 3,
     noTitleKey: [
-        "app"
+      "app"
     ]
   };
-  componentDidMount(){
-      
-      for(let i = 0; i < this.state.n;i++){
-          this.onLoad()
-      }
-      console.log(this.state)
+  componentDidMount() {
+
+    for (let i = 0; i < this.state.n; i++) {
+      this.onLoad()
+    }
+    console.log(this.state)
   }
   onLoad = () => {
-      this.setState({
-          noTitleKey : this.state.noTitleKey.push("app")
-      });
+    this.setState({
+      noTitleKey: this.state.noTitleKey.push("app")
+    });
   }
-  onTabChange = (key, type,index) => {
+  onTabChange = (key, type, index) => {
     console.log(this.state)
     console.log(key, type);
     let curTabs = this.state.noTitleKey;
-    console.log(this.state,index);
+    console.log(this.state, index);
     curTabs[index] = key;
-    this.setState({ [type] : curTabs });
+    this.setState({ [type]: curTabs });
   };
   render() {
     return (
@@ -65,7 +65,7 @@ class MoreProjects extends Component {
                 activeTabKey={this.state.noTitleKey[i]}
                 tabBarExtraContent={<a href="#">More</a>}
                 onTabChange={key => {
-                  this.onTabChange(key, "noTitleKey",i);
+                  this.onTabChange(key, "noTitleKey", i);
                 }}
               >
                 {contentListNoTitle[this.state.noTitleKey[i]]}

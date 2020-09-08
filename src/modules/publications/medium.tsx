@@ -8,7 +8,7 @@ class Medium extends Component {
       <Fragment>
         <Row>
           <Col>
-            <blockquote class="embedly-card" data-card-theme="dark">
+            <blockquote className="embedly-card" data-card-theme="dark">
               <h4>
                 <a href="https://medium.com/etwas/twitter-client-side-dom-scrapping-6f5a36ce3243">
                   Twitter Client Side DOM Scrapping
@@ -28,7 +28,7 @@ class Medium extends Component {
             <script
               async
               src="//cdn.embedly.com/widgets/platform.js"
-              charset="UTF-8"
+              charSet="UTF-8"
             ></script>
           </Col>
         </Row>
@@ -51,7 +51,7 @@ class Medium extends Component {
             <script
               async
               src="//cdn.embedly.com/widgets/platform.js"
-              charset="UTF-8"
+              charSet="UTF-8"
             ></script>
           </Col>
           <Col>
@@ -72,7 +72,7 @@ class Medium extends Component {
             <script
               async
               src="//cdn.embedly.com/widgets/platform.js"
-              charset="UTF-8"
+              charSet="UTF-8"
             ></script>
           </Col>
         </Row>

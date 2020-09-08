@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 import React, { Component, Fragment } from "react";
-import data from "./data";
+import data from "./data.json";
 import { Col, Row, List, Typography, Icon, Tooltip } from "antd";
 //import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
-class Experience extends Component {
+class Experience extends Component<{ fontSize: string, isMobile: boolean }> {
   state = {
     fontSize: this.props.fontSize,
     isMobile: this.props.isMobile,
@@ -39,18 +39,19 @@ class Experience extends Component {
                       <Fragment>
                         <Col span={4}>
                           <Tooltip title="Learn More">
+                            {/* @ts-ignore */}
                             <a href={`#${item.title.name}`} disabled>
                               <Icon
                                 type="more"
                                 style={{ fontSize: this.state.fontSize }}
-                                rotate="90"
+                                rotate={90}
                               />
                             </a>
                           </Tooltip>
                         </Col>
                         {item.links.map((link) => {
                           return (
-                            <Col span={4}>
+                            <Col span={4} style={{ paddingLeft: '1%' }}>
                               <Tooltip title={link.prompt}>
                                 <a
                                   href={link.href}
@@ -81,13 +82,11 @@ class Experience extends Component {
                 >
                   <List.Item.Meta
                     title={<a href={item.title.href}> {item.title.name} </a>}
-                    description={`${item.position} | From ${
-                      item.startDate
-                    } to ${item.endDate} ${
-                      item.location === "Remote"
+                    description={`${item.position} | From ${item.startDate
+                      } to ${item.endDate} ${item.location === "Remote"
                         ? "| Remote"
                         : "in " + item.location
-                    }`}
+                      }`}
                   />
                   {item.description.map((description) => {
                     return <p>{description}</p>;
@@ -97,8 +96,8 @@ class Experience extends Component {
                       <b>{`Languages used ${item.languages}`}</b>
                     </p>
                   ) : (
-                    <p></p>
-                  )}
+                      <p></p>
+                    )}
                 </List.Item>
               )}
             ></List>

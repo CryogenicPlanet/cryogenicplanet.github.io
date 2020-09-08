@@ -1,99 +1,82 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
-import React, { Component, Fragment } from "react";
+
+import React, { Component, useState } from "react";
 import { Layout, Drawer, Button, Menu, Icon } from "antd";
 import { Events, animateScroll as scroll, scroller } from "react-scroll";
 import { Link } from "react-router-dom";
 import SubMenu from "antd/lib/menu/SubMenu";
 const { Sider } = Layout;
 
-class Menubar extends Component {
-  state = {
-    collapsed: false,
-    screenWidth: this.props.screenWidth,
-    isMobile: this.props.isMobile,
-    visible: false,
-  };
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.screenWidth !== prevProps.screenWidth ||
-      this.props.isMobile !== prevProps.isMobile
-    ) {
-      this.setState({
-        screenWidth: this.props.screenWidth,
-        isMobile: this.props.isMobile,
-      });
-    }
-  }
-  showDrawer = () => {
-    this.setState({
-      visible: true,
-    });
+
+
+const Menubar = () => {
+  const [collapsed, setCollapsed] = useState(false)
+
+  const [visible, setVisible] = useState(false)
+
+  const showDrawer = () => {
+    setCollapsed(true);
   };
 
-  onClose = () => {
-    this.setState({
-      visible: false,
-    });
+  const onClose = () => {
+    setVisible(true);
   };
 
-  render() {
-    // eslint-disable-next-line no-undef
-    console.log(process.env.PUBLIC_URL + "/files/techincal_resume.pdf");
-    if (this.state.collapsed === false) {
-      return (
-        <Sider
-          style={{
-            overflow: "auto",
-            height: "100vh",
-            position: "fixed",
-            left: 0,
-          }}
-          breakpoint="md"
-          // collapsedWidth= {this.state.screenWidth  > 600 && this.state.isMobile === false ? "8.5vw" : "0"}
-          collapsedWidth="0"
-          onBreakpoint={(broken) => {
-            //console.log("Breakpoint");
-            //console.log(broken);
-          }}
-          onCollapse={(collapsed, type) => {
-            this.setState({
-              collapsed: true,
-            });
-            console.log(collapsed, type);
-          }}
+
+  // eslint-disable-next-line no-undef
+  console.log(process.env.PUBLIC_URL + "/files/techincal_resume.pdf");
+  if (collapsed === false) {
+    return (
+      <Sider
+        style={{
+          overflow: "auto",
+          height: "100vh",
+          position: "fixed",
+          left: 0,
+        }}
+        breakpoint="md"
+        // collapsedWidth= {this.state.screenWidth  > 600 && this.state.isMobile === false ? "8.5vw" : "0"}
+        collapsedWidth="0"
+        onBreakpoint={(broken) => {
+          //console.log("Breakpoint");
+          //console.log(broken);
+        }}
+        onCollapse={() => {
+          setCollapsed(true)
+        }}
+      >
+        <div className="logo" />
+        <Nav mode="vertical"></Nav>
+      </Sider>
+    );
+  } else {
+    console.log("Returing Drawer");
+    return (
+      <>
+        <Button
+          type="primary"
+          style={{ position: "fixed", overflow: "auto", paddingTop: "1%" }}
+          onClick={showDrawer}
         >
-          <div className="logo" />
-          <Nav mode="vertical"></Nav>
-        </Sider>
-      );
-    } else {
-      console.log("Returing Drawer");
-      return (
-        <Fragment>
-          <Button
-            type="primary"
-            style={{ position: "fixed", overflow: "auto", paddingTop: "1%" }}
-            onClick={this.showDrawer}
-          >
-            <Icon type="menu" />
-          </Button>
-          <Drawer
-            title="CryogenicPlanet"
-            placement="top"
-            closable={false}
-            onClose={this.onClose}
-            visible={this.state.visible}
-          >
-            <Nav mode="inline" onClose={this.onClose}></Nav>
-          </Drawer>
-        </Fragment>
-      );
-    }
+          <Icon type="menu" />
+        </Button>
+        <Drawer
+          title="CryogenicPlanet"
+          placement="top"
+          closable={false}
+          onClose={onClose}
+          visible={visible}
+        >
+          <Nav mode="inline" onClose={onClose}></Nav>
+        </Drawer>
+      </>
+    );
   }
+
 }
 
-class Nav extends Component {
+class Nav extends Component<{ mode: string, onClose?: () => void }> {
   state = {
     mode: this.props.mode,
   };
@@ -153,7 +136,7 @@ class Nav extends Component {
     // eslint-disable-next-line no-unused-vars
     let goToContainer = new Promise((resolve, reject) => {
       Events.scrollEvent.register("end", () => {
-        resolve();
+        resolve(true);
         Events.scrollEvent.remove("end");
       });
 
@@ -175,6 +158,7 @@ class Nav extends Component {
   }
   render() {
     return (
+      // @ts-ignore
       <Menu theme="dark" mode={this.state.mode} defaultSelectedKeys={["1"]}>
         <Menu.Item key="1">
           <a onClick={this.scrollToTop}>
@@ -192,6 +176,12 @@ class Nav extends Component {
           <a href="https://photography.cryogenicplanet.tech">
             <Icon type="camera" />
             <span className="nav-text">Photography</span>
+          </a>
+        </Menu.Item>
+        <Menu.Item key="10">
+          <a href="https://open.thevarsity.ca">
+            <Icon type="book" />
+            <span className="nav-text">Blog</span>
           </a>
         </Menu.Item>
         <Menu.Item key="3">
@@ -254,7 +244,7 @@ class Nav extends Component {
         <SubMenu
           title={
             <span>
-              <Icon type="more" rotate="90"></Icon>
+              <Icon type="more" rotate={90}></Icon>
               <span className="nav-text">Extras </span>
             </span>
           }
