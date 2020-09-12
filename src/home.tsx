@@ -176,12 +176,12 @@ const Home: React.FC<HomeProps> = ({ screenWidth, iconSize, smallIconSize, isMob
                       />
                     </a>
                     <a
-                      href="https://www.instagram.com/cryogenicplanet/"
+                      href="https://www.twitter.com/cryogenicplanet/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <Icon
-                        type="instagram"
+                        type="twitter"
                         style={{ fontSize: iconSize }}
                       />
                     </a>
