@@ -1,3 +1,4 @@
+import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import React, { ReactNode, useEffect, useState } from 'react'
@@ -23,6 +24,8 @@ const Layout = ({ children, title = 'Rahul Tarak' }: Props) => {
     window.localStorage.setItem('darkMode', darkMode ? 'true' : 'false')
   }, [darkMode])
 
+  const router = useRouter()
+
   return (
     <div className={darkMode ? 'dark' : ''}>
       <div className="w-full min-h-screen transition-colors duration-500 ease-in-out h-full bg-gradient-to-r from-gray-50 to-gray-200 dark:from-gray-800 dark:via-gray-900 dark:to-black">
@@ -34,6 +37,21 @@ const Layout = ({ children, title = 'Rahul Tarak' }: Props) => {
             content="initial-scale=1.0, width=device-width"
           />
           <link rel="icon" href="/images/laptop.svg"></link>
+          <meta name="og:title" content="Rahul Tarak"></meta>
+          <meta
+            name="og:description"
+            content="Personal space on the internet"></meta>
+          <meta name="og:type" content="website"></meta>
+          <meta
+            name="og:image"
+            content={`https://og.railway.app/api/image?fileType=png&layoutName=Simple&Text=${
+              router.pathname === '/'
+                ? 'Rahul+Tarak'
+                : `${router.pathname[1].toUpperCase()}${router.pathname.slice(
+                    2
+                  )}+%7C+Rahul+Tarak`
+            }`}></meta>
+          <meta name="og:url" content={router.pathname}></meta>
         </Head>
         {/* This example requires Tailwind CSS v2.0+ */}
         <Toaster position="top-right"></Toaster>

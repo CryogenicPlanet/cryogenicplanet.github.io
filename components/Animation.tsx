@@ -130,7 +130,7 @@ const Animator = () => {
         loop: true,
         delay: 75
       })
-      typewriter.typeString(`Hey, I'am Rahul Tarak`).pauseFor(2000).start()
+      typewriter.typeString(`Hey, I am Rahul Tarak`).pauseFor(2000).start()
     }
   }, [stagger])
 
