@@ -29,7 +29,7 @@ const Animator = () => {
           autoplay: false,
           duration: 600,
           // eslint-disable-next-line no-unused-vars
-          loopComplete: a => console.log('end')
+          loopComplete: () => console.log('end')
           // update: () => console.log(staggersAnimation.progress)
         })
         .add({
