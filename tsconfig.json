@@ -22,7 +22,8 @@
       "@styles*": ["styles*"],
       "@components*": ["components*"],
       "@interfaces*": ["interfaces*"],
-      "@utils*": ["utils*"]
+      "@utils*": ["utils*"],
+      "@data*": ["data*"]
     }
   },
   "exclude": ["node_modules"],

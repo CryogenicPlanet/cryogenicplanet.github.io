@@ -36,3 +36,4 @@ yarn-error.log*
 /out_functions/
 # Local Netlify folder
 .netlify
+public/files/.pnpm-debug.log
