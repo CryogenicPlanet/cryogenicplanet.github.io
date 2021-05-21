@@ -135,7 +135,7 @@ const Animator = () => {
   }, [stagger])
 
   return (
-    <div className="h-screen w-full flex justify-center items-start overflow-x-hidden">
+    <div className="h-screen w-full px-2 flex justify-center items-start overflow-x-hidden">
       <div className="flex h-full flex-col w-full justify-center items-center">
         <div className="flex">
           <div ref={stagger} className={'stagger-visualizer'}></div>
@@ -143,7 +143,7 @@ const Animator = () => {
         <div className="flex">
           <p
             ref={typeSpace}
-            className="text-gray-800 z-20 dark:text-gray-200  text-6xl font-bold"></p>
+            className="text-gray-800 z-20 dark:text-gray-200  text-5xl sm:text-6xl font-bold"></p>
         </div>
       </div>
     </div>

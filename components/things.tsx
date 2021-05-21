@@ -1,5 +1,6 @@
+import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Layout from '@components/Layout'
 import { thingBadgeColors, things, thingTypes } from '@data/things'
@@ -21,6 +22,14 @@ const Things = ({ filter }: { filter?: string }) => {
   const currentTabName = filter
     ? tabs.find(tab => tab.href === `/things/${filter || ''}`)?.name
     : 'All'
+
+  const [currentTab, setCurrentTab] = useState(currentTabName)
+
+  const router = useRouter()
+
+  useEffect(() => {
+    router.push(currentTab === 'All' ? '/things' : `/things/${currentTab}`)
+  }, [currentTab])
 
   return (
     <Layout title="Projects | Rahul Tarak">
@@ -53,9 +62,17 @@ const Things = ({ filter }: { filter?: string }) => {
                 id="tabs"
                 name="tabs"
                 className="block w-full cap focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
-                defaultValue={currentTabName}>
+                defaultValue={currentTab}
+                onChange={e => {
+                  setCurrentTab(e.target.value)
+                }}>
                 {tabs.map(tab => (
-                  <option key={tab.name}>{tab.name}</option>
+                  <option
+                    className="capitalize"
+                    key={tab.name}
+                    value={tab.name}>
+                    {`${tab.name[0].toUpperCase()}${tab.name.slice(1)}`}
+                  </option>
                 ))}
               </select>
             </div>
