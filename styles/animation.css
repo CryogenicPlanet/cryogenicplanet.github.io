@@ -1,0 +1,17 @@
+.stagger-visualizer {
+  display: flex;
+  /*flex-wrap: wrap;*/
+  justify-content: center;
+  align-items: center;
+  width: 23.4375vw;
+  height: 23.4375vw;
+}
+
+.stagger-visualizer div {
+  /*position: absolute;*/
+  width: 3.3333333333333335vw;
+  height: 6.666666666666667vw;
+  /* border: 0.052083333333333336vw solid #ffffff96; */
+  border: 0.052083333333333336vw solid;
+  @apply border-indigo-500 border-opacity-50 dark:border-indigo-500 dark:border-opacity-25;
+}
