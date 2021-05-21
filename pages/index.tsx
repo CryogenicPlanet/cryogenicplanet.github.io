@@ -169,7 +169,7 @@ const IndexPage = () => {
                       </p>
                       <p className="text-base leading-7">
                         Previously, I was{' '}
-                        <a className="underline" href="https://thevarstiy.ca">
+                        <a className="underline" href="https://thevarsity.ca/">
                           Backend @ The Varsity
                         </a>{' '}
                         and{' '}
@@ -188,7 +188,7 @@ const IndexPage = () => {
                         </a>{' '}
                         and founded a{' '}
                         <a
-                          href="http://codefest.oakrdige.in"
+                          href="http://codefest.oakridge.in/"
                           className="underline">
                           Hackathon
                         </a>
