@@ -1,10 +1,11 @@
-import Animator from '@components/Animation'
-import Layout from '@components/Layout'
-import Loader from '@components/Loader'
 import copy from 'copy-to-clipboard'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+
+import Animator from '@components/Animation'
+import Layout from '@components/Layout'
+import Loader from '@components/Loader'
 
 const IndexPage = () => {
   const [isLoading, setLoading] = useState(true)

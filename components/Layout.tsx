@@ -1,9 +1,10 @@
-import { navigation } from '@data/navigation'
-import { MoonIcon, SunIcon } from '@heroicons/react/solid'
 import Head from 'next/head'
 import Link from 'next/link'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
+
+import { navigation } from '@data/navigation'
+import { MoonIcon, SunIcon } from '@heroicons/react/solid'
 
 type Props = {
   children?: ReactNode
