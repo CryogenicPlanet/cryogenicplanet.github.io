@@ -2,6 +2,7 @@ export const posts: Array<{
   title: string
   url: string
   type: 'technical' | 'startup' | 'other'
+  local?: boolean
 }> = [
   {
     title: 'Hiring for Broke Startups',

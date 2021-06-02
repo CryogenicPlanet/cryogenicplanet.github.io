@@ -1,34 +1,35 @@
 import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 
 import { navigation } from '@data/navigation'
 import { MoonIcon, SunIcon } from '@heroicons/react/solid'
+import { view } from '@risingstack/react-easy-state'
+import { state } from '@utils/store'
 
 type Props = {
   children?: ReactNode
   title?: string
+  footerBg?: string
 }
 
-const Layout = ({ children, title = 'Rahul Tarak' }: Props) => {
-  const [darkMode, setDarkMode] = useState(false)
-
+const Layout = ({ children, title = 'Rahul Tarak', footerBg }: Props) => {
   useEffect(() => {
     const dark = window.localStorage.getItem('darkMode')
-    setDarkMode(dark === 'true')
+    state.dark = dark === 'true'
   }, [])
 
   useEffect(() => {
-    window.localStorage.setItem('darkMode', darkMode ? 'true' : 'false')
-  }, [darkMode])
+    window.localStorage.setItem('darkMode', state.dark ? 'true' : 'false')
+  }, [state.dark])
 
   const router = useRouter()
 
   return (
-    <div className={darkMode ? 'dark' : ''}>
-      <div className="w-full min-h-screen transition-colors duration-500 ease-in-out h-full bg-gradient-to-r from-gray-50 to-gray-200 dark:from-gray-800 dark:via-gray-900 dark:to-black">
+    <div className={state.dark ? 'dark' : ''}>
+      <div className="w-full min-h-screen transition-colors duration-500 ease-in-out h-full bg-gradient-to-r from-gray-50 to-gray-200 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
         <Head>
           <title>{title}</title>
           <meta charSet="utf-8" />
@@ -65,7 +66,7 @@ const Layout = ({ children, title = 'Rahul Tarak' }: Props) => {
           </main>
         </div>
 
-        <footer className="bg-transparent">
+        <footer className={footerBg || 'bg-transparent'}>
           <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
             <nav
               className="-mx-5 -my-2 flex flex-wrap justify-center"
@@ -107,7 +108,7 @@ const Layout = ({ children, title = 'Rahul Tarak' }: Props) => {
               &copy; 2021 Rahul Tarak. All rights reserved.
             </p>
 
-            <p className="mt-2 text-center  text-gray-500 text-sm">
+            <p className="mt-2 text-center  text-gray-500 text-xs">
               if you are looking for my old more flashy website, checkout {` `}
               <a className="underline" href="https://old.cryogenicplanet.tech">
                 old.cryogenicplanet.tech
@@ -119,11 +120,11 @@ const Layout = ({ children, title = 'Rahul Tarak' }: Props) => {
         <div className="fixed bottom-2 right-2">
           <button
             onClick={() => {
-              setDarkMode(c => !c)
+              state.dark = !state.dark
             }}
             type="button"
             className="inline-flex items-center p-2 border transition-colors duration-500 border-transparent rounded-full shadow-sm text-white bg-gray-900 dark:bg-gray-50 dark:text-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            {darkMode ? (
+            {state.dark ? (
               <SunIcon className="h-7 w-7 text-black" />
             ) : (
               <MoonIcon className="h-7 w-7" />
@@ -135,4 +136,4 @@ const Layout = ({ children, title = 'Rahul Tarak' }: Props) => {
   )
 }
 
-export default Layout
+export default view(Layout)

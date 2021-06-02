@@ -11,3 +11,7 @@ html::-webkit-scrollbar {
   width: 8px;
   height: 10px;
 }
+
+.notion-viewport {
+  @apply pointer-events-none;
+}

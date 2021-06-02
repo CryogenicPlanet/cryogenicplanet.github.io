@@ -2,9 +2,10 @@ import Link from 'next/link'
 import React from 'react'
 
 import Layout from '@components/Layout'
-import { postBadgeColors, posts } from '@data/posts'
+import { postBadgeColors, posts as defaultPosts } from '@data/posts'
+import { getAllPosts } from '@utils/blog'
 
-const Posts = () => {
+const Posts = ({ posts }: { posts: typeof defaultPosts }) => {
   return (
     <Layout title="Posts | Rahul Tarak">
       <div className="py-10 ">
@@ -33,13 +34,23 @@ const Posts = () => {
             return (
               <div className="w-full" key={index}>
                 <div className="hidden bg-red-100 bg-blue-100 bg-green-100 text-green-800 text-red-800 text-blue-800"></div>
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-gray-800 dark:text-gray-50 pr-3 font-inter text-lg font-medium"
-                  href={post.url}>
-                  {post.title}
-                </a>
+                {post.local ? (
+                  <Link href={post.url} passHref>
+                    <a
+                      className="text-gray-800 dark:text-gray-50 pr-3 font-inter text-lg font-medium"
+                      href={post.url}>
+                      {post.title}
+                    </a>
+                  </Link>
+                ) : (
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-gray-800 dark:text-gray-50 pr-3 font-inter text-lg font-medium"
+                    href={post.url}>
+                    {post.title}
+                  </a>
+                )}
 
                 <span
                   className={`inline-flex capitalize items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${colors.foreground} ${colors.background} `}>
@@ -52,6 +63,38 @@ const Posts = () => {
       </div>
     </Layout>
   )
+}
+
+export const getStaticProps = async () => {
+  // Get all posts again
+
+  try {
+    const dynamicPosts = (await getAllPosts()).filter(p => p.published)
+
+    // Find the current blogpost by slug
+    const posts = [...defaultPosts]
+
+    dynamicPosts.forEach(dynamicPost => {
+      posts.unshift({
+        title: dynamicPost.name,
+        type:
+          dynamicPost.tag.toLowerCase() === ('technical' || 'startup')
+            ? (dynamicPost.tag.toLowerCase() as 'technical' | 'startup')
+            : 'other',
+        url: `/posts/${dynamicPost.slug}`,
+        local: true
+      })
+    })
+
+    return {
+      props: {
+        posts
+      },
+      revalidate: 1
+    }
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 export default Posts
