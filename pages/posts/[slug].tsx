@@ -71,7 +71,7 @@ const BlogPost: FC<{
 }
 
 export const getStaticPaths = async () => {
-  const table = await getAllPosts()
+  const table = (await getAllPosts()).filter(p => p.slug)
 
   return {
     paths: table.map(row => `/posts/${row.slug}`),
