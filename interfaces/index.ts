@@ -7,6 +7,7 @@ export interface Post {
   slug: string
   author: Author[]
   preview: string
+  ogImage?: string
 }
 
 export interface Author {

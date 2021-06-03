@@ -7,6 +7,7 @@ dependencies:
   axios: 0.21.1
   copy-to-clipboard: 3.3.1
   next: 10.2.3_c4d9895f1fa422c7d495385ec9ad965b
+  next-seo: 4.24.0_b09f206ae0fb9fe12dd50ba99abcdfc0
   notion-client: 4.6.4
   notion-types: 4.6.4
   postcss: 8.2.15
@@ -3102,6 +3103,18 @@ packages:
     dev: true
     resolution:
       integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
+  /next-seo/4.24.0_b09f206ae0fb9fe12dd50ba99abcdfc0:
+    dependencies:
+      next: 10.2.3_c4d9895f1fa422c7d495385ec9ad965b
+      react: 17.0.2
+      react-dom: 16.14.0_react@17.0.2
+    dev: false
+    peerDependencies:
+      next: ^8.1.1-canary.54 || ^9.0.0 || ^10.0.0
+      react: ^16.0.0 || ^17.0.0
+      react-dom: ^16.0.0 || ^17.0.0
+    resolution:
+      integrity: sha512-9VQXfXAelhE+hAWzJ4azigQaW3FPX0kU0eYKFQXKsQjgY7AWtukjRGXls0oSIk8khhDJwmCt46EwsO9n5DDW6Q==
   /next/10.2.3_c4d9895f1fa422c7d495385ec9ad965b:
     dependencies:
       '@babel/runtime': 7.12.5
@@ -5242,6 +5255,7 @@ specifiers:
   eslint-plugin-standard: ^5.0.0
   husky: ^4.3.8
   next: latest
+  next-seo: ^4.24.0
   notion-client: ^4.6.4
   notion-types: ^4.6.4
   postcss: ^8.2.4

@@ -1,3 +1,5 @@
+import { GetStaticProps } from 'next'
+import { NextSeo } from 'next-seo'
 import { NotionAPI } from 'notion-client'
 import { ExtendedRecordMap } from 'notion-types'
 import React, { FC } from 'react'
@@ -11,12 +13,12 @@ import { state } from '@utils/store'
 
 const notion = new NotionAPI()
 
-export const getStaticProps = async ({
-  params: { slug }
-}: {
-  params: { slug: string }
-}) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Get all posts again
+
+  if (!params) throw new Error('no params')
+
+  const { slug } = params
 
   try {
     const posts = await getAllPosts()
@@ -36,6 +38,9 @@ export const getStaticProps = async ({
     }
   } catch (err) {
     console.error(err)
+    return {
+      redirect: { permanent: false, destination: '/404' }
+    }
   }
 }
 
@@ -47,7 +52,25 @@ const BlogPost: FC<{
 
   return (
     <>
-      <Layout title={`${post.name} - Rahul's Blog`}>
+      <NextSeo
+        title={`${post.name} - Rahul Tarak`}
+        description={post.preview}
+        canonical={`https://cryogenicplanet.tech/post/${post.slug}`}
+        twitter={{
+          handle: '@cryogenicplanet',
+          cardType: 'summary_large_image'
+        }}
+        openGraph={{
+          title: post.name,
+          description: post.preview,
+          url: `https://cryogenicplanet.tech/post/${post.slug}`,
+          images: [
+            {
+              url: post.ogImage || ''
+            }
+          ]
+        }}></NextSeo>
+      <Layout skipSeo={true}>
         <div className="min-h-screen flex flex-col">
           <div className="container mx-auto px-4 sm:px-6 justify-center flex-grow max-w-6xl">
             <div className="my-16">

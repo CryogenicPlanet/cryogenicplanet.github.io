@@ -13,9 +13,17 @@ type Props = {
   children?: ReactNode
   title?: string
   footerBg?: string
+  ogImage?: string
+  skipSeo?: boolean
 }
 
-const Layout = ({ children, title = 'Rahul Tarak', footerBg }: Props) => {
+const Layout = ({
+  children,
+  title = 'Rahul Tarak',
+  footerBg,
+  ogImage,
+  skipSeo
+}: Props) => {
   useEffect(() => {
     const dark = window.localStorage.getItem('darkMode')
     state.dark = dark === 'true'
@@ -31,29 +39,38 @@ const Layout = ({ children, title = 'Rahul Tarak', footerBg }: Props) => {
     <div className={state.dark ? 'dark' : ''}>
       <div className="w-full min-h-screen transition-colors duration-500 ease-in-out h-full bg-gradient-to-r from-gray-50 to-gray-200 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
         <Head>
-          <title>{title}</title>
-          <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
           <link rel="icon" href="/images/laptop.svg"></link>
-          <meta name="og:title" content="Rahul Tarak"></meta>
-          <meta
-            name="og:description"
-            content="Personal space on the internet"></meta>
-          <meta name="og:type" content="website"></meta>
-          <meta
-            name="og:image"
-            content={`https://og.railway.app/api/image?fileType=png&layoutName=Simple&Text=${
-              router.pathname === '/'
-                ? 'Rahul+Tarak'
-                : `${router.pathname[1].toUpperCase()}${router.pathname.slice(
-                    2
-                  )}+%7C+Rahul+Tarak`
-            }`}></meta>
-          <meta name="og:url" content={router.pathname}></meta>
+          <meta charSet="utf-8" />
+
+          {!skipSeo && (
+            <>
+              <title>{title}</title>
+              <meta
+                name="viewport"
+                content="initial-scale=1.0, width=device-width"
+              />
+              <meta name="og:title" content="Rahul Tarak"></meta>
+              <meta
+                name="og:description"
+                content="Personal space on the internet"></meta>
+              <meta name="og:type" content="website"></meta>
+              <meta
+                name="og:image"
+                content={
+                  ogImage ||
+                  `https://og.railway.app/api/image?fileType=png&layoutName=Simple&Text=${
+                    router.pathname === '/'
+                      ? 'Rahul+Tarak'
+                      : `${router.pathname[1].toUpperCase()}${router.pathname.slice(
+                          2
+                        )}+%7C+Rahul+Tarak`
+                  }`
+                }></meta>
+              <meta name="og:url" content={router.pathname}></meta>
+            </>
+          )}
         </Head>
+
         {/* This example requires Tailwind CSS v2.0+ */}
         <Toaster position="top-right"></Toaster>
         <div className="h-full">

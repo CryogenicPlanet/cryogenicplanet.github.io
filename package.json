@@ -23,6 +23,7 @@
     "axios": "^0.21.1",
     "copy-to-clipboard": "^3.3.1",
     "next": "latest",
+    "next-seo": "^4.24.0",
     "notion-client": "^4.6.4",
     "notion-types": "^4.6.4",
     "postcss": "^8.2.4",
