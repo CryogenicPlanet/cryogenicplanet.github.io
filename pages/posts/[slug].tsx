@@ -3,7 +3,8 @@ import { NextSeo } from 'next-seo'
 import { NotionAPI } from 'notion-client'
 import { ExtendedRecordMap } from 'notion-types'
 import React, { FC } from 'react'
-import { Code, Equation, NotionRenderer } from 'react-notion-x'
+import { CopyBlock, tomorrowNight } from 'react-code-blocks'
+import { Equation, NotionRenderer } from 'react-notion-x'
 
 import Layout from '@components/Layout'
 import PostTitle from '@components/PostTitle'
@@ -27,7 +28,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const postIndex = posts.findIndex(t => t.slug === slug)
     const post = posts[postIndex]
 
-    const recordMap = await notion.getPage(post!.id)
+    const [recordMap] = await Promise.all([notion.getPage(post!.id)])
 
     return {
       props: {
@@ -44,10 +45,33 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 }
 
+const CodeBlock = ({ code, language }: { code: string; language: string }) => {
+  return (
+    <div className="w-full">
+      <CopyBlock
+        text={code}
+        language={language}
+        showLineNumbers={false}
+        theme={tomorrowNight}
+        codeBlock
+      />
+    </div>
+  )
+}
+
 const BlogPost: FC<{
   recordMap: ExtendedRecordMap
   post: Post
-}> = ({ recordMap, post }: { recordMap: ExtendedRecordMap; post: Post }) => {
+  ogImage: string
+}> = ({
+  recordMap,
+  post
+}: // ogImage
+{
+  recordMap: ExtendedRecordMap
+  post: Post
+  ogImage: string
+}) => {
   if (!post) return null
 
   return (
@@ -66,7 +90,7 @@ const BlogPost: FC<{
           url: `https://cryogenicplanet.tech/post/${post.slug}`,
           images: [
             {
-              url: post.ogImage || ''
+              url: post.staticImage || ''
             }
           ]
         }}></NextSeo>
@@ -80,7 +104,7 @@ const BlogPost: FC<{
                 </div>
                 <NotionRenderer
                   recordMap={recordMap}
-                  components={{ code: Code, equation: Equation }}
+                  components={{ code: CodeBlock, equation: Equation }}
                   darkMode={state.dark}
                   fullPage={false}
                 />

@@ -8,6 +8,7 @@ export interface Post {
   author: Author[]
   preview: string
   ogImage?: string
+  staticImage?: string
 }
 
 export interface Author {
