@@ -37,3 +37,4 @@ yarn-error.log*
 # Local Netlify folder
 .netlify
 public/files/.pnpm-debug.log
+public/rss
