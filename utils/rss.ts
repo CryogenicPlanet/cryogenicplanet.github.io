@@ -1,10 +1,8 @@
-import fs from 'fs'
-
 import { Feed } from 'feed'
 
 import { Post } from '@interfaces/index'
 
-export const generateRssFeed = async (posts: Post[]) => {
+export const generateRssFeed = (posts: Post[]) => {
   const siteURL = process.env.SITE_URL || 'https://cryogenicplanet.tech'
   const date = new Date()
   const author = {
@@ -14,8 +12,8 @@ export const generateRssFeed = async (posts: Post[]) => {
   }
 
   const feed = new Feed({
-    title: "Rahul Tarak's blog",
-    description: '',
+    title: "Rahul Tarak's Blog",
+    description: 'A blog about startups, tech and life.',
     id: siteURL,
     link: siteURL,
     image: `${siteURL}/images/laptop.svg`,
@@ -23,9 +21,7 @@ export const generateRssFeed = async (posts: Post[]) => {
     copyright: `All rights reserved ${date.getFullYear()}, Rahul Tarak`,
     updated: date,
     feedLinks: {
-      rss2: `${siteURL}/rss/feed.xml`,
-      json: `${siteURL}/rss/feed.json`,
-      atom: `${siteURL}/rss/atom.xml`
+      rss2: `${siteURL}/rss`
     },
     author
   })
@@ -45,8 +41,5 @@ export const generateRssFeed = async (posts: Post[]) => {
     })
   })
 
-  fs.mkdirSync('./public/rss', { recursive: true })
-  fs.writeFileSync('./public/rss/feed.xml', feed.rss2())
-  fs.writeFileSync('./public/rss/atom.xml', feed.atom1())
-  fs.writeFileSync('./public/rss/feed.json', feed.json1())
+  return feed
 }

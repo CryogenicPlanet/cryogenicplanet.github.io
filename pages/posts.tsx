@@ -4,7 +4,6 @@ import React from 'react'
 import Layout from '@components/Layout'
 import { postBadgeColors, posts as defaultPosts } from '@data/posts'
 import { getAllPosts } from '@utils/blog'
-import { generateRssFeed } from '@utils/rss'
 
 const Posts = ({ posts }: { posts: typeof defaultPosts }) => {
   return (
@@ -86,8 +85,6 @@ export const getStaticProps = async () => {
         local: true
       })
     })
-
-    await generateRssFeed(dynamicPosts)
 
     return {
       props: {
