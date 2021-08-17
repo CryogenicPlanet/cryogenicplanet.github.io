@@ -6,7 +6,7 @@ import { generateRssFeed } from '@utils/rss'
 const rssEndPoint = async (_req: NextApiRequest, res: NextApiResponse) => {
   const dynamicPosts = (await getAllPosts()).filter(p => p.published)
 
-  const feed = generateRssFeed(dynamicPosts)
+  const feed = await generateRssFeed(dynamicPosts)
 
   res.setHeader('Content-Type', 'text/xml')
   res.write(feed.rss2())

@@ -9,6 +9,7 @@ export interface Post {
   preview: string
   ogImage?: string
   staticImage?: string
+  categories: string[]
 }
 
 export interface Author {
