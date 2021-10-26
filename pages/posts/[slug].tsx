@@ -85,7 +85,7 @@ const BlogPost: FC<{
           cardType: 'summary_large_image'
         }}
         openGraph={{
-          title: post.name,
+          title: `${post.name.replace(/</g, '⋖').replace(/>/g, '⋗')}`,
           description: post.preview,
           url: `https://cryogenicplanet.tech/post/${post.slug}`,
           images: [
