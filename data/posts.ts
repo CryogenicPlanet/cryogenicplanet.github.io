@@ -1,3 +1,5 @@
+import colors from 'tailwindcss/colors'
+
 export const posts: Array<{
   title: string
   url: string
@@ -59,14 +61,17 @@ export const posts: Array<{
 export const postBadgeColors = {
   startup: {
     foreground: 'bg-green-100',
-    background: 'text-green-800'
+    background: 'text-green-800',
+    bgHex: colors.green['100']
   },
   other: {
     foreground: 'bg-blue-100',
-    background: 'text-blue-800'
+    background: 'text-blue-800',
+    bgHex: colors.blue['100']
   },
   technical: {
     foreground: 'bg-red-100',
-    background: 'text-red-800'
+    background: 'text-red-800',
+    bgHex: colors.red['100']
   }
 }

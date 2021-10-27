@@ -1,3 +1,5 @@
+import colors from 'tailwindcss/colors'
+
 export const thingTypes = {
   technical: true,
   hackathon: true,
@@ -224,22 +226,30 @@ export const things = unsortedThings.sort((a, b) => b.year - a.year)
 
 export const thingBadgeColors: {
   // eslint-disable-next-line no-unused-vars
-  [name in keyof typeof thingTypes]: { foreground: string; background: string }
+  [name in keyof typeof thingTypes]: {
+    foreground: string
+    background: string
+    bgHex: string
+  }
 } = {
   other: {
     foreground: 'bg-green-100',
-    background: 'text-green-800'
+    background: 'text-green-800',
+    bgHex: colors.green[100]
   },
   technical: {
     foreground: 'bg-red-100',
-    background: 'text-red-800'
+    background: 'text-red-800',
+    bgHex: colors.red[100]
   },
   hackathon: {
     foreground: 'bg-orange-100',
-    background: 'text-orange-800'
+    background: 'text-orange-800',
+    bgHex: colors.orange[100]
   },
   film: {
     foreground: 'bg-green-100',
-    background: 'text-green-800'
+    background: 'text-green-800',
+    bgHex: colors.green[100]
   }
 }

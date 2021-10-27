@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React, { ReactNode, useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 
+import A, { Button } from '@components/Blobity'
 import { navigation } from '@data/navigation'
 import { MoonIcon, SunIcon } from '@heroicons/react/solid'
 import { view } from '@risingstack/react-easy-state'
@@ -92,33 +93,34 @@ const Layout = ({
                 <div key={item.name} className="px-5 py-2">
                   {item.local ? (
                     <Link href={item.href} passHref>
-                      <a
+                      <A
                         href={item.href}
                         className="text-base text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-50">
                         {item.name}
-                      </a>
+                      </A>
                     </Link>
                   ) : (
-                    <a
+                    <A
                       href={item.href}
                       className="text-base text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-50">
                       {item.name}
-                    </a>
+                    </A>
                   )}
                 </div>
               ))}
             </nav>
             <div className="mt-8 flex justify-center space-x-6">
               {navigation.social.map(item => (
-                <a
+                <A
                   key={item.name}
                   href={item.href}
                   target="_blank"
                   rel="noreferrer"
+                  dataOptions={{ radius: 20 }}
                   className="text-gray-400 hover:text-gray-500  dark:hover:text-gray-50">
                   <span className="sr-only">{item.name}</span>
                   <item.icon className="h-6 w-6" aria-hidden="true" />
-                </a>
+                </A>
               ))}
             </div>
             <p className="mt-8 text-center text-base text-gray-400">
@@ -127,15 +129,21 @@ const Layout = ({
 
             <p className="mt-2 text-center  text-gray-500 text-xs">
               if you are looking for my old more flashy website, checkout {` `}
-              <a className="underline" href="https://old.cryogenicplanet.tech">
+              <A className="underline" href="https://old.cryogenicplanet.tech">
                 old.cryogenicplanet.tech
-              </a>
+              </A>
             </p>
           </div>
         </footer>
 
         <div className="fixed bottom-2 right-2">
-          <button
+          <Button
+            dataOptions={{
+              magnetic: false,
+              radius: 20,
+              xOffset: 0,
+              yOffset: 0
+            }}
             onClick={() => {
               state.dark = !state.dark
             }}
@@ -146,7 +154,7 @@ const Layout = ({
             ) : (
               <MoonIcon className="h-7 w-7" />
             )}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

@@ -4,17 +4,27 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import Animator from '@components/Animation'
+import A, { Button } from '@components/Blobity'
 import Layout from '@components/Layout'
 import Loader from '@components/Loader'
+import { view } from '@risingstack/react-easy-state'
+import { state } from '@utils/store'
 
 const IndexPage = () => {
   const [isLoading, setLoading] = useState(true)
+  const { blobity, dark } = state
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
     }, 1500)
   }, [])
+
+  useEffect(() => {
+    blobity?.updateOptions({
+      dotColor: dark ? 'white' : 'black'
+    })
+  }, [state.dark])
 
   return (
     <Layout title="Rahul Tarak">
@@ -148,88 +158,97 @@ const IndexPage = () => {
                     <div className="mt-6 font-semibold text-gray-800 dark:text-gray-50 space-y-6">
                       <p className="text-lg">
                         My name is Rahul. I am building{' '}
-                        <a className="underline" href="https://modfy.video">
+                        <A className="underline" href="https://modfy.video">
                           Modfy.video
-                        </a>
+                        </A>
                       </p>
                       <p className="text-base leading-7">
                         I am a{' '}
-                        <a
+                        <A
                           className="underline"
                           href="https://pioneer.app/winners/rahul-tarak">
                           {' '}
                           Pioneer @ Pioneer.app
-                        </a>
+                        </A>
                         , and{' '}
-                        <a
+                        <A
                           className="underline"
                           href="https://devfolio.co/blog/first-bif-cohort/">
                           Build India Fellow @ Devfolio
-                        </a>
+                        </A>
                       </p>
                       <p className="text-base leading-7">
                         Previously, I was{' '}
-                        <a className="underline" href="https://thevarsity.ca/">
+                        <A className="underline" href="https://thevarsity.ca/">
                           Backend @ The Varsity
-                        </a>{' '}
+                        </A>{' '}
                         and{' '}
-                        <a
+                        <A
                           href="https://aws.amazon.com/blogs/mobile/major-league-hacking-fellows-recap-of-winter-2020/"
                           className="underline">
                           Fellow @ MLH.
-                        </a>
+                        </A>
                       </p>
                       <p>
                         I also wrote a{' '}
-                        <a
+                        <A
                           href="https://www.cfrce.com/images/Investigating_the_vertical_ozone_profile_with_a_specific_focus_on_the_ground_level_and_tropospheric_.pdf"
                           className="underline">
                           Research Paper
-                        </a>{' '}
+                        </A>{' '}
                         and founded a{' '}
-                        <a
+                        <A
                           href="http://codefest.oakridge.in/"
                           className="underline">
                           Hackathon
-                        </a>
+                        </A>
                         , among other things.
                       </p>
 
                       <p className="text-base leading-7">
                         I like building{' '}
                         <Link href="/things" passHref>
-                          <a className="underline" href="/things">
+                          <A
+                            nextLink={true}
+                            className="underline"
+                            href="/things">
                             things
-                          </a>
+                          </A>
                         </Link>
-                        . Also occationally{' '}
+                        . Also occasionally{' '}
                         <Link href="/posts" passHref>
-                          <a className="underline" href="/posts">
+                          <A
+                            nextLink={true}
+                            className="underline"
+                            href="/posts">
                             write
-                          </a>
+                          </A>
                         </Link>
                         ,{' '}
-                        <a
+                        <A
                           className="underline"
                           href="https://photography.cryogenicplanet.tech">
                           take photos
-                        </a>{' '}
+                        </A>{' '}
                         and{' '}
-                        <a
+                        <A
                           className="underline"
                           href="https://film.cryogenicplanet.tech">
                           make short films.
-                        </a>
+                        </A>
                       </p>
                       <p className="text-base leading-7">
-                        <button
+                        <Button
                           onClick={() => {
                             copy('rahul@modfy.video')
                             toast.success('Copied email to clipboard')
                           }}
+                          data-blobity-radius="10"
+                          data-blobity-offset-x="7"
+                          data-blobity-offset-y="7"
                           className="font-bold underline focus:outline-none">
                           rahul@modfy.video
-                        </button>
+                        </Button>
                       </p>
                     </div>
                   </div>
@@ -237,13 +256,14 @@ const IndexPage = () => {
                   {/* Stats section */}
                   <div className="mt-10">
                     <div className="mt-10">
-                      <a
+                      <A
+                        dataOptions={{ xOffset: 10, yOffset: 10, radius: 8 }}
                         href="https://modfy.video"
                         className="text-base font-medium text-indigo-600 dark:text-indigo-500">
                         {' '}
                         Learn more about how we are reinventing video editing{' '}
                         <span aria-hidden="true">&rarr;</span>{' '}
-                      </a>
+                      </A>
                     </div>
                   </div>
                 </div>
@@ -256,4 +276,4 @@ const IndexPage = () => {
   )
 }
 
-export default IndexPage
+export default view(IndexPage)

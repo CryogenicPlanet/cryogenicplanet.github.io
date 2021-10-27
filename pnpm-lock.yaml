@@ -8,12 +8,14 @@ specifiers:
   '@types/node': ^12.12.21
   '@types/react': ^16.9.16
   '@types/react-dom': ^16.9.4
+  '@types/tailwindcss': ^2.2.2
   '@typescript-eslint/eslint-plugin': ^4.14.2
   '@typescript-eslint/parser': ^4.14.2
   animejs: ^3.2.1
   autoprefixer: ^10.2.4
   axios: ^0.21.1
   babel-eslint: ^10.1.0
+  blobity: ^0.1.7
   copy-to-clipboard: ^3.3.1
   eslint: ^7.19.0
   eslint-config-prettier: ^7.2.0
@@ -53,9 +55,11 @@ dependencies:
   '@heroicons/react': 1.0.1_react@17.0.2
   '@risingstack/react-easy-state': 6.3.0_react@17.0.2
   '@tailwindcss/jit': 0.1.18_postcss@8.2.15+tailwindcss@2.1.2
+  '@types/tailwindcss': 2.2.2
   animejs: 3.2.1
   autoprefixer: 10.2.5_postcss@8.2.15
   axios: 0.21.1
+  blobity: 0.1.7_react@17.0.2
   copy-to-clipboard: 3.3.1
   feed: 4.2.2
   next: 12.0.0_react-dom@16.14.0+react@17.0.2
@@ -622,6 +626,10 @@ packages:
     resolution: {integrity: sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==}
     dev: true
 
+  /@types/tailwindcss/2.2.2:
+    resolution: {integrity: sha512-VgNJQstMEaSqCu6cL39pgUqHW+EKHPsQ3zazeQDoO1USfyOvsuIiCFzmPqreAYswHntxmeNM+/V45d3n5KRo4Q==}
+    dev: false
+
   /@typescript-eslint/eslint-plugin/4.24.0_3c77da5e798439f459fc17c3b77f82cf:
     resolution: {integrity: sha512-qbCgkPM7DWTsYQGjx9RTuQGswi+bEt0isqDBeo+CKV0953zqI0Tp7CZ7Fi9ipgFA6mcQqF4NOVNwS/f2r6xShw==}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -1013,6 +1021,16 @@ packages:
   /binary-extensions/2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
+    dev: false
+
+  /blobity/0.1.7_react@17.0.2:
+    resolution: {integrity: sha512-4pIUWS99ldLtCSKDAwaz3SqGH4ExfaUo8Bq8BXNKPyvR3z6gyr8G4uHvV/exwu2OOyBser+vIXMMeC1l1kNWiQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      kinet: 2.2.1
+      lodash: 4.17.21
+      react: 17.0.2
     dev: false
 
   /bn.js/4.12.0:
@@ -2976,6 +2994,10 @@ packages:
     resolution: {integrity: sha512-zdGa2TOpSZPq5mU6iowDARnMBZgtCqJ11dJROFi6tg6kTn4nuUdU09lFyLFSaHrWqpIJ+EBq4E8/Dc0Vx5vLdA==}
     dependencies:
       json-buffer: 3.0.1
+    dev: false
+
+  /kinet/2.2.1:
+    resolution: {integrity: sha512-UmnTPmnEokjxBeB3gPkOnTwRlIUaAeB+t21E+HJGzRKCGdJTUF3CTztK5yzzEuBQ1BZ0I0ovrY73+ctpPWFIOg==}
     dev: false
 
   /language-subtag-registry/0.3.21:
