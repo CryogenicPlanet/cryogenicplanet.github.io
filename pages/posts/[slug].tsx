@@ -28,6 +28,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     // Find the current blogpost by slug
     const postIndex = posts.findIndex(t => t.slug === slug)
+
+    if (postIndex === -1) {
+      return { redirect: { permanent: false, destination: '/404' } }
+    }
+
     const post = posts[postIndex]
 
     const [recordMap] = await Promise.all([notion.getPage(post!.id)])
