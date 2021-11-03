@@ -9,6 +9,7 @@ import { getAllPosts } from '@utils/blog'
 import { state } from '@utils/store'
 
 const Posts = ({ posts }: { posts: typeof defaultPosts }) => {
+  console.log({ dark: state.dark })
   return (
     <Layout title="Posts | Rahul Tarak">
       <div className="py-10 ">

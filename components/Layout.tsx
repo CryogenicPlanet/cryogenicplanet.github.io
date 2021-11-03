@@ -30,10 +30,6 @@ const Layout = ({
     state.dark = dark === 'true'
   }, [])
 
-  useEffect(() => {
-    window.localStorage.setItem('darkMode', state.dark ? 'true' : 'false')
-  }, [state.dark])
-
   const router = useRouter()
 
   return (
