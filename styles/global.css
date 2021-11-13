@@ -15,3 +15,7 @@ html::-webkit-scrollbar {
 .notion-viewport {
   @apply pointer-events-none;
 }
+
+.katex-html {
+  @apply sr-only
+}

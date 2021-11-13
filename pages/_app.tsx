@@ -16,7 +16,7 @@ import '@styles/global.css'
 import '@styles/animation.css'
 import '@styles/prismaTheme.css'
 // import 'prismjs/themes/prism-okaidia.css'
-import 'react-notion-x/src/styles.css'
+import '@cryogenicplanet/react-notion-x/src/styles.css'
 
 const ModfyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {

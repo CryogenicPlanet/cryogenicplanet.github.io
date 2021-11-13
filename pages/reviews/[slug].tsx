@@ -2,16 +2,22 @@ import Blobity from 'blobity'
 import { GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 import { NotionAPI } from 'notion-client'
-import { ExtendedRecordMap } from 'notion-types'
+import {
+  CalloutBlock as CalloutBlockType,
+  ExtendedRecordMap
+} from 'notion-types'
 import React, { FC, useEffect } from 'react'
 import { CopyBlock, tomorrowNight } from 'react-code-blocks'
 
 import { defaultConfig } from '@components/Blobity'
 import Layout from '@components/Layout'
-import PostTitle from '@components/PostTitle'
+import RatingComponent from '@components/Rating'
+import RatingTitle from '@components/RatingTitle'
 import { Equation, NotionRenderer } from '@cryogenicplanet/react-notion-x'
+import { Rating } from '@interfaces/index'
 import { view } from '@risingstack/react-easy-state'
-import { getAllPosts, Post } from '@utils/blog'
+import { getAllReviews, Review } from '@utils/blog'
+import { getSlug } from '@utils/review'
 import { state } from '@utils/store'
 
 const notion = new NotionAPI()
@@ -24,23 +30,23 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params
 
   try {
-    const posts = await getAllPosts()
+    const reviews = await getAllReviews()
 
     // Find the current blogpost by slug
-    const postIndex = posts.findIndex(t => t.slug === slug)
+    const postIndex = reviews.findIndex(t => getSlug(t) === slug)
 
     if (postIndex === -1) {
       return { redirect: { permanent: false, destination: '/404' } }
     }
 
-    const post = posts[postIndex]
+    const review = reviews[postIndex]
 
-    const [recordMap] = await Promise.all([notion.getPage(post!.id)])
+    const [recordMap] = await Promise.all([notion.getPage(review!.id)])
 
     return {
       props: {
         recordMap,
-        post
+        review: review
       },
       revalidate: 1
     }
@@ -66,17 +72,52 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
   )
 }
 
-const BlogPost: FC<{
+const CalloutBlock = ({ block }: { block: CalloutBlockType }) => {
+  const icon = block.format.page_icon === '🎬' // Review score block
+
+  if (!icon) return null
+
+  const text = block.properties.title[0][0]
+  const lines = text.split('\n')
+
+  const rating: Rating = { disappointment: 0, enjoyment: 0, quality: 0 }
+
+  for (const line of lines) {
+    if (line.includes('Enjoyment')) {
+      const enjoymentStr = line.replace(/^\D+/g, '')
+      if (enjoymentStr) {
+        rating.enjoyment = parseFloat(enjoymentStr)
+      }
+    } else if (line.includes('Quality')) {
+      const qualityStr = line.replace(/^\D+/g, '')
+      if (qualityStr) {
+        rating.quality = parseFloat(qualityStr)
+      }
+    } else if (line.includes('Disappointment')) {
+      const disappointmentStr = line.replace(/^\D+/g, '')
+      const negative = line.includes('-') ? -1 : 1
+      if (disappointmentStr) {
+        rating.disappointment = parseFloat(disappointmentStr) * negative
+      }
+    }
+  }
+
+  console.log({ rating })
+
+  return <RatingComponent rating={rating}></RatingComponent>
+}
+
+const ReviewPost: FC<{
   recordMap: ExtendedRecordMap
-  post: Post
+  review: Review
   ogImage: string
 }> = ({
   recordMap,
-  post
+  review
 }: // ogImage
 {
   recordMap: ExtendedRecordMap
-  post: Post
+  review: Review
   ogImage: string
 }) => {
   useEffect(() => {
@@ -92,25 +133,25 @@ const BlogPost: FC<{
     }
   }, [])
 
-  if (!post) return null
+  if (!review) return null
 
   return (
     <>
       <NextSeo
-        title={`${post.name} - Rahul Tarak`}
-        description={post.preview}
-        canonical={`https://cryogenicplanet.tech/post/${post.slug}`}
+        title={`${review.name} - Rahul Tarak`}
+        description={review.preview}
+        canonical={`https://cryogenicplanet.tech/reviews/${review.name}`}
         twitter={{
           handle: '@cryogenicplanet',
           cardType: 'summary_large_image'
         }}
         openGraph={{
-          title: `${post.name.replace(/</g, '⋖').replace(/>/g, '⋗')}`,
-          description: post.preview,
-          url: `https://cryogenicplanet.tech/post/${post.slug}`,
+          title: `${review.name.replace(/</g, '⋖').replace(/>/g, '⋗')}`,
+          description: review.preview,
+          url: `https://cryogenicplanet.tech/reviews/${review.name}`,
           images: [
             {
-              url: post.staticImage || ''
+              url: review.staticImage || ''
             }
           ]
         }}></NextSeo>
@@ -120,11 +161,15 @@ const BlogPost: FC<{
             <div className="my-16">
               <div className="py-2 sm:p-8 flex flex-col items-center justify-center  rounded ">
                 <div className="notion-page">
-                  <PostTitle post={post} />
+                  <RatingTitle review={review} />
                 </div>
                 <NotionRenderer
+                  components={{
+                    code: CodeBlock,
+                    equation: Equation,
+                    callout: CalloutBlock
+                  }}
                   recordMap={recordMap}
-                  components={{ code: CodeBlock, equation: Equation }}
                   darkMode={state.dark}
                   fullPage={false}
                 />
@@ -138,12 +183,12 @@ const BlogPost: FC<{
 }
 
 export const getStaticPaths = async () => {
-  const table = (await getAllPosts()).filter(p => p.slug)
+  const table = (await getAllReviews()).filter(p => p.name)
 
   return {
-    paths: table.map(row => `/posts/${row.slug}`),
+    paths: table.map(row => `/reviews/${getSlug(row)}`),
     fallback: true
   }
 }
 
-export default view(BlogPost)
+export default view(ReviewPost)
