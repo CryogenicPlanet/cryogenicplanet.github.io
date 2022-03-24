@@ -37,8 +37,8 @@ specifiers:
   feed: ^4.2.2
   husky: ^4.3.8
   next: ^12.0.3
-  next-google-analytics: ^0.4.0
   next-seo: ^4.24.0
+  next-simple-google-analytics: ^1.1.0
   notion-client: ^4.6.4
   notion-types: ^4.10.0
   postcss: ^8.2.4
@@ -67,8 +67,8 @@ dependencies:
   copy-to-clipboard: 3.3.1
   feed: 4.2.2
   next: 12.0.3_react-dom@16.14.0+react@17.0.2
-  next-google-analytics: 0.4.0_next@12.0.3+react@17.0.2
   next-seo: 4.24.0_542f3a4cb261c45bf47d526597deefdf
+  next-simple-google-analytics: 1.1.0_next@12.0.3+react@17.0.2
   notion-client: 4.6.4
   notion-types: 4.10.0
   postcss: 8.2.15
@@ -3342,16 +3342,6 @@ packages:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
     dev: true
 
-  /next-google-analytics/0.4.0_next@12.0.3+react@17.0.2:
-    resolution: {integrity: sha512-bmeFQCod2YITtifrOBdVWQrkGCRqzZ48Ylp/h5KeIJAqrc4cyW6QrU89BEcKpa/TmPbfSP4v4Vf/qXXJes4okA==}
-    peerDependencies:
-      next: ^10 || ^11
-      react: ^17
-    dependencies:
-      next: 12.0.3_react-dom@16.14.0+react@17.0.2
-      react: 17.0.2
-    dev: false
-
   /next-seo/4.24.0_542f3a4cb261c45bf47d526597deefdf:
     resolution: {integrity: sha512-9VQXfXAelhE+hAWzJ4azigQaW3FPX0kU0eYKFQXKsQjgY7AWtukjRGXls0oSIk8khhDJwmCt46EwsO9n5DDW6Q==}
     peerDependencies:
@@ -3362,6 +3352,16 @@ packages:
       next: 12.0.3_react-dom@16.14.0+react@17.0.2
       react: 17.0.2
       react-dom: 16.14.0_react@17.0.2
+    dev: false
+
+  /next-simple-google-analytics/1.1.0_next@12.0.3+react@17.0.2:
+    resolution: {integrity: sha512-/d4+17R7M4ZXZzTP3f/GcJZkwC7XDroNZcIWgzUq8culp9PT3M2RirQhgcqGo6mmA+h6cop0Y74shZw8XtPwEQ==}
+    peerDependencies:
+      next: '8'
+      react: '16'
+    dependencies:
+      next: 12.0.3_react-dom@16.14.0+react@17.0.2
+      react: 17.0.2
     dev: false
 
   /next/12.0.3_react-dom@16.14.0+react@17.0.2:

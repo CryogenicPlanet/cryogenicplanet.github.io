@@ -1,6 +1,5 @@
 import Blobity from 'blobity'
 import { AppProps } from 'next/app'
-import * as GoogleAnalytics from 'next-google-analytics'
 import React, { useEffect } from 'react'
 
 import { defaultConfig } from '@components/Blobity'
@@ -27,8 +26,6 @@ const ModfyApp = ({ Component, pageProps }: AppProps) => {
     }
   }, [])
 
-  GoogleAnalytics.useAppInit()
-
   return (
     <>
       {/* https://www.radix-ui.com/docs/primitives/utilities/id-provider
@@ -41,5 +38,3 @@ const ModfyApp = ({ Component, pageProps }: AppProps) => {
 }
 
 export default ModfyApp
-
-export { reportWebVitals } from 'next-google-analytics'
