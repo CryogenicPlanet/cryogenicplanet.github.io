@@ -8,6 +8,15 @@ module.exports = {
       }
     ]
   },
+  async redirects() {
+    return [
+      {
+        source: '/reviews/rating',
+        destination: '/posts/rating',
+        permanent: true
+      }
+    ]
+  },
   eslint: {
     // Warning: Dangerously allow production builds to successfully complete even if
     // your project has ESLint errors.

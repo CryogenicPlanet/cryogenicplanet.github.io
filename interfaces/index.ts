@@ -12,17 +12,16 @@ export interface Post {
   categories: string[]
 }
 
-export interface Review extends Rating {
+export interface Movie extends Rating {
   id: string
-  name: string
-  tag: string
-  published: boolean
-  slug?: string
-  date: string
-  author: Author[]
-  preview: string
-  staticImage?: string
-  categories: string[]
+  Name: string
+  Tier: string
+  poster: string
+  Seen: string
+  '2022 Release': boolean
+  'Where did you watch': string[]
+  Rewatch: boolean
+  posterOverwrite: string
 }
 
 export interface Author {
@@ -34,7 +33,7 @@ export interface Author {
 }
 
 export interface Rating {
-  enjoyment: number
-  quality: number
-  disappointment: number
+  Enjoyment: string
+  Quality: string
+  Disappointment: string
 }

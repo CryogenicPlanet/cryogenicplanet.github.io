@@ -3,9 +3,13 @@ import React from 'react'
 import { Rating } from '@interfaces/index'
 
 const RatingComponent = ({ rating }: { rating: Rating }) => {
-  const { enjoyment, quality, disappointment } = rating
+  const { Enjoyment, Quality, Disappointment } = rating
 
-  const total = (enjoyment + quality) / (20 + disappointment)
+  const enjoyment = parseInt(Enjoyment)
+  const quality = parseInt(Quality)
+  const disappointment = parseInt(Disappointment)
+
+  const score = (quality + enjoyment) / (20 + disappointment)
 
   const disappointmentBg =
     disappointment < 0
@@ -74,13 +78,13 @@ const RatingComponent = ({ rating }: { rating: Rating }) => {
       <div>
         <h4 className="sr-only">Status</h4>
         <p className="text-lg font-medium text-gray-900 dark:text-gray-200">
-          Total ({`${(total * 100).toFixed(1)}%`})
+          Total ({`${(score * 100).toFixed(1)}%`})
         </p>
         <div className="mt-2" aria-hidden="true">
           <div className="flex bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 rounded-full overflow-hidden">
             <div
               className="h-2  bg-transparent rounded-full  transition-all duration-200 ease-in-out"
-              style={{ width: `${total * 100}%` }}
+              style={{ width: `${score * 100}%` }}
             />
             <div className="h-2  flex-1 bg-gray-200 transition-all duration-200 ease-in-out"></div>
           </div>
@@ -91,7 +95,13 @@ const RatingComponent = ({ rating }: { rating: Rating }) => {
 }
 
 export const SmallRatingComponent = ({ rating }: { rating: Rating }) => {
-  const { enjoyment, quality, disappointment } = rating
+  const { Enjoyment, Quality, Disappointment } = rating
+
+  const enjoyment = parseInt(Enjoyment)
+  const quality = parseInt(Quality)
+  const disappointment = parseInt(Disappointment)
+
+  const score = (quality + enjoyment) / (20 + disappointment)
 
   const disappointmentBg =
     disappointment < 0
@@ -99,6 +109,11 @@ export const SmallRatingComponent = ({ rating }: { rating: Rating }) => {
       : disappointment === 0
       ? 'bg-gray-300 dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-50'
       : 'bg-gray-200'
+
+  if (!enjoyment || !quality)
+    return (
+      <p className="text-xs text-gray-500">This movie has not been rated</p>
+    )
 
   return (
     <div className="flex w-full flex-col space-y-4">
@@ -155,6 +170,9 @@ export const SmallRatingComponent = ({ rating }: { rating: Rating }) => {
           </div>
         </div>
       )}
+      <p className="text-base font-medium text-gray-900">
+        Score <span className="font-semibold">{(score * 100).toFixed(0)}%</span>
+      </p>
     </div>
   )
 }

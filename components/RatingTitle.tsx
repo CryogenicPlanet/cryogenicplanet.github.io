@@ -2,12 +2,12 @@ import Link from 'next/link'
 import React from 'react'
 
 import { ArrowLeftIcon, CalendarIcon, TagIcon } from '@heroicons/react/solid'
-import { Review } from '@interfaces/index'
+import { Movie } from '@interfaces/index'
 import { view } from '@risingstack/react-easy-state'
 
 import RatingComponent from './Rating'
 
-const ReviewTitle = ({ review }: { review: Review }) => {
+const ReviewTitle = ({ review }: { review: Movie }) => {
   console.log({ review })
 
   return (
@@ -23,7 +23,7 @@ const ReviewTitle = ({ review }: { review: Review }) => {
         <div className="mb-12 mt-4 px-3 max-w-7xl">
           <div className="inline-block text-blue-800 bg-blue-100 px-2 py-1 rounded dark:text-yellow-400 dark:bg-gray-700">
             <div className="flex items-center space-x-1">
-              <TagIcon className="w-5 h-5" /> <span>{review.tag}</span>
+              <TagIcon className="w-5 h-5" /> <span>{review.Tier}</span>
             </div>
           </div>
 
@@ -61,7 +61,7 @@ const ReviewTitle = ({ review }: { review: Review }) => {
           </div>
         </div>
       </div>
-      {review.tag !== 'Meta' && (
+      {review.Tier !== 'Meta' && (
         <div className="pb-6">
           <RatingComponent rating={{ ...review }}></RatingComponent>
         </div>

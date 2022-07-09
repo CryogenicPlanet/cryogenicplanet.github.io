@@ -9,13 +9,19 @@ import { state } from '@utils/store'
 const PostTitle = ({ post }: { post: Post }) => {
   return (
     <div className="w-full mx-auto overflow-hidden ">
-      {post.ogImage && (
+      {post.ogImage ? (
         <img
           className="object-cover w-full h-64"
           src={`${post.ogImage}&theme=${state.dark ? 'Dark' : 'Light'}`}
-          alt="Article"
+          alt="Dynamic"
         />
-      )}
+      ) : post.staticImage ? (
+        <img
+          className="object-cover w-full h-64"
+          src={`${post.staticImage}`}
+          alt="Static"
+        />
+      ) : null}
       <div className="p-2">
         <div className="mb-12 mt-4 px-3 max-w-7xl">
           <div className="inline-block text-blue-800 bg-blue-100 px-2 py-1 rounded dark:text-yellow-400 dark:bg-gray-700">

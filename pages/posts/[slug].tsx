@@ -2,14 +2,19 @@ import Blobity from 'blobity'
 import { GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 import { NotionAPI } from 'notion-client'
-import { ExtendedRecordMap } from 'notion-types'
+import {
+  CalloutBlock as CalloutBlockType,
+  ExtendedRecordMap
+} from 'notion-types'
 import React, { FC, useEffect } from 'react'
 import { CopyBlock, tomorrowNight } from 'react-code-blocks'
 
 import { defaultConfig } from '@components/Blobity'
 import Layout from '@components/Layout'
 import PostTitle from '@components/PostTitle'
+import RatingComponent from '@components/Rating'
 import { Equation, NotionRenderer } from '@cryogenicplanet/react-notion-x'
+import { Rating } from '@interfaces/index'
 import { view } from '@risingstack/react-easy-state'
 import { getAllPosts, Post } from '@utils/blog'
 import { state } from '@utils/store'
@@ -25,6 +30,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   try {
     const posts = await getAllPosts()
+    console.log({ posts, slug })
 
     // Find the current blogpost by slug
     const postIndex = posts.findIndex(t => t.slug === slug)
@@ -50,6 +56,38 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       redirect: { permanent: false, destination: '/404' }
     }
   }
+}
+
+const CalloutBlock = ({ block }: { block: CalloutBlockType }) => {
+  const icon = block.format.page_icon === '🎬' // Review score block
+
+  if (!icon) return null
+
+  const text = block.properties.title[0][0]
+  const lines = text.split('\n')
+
+  const rating: Rating = { Enjoyment: '', Disappointment: '', Quality: '' }
+
+  for (const line of lines) {
+    if (line.includes('Enjoyment')) {
+      const enjoymentStr = line.replace(/^\D+/g, '')
+      if (enjoymentStr) {
+        rating.Enjoyment = enjoymentStr
+      }
+    } else if (line.includes('Quality')) {
+      const qualityStr = line.replace(/^\D+/g, '')
+      if (qualityStr) {
+        rating.Quality = qualityStr
+      }
+    } else if (line.includes('Disappointment')) {
+      const disappointmentStr = line.replace(/^\D+/g, '')
+      if (disappointmentStr) {
+        rating.Disappointment = disappointmentStr
+      }
+    }
+  }
+
+  return <RatingComponent rating={rating}></RatingComponent>
 }
 
 const CodeBlock = ({ code, language }: { code: string; language: string }) => {
@@ -124,7 +162,11 @@ const BlogPost: FC<{
                 </div>
                 <NotionRenderer
                   recordMap={recordMap}
-                  components={{ code: CodeBlock, equation: Equation }}
+                  components={{
+                    code: CodeBlock,
+                    equation: Equation,
+                    callout: CalloutBlock
+                  }}
                   darkMode={state.dark}
                   fullPage={false}
                 />
