@@ -13,6 +13,7 @@ import { state } from '@utils/store'
 type Props = {
   children?: ReactNode
   title?: string
+  description?: string
   footerBg?: string
   ogImage?: string
   skipSeo?: boolean
@@ -23,7 +24,8 @@ const Layout = ({
   title = 'Rahul Tarak',
   footerBg,
   ogImage,
-  skipSeo
+  skipSeo,
+  description
 }: Props) => {
   useEffect(() => {
     const dark = window.localStorage.getItem('darkMode')
@@ -46,10 +48,12 @@ const Layout = ({
                 name="viewport"
                 content="initial-scale=1.0, width=device-width"
               />
-              <meta name="og:title" content="Rahul Tarak"></meta>
+              <meta name="og:title" content={title}></meta>
               <meta
                 name="og:description"
-                content="Personal space on the internet"></meta>
+                content={
+                  description || 'Personal space on the internet'
+                }></meta>
               <meta name="og:type" content="website"></meta>
               <meta
                 name="og:image"

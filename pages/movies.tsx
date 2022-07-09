@@ -10,7 +10,10 @@ import { getAllMovies } from '@utils/blog'
 
 const Movies = ({ reviews }: { reviews: Movie[] }) => {
   return (
-    <Layout title="Movies | Rahul Tarak">
+    <Layout
+      title="Movies | Rahul Tarak"
+      description="List of movies I've watched since 2022"
+      ogImage="https://user-images.githubusercontent.com/10355479/178099683-6ebf7d20-9e8e-4c9a-b7ba-689ddbc221dd.png">
       <div className="py-10 ">
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
           <div className="text-center">
