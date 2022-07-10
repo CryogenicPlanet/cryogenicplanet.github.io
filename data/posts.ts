@@ -7,19 +7,9 @@ export const posts: Array<{
   local?: boolean
 }> = [
   {
-    title: 'Hiring for Broke Startups',
-    url: 'https://blog.modfy.video/Hiring-for-Broke-Startups',
-    type: 'startup'
-  },
-  {
     title: '🏗️ Building Electron with FFmpeg',
     url: 'https://blog.modfy.video/Building-Electron-with-FFmpeg',
     type: 'technical'
-  },
-  {
-    title: 'Be an active protagonist in your life',
-    url: 'https://blog.modfy.video/Be-an-active-protagonist-in-your-life',
-    type: 'startup'
   },
   {
     title: ' Create Github Social Preview Images in a few clicks ',
