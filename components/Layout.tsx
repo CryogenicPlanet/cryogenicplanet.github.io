@@ -5,7 +5,6 @@ import React, { ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
 
 import { navigation } from '@data/navigation'
-import { MoonIcon, SunIcon } from '@heroicons/react/solid'
 import { view } from '@risingstack/react-easy-state'
 import { state } from '@utils/store'
 
@@ -128,21 +127,6 @@ const Layout = ({
             </p>
           </div>
         </footer>
-
-        <div className="fixed bottom-2 right-2">
-          <button
-            onClick={() => {
-              // state.dark = !state.dark
-            }}
-            type="button"
-            className="inline-flex items-center p-2 border transition-colors duration-500 border-transparent rounded-full shadow-sm text-white bg-gray-900 dark:bg-gray-50 dark:text-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            {state.dark ? (
-              <SunIcon className="h-7 w-7 text-black" />
-            ) : (
-              <MoonIcon className="h-7 w-7" />
-            )}
-          </button>
-        </div>
       </div>
     </div>
   )

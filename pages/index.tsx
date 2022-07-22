@@ -8,6 +8,7 @@ import { Keyframes, Scroll } from 'scrollex'
 import Layout from '@components/Layout'
 import { navigation } from '@data/navigation'
 import { Transition } from '@headlessui/react'
+import type { ExtractPromise } from '@utils/photos'
 
 const keyframes: Record<string, Keyframes> = {
   headerText: ({ section }) => ({
@@ -16,22 +17,6 @@ const keyframes: Record<string, Keyframes> = {
     },
     [section.bottomAt('container-top')]: {
       translateY: -200
-    }
-  }),
-  headerImage: ({ section }) => ({
-    [section.topAt('container-top')]: {
-      translateY: 0
-    },
-    [section.bottomAt('container-top')]: {
-      translateY: 125
-    }
-  }),
-  galleryImage: ({ section, data }) => ({
-    [section.topAt('container-top')]: {
-      translateZ: data.initialZ
-    },
-    [section.bottomAt('container-bottom')]: {
-      translateZ: data.initialZ + 510
     }
   }),
   footerText: ({ section }) => ({
@@ -53,15 +38,8 @@ const keyframes: Record<string, Keyframes> = {
 }
 
 export default function App({
-  images
-}: {
-  images: {
-    x: number
-    y: number
-    z: number
-    src: string
-  }[]
-}) {
+  bg
+}: ExtractPromise<ReturnType<typeof getStaticProps>>['props']) {
   const [bio, setBio] = useState(false)
 
   return (
@@ -69,15 +47,20 @@ export default function App({
       scrollAxis="y"
       className="h-screen w-screen text-green-500 bg-gray-900">
       <Scroll.Section className="h-screen relative">
-        <Scroll.Item
-          keyframes={keyframes.headerImage}
-          className="absolute inset-0">
+        <div className="absolute inset-0">
           <img
-            alt="bg"
             className="object-cover filter blur-lg h-full w-full transform scale-125"
-            src="/images/graded/P1530184.jpeg"
+            alt="bg"
+            src={bg}
           />
-        </Scroll.Item>
+          {/* <Img
+            placeholder="blur"
+            {...bg.img}
+            blurDataURL={bg.base64}
+            quality={40}
+            className="object-cover filter blur-lg h-full w-full transform scale-125"
+          /> */}
+        </div>
         <div className="flex w-full px-8 lg:py-0 py-8 h-full justify-center items-center">
           <Scroll.Item keyframes={keyframes.headerText}>
             <p className="text-9xl backdrop-blur-md	 filter text-gray-50 text-opacity-75">
@@ -138,28 +121,6 @@ export default function App({
               </p>
             </Scroll.Item>
           </Scroll.Item>
-        </div>
-      </Scroll.Section>
-      <Scroll.Section style={{ height: '500vh' }}>
-        <div
-          className="sticky top-0 h-screen overflow-hidden"
-          style={{ perspective: 600 }}>
-          {images.map(image => {
-            return (
-              <Scroll.Item
-                key={image.src}
-                keyframes={keyframes.galleryImage}
-                className="absolute inset-0 grid  place-items-center"
-                style={{ left: image.x, top: image.y }}
-                data={{ initialZ: image.z }}>
-                <img
-                  alt="scroll"
-                  src={image.src}
-                  className="object-cover h-64"
-                />
-              </Scroll.Item>
-            )
-          })}
         </div>
       </Scroll.Section>
 
@@ -232,7 +193,7 @@ export default function App({
                     <div className="absolute pointer-events-none inset-0 bg-indigo-500 mix-blend-multiply" />
                     <img
                       className="absolute pointer-events-none inset-0 h-full w-full object-cover"
-                      src="/images/graded/P1520366.jpeg"
+                      src="/images/home/P1520366.jpeg"
                       alt="headshot"
                     />
                     <div className="absolute pointer-events-none inset-0 bg-gradient-to-t from-indigo-600 via-indigo-600 opacity-50" />
@@ -383,37 +344,50 @@ export const getStaticProps = async () => {
       x: -600,
       y: -500,
       z: -200,
-      src: `/images/graded/P1530278.jpeg`
+      src: `/images/home/P1530278.jpeg`
     },
     {
       x: 600,
       y: -500,
       z: -100,
-      src: `/images/graded/P1520287.jpeg`
+      src: `/images/home/P1520287.jpeg`
     },
     {
       x: 0,
       y: -100,
       z: 0,
-      src: `/images/graded/P1520002.jpeg`
+      src: `/images/home/P1520002.jpeg`
     },
     {
       x: -450,
       y: 300,
       z: 100,
-      src: `/images/graded/P1530790.jpeg`
+      src: `/images/home/P1530790.jpeg`
     },
     {
       x: 400,
       y: 250,
       z: 200,
-      src: `/images/graded/P1540095.jpeg`
+      src: `/images/home/P1540095.jpeg`
     }
   ]
 
+  // const bg = await getPlaiceholder('/images/home/P1530184.jpeg')
+
+  // const imageData = await Promise.all(
+  //   scrollImages.map(img => getPlaiceholder(img.src))
+  // )
+
+  // const images = imageData.map((img, i) => {
+  //   return { ...img, ...scrollImages[i] }
+  // })
+
+  const bg = '/images/home/P1530184.jpeg'
+
   return {
     props: {
-      images: scrollImages
+      images: scrollImages,
+      bg
     }
   }
 }

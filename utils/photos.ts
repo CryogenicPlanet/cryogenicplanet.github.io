@@ -15,12 +15,12 @@ const statPromise = (src: string) => {
   })
 }
 
-type ExtractPromise<T> = T extends Promise<infer U> ? U : T
+export type ExtractPromise<T> = T extends Promise<infer U> ? U : T
 
 export type Photos = ExtractPromise<ReturnType<typeof getAllImages>>
 
 export const getAllImages = async () => {
-  const dirRelativeToPublicFolder = 'images/graded'
+  const dirRelativeToPublicFolder = 'images/mozJpeg'
 
   const dir = path.resolve('./public', dirRelativeToPublicFolder)
 
