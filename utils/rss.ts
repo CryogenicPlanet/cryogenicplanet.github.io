@@ -32,8 +32,6 @@ export const generateRssFeed = async (posts: Post[]) => {
 
     const html = await (await axios.get(url)).data
 
-    // console.log(html)
-
     feed.addItem({
       title: post.name,
       id: url,

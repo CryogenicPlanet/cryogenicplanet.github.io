@@ -1,15 +1,10 @@
-import Blobity from 'blobity'
-
-import { defaultConfig } from '@components/Blobity'
 import { autoEffect, store } from '@risingstack/react-easy-state'
 
-const state = store({
+const state = store<{ dark: boolean }>({
   dark:
     (typeof window !== 'undefined' &&
       window.localStorage.getItem('darkMode') === 'true') ||
-    false,
-  blobity: typeof window === 'undefined' ? null : new Blobity(defaultConfig),
-  noGlobalBlobity: false
+    true
 })
 
 export { state }

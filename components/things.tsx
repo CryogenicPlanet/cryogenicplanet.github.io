@@ -2,11 +2,9 @@ import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
-import A from '@components/Blobity'
 import Layout from '@components/Layout'
 import { thingBadgeColors, things, thingTypes } from '@data/things'
 import { view } from '@risingstack/react-easy-state'
-import { state } from '@utils/store'
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ')
@@ -50,10 +48,9 @@ const Things = ({ filter }: { filter?: string }) => {
         <div className="max-w-2xl mx-auto px-4 space-y-6 sm:px-6 lg:px-8 w-full flex flex-col justify-center items-center">
           <div className="w-full">
             <Link href="/" passHref>
-              <A
-                nextLink={true}
+              <a
                 className="text-gray-800 dark:text-gray-50 pr-3 font-inter text-lg font-medium"
-                href="/">{`<< Home`}</A>
+                href="/">{`<< Home`}</a>
             </Link>
           </div>
 
@@ -75,7 +72,7 @@ const Things = ({ filter }: { filter?: string }) => {
                     className="capitalize"
                     key={tab.name}
                     value={tab.name}>
-                    {`${tab.name[0].toUpperCase()}${tab.name.slice(1)}`}
+                    {`${tab.name[0]?.toUpperCase()}${tab.name.slice(1)}`}
                   </option>
                 ))}
               </select>
@@ -89,7 +86,7 @@ const Things = ({ filter }: { filter?: string }) => {
 
                   return (
                     <Link href={tab.href} passHref key={tab.name}>
-                      <A
+                      <a
                         href={tab.href}
                         className={classNames(
                           current
@@ -108,7 +105,7 @@ const Things = ({ filter }: { filter?: string }) => {
                             'absolute inset-x-0 bottom-0 h-0.5'
                           )}
                         />
-                      </A>
+                      </a>
                     </Link>
                   )
                 })}
@@ -122,18 +119,13 @@ const Things = ({ filter }: { filter?: string }) => {
               <div className="flex flex-col w-full space-y-1" key={index}>
                 <div className="w-full flex space-x-2 items-center">
                   <div className="hidden bg-red-100 bg-blue-100 bg-green-100 text-green-800 text-red-800 text-blue-800 bg-orange-100 text-orange-800"></div>
-                  <A
-                    dataOptions={{ radius: 16, xOffset: 10, yOffset: 10 }}
-                    enterOptions={{
-                      color: badgeColors.bgHex,
-                      opacity: state.dark ? 0.1 : 0.5
-                    }}
+                  <a
                     className="text-gray-800  dark:text-gray-50  font-inter text-xl font-medium"
                     target="_blank"
                     rel="noreferrer"
                     href={thing.url}>
                     {thing.title}
-                  </A>
+                  </a>
 
                   <span
                     className={`inline-flex capitalize items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-yellow-800 bg-yellow-100 `}>
@@ -145,11 +137,7 @@ const Things = ({ filter }: { filter?: string }) => {
                     {thing.type}
                   </span>
                   {thing.sourceUrl && (
-                    <A
-                      dataOptions={{ magnetic: false }}
-                      target="_blank"
-                      rel="noreferrer"
-                      href={thing.sourceUrl}>
+                    <a target="_blank" rel="noreferrer" href={thing.sourceUrl}>
                       <svg
                         className="h-[20px] w-auto text-gray-900 dark:text-gray-200"
                         viewBox="0 0 128 128">
@@ -161,7 +149,7 @@ const Things = ({ filter }: { filter?: string }) => {
                           <path d="M26.484 91.806c-.133.3-.605.39-1.035.185-.44-.196-.685-.605-.543-.906.13-.31.603-.395 1.04-.188.44.197.69.61.537.91zm-.743-.55M28.93 94.535c-.287.267-.85.143-1.232-.28-.396-.42-.47-.983-.177-1.254.298-.266.844-.14 1.24.28.394.426.472.984.17 1.255zm-.575-.618M31.312 98.012c-.37.258-.976.017-1.35-.52-.37-.538-.37-1.183.01-1.44.373-.258.97-.025 1.35.507.368.545.368 1.19-.01 1.452zm0 0M34.573 101.373c-.33.365-1.036.267-1.552-.23-.527-.487-.674-1.18-.343-1.544.336-.366 1.045-.264 1.564.23.527.486.686 1.18.333 1.543zm0 0M39.073 103.324c-.147.473-.825.688-1.51.486-.683-.207-1.13-.76-.99-1.238.14-.477.823-.7 1.512-.485.683.206 1.13.756.988 1.237zm0 0M44.016 103.685c.017.498-.563.91-1.28.92-.723.017-1.308-.387-1.315-.877 0-.503.568-.91 1.29-.924.717-.013 1.306.387 1.306.88zm0 0M48.614 102.903c.086.485-.413.984-1.126 1.117-.7.13-1.35-.172-1.44-.653-.086-.498.422-.997 1.122-1.126.714-.123 1.354.17 1.444.663zm0 0"></path>
                         </g>
                       </svg>
-                    </A>
+                    </a>
                   )}
                 </div>
                 <div className="w-full flex px-2 items-center">

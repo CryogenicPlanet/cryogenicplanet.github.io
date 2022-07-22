@@ -1,15 +1,12 @@
 import Link from 'next/link'
 import React from 'react'
 
-import A from '@components/Blobity'
 import Layout from '@components/Layout'
 import { postBadgeColors, posts as defaultPosts } from '@data/posts'
 import { view } from '@risingstack/react-easy-state'
 import { getAllPosts } from '@utils/blog'
-import { state } from '@utils/store'
 
 const Posts = ({ posts }: { posts: typeof defaultPosts }) => {
-  console.log({ dark: state.dark })
   return (
     <Layout title="Posts | Rahul Tarak">
       <div className="py-10 ">
@@ -27,9 +24,9 @@ const Posts = ({ posts }: { posts: typeof defaultPosts }) => {
         <div className="max-w-2xl mx-auto px-4 space-y-4 sm:px-6 lg:px-8 w-full flex flex-col justify-center items-center">
           <div className="w-full">
             <Link href="/" passHref>
-              <A
+              <a
                 className="text-gray-800 dark:text-gray-50 pr-3 font-inter text-lg font-medium"
-                href="/">{`<< Home`}</A>
+                href="/">{`<< Home`}</a>
             </Link>
           </div>
           {posts.map((post, index) => {
@@ -40,31 +37,20 @@ const Posts = ({ posts }: { posts: typeof defaultPosts }) => {
                 <div className="hidden bg-red-100 bg-blue-100 bg-green-100 text-green-800 text-red-800 text-blue-800"></div>
                 {post.local ? (
                   <Link href={post.url} passHref>
-                    <A
-                      dataOptions={{ radius: 8, xOffset: 10, yOffset: 10 }}
-                      enterOptions={{
-                        color: badgeColors.bgHex,
-                        opacity: state.dark ? 0.1 : 0.5
-                      }}
-                      nextLink={true}
+                    <a
                       className="text-gray-800 z-10 dark:text-gray-50 pr-3 font-inter text-lg font-medium"
                       href={post.url}>
                       {post.title}
-                    </A>
+                    </a>
                   </Link>
                 ) : (
-                  <A
-                    dataOptions={{ radius: 8, xOffset: 19, yOffset: 10 }}
-                    enterOptions={{
-                      color: badgeColors.bgHex,
-                      opacity: state.dark ? 0.1 : 0.5
-                    }}
+                  <a
                     target="_blank"
                     rel="noreferrer"
                     className="text-gray-800 z-10 dark:text-gray-50 pr-3 font-inter text-lg font-medium"
                     href={post.url}>
                     {post.title}
-                  </A>
+                  </a>
                 )}
 
                 <span

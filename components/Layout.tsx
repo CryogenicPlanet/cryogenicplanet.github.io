@@ -1,10 +1,9 @@
 import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
 
-import A, { Button } from '@components/Blobity'
 import { navigation } from '@data/navigation'
 import { MoonIcon, SunIcon } from '@heroicons/react/solid'
 import { view } from '@risingstack/react-easy-state'
@@ -27,11 +26,6 @@ const Layout = ({
   skipSeo,
   description
 }: Props) => {
-  useEffect(() => {
-    const dark = window.localStorage.getItem('darkMode')
-    state.dark = dark === 'true'
-  }, [])
-
   const router = useRouter()
 
   return (
@@ -62,7 +56,7 @@ const Layout = ({
                   `https://og.railway.app/api/image?fileType=png&layoutName=Simple&Text=${
                     router.pathname === '/'
                       ? 'Rahul+Tarak'
-                      : `${router.pathname[1].toUpperCase()}${router.pathname.slice(
+                      : `${router.pathname[1]?.toUpperCase()}${router.pathname.slice(
                           2
                         )}+%7C+Rahul+Tarak`
                   }`
@@ -93,34 +87,33 @@ const Layout = ({
                 <div key={item.name} className="px-5 py-2">
                   {item.local ? (
                     <Link href={item.href} passHref>
-                      <A
+                      <a
                         href={item.href}
                         className="text-base text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-50">
                         {item.name}
-                      </A>
+                      </a>
                     </Link>
                   ) : (
-                    <A
+                    <a
                       href={item.href}
                       className="text-base text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-50">
                       {item.name}
-                    </A>
+                    </a>
                   )}
                 </div>
               ))}
             </nav>
             <div className="mt-8 flex justify-center space-x-6">
               {navigation.social.map(item => (
-                <A
+                <a
                   key={item.name}
                   href={item.href}
                   target="_blank"
                   rel="noreferrer"
-                  dataOptions={{ radius: 20 }}
                   className="text-gray-400 hover:text-gray-500  dark:hover:text-gray-50">
                   <span className="sr-only">{item.name}</span>
                   <item.icon className="h-6 w-6" aria-hidden="true" />
-                </A>
+                </a>
               ))}
             </div>
             <p className="mt-8 text-center text-base text-gray-400">
@@ -129,23 +122,17 @@ const Layout = ({
 
             <p className="mt-2 text-center  text-gray-500 text-xs">
               if you are looking for my old more flashy website, checkout {` `}
-              <A className="underline" href="https://old.cryogenicplanet.tech">
+              <a className="underline" href="https://old.cryogenicplanet.tech">
                 old.cryogenicplanet.tech
-              </A>
+              </a>
             </p>
           </div>
         </footer>
 
         <div className="fixed bottom-2 right-2">
-          <Button
-            dataOptions={{
-              magnetic: false,
-              radius: 20,
-              xOffset: 0,
-              yOffset: 0
-            }}
+          <button
             onClick={() => {
-              state.dark = !state.dark
+              // state.dark = !state.dark
             }}
             type="button"
             className="inline-flex items-center p-2 border transition-colors duration-500 border-transparent rounded-full shadow-sm text-white bg-gray-900 dark:bg-gray-50 dark:text-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -154,7 +141,7 @@ const Layout = ({
             ) : (
               <MoonIcon className="h-7 w-7" />
             )}
-          </Button>
+          </button>
         </div>
       </div>
     </div>

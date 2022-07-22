@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
 
-import A from '@components/Blobity'
 import Layout from '@components/Layout'
 import { SmallRatingComponent } from '@components/Rating'
 import { Movie } from '@interfaces/index'
@@ -23,23 +22,22 @@ const Movies = ({ reviews }: { reviews: Movie[] }) => {
             <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
               This is a list of movie {`I've`} watched rated in my new{' '}
               <Link href="/posts/rating">
-                <A
-                  dataOptions={{ radius: 8, xOffset: 10, yOffset: 10 }}
-                  nextLink={true}
+                <a
+                  href="/posts/rating"
                   className="text-gray-800 underline z-10 dark:text-gray-50 pr-3 font-inter text-lg font-medium">
                   rating format
-                </A>
+                </a>
               </Link>
             </p>
             <p className="max-w-xl mx-auto text-base text-gray-500">
               Started properly tracking since 2020, more movies on my{' '}
-              <A
+              <a
                 target="_blank"
-                dataOptions={{ radius: 4 }}
                 href="https://letterboxd.com/CryogenicPlanet/"
-                className="text-gray-800 underline z-10 dark:text-gray-50 pr-3 font-inter text-base font-medium">
+                className="text-gray-800 underline z-10 dark:text-gray-50 pr-3 font-inter text-base font-medium"
+                rel="noreferrer">
                 letterbox
-              </A>
+              </a>
             </p>
           </div>
         </div>

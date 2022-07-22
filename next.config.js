@@ -1,4 +1,5 @@
 module.exports = {
+  experimental: { images: { allowFutureImage: true } },
   // Target must be serverless
   async rewrites() {
     return [
