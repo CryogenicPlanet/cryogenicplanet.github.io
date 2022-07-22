@@ -219,6 +219,40 @@ The short film was made for the India film project season 8. It was a part of th
     type: 'technical',
     sourceUrl: 'https://github.com/modfy/go-fluent-ffmpeg',
     description: ' A Go implementation of fluent-ffmpeg '
+  },
+  {
+    title: 'Depp',
+    url: 'https://github.com/CryogenicPlanet/depp',
+    year: 2021,
+    type: 'technical',
+    sourceUrl: 'https://github.com/CryogenicPlanet/depp',
+    description:
+      '⚡ Check your npm modules for unused and duplicate dependencies fast'
+  },
+  {
+    title: 'Testickle',
+    url: 'https://twitter.com/zack_overflow/status/1496096037211103232?s=20&t=v2pox-AYruZuHOdeFPumMA',
+    year: 2022,
+    type: 'technical',
+    sourceUrl: 'https://testickle.vercel.app/',
+    description:
+      'Testickle is a blazing faster typescript/javascript test runner built on esbuild'
+  },
+  {
+    title: 'Fenster',
+    url: 'https://github.com/CryogenicPlanet/fenster',
+    year: 2022,
+    type: 'technical',
+    sourceUrl: 'https://github.com/CryogenicPlanet/fenster',
+    description: 'Sane macos spaces'
+  },
+  {
+    title: 'Stellage',
+    url: 'https://stellage.vercel.app',
+    year: 2022,
+    type: 'technical',
+    description:
+      'Staging management tool for vercel - verify, promote and rollback environments'
   }
 ]
 
