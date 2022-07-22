@@ -1,4 +1,3 @@
-import Blobity from 'blobity'
 import { GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 import { NotionAPI } from 'notion-client'
@@ -6,10 +5,9 @@ import {
   CalloutBlock as CalloutBlockType,
   ExtendedRecordMap
 } from 'notion-types'
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { CopyBlock, tomorrowNight } from 'react-code-blocks'
 
-import { defaultConfig } from '@components/Blobity'
 import Layout from '@components/Layout'
 import PostTitle from '@components/PostTitle'
 import RatingComponent from '@components/Rating'
@@ -30,7 +28,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   try {
     const posts = await getAllPosts()
-    console.log({ posts, slug })
 
     // Find the current blogpost by slug
     const postIndex = posts.findIndex(t => t.slug === slug)
@@ -63,7 +60,7 @@ const CalloutBlock = ({ block }: { block: CalloutBlockType }) => {
 
   if (!icon) return null
 
-  const text = block.properties.title[0][0]
+  const text = block.properties.title[0]![0]!
   const lines = text.split('\n')
 
   const rating: Rating = { Enjoyment: '', Disappointment: '', Quality: '' }
@@ -117,19 +114,6 @@ const BlogPost: FC<{
   post: Post
   ogImage: string
 }) => {
-  useEffect(() => {
-    state.blobity?.destroy()
-    console.log('Destroyed blobity')
-    state.blobity = null
-    state.noGlobalBlobity = true
-
-    return () => {
-      console.log('Created blobity')
-      state.blobity = new Blobity(defaultConfig)
-      state.noGlobalBlobity = false
-    }
-  }, [])
-
   if (!post) return null
 
   return (
