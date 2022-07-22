@@ -81,15 +81,15 @@ export default function App({
         <div className="flex w-full px-8 lg:py-0 py-8 h-full justify-center items-center">
           <Scroll.Item keyframes={keyframes.headerText}>
             <p className="text-9xl backdrop-blur-md	 filter text-gray-50 text-opacity-75">
-              Hey, I'm Rahul
+              Hey, {`I'm`} Rahul
             </p>
 
             <Scroll.Item
               data={{ index: 0 }}
               keyframes={keyframes.staggeredItem}>
               <p className="text-3xl backdrop-blur-md py-4 filter text-gray-50 text-opacity-75">
-                I'm a founder, engineer, photography, filmmaker and technologist
-                - this is my little corner of the internet.
+                {`I'm`} a founder, engineer, photography, filmmaker and
+                technologist - this is my little corner of the internet.
               </p>
             </Scroll.Item>
             <Scroll.Item
@@ -261,12 +261,12 @@ const Bio = () => {
         narcissistic?)
       </p>
       <p className="text-left">
-        I've already given the TLDR of who I am, but this is just diving a bit
-        deeper. I am a 21 year old (at the time of writing) dropout building a
-        startup.
+        {`I've`} already given the TLDR of who I am, but this is just diving a
+        bit deeper. I am a 21 year old (at the time of writing) dropout building
+        a startup.
       </p>
       <p className="text-left">
-        I've been writing code for as long as I can remember (probably about
+        {`I've`} been writing code for as long as I can remember (probably about
         9-10 years now), I used to spend a lot of time building random shit and
         losing hackathons. I love writing code as it allows me to break out of
         systems and really express myself (a bit cliche I know)
@@ -286,7 +286,7 @@ const Bio = () => {
           in high school on Ozone concentration
         </p>
         <p>
-          - I founded Bangalore's first overnight highschool{' '}
+          - I founded {`Bangalore's`} first overnight highschool{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"

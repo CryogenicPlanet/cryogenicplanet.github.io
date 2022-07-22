@@ -134,8 +134,6 @@ export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
 
     const currentImage = images[intId]
 
-    console.log({ intId, currentImage })
-
     if (!currentImage) {
       return { props: { notFound: true } }
     }
