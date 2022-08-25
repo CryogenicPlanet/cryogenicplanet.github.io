@@ -112,14 +112,14 @@ export const SmallRatingComponent = ({ rating }: { rating: Rating }) => {
 
   if (!enjoyment || !quality)
     return (
-      <p className="text-xs text-gray-500">This movie has not been rated</p>
+      <p className="text-xs text-gray-400">This movie has not been rated</p>
     )
 
   return (
     <div className="flex w-full flex-col space-y-4">
       <div>
         <h4 className="sr-only">Status</h4>
-        <p className="text-xs font-medium text-gray-900">Quality ({quality})</p>
+        <p className="text-xs font-medium text-gray-300">Quality ({quality})</p>
         <div className="mt-1" aria-hidden="true">
           <div className="flex bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 rounded-full overflow-hidden">
             <div
@@ -132,7 +132,7 @@ export const SmallRatingComponent = ({ rating }: { rating: Rating }) => {
       </div>
       <div>
         <h4 className="sr-only">Status</h4>
-        <p className="text-xs font-medium text-gray-900 ">
+        <p className="text-xs font-medium text-gray-300 ">
           Enjoyment ({enjoyment})
         </p>
         <div className="mt-1" aria-hidden="true">
@@ -148,7 +148,7 @@ export const SmallRatingComponent = ({ rating }: { rating: Rating }) => {
       {disappointment !== 0 && (
         <div>
           <h4 className="sr-only">Status</h4>
-          <p className="text-xs font-medium text-gray-900">
+          <p className="text-xs font-medium text-gray-300">
             Disappointment ({disappointment})
           </p>
           <div className="mt-1" aria-hidden="true">
@@ -170,7 +170,7 @@ export const SmallRatingComponent = ({ rating }: { rating: Rating }) => {
           </div>
         </div>
       )}
-      <p className="text-base font-medium text-gray-900">
+      <p className="text-base font-medium text-gray-300">
         Score <span className="font-semibold">{(score * 100).toFixed(0)}%</span>
       </p>
     </div>

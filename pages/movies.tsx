@@ -1,13 +1,35 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import Layout from '@components/Layout'
+import { PlatformTag, RewatchTag, WhereWatchTag } from '@components/Movie'
 import { SmallRatingComponent } from '@components/Rating'
+import { Disclosure } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/outline'
 import { Movie } from '@interfaces/index'
 import { view } from '@risingstack/react-easy-state'
 import { getAllMovies } from '@utils/blog'
 
 const Movies = ({ reviews }: { reviews: Movie[] }) => {
+  const uniqueMovies = useMemo(
+    () => Array.from(new Set(reviews.map(review => review.Name.toUpperCase()))),
+    [reviews]
+  )
+
+  const firstWatch = reviews.filter(review => review.Rewatch !== true)
+  const reWatch = reviews.filter(review => review.Rewatch === true)
+
+  const atTheatre = reviews.filter(
+    review =>
+      review['Device/Location'] === '🪑Theatre' ||
+      review['Device/Location'] === '💺Imax' ||
+      review['Device/Location'] === '🛋️ Private theatre'
+  )
+
+  const twentyTwentyTwo = reviews.filter(
+    review => review['2022 Release'] === true
+  )
+
   return (
     <Layout
       title="Movies | Rahul Tarak"
@@ -39,50 +61,115 @@ const Movies = ({ reviews }: { reviews: Movie[] }) => {
                 letterbox
               </a>
             </p>
+
+            <Disclosure>
+              <Disclosure.Button className="max-w-3xl mt-2 mx-auto text-base text-gray-500 flex space-x-2">
+                So far this year {`I've`} seen {reviews.length} movies.
+                <span className="flex pl-2 hover:text-gray-300 items-center space-x-2">
+                  More stats
+                  <ChevronDownIcon className="w-4 h-4"></ChevronDownIcon>
+                </span>
+              </Disclosure.Button>
+              <Disclosure.Panel className="text-gray-500 flex flex-col text-left justify-start max-w-xl mx-auto px-20">
+                <p className="max-w-xl mt-2 text-base text-gray-400">
+                  Out of which {uniqueMovies.length} are unique.
+                </p>
+
+                <p className="max-w-xl mt-2 text-base text-gray-400">
+                  {firstWatch.length} are movies {`I've`} watched for the first
+                  time this year
+                </p>
+                <p className="max-w-xl mt-2 text-base text-gray-400">
+                  {reWatch.length} are movies I rewatched this year.
+                </p>
+                <p className="max-w-xl mt-2 text-base text-gray-400">
+                  {atTheatre.length} are movies I watched in a theatre out of
+                  the {twentyTwentyTwo.length} movies I watched released this
+                  year
+                </p>
+              </Disclosure.Panel>
+            </Disclosure>
           </div>
         </div>
         <div className="max-w-5xl mx-auto px-4 space-y-4 sm:px-6 lg:px-8 w-full flex flex-col justify-center items-center">
           <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 overflow-hidden">
             {reviews.map((review, index) => {
               const date = new Date(review.Seen)
-
               return (
                 <li
-                  className="col-span-1 bg-white flex flex-col items-center w-full rounded-lg shadow divide-y divide-gray-200"
+                  className="col-span-1 bg-zinc-800 flex flex-col items-center w-full rounded-lg shadow divide-y divide-zinc-700 divide-opacity-50"
                   key={index}>
-                  <div className="w-full flex flex-col items-center justify-between p-6 space-y-2">
-                    <img
-                      className="aspect-w-16 max-w-[248px]"
-                      src={review.poster}
-                      alt=""
-                    />
-                    <div className="flex-1 w-full">
-                      <div className="flex justify-start items-center space-x-3">
-                        <h3 className="text-gray-900 text-sm font-medium truncate">
-                          {review.Name}
-                        </h3>
+                  <Link href={`/movies/${review.Name}/${review.id}`} passHref>
+                    <a
+                      href={`/movies/${review.Name}/${review.id}`}
+                      className="col-span-1 bg-zinc-800 flex flex-col items-center w-full rounded-lg shadow divide-y divide-zinc-700 divide-opacity-50">
+                      <div className="w-full flex flex-col items-center justify-between p-6 space-y-2">
+                        <img
+                          className="aspect-w-16 max-w-[248px]"
+                          src={review.poster}
+                          alt=""
+                        />
+                        <div className="flex-1 w-full">
+                          <div className="flex justify-start items-center space-x-3">
+                            <h3 className="text-gray-300 text-sm font-medium truncate">
+                              {review.Name}
+                            </h3>
+                          </div>
+                        </div>
+                        <div className="flex-1 w-full">
+                          <div className="flex justify-start items-center space-x-3">
+                            <h3 className="text-gray-400 text-sm font-medium truncate">
+                              {date.toLocaleString('default', {
+                                month: 'long'
+                              })}{' '}
+                              {date.getFullYear()}
+                            </h3>
+                          </div>
+                        </div>
+                        <div className="flex-1 w-full">
+                          <div className="flex justify-start items-center space-x-3">
+                            <h3 className="text-gray-900 text-sm font-medium truncate">
+                              <RewatchTag reWatch={review.Rewatch}></RewatchTag>
+                            </h3>
+                          </div>
+                        </div>
+                        <div className="flex-1 w-full">
+                          <div className="flex justify-start items-center space-x-3">
+                            <h3 className="text-gray-400 text-sm font-medium truncate">
+                              <PlatformTag
+                                platform={
+                                  review['Device/Location']
+                                }></PlatformTag>
+                            </h3>
+                          </div>
+                        </div>
+
+                        <div className="flex-1 w-full">
+                          <div className="flex justify-start items-center space-x-3">
+                            <h3 className="text-gray-400 text-sm font-medium  flex space-x-2 overflow-auto">
+                              {review['Where did you watch'].map(
+                                (where, index) => {
+                                  return (
+                                    <WhereWatchTag
+                                      key={index}
+                                      platform={where}></WhereWatchTag>
+                                  )
+                                }
+                              )}
+                            </h3>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex-1 w-full">
-                      <div className="flex justify-start items-center space-x-3">
-                        <h3 className="text-gray-900 text-sm font-medium truncate">
-                          {date.toLocaleString('default', { month: 'long' })}{' '}
-                          {date.getFullYear()}
-                        </h3>
-                        <span className="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">
-                          {review.Rewatch ? 'Rewatch' : 'First Watch'}
-                        </span>
+                      <div className="w-full">
+                        <div className="-mt-px p-4 flex divide-x divide-zinc-800">
+                          {review.Tier !== 'Meta' && (
+                            <SmallRatingComponent
+                              rating={{ ...review }}></SmallRatingComponent>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="w-full">
-                    <div className="-mt-px p-4 flex divide-x divide-gray-200">
-                      {review.Tier !== 'Meta' && (
-                        <SmallRatingComponent
-                          rating={{ ...review }}></SmallRatingComponent>
-                      )}
-                    </div>
-                  </div>
+                    </a>
+                  </Link>
                 </li>
               )
             })}

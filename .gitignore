@@ -38,3 +38,5 @@ yarn-error.log*
 .netlify
 public/files/.pnpm-debug.log
 public/rss
+temp.json
+colors.json
