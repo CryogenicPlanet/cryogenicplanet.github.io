@@ -4,11 +4,11 @@ import React from 'react'
 
 export default function Document() {
   return (
-    <Html>
+    <Html className="h-full antialiased" lang="en">
       <Head>
         <GoogleAnalytics id="UA-159985130-1" />
       </Head>
-      <body>
+      <body className="flex h-full flex-col bg-black dark">
         <Main />
         <NextScript />
       </body>
