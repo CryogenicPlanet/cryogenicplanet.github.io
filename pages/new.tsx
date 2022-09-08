@@ -11,6 +11,7 @@ import { linearInterpolation } from 'simple-linear-interpolation'
 import { Button } from '@components/Button'
 import { Card } from '@components/Card'
 import { clamp } from '@components/Header'
+import { RewatchTag } from '@components/Movie'
 import { TinyRatingComponent } from '@components/Rating'
 import { GitHubIcon, LinkedInIcon, TwitterIcon } from '@components/SocialIcons'
 import {
@@ -32,7 +33,7 @@ function clsx(...classes: any[]) {
 }
 
 export function formatDate(dateString: string) {
-  return new Date(`${dateString}T00:00:00Z`).toLocaleDateString('en-US', {
+  return new Date(dateString).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -88,7 +89,7 @@ function Posts({ post }: { post: Post }) {
   return (
     <Card as="article">
       <Card.Title href={`/post/${post.slug}`}>{post.name}</Card.Title>
-      <Card.Eyebrow as="time" dateTime={post.date} decorate>
+      <Card.Eyebrow as="time" decorate>
         {formatDate(post.date)}
       </Card.Eyebrow>
       <Card.Description>{post.preview}</Card.Description>
@@ -104,6 +105,7 @@ function SocialLink({
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
+    // @ts-expect-error
     <Link className="group -m-1 p-1" {...props}>
       <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
     </Link>
@@ -145,7 +147,6 @@ function Movies({ movies }: { movies: Movie[] }) {
       </a>
       <ol className="mt-6 space-y-4">
         {movies.map((movie, roleIndex) => {
-          const date = new Date(movie.Seen)
           return (
             <li key={roleIndex} className="flex gap-4 ">
               <a
@@ -155,10 +156,7 @@ function Movies({ movies }: { movies: Movie[] }) {
                   <dt className="sr-only">Title</dt>
                   <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
                     {movie.Name} -{' '}
-                    <span className="text-xs">
-                      {date.toLocaleString('default', { month: 'long' })}{' '}
-                      {date.getFullYear()}
-                    </span>
+                    <RewatchTag reWatch={movie.Rewatch}></RewatchTag>
                   </dd>
                 </dl>
                 <TinyRatingComponent rating={movie}></TinyRatingComponent>
@@ -350,6 +348,7 @@ export default function Home({
               <div
                 className="sm:px-8"
                 style={{
+                  // @ts-expect-error
                   position: 'var(--header-position)'
                 }}>
                 <div className="mx-auto max-w-7xl lg:px-8">

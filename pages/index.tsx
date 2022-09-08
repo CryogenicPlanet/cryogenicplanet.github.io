@@ -1,337 +1,450 @@
 import copy from 'copy-to-clipboard'
+import Image from 'next/future/image'
+import Head from 'next/head'
 import Link from 'next/link'
-import * as React from 'react'
-import { useState } from 'react'
+import React, { useEffect, useRef } from 'react'
+import { isMobile } from 'react-device-detect'
 import toast from 'react-hot-toast'
-import { Keyframes, Scroll } from 'scrollex'
+// import { Card } from '@components/Card'
+import { linearInterpolation } from 'simple-linear-interpolation'
 
-import Layout from '@components/Layout'
-import { navigation } from '@data/navigation'
-import { Transition } from '@headlessui/react'
-import type { ExtractPromise } from '@utils/photos'
+import { Button } from '@components/Button'
+import { Card } from '@components/Card'
+import { clamp } from '@components/Header'
+import { RewatchTag } from '@components/Movie'
+import { TinyRatingComponent } from '@components/Rating'
+import { GitHubIcon, LinkedInIcon, TwitterIcon } from '@components/SocialIcons'
+import {
+  CameraIcon,
+  FilmIcon,
+  LinkIcon,
+  WrenchScrewdriverIcon
+} from '@heroicons/react/24/outline'
+import image5 from '@images/home/beach.jpeg'
+import image4 from '@images/home/boat.jpeg'
+import avatarImage from '@images/home/headshot.jpeg'
+import image2 from '@images/home/stark.jpeg'
+import image3 from '@images/home/sunset.jpeg'
+import { Movie, Post } from '@interfaces/index'
+import { getAllMovies, getAllPosts } from '@utils/blog'
 
-const keyframes: Record<string, Keyframes> = {
-  headerText: ({ section }) => ({
-    [section.topAt('container-top')]: {
-      translateY: 200
-    },
-    [section.bottomAt('container-top')]: {
-      translateY: -200
-    }
-  }),
-  footerText: ({ section }) => ({
-    [section.topAt('container-bottom')]: {
-      translateY: 200
-    },
-    [section.bottomAt('container-bottom')]: {
-      translateY: 0
-    }
-  }),
-  staggeredItem: ({ data }) => ({
-    [data.index * 150]: {
-      opacity: 0
-    },
-    [data.index * 150 + 1]: {
-      opacity: 1
-    }
+function clsx(...classes: any[]) {
+  return classes.filter(Boolean).join(' ')
+}
+
+export function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC'
   })
 }
 
-export default function App({
-  bg
-}: ExtractPromise<ReturnType<typeof getStaticProps>>['props']) {
-  const [bio, setBio] = useState(false)
-
+function MailIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <Scroll.Container
-      scrollAxis="y"
-      className="h-screen w-screen text-green-500 bg-gray-900">
-      <Scroll.Section className="h-screen relative">
-        <div className="absolute inset-0">
-          <img
-            className="object-cover filter blur-lg h-full w-full transform scale-125"
-            alt="bg"
-            src={bg}
-          />
-          {/* <Img
-            placeholder="blur"
-            {...bg.img}
-            blurDataURL={bg.base64}
-            quality={40}
-            className="object-cover filter blur-lg h-full w-full transform scale-125"
-          /> */}
-        </div>
-        <div className="flex w-full px-8 lg:py-0 py-8 h-full justify-center items-center">
-          <Scroll.Item keyframes={keyframes.headerText}>
-            <p className="text-9xl backdrop-blur-md	 filter text-gray-50 text-opacity-75">
-              Hey, {`I'm`} Rahul
-            </p>
-
-            <Scroll.Item
-              data={{ index: 0 }}
-              keyframes={keyframes.staggeredItem}>
-              <p className="text-3xl backdrop-blur-md py-4 filter text-gray-50 text-opacity-75">
-                {`I'm`} a founder, engineer, photography, filmmaker and
-                technologist - this is my little corner of the internet.
-              </p>
-            </Scroll.Item>
-            <Scroll.Item
-              data={{ index: 1 }}
-              keyframes={keyframes.staggeredItem}>
-              <p className="text-2xl backdrop-blur-md filter text-gray-50 text-opacity-75">
-                Most of the time I am building my{' '}
-                <a className="underline" href="https://modfy.video">
-                  company
-                </a>
-                , when I am not, I hack on random{' '}
-                <Link href="/things" passHref>
-                  <a className="underline" href="/things">
-                    things
-                  </a>
-                </Link>{' '}
-                or take{' '}
-                <Link href="/photos" passHref>
-                  <a className="underline" href="/photos">
-                    photos.
-                  </a>
-                </Link>
-              </p>
-            </Scroll.Item>
-            <Scroll.Item
-              data={{ index: 2 }}
-              keyframes={keyframes.staggeredItem}>
-              <p className="text-xl backdrop-blur-md py-4 filter text-gray-50 text-opacity-75">
-                Occasionally, I{' '}
-                <Link href="/posts" passHref>
-                  <a className="underline" href="/posts">
-                    write my rambly thoughts
-                  </a>
-                </Link>{' '}
-                about things or talk about{' '}
-                <Link href="/movies" passHref>
-                  <a className="underline" href="/movies">
-                    the movies I love (or hate)
-                  </a>
-                </Link>
-                , sometimes even make{' '}
-                <a className="underline" href="https://youtube.com/">
-                  {' '}
-                  my own short films.
-                </a>
-              </p>
-            </Scroll.Item>
-          </Scroll.Item>
-        </div>
-      </Scroll.Section>
-
-      <Layout title="Rahul Tarak">
-        <div className="relative  py-16 sm:py-24">
-          <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">
-            <div className="relative sm:py-16 lg:py-0">
-              <div
-                aria-hidden="true"
-                className="hidden sm:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-screen">
-                <div className="absolute inset-y-0 right-1/2 w-full bg-transparent rounded-r-3xl lg:right-72" />
-                <svg
-                  className="absolute top-8 left-1/2 -ml-3 lg:-right-8 lg:left-auto lg:top-12"
-                  width={404}
-                  height={392}
-                  fill="none"
-                  viewBox="0 0 404 392">
-                  <defs>
-                    <pattern
-                      id="02f20b47-fd69-4224-a62a-4c9de5c763f7"
-                      x={0}
-                      y={0}
-                      width={20}
-                      height={20}
-                      patternUnits="userSpaceOnUse">
-                      <rect
-                        x={0}
-                        y={0}
-                        width={4}
-                        height={4}
-                        className="text-gray-300"
-                        fill="currentColor"
-                      />
-                    </pattern>
-                  </defs>
-                  <rect
-                    width={404}
-                    height={392}
-                    fill="url(#02f20b47-fd69-4224-a62a-4c9de5c763f7)"
-                  />
-                </svg>
-              </div>
-              <div className="relative mx-auto max-w-md px-4 flex justify-center items-center sm:max-w-3xl sm:px-6 lg:px-0 lg:max-w-none lg:py-20">
-                <button
-                  onClick={() => {
-                    setBio(c => !c)
-                  }}
-                  className="relative  w-full pb-10 rounded-2xl  overflow-hidden">
-                  <Transition
-                    show={bio}
-                    className="w-full h-full flex justify-center items-center"
-                    enter="transition-opacity duration-75 delay-200 ease-in-out"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="transition-opacity duration-150"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0">
-                    <Bio></Bio>
-                  </Transition>
-
-                  <Transition
-                    show={!bio}
-                    className="w-full h-full pt-64 shadow-xl"
-                    enter="transition-opacity duration-75 delay-150 ease-in-out"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="transition-opacity duration-150 ease-in-out"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0">
-                    <div className="absolute pointer-events-none inset-0 bg-indigo-500 mix-blend-multiply" />
-                    <img
-                      className="absolute pointer-events-none inset-0 h-full w-full object-cover"
-                      src="/images/home/P1520366.jpeg"
-                      alt="headshot"
-                    />
-                    <div className="absolute pointer-events-none inset-0 bg-gradient-to-t from-indigo-600 via-indigo-600 opacity-50" />
-                    <div className="relative px-8">
-                      <div></div>
-                      <div className="py-20"></div>
-                    </div>
-                  </Transition>
-                </button>
-              </div>
-            </div>
-
-            <Links></Links>
-          </div>
-        </div>
-      </Layout>
-    </Scroll.Container>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}>
+      <path
+        d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
+        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
+      />
+      <path
+        d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
+        className="stroke-zinc-400 dark:stroke-zinc-500"
+      />
+    </svg>
   )
 }
 
-const Bio = () => {
+function BriefcaseIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <div className="bg-white overflow-y-auto w-full h-full px-4 space-y-2 py-8 text-gray-900 flex flex-col items-start justify-center shadow-md rounded-lg max-w-md max-h-[500px] sm:max-w-3xl">
-      <p className="text-lg text-left">
-        This is just a bit more about me (slightly hidden so it is not as
-        narcissistic?)
-      </p>
-      <p className="text-left">
-        {`I've`} already given the TLDR of who I am, but this is just diving a
-        bit deeper. I am a 21 year old (at the time of writing) dropout building
-        a startup.
-      </p>
-      <p className="text-left">
-        {`I've`} been writing code for as long as I can remember (probably about
-        9-10 years now), I used to spend a lot of time building random shit and
-        losing hackathons. I love writing code as it allows me to break out of
-        systems and really express myself (a bit cliche I know)
-      </p>
-      <p className="text-left">
-        Long before starting my company, I used to work a big long-term
-        complicated projects to just name a few:
-        <p>
-          - I also wrote a{' '}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.cfrce.com/images/Investigating_the_vertical_ozone_profile_with_a_specific_focus_on_the_ground_level_and_tropospheric_.pdf"
-            className="underline">
-            Research Paper
-          </a>{' '}
-          in high school on Ozone concentration
-        </p>
-        <p>
-          - I founded {`Bangalore's`} first overnight highschool{' '}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://codefest.oakridge.in/"
-            className="underline">
-            hackathon
-          </a>
-        </p>
-      </p>
-      <p>
-        I am also part of a few prestigious communities:
-        <ul className="text-left">
-          <li>- Pioneer.app</li>
-          <li>- Ondeck (ODX1)</li>
-          <li>- Interact</li>
-        </ul>
-      </p>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}>
+      <path
+        d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
+        fill="currentColor"
+      />
+      <path
+        d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+function Posts({ post }: { post: Post }) {
+  return (
+    <Card as="article">
+      <Card.Title href={`/posts/${post.slug}`}>{post.name}</Card.Title>
+      <Card.Eyebrow as="time" decorate>
+        {formatDate(post.date)}
+      </Card.Eyebrow>
+      <Card.Description>{post.preview}</Card.Description>
+      <Card.Cta>Read article</Card.Cta>
+    </Card>
+  )
+}
+
+function SocialLink({
+  icon: Icon,
+  ...props
+}: {
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+  return (
+    // @ts-expect-error
+    <Link className="group -m-1 p-1" {...props}>
+      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+    </Link>
+  )
+}
+
+function Contact() {
+  return (
+    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <MailIcon className="h-6 w-6 flex-none" />
+        <span className="ml-3">
+          Love talking to founders, students, hackers
+        </span>
+      </h2>
+
+      <div className="mt-6 flex">
+        <Button
+          onClick={() => {
+            copy('rahul@modfy.video')
+            toast.success('Copied email to clipboard')
+          }}
+          className="ml-4 flex-none">
+          rahul@modfy.video
+        </Button>
+      </div>
     </div>
   )
 }
 
-const Links = () => {
+function Movies({ movies }: { movies: Movie[] }) {
   return (
-    <div className="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-0">
-      {/* Content area */}
-      <div className="pt-12 sm:pt-16 lg:pt-20">
-        <div className="mt-6 font-semibold text-gray-800 dark:text-gray-50 space-y-3">
-          <p className="text-4xl">Links and stuff</p>
-          <p className="text-xl leading-7">
-            <Link href="/things" passHref>
-              <a href="/things">- My random hacks</a>
-            </Link>
-          </p>
-          <p className="text-xl leading-7">
-            <Link href="/photos" passHref>
-              <a href="/photos">- My photos</a>
-            </Link>
-          </p>
-          <p className="text-xl leading-7">
-            <Link href="/posts" passHref>
-              <a href="/posts">- My rambly thoughts</a>
-            </Link>
-          </p>
-          <p className="text-xl leading-7">
-            <Link href="/movies" passHref>
-              <a href="/movies">- My thoughts on movies</a>
-            </Link>
-          </p>
-          <p className="text-xl inline-flex flex-col justify-center space-y-1 items-start leading-7">
-            <p>Love talking to founders, students, hackers -</p>
-            <button
-              onClick={() => {
-                copy('rahul@modfy.video')
-                toast.success('Copied email to clipboard')
-              }}
-              className="font-bold underline focus:outline-none">
-              rahul@modfy.video
-            </button>
-          </p>
-          <div className="pt-8 flex justify-start space-x-6">
-            {navigation.social.map(item => (
+    <div className="rounded-2xl hidden sm:block border border-zinc-100 p-6 dark:border-zinc-700/40">
+      <a
+        href="/rating"
+        className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <FilmIcon className="h-6 w-6 flex-none" />
+        <span className="ml-3">Recent movies watched</span>
+      </a>
+      <ol className="mt-6 space-y-4">
+        {movies.map((movie, roleIndex) => {
+          return (
+            <li key={roleIndex} className="flex gap-4 ">
               <a
-                key={item.name}
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
-                className="text-gray-400 hover:text-gray-500  dark:hover:text-gray-50">
-                <span className="sr-only">{item.name}</span>
-                <item.icon className="h-8 w-8" aria-hidden="true" />
+                href={`/movies/${movie.Name}/${movie.id}`}
+                className="flex flex-col  space-y-1 w-full hover:bg-zinc-700 p-2 px-4 rounded-lg">
+                <dl className="flex flex-auto flex-wrap gap-x-2">
+                  <dt className="sr-only">Title</dt>
+                  <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                    {movie.Name} -{' '}
+                    <RewatchTag reWatch={movie.Rewatch}></RewatchTag>
+                  </dd>
+                </dl>
+                <TinyRatingComponent rating={movie}></TinyRatingComponent>
               </a>
-            ))}
+            </li>
+          )
+        })}
+      </ol>
+    </div>
+  )
+}
+
+function Links() {
+  const resume = [
+    {
+      title: 'My company',
+      logo: BriefcaseIcon,
+      link: 'https://modfy.video'
+    },
+    {
+      title: 'My random hacks',
+      logo: WrenchScrewdriverIcon,
+      link: '/things'
+    },
+    {
+      title: 'My Photos',
+      logo: CameraIcon,
+      link: '/photos'
+    },
+    {
+      title: 'My thoughts on movies',
+      logo: FilmIcon,
+      link: '/movies'
+    }
+  ] as const
+
+  return (
+    <div className="rounded-2xl hidden sm:block border border-zinc-100 p-6 dark:border-zinc-700/40">
+      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <LinkIcon className="h-6 w-6 flex-none" />
+        <span className="ml-3">Links and stuff</span>
+      </h2>
+      <ol className="mt-6 space-y-4">
+        {resume.map((role, roleIndex) => (
+          <li key={roleIndex} className="flex gap-4 ">
+            <a
+              href={role.link}
+              className="flex items-center space-x-2 w-full hover:bg-zinc-900 p-2 px-4 rounded-lg">
+              <div className="relative flex flex-none items-center justify-center rounded-full shadow-md ">
+                <role.logo className="h-7 w-7 bg-transparent text-gray-300" />
+              </div>
+              <dl className="flex flex-auto flex-wrap gap-x-2">
+                <dt className="sr-only">Title</dt>
+                <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                  {role.title}
+                </dd>
+              </dl>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
+}
+
+function Photos() {
+  const rotations = [
+    'rotate-2',
+    '-rotate-2',
+    'rotate-2',
+    'rotate-2',
+    '-rotate-2'
+  ]
+
+  return (
+    <div className="mt-16 sm:mt-52">
+      <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
+        {[image2, image3, image4, image5]
+          .concat(isMobile ? [image5] : [])
+          .map((image, imageIndex) => (
+            <div
+              key={`${image.src}-${imageIndex}`}
+              className={clsx(
+                'relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl',
+                rotations[imageIndex % rotations.length]
+              )}>
+              <Image
+                src={image}
+                alt=""
+                sizes="(min-width: 640px) 18rem, 11rem"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
+          ))}
+      </div>
+    </div>
+  )
+}
+
+export default function Home({
+  posts,
+  movies
+}: {
+  posts: Post[]
+  movies: Movie[]
+}) {
+  const avatarRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const downDelay = avatarRef.current?.offsetTop ?? 0
+
+    function setProperty(property: string, value: string) {
+      document.documentElement.style.setProperty(property, value)
+    }
+
+    function updateAvatarStyles() {
+      const fromScale = 1
+      const toScale = isMobile ? 1 / 2 : 8 / 64
+
+      const fromX = 0
+      const toX = isMobile ? 0 : 0.8
+
+      const fromY = 0
+      const toY = isMobile ? 7 : 11
+
+      const scrollY = downDelay - window.scrollY
+
+      const scaler = linearInterpolation([
+        { x: downDelay, y: 1 },
+        { x: 40, y: toScale }
+      ])
+
+      let scale = scaler({ x: scrollY })
+      scale = clamp(scale, fromScale, toScale)
+
+      let x = (scrollY * (fromX - toX)) / downDelay + toX
+      x = -clamp(x, fromX, toX)
+
+      const yFunc = linearInterpolation([
+        { x: downDelay, y: 0 },
+        { x: 40, y: toY }
+      ])
+
+      let y = yFunc({ x: scrollY })
+      y = -clamp(y, fromY, toY)
+
+      setProperty(
+        '--avatar-image-transform',
+        `translate3d(${x}rem, ${y}rem, 0) scale(${scale})`
+      )
+
+      const borderScale = 1 / (toScale / scale)
+      const borderX = (-toX + x) * borderScale
+      const borderY = (-toY + y) * borderScale
+      const borderTransform = `translate3d(${borderX}rem, ${borderY}rem, 0) scale(${borderScale})`
+
+      setProperty('--avatar-border-transform', borderTransform)
+      setProperty('--avatar-border-opacity', scale === toScale ? '1' : '0')
+    }
+
+    window.addEventListener('scroll', updateAvatarStyles, { passive: true })
+    window.addEventListener('resize', updateAvatarStyles)
+
+    return () => {
+      window.removeEventListener('scroll', updateAvatarStyles)
+      window.removeEventListener('resize', updateAvatarStyles)
+    }
+  }, [])
+
+  return (
+    <div className="dark">
+      <Head>
+        <title>
+          Spencer Sharp - Software designer, founder, and amateur astronaut
+        </title>
+        <meta
+          name="description"
+          content="I’m Spencer, a software designer and entrepreneur based in New York City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms."
+        />
+      </Head>
+      <div className="flex flex-col sm:min-h-screen">
+        <div className="flex justify-center w-full sm:px-8">
+          <div className="flex flex-col sm:flex-row items-center sm:space-y-0 space-y-8 pb-8 w-full max-w-7xl lg:px-8">
+            <div className="flex-1 flex items-center w-full">
+              <div
+                ref={avatarRef}
+                className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
+              />
+              <div
+                className="sm:px-8"
+                style={{
+                  // @ts-expect-error
+                  position: 'var(--header-position)'
+                }}>
+                <div className="mx-auto max-w-7xl lg:px-8">
+                  <div className={clsx('relative px-4 sm:px-8 lg:px-12')}>
+                    <div className="mx-auto max-w-2xl lg:max-w-5xl">
+                      <div className="relative">
+                        <div
+                          style={{
+                            opacity: 'var(--avatar-border-opacity, 0)',
+                            transform: 'var(--avatar-border-transform)'
+                          }}
+                          className="absolute left-0 top-3 z-0 origin-left transition-opacity h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/30 dark:ring-white/10"
+                        />
+                        <Link
+                          href="/"
+                          aria-label="Home"
+                          className={clsx(
+                            'block sm:h-64 sm:w-64 h-32 z-10 w-32 origin-left',
+                            'pointer-events-auto '
+                          )}
+                          style={{
+                            transform: 'var(--avatar-image-transform)'
+                          }}>
+                          <Image
+                            src={avatarImage}
+                            alt=""
+                            sizes="20rem"
+                            className={clsx(
+                              'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
+                              'sm:h-64 sm:w-64 h-32 w-32'
+                            )}
+                            priority
+                          />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative px-4 sm:px-8 lg:px-12">
+              <div className="mx-auto max-w-2xl lg:max-w-5xl">
+                <div className="max-w-2xl">
+                  <p className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+                    {/* Software designer, founder, and amateur astronaut. */}
+                    Founder, engineer, filmmaker and technologist.
+                  </p>
+                  <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+                    I’m Rahul, a engineer and entrepreneur based in Bangalore.
+                    I’m the founder and CEO of Modfy, where we reinventing video
+                    editing to be more collaborative and accessible .
+                  </p>
+                  <div className="mt-6 flex gap-6">
+                    <SocialLink
+                      href="https://cryo.wtf/t"
+                      aria-label="Follow on Twitter"
+                      icon={TwitterIcon}
+                    />
+                    <SocialLink
+                      href="https://cryo.wtf/g"
+                      aria-label="Follow on GitHub"
+                      icon={GitHubIcon}
+                    />
+                    <SocialLink
+                      href="https://cryo.wtf/l"
+                      aria-label="Follow on LinkedIn"
+                      icon={LinkedInIcon}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <Photos />
       </div>
-
-      {/* Stats section */}
-      <div className="mt-10">
-        <div className="mt-10">
-          <a
-            href="https://modfy.video"
-            className="text-xl font-medium text-indigo-600 dark:text-indigo-500">
-            Learn more about how we are reinventing video editing{' '}
-            <span aria-hidden="true">&rarr;</span>
-          </a>
+      <div className="sm:px-8 mt-8 sm:-mt-32">
+        <div className="mx-auto max-w-7xl lg:px-8 ">
+          <div className="bg-zinc-900 bg-opacity-80">
+            <div className={clsx('relative px-4 py-20 sm:px-8 lg:px-12')}>
+              <div className="mx-auto max-w-2xl lg:max-w-5xl">
+                <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+                  <div className="flex flex-col gap-16">
+                    {posts.map(post => (
+                      <Posts key={post.slug} post={post} />
+                    ))}
+                  </div>
+                  <div className="space-y-10 lg:pl-16 xl:pl-24">
+                    <Links />
+                    <Contact />
+                    <Movies movies={movies} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -339,55 +452,30 @@ const Links = () => {
 }
 
 export const getStaticProps = async () => {
-  const scrollImages = [
-    {
-      x: -600,
-      y: -500,
-      z: -200,
-      src: `/images/home/P1530278.jpeg`
-    },
-    {
-      x: 600,
-      y: -500,
-      z: -100,
-      src: `/images/home/P1520287.jpeg`
-    },
-    {
-      x: 0,
-      y: -100,
-      z: 0,
-      src: `/images/home/P1520002.jpeg`
-    },
-    {
-      x: -450,
-      y: 300,
-      z: 100,
-      src: `/images/home/P1530790.jpeg`
-    },
-    {
-      x: 400,
-      y: 250,
-      z: 200,
-      src: `/images/home/P1540095.jpeg`
+  // Get all posts again
+
+  try {
+    const dynamicPosts = (await getAllPosts()).filter(p => p.published)
+
+    dynamicPosts.sort((a, b) => {
+      const aDate = new Date(a.date)
+      const bDate = new Date(b.date)
+
+      return bDate.getTime() - aDate.getTime()
+    })
+
+    const movies = await getAllMovies()
+
+    const posts = dynamicPosts.slice(0, 5)
+
+    return {
+      props: {
+        posts: posts,
+        movies: movies.slice(0, 5)
+      },
+      revalidate: 1
     }
-  ]
-
-  // const bg = await getPlaiceholder('/images/home/P1530184.jpeg')
-
-  // const imageData = await Promise.all(
-  //   scrollImages.map(img => getPlaiceholder(img.src))
-  // )
-
-  // const images = imageData.map((img, i) => {
-  //   return { ...img, ...scrollImages[i] }
-  // })
-
-  const bg = '/images/home/P1530184.jpeg'
-
-  return {
-    props: {
-      images: scrollImages,
-      bg
-    }
+  } catch (e) {
+    console.error(e)
   }
 }
