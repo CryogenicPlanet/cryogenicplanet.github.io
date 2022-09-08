@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import Image from 'next/future/image'
 import React, { useEffect, useRef } from 'react'
@@ -14,6 +15,7 @@ import 'prismjs/components/prism-json'
 
 import bg from '../public/images/home/bg.jpg'
 import bg2 from '../public/images/home/bg2.jpg'
+import gradient from '../public/images/home/sky.jpeg'
 
 // used for code syntax highlighting (optional)
 import 'prismjs/themes/prism-tomorrow.css'
@@ -37,18 +39,29 @@ function usePrevious(value: string) {
 const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
   const previousPathname = usePrevious(router.pathname)
 
+  const isHome = router.pathname === '/' || router.pathname === '/new'
+
   return (
     <>
       <div className="absolute inset-0 hidden sm:block max-w-[100vw]">
         <div className="flex flex-col items-center justify-center bg-black">
-          <Image
-            src={bg}
-            className="object-cover filter blur-lg min-h-screen h-full w-full"
-          />
-          <Image
-            src={bg2}
-            className="object-cover filter blur-lg min-h-screen h-full w-full"
-          />
+          {isHome ? (
+            <>
+              <Image
+                src={bg}
+                className="object-cover filter blur-lg min-h-screen h-full w-full"
+              />
+              <Image
+                src={bg2}
+                className="object-cover filter blur-lg min-h-screen h-full w-full"
+              />
+            </>
+          ) : (
+            <Image
+              src={gradient}
+              className="object-cover filter blur-lg min-h-screen h-full w-full"
+            />
+          )}
         </div>
       </div>
 
@@ -57,7 +70,12 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
 
         <div className="fixed inset-0 flex justify-center sm:px-8">
           <div className="flex w-full max-w-7xl lg:px-8">
-            <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 sm:dark:bg-opacity-60 dark:ring-zinc-300/20" />
+            <div
+              className={clsx(
+                'w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900  dark:ring-zinc-300/20',
+                isHome ? 'sm:dark:bg-opacity-60' : ''
+              )}
+            />
           </div>
         </div>
 
