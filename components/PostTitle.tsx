@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { ArrowLeftIcon, CalendarIcon, TagIcon } from '@heroicons/react/solid'
+import { ArrowLeftIcon, CalendarIcon, TagIcon } from '@heroicons/react/24/solid'
 import { Post } from '@interfaces/index'
 import { view } from '@risingstack/react-easy-state'
 import { state } from '@utils/store'

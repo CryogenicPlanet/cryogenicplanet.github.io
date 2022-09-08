@@ -3,9 +3,13 @@ import Image from 'next/future/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { Fragment, useEffect, useRef } from 'react'
+import { isMobile } from 'react-device-detect'
 
 import { Popover, Transition } from '@headlessui/react'
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import avatarImage from '@images/home/headshot.jpeg'
+import { view } from '@risingstack/react-easy-state'
+import { state } from '@utils/store'
 
 import { Container } from './Container'
 
@@ -136,6 +140,24 @@ function NavItem({
   )
 }
 
+const ModeToggle = view(() => {
+  return (
+    <button
+      type="button"
+      aria-label="Toggle dark mode"
+      className="group rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+      onClick={() => {
+        state.showBg = !state.showBg
+      }}>
+      {state.showBg ? (
+        <EyeIcon className="h-7 w-7 text-gray-300"></EyeIcon>
+      ) : (
+        <EyeSlashIcon className="h-7 w-7 text-gray-300"></EyeSlashIcon>
+      )}
+    </button>
+  )
+})
+
 function DesktopNavigation(props: React.ComponentProps<'nav'>) {
   return (
     <nav {...props}>
@@ -195,7 +217,7 @@ function Avatar({
   )
 }
 
-export function Header() {
+export const Header = () => {
   const pathName = useRouter().pathname
   const isHomePage = pathName === '/' || pathName === '/new'
 
@@ -339,7 +361,9 @@ export function Header() {
                 <DesktopNavigation className="pointer-events-auto hidden md:block" />
               </div>
               <div className="flex justify-end md:flex-1">
-                <div className="pointer-events-auto"></div>
+                <div className="pointer-events-auto">
+                  {!isMobile && <ModeToggle></ModeToggle>}
+                </div>
               </div>
             </div>
           </Container>

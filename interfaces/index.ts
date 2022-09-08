@@ -10,6 +10,7 @@ export interface Post {
   ogImage?: string
   staticImage?: string
   categories: string[]
+  url?: string
 }
 
 export const movieDevice = {

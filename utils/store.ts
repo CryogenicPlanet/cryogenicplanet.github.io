@@ -1,10 +1,11 @@
 import { autoEffect, store } from '@risingstack/react-easy-state'
 
-const state = store<{ dark: boolean }>({
+const state = store<{ dark: boolean; showBg: boolean }>({
   dark:
     (typeof window !== 'undefined' &&
       window.localStorage.getItem('darkMode') === 'true') ||
-    true
+    true,
+  showBg: false
 })
 
 export { state }

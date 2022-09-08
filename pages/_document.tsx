@@ -8,7 +8,7 @@ export default function Document() {
       <Head>
         <GoogleAnalytics id="UA-159985130-1" />
       </Head>
-      <body className="flex h-full flex-col bg-black dark">
+      <body className="flex h-full flex-col bg-gradient-to-tr from-gray-700 via-gray-900 to-black dark">
         <Main />
         <NextScript />
       </body>

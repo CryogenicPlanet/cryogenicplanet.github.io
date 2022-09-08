@@ -9,7 +9,7 @@ import { PlatformTag, RewatchTag, WhereWatchTag } from '@components/Movie'
 import { SmallRatingComponent } from '@components/Rating'
 import { NotionRenderer } from '@cryogenicplanet/react-notion-x'
 import { Dialog, Transition } from '@headlessui/react'
-import { XIcon } from '@heroicons/react/outline'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Movie } from '@interfaces/index'
 import { getAllMovies } from '@utils/blog'
 
@@ -79,7 +79,7 @@ export default function MoviePage({
                           router.push('/movies')
                         }}>
                         <span className="sr-only">Close</span>
-                        <XIcon className="h-6 w-6" aria-hidden="true" />
+                        <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
 
                       <div className="w-full grid grid-cols-1 gap-y-8 gap-x-6 items-start sm:grid-cols-12 lg:items-center lg:gap-x-8">
