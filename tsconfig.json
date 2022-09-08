@@ -24,6 +24,7 @@
       "@components*": ["components*"],
       "@interfaces*": ["interfaces*"],
       "@utils*": ["utils*"],
+      "@images*": ["public/images*"],
       "@data*": ["data*"]
     }
   },

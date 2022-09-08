@@ -17,5 +17,10 @@ html::-webkit-scrollbar {
 }
 
 .katex-html {
-  @apply sr-only
+  @apply sr-only;
+}
+
+.stackedLayer {
+  grid-row: 1;
+  grid-column: 1;
 }

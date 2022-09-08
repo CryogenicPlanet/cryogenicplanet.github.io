@@ -1,5 +1,12 @@
-module.exports = {
-  experimental: { images: { allowFutureImage: true } },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    newNextLinkBehavior: true,
+    scrollRestoration: true,
+    images: {
+      allowFutureImage: true
+    }
+  },
   // Target must be serverless
   async rewrites() {
     return [
@@ -24,3 +31,5 @@ module.exports = {
     ignoreDuringBuilds: true
   }
 }
+
+module.exports = nextConfig
