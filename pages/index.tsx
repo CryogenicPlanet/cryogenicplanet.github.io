@@ -27,19 +27,7 @@ import image2 from '@images/home/stark.jpeg'
 import image3 from '@images/home/sunset.jpeg'
 import { Movie, Post } from '@interfaces/index'
 import { getAllMovies, getAllPosts } from '@utils/blog'
-
-function clsx(...classes: any[]) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    timeZone: 'UTC'
-  })
-}
+import { clsx, formatDate } from '@utils/date'
 
 function MailIcon(props: React.SVGProps<SVGSVGElement>) {
   return (

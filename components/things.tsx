@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { SimpleLayout } from 'pages/posts'
 import React, { useEffect } from 'react'
 
 import Layout from '@components/Layout'
@@ -15,6 +14,7 @@ import { view } from '@risingstack/react-easy-state'
 import { state } from '@utils/store'
 
 import { Card } from './Card'
+import { SimpleLayout } from './SimpleLayout'
 import { GitHubIcon } from './SocialIcons'
 
 const tabs: {
@@ -53,7 +53,7 @@ function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export function ThingsNav({ filter }: { filter?: string }) {
+function ThingsNav({ filter }: { filter?: string }) {
   const currentTabName = filter
     ? tabs.find(tab => tab.href === `/things/${filter || ''}`)?.name
     : 'All'
