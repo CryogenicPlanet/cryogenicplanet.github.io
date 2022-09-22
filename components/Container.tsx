@@ -33,6 +33,7 @@ export const Container = forwardRef(function Container(
   ref: React.Ref<HTMLDivElement>
 ) {
   return (
+    // @ts-expect-error
     <OuterContainer ref={ref} {...props}>
       <InnerContainer>{children}</InnerContainer>
     </OuterContainer>
