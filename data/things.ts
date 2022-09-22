@@ -1,4 +1,7 @@
+import React from 'react'
 import colors from 'tailwindcss/colors'
+
+import { MediumIcon, TwitterIcon } from '@components/SocialIcons'
 
 export const thingTypes = {
   technical: true,
@@ -10,16 +13,34 @@ export const thingTypes = {
 const unsortedThings: Array<{
   title: string
   url: string
-  sourceUrl?: string
+  githubUrl?: string
+  logo?: string
+  links?: { href: string; icon: React.ReactNode }[]
   description?: string
   type: keyof typeof thingTypes
   year: number
 }> = [
   {
+    title: 'Typed Routes',
+    url: 'https://github.com/CryogenicPlanet/typed-routes',
+    githubUrl: 'https://github.com/CryogenicPlanet/typed-routes',
+    type: 'technical',
+    year: 2022,
+    description: 'A super simple minimal tRPC alternative for next.js'
+  },
+  {
+    title: 'Nominal',
+    url: 'https://zackoverflow.dev/writing/nominal-and-refinement-types-typescript',
+    type: 'technical',
+    year: 2022,
+    description: 'A TypeScript library for nominal typing.',
+    githubUrl: 'https://github.com/modfy/nominal'
+  },
+  {
     title: 'Socialify',
     url: 'https://socialify.git.ci/',
     type: 'technical',
-    sourceUrl: 'https://github.com/wei/socialify',
+    githubUrl: 'https://github.com/wei/socialify',
     description: '800+ stars; Generate dynamic social preview images',
     year: 2020
   },
@@ -27,7 +48,7 @@ const unsortedThings: Array<{
     title: 'Twitter Source Bot',
     url: 'https://twitter-source-bot.netlify.app/',
     type: 'technical',
-    sourceUrl: 'https://github.com/Etwas-Builders/Twitter-Source-Bot',
+    githubUrl: 'https://github.com/Etwas-Builders/Twitter-Source-Bot',
     description: ` Ever wanted to know the source of a tweet? Just @whosaidthis_bot and I'll tell you where it came from `,
     year: 2020
   },
@@ -36,7 +57,7 @@ const unsortedThings: Array<{
     url: 'https://deconstruct.thevarsity.ca/',
     type: 'technical',
     year: 2020,
-    description: `Built the Varsity's 2020 Digial Magazine`
+    description: `Built the Varsity's 2020 Digital Magazine`
   },
 
   {
@@ -51,7 +72,7 @@ const unsortedThings: Array<{
     title: 'Koelkast',
     url: 'https://devpost.com/software/koelkast',
     type: 'hackathon',
-    sourceUrl: 'https://github.com/CryogenicPlanet/HTV4',
+    githubUrl: 'https://github.com/CryogenicPlanet/HTV4',
     description: ' A smart inventory management solution for Refrigerators ',
     year: 2020
   },
@@ -59,7 +80,7 @@ const unsortedThings: Array<{
     title: 'Clothology',
     url: 'https://devpost.com/software/clothology',
     type: 'hackathon',
-    sourceUrl: 'https://github.com/CryogenicPlanet/UofTHacks-2020',
+    githubUrl: 'https://github.com/CryogenicPlanet/UofTHacks-2020',
     description:
       ' Not sure what to wear in unpredictable weather? Clothology allows you to choose your clothing attire based on what others in your area are wearing. ',
     year: 2020
@@ -68,7 +89,7 @@ const unsortedThings: Array<{
     title: 'Stanza',
     url: 'http://stanzabooks.herokuapp.com/#!/login',
     type: 'technical',
-    sourceUrl: 'https://github.com/CryogenicPlanet/Stanza-Cisco-Internship',
+    githubUrl: 'https://github.com/CryogenicPlanet/Stanza-Cisco-Internship',
     description: 'A community for sharing books',
     year: 2017
   },
@@ -76,7 +97,7 @@ const unsortedThings: Array<{
     title: 'Phorum',
     url: 'https://phorum-mylan-hacks.netlify.app/',
     type: 'hackathon',
-    sourceUrl: 'https://github.com/CryogenicPlanet/Mylan_Hack_16',
+    githubUrl: 'https://github.com/CryogenicPlanet/Mylan_Hack_16',
     description:
       ' A forum where you can report issues you faced after consumption of drugs, and report possible drug defects.. ',
     year: 2016
@@ -93,14 +114,14 @@ const unsortedThings: Array<{
     title: 'Zonne Solaris',
     url: 'https://github.com/CryogenicPlanet/wired_hack',
     type: 'hackathon',
-    sourceUrl: 'https://github.com/CryogenicPlanet/wired_hack',
+    githubUrl: 'https://github.com/CryogenicPlanet/wired_hack',
     description: 'Solar Projects Crowd Funding Platform!',
     year: 2016
   },
   {
     title: 'Vivum Hack 2018 Winners',
     url: 'https://github.com/CryogenicPlanet/vivum-hack',
-    sourceUrl: 'https://github.com/CryogenicPlanet/vivum-hack',
+    githubUrl: 'https://github.com/CryogenicPlanet/vivum-hack',
     type: 'hackathon',
     description: 'Machine Learning Based Facial Recognition for attendance',
     year: 2018
@@ -108,7 +129,7 @@ const unsortedThings: Array<{
   {
     title: 'Stonehill Hack 2018 Winners',
     url: 'https://github.com/CryogenicPlanet/Stonehill-Hackathon',
-    sourceUrl: 'https://github.com/CryogenicPlanet/Stonehill-Hackathon',
+    githubUrl: 'https://github.com/CryogenicPlanet/Stonehill-Hackathon',
     type: 'hackathon',
     description:
       'Using Face dection and Facial Recognition to identify indiviuals entering a room and controlling electronics in the room based on their preference, i.e turning on fans or air conditioners or which lights to turn on, what color the lights should be.',
@@ -117,7 +138,7 @@ const unsortedThings: Array<{
   {
     title: 'Nps-Hsr-Grad-2017',
     url: 'https://github.com/CryogenicPlanet/Nps-Hsr-Grad-2017',
-    sourceUrl: 'https://github.com/CryogenicPlanet/Nps-Hsr-Grad-2017',
+    githubUrl: 'https://github.com/CryogenicPlanet/Nps-Hsr-Grad-2017',
     type: 'technical',
     description:
       'This was app made to invite and checkin people for the Nps Hsr Grad party. It could be ported within a couple of hours to serve this purpose for any event',
@@ -127,7 +148,7 @@ const unsortedThings: Array<{
   {
     title: 'DCB Hackathon',
     url: 'https://github.com/CryogenicPlanet/DcbHackathon',
-    sourceUrl: 'https://github.com/CryogenicPlanet/DcbHackathon',
+    githubUrl: 'https://github.com/CryogenicPlanet/DcbHackathon',
     year: 2017,
     description:
       ' ATM Solution to allow users to withdraw money from ATM using their phones ',
@@ -136,7 +157,7 @@ const unsortedThings: Array<{
   {
     title: 'RHOK Hack Winner',
     url: 'https://github.com/CryogenicPlanet/rhokBangalore2018',
-    sourceUrl: 'https://github.com/CryogenicPlanet/rhokBangalore2018',
+    githubUrl: 'https://github.com/CryogenicPlanet/rhokBangalore2018',
     year: 2018,
     description: ' Using a ml model to identify plant and animal species ',
     type: 'hackathon'
@@ -144,7 +165,7 @@ const unsortedThings: Array<{
   {
     title: `Mini Research Paper comparing hashing algorithms`,
     url: '/files/ee.pdf',
-    sourceUrl: 'https://github.com/CryogenicPlanet/Extended-Essay',
+    githubUrl: 'https://github.com/CryogenicPlanet/Extended-Essay',
     year: 2019,
     description: `How do hashing algorithms in specific
 
@@ -160,7 +181,7 @@ given period?`,
   {
     title: 'Mini Research Paper exploring hash collisions',
     url: '/files/hashCollisions.pdf',
-    sourceUrl: 'https://github.com/CryogenicPlanet/mathIA',
+    githubUrl: 'https://github.com/CryogenicPlanet/mathIA',
     year: 2019,
     type: 'other',
     description: `Expected Number of Hash
@@ -172,7 +193,7 @@ hash algorithm.`
   {
     title: 'Bauernhof | NPS K Hack',
     url: 'https://github.com/CryogenicPlanet/Bauernhof',
-    sourceUrl: 'https://github.com/CryogenicPlanet/Bauernhof',
+    githubUrl: 'https://github.com/CryogenicPlanet/Bauernhof',
     year: 2016,
     type: 'hackathon',
     description:
@@ -182,6 +203,7 @@ hash algorithm.`
     title: 'Broken Paths',
     url: 'https://www.youtube.com/watch?v=PcFoeIruD7o',
     year: 2019,
+    logo: 'https://user-images.githubusercontent.com/10355479/191543286-6da3001d-847e-4182-a025-2a7b8fc72aa1.svg',
     type: 'film',
     description:
       'Three childhood best friends choose to walk down different paths when faced with one of the biggest challenges of their teenage years: getting into college'
@@ -190,6 +212,7 @@ hash algorithm.`
     title: 'Elevator Pitch',
     url: 'https://www.youtube.com/watch?v=ee_xjJUCRt8',
     year: 2018,
+    logo: 'https://user-images.githubusercontent.com/10355479/191543286-6da3001d-847e-4182-a025-2a7b8fc72aa1.svg',
     type: 'film',
     description: `
 The short film was made for the India film project season 8. It was a part of the amateur category with the given theme being experience change. The film was made in 50 hours for the contest.
@@ -199,6 +222,7 @@ The short film was made for the India film project season 8. It was a part of th
     title: 'Incognita',
     url: 'https://www.youtube.com/watch?v=URP6oNtLa8E',
     year: 2018,
+    logo: 'https://user-images.githubusercontent.com/10355479/191543286-6da3001d-847e-4182-a025-2a7b8fc72aa1.svg',
     type: 'film',
     description: `This was a short film made from start to finish in just 48 hours for The Next Indian Dream's 48-hour filmmaking contest www.tnid.in`
   },
@@ -209,15 +233,19 @@ The short film was made for the India film project season 8. It was a part of th
     type: 'technical',
     description:
       'While this may not be as complex as other, it is the project I used the most by far',
-    sourceUrl:
-      'https://gist.github.com/CryogenicPlanet/dc8b24d30f0c13f6a0a63ed2647419dd'
+    links: [
+      {
+        href: 'https://medium.com/etwas/creating-smart-home-devices-using-ifttt-and-arduino-8a3506168705',
+        icon: MediumIcon
+      }
+    ]
   },
   {
     title: 'Go Fluent FFmpeg',
     url: 'https://github.com/modfy/go-fluent-ffmpeg',
     year: 2021,
     type: 'technical',
-    sourceUrl: 'https://github.com/modfy/go-fluent-ffmpeg',
+    githubUrl: 'https://github.com/modfy/go-fluent-ffmpeg',
     description: ' A Go implementation of fluent-ffmpeg '
   },
   {
@@ -225,16 +253,22 @@ The short film was made for the India film project season 8. It was a part of th
     url: 'https://github.com/CryogenicPlanet/depp',
     year: 2021,
     type: 'technical',
-    sourceUrl: 'https://github.com/CryogenicPlanet/depp',
+    githubUrl: 'https://github.com/CryogenicPlanet/depp',
     description:
       '⚡ Check your npm modules for unused and duplicate dependencies fast'
   },
   {
     title: 'Testickle',
-    url: 'https://twitter.com/zack_overflow/status/1496096037211103232?s=20&t=v2pox-AYruZuHOdeFPumMA',
+    url: 'https://testickle.vercel.app/',
     year: 2022,
     type: 'technical',
-    sourceUrl: 'https://testickle.vercel.app/',
+    logo: 'https://user-images.githubusercontent.com/10355479/191545053-2d3c043d-cd1a-4530-9613-bdf7315b53a1.svg',
+    links: [
+      {
+        href: 'https://twitter.com/zack_overflow/status/1496096037211103232?s=20&t=v2pox-AYruZuHOdeFPumMA',
+        icon: TwitterIcon
+      }
+    ],
     description:
       'Testickle is a blazing faster typescript/javascript test runner built on esbuild'
   },
@@ -243,7 +277,7 @@ The short film was made for the India film project season 8. It was a part of th
     url: 'https://github.com/CryogenicPlanet/fenster',
     year: 2022,
     type: 'technical',
-    sourceUrl: 'https://github.com/CryogenicPlanet/fenster',
+    githubUrl: 'https://github.com/CryogenicPlanet/fenster',
     description: 'Sane macos spaces'
   },
   {
@@ -251,6 +285,7 @@ The short film was made for the India film project season 8. It was a part of th
     url: 'https://stellage.vercel.app',
     year: 2022,
     type: 'technical',
+    logo: 'https://user-images.githubusercontent.com/10355479/191545332-0cb88318-3d04-478b-aac0-a26b9138ccb8.svg',
     description:
       'Staging management tool for vercel - verify, promote and rollback environments'
   }

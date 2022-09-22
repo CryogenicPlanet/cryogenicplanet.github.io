@@ -3,11 +3,12 @@ import Head from 'next/head'
 import Img from 'next/image'
 import { useRouter } from 'next/router'
 import PhotosPage from 'pages/photos'
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 
 import { Dialog, Transition } from '@headlessui/react'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { getAllImages, Photos } from '@utils/photos'
+import { state } from '@utils/store'
 
 const PhotoPage = ({
   images,
@@ -23,6 +24,14 @@ const PhotoPage = ({
   const onClose = () => {
     router.push('/photos')
   }
+
+  useEffect(() => {
+    state.showBg = true
+
+    return () => {
+      state.showBg = false
+    }
+  }, [])
 
   const handleGalleryChange = (type: 'plus' | 'minus') => {
     const add = type === 'plus' ? 1 : -1

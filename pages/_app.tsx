@@ -65,6 +65,7 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
   }, [])
 
   useEffect(() => {
+    if (state.noImageBg) return
     setVhMultiplier(1)
     setTimeout(() => {
       resizeHandler()
@@ -72,6 +73,7 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
   }, [pathName, resizeHandler])
 
   useEffect(() => {
+    if (state.noImageBg) return
     resizeHandler()
     window.addEventListener('resize', resizeHandler)
 
@@ -82,38 +84,41 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
 
   return (
     <>
-      <div className="absolute inset-0 hidden sm:block max-w-[100vw]">
-        <div className="flex flex-col items-center justify-center bg-black">
-          {isHome ? (
-            <>
-              <Image
-                src={bg}
-                className="object-cover filter blur-lg min-h-screen h-full w-full"
-              />
-              <Image
-                src={bg2}
-                className="object-cover filter blur-lg min-h-screen h-full w-full"
-              />
-            </>
-          ) : (
-            <>
-              {Array(vhMultiplier)
-                .fill(0)
-                .map((_, index) => {
-                  const idx = index % images.length
+      {!state.noImageBg && (
+        <div className="absolute inset-0 hidden sm:block max-w-[100vw]">
+          <div className="flex flex-col items-center justify-center bg-black">
+            {isHome ? (
+              <>
+                <Image
+                  src={bg}
+                  className="object-cover filter blur-lg min-h-screen h-full w-full"
+                />
+                <Image
+                  src={bg2}
+                  className="object-cover filter blur-lg min-h-screen h-full w-full"
+                />
+              </>
+            ) : (
+              <>
+                {vhMultiplier > 0 &&
+                  Array(vhMultiplier || 1)
+                    .fill(0)
+                    .map((_, index) => {
+                      const idx = index % images.length
 
-                  return (
-                    <Image
-                      key={index}
-                      src={images[idx]!}
-                      className="object-cover filter blur-lg min-h-screen h-full w-full"
-                    />
-                  )
-                })}
-            </>
-          )}
+                      return (
+                        <Image
+                          key={index}
+                          src={images[idx]!}
+                          className="object-cover filter blur-lg min-h-screen h-full w-full"
+                        />
+                      )
+                    })}
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="relative w-full min-w-[100vw] ">
         <Header />
