@@ -4,6 +4,7 @@ function clsx(...classes: any[]) {
 }
 
 const OuterContainer = forwardRef(function OuterContainer(
+  // eslint-disable-next-line react/prop-types
   { className, children, ...props }: React.ComponentProps<'div'>,
   ref: React.Ref<HTMLDivElement>
 ) {
@@ -15,6 +16,7 @@ const OuterContainer = forwardRef(function OuterContainer(
 })
 
 const InnerContainer = forwardRef(function InnerContainer(
+  // eslint-disable-next-line react/prop-types
   { className, children, ...props }: React.ComponentProps<'div'>,
   ref: React.Ref<HTMLDivElement>
 ) {

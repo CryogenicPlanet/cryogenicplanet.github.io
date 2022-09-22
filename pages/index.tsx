@@ -330,11 +330,13 @@ export default function Home({
     <div className="dark">
       <Head>
         <title>
-          Spencer Sharp - Software designer, founder, and amateur astronaut
+          Rahul Tarak - Founder, engineer, filmmaker and technologist.
         </title>
         <meta
           name="description"
-          content="I’m Spencer, a software designer and entrepreneur based in New York City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms."
+          content=" I’m Rahul, a engineer and entrepreneur based in Bangalore.
+          I’m the founder of modfy.video, where we reinventing video
+          editing to be more collaborative and accessible ."
         />
       </Head>
       <div className="flex flex-col sm:min-h-screen">
@@ -398,7 +400,7 @@ export default function Home({
                   </p>
                   <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
                     I’m Rahul, a engineer and entrepreneur based in Bangalore.
-                    I’m the founder and CEO of Modfy, where we reinventing video
+                    I’m the founder of modfy.video, where we reinventing video
                     editing to be more collaborative and accessible .
                   </p>
                   <div className="mt-6 flex gap-6">
