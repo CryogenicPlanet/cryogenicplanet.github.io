@@ -4,9 +4,8 @@ import Link from 'next/link'
 import React from 'react'
 
 import Layout from '@components/Layout'
+import { SimpleLayout } from '@components/SimpleLayout'
 import { getAllImages, Photos } from '@utils/photos'
-
-import { SimpleLayout } from './posts'
 
 export default function PhotosPage({ images }: { images: Photos }) {
   return (
