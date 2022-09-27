@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { GetServerSidePropsContext } from 'next/types'
 import { NotionAPI } from 'notion-client'
 import { ExtendedRecordMap } from 'notion-types'
-import Movies from 'pages/movies'
+import { Movies } from 'pages/movies'
 import React, { Fragment } from 'react'
 
 import Layout from '@components/Layout'
