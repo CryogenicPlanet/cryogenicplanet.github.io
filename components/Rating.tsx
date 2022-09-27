@@ -2,6 +2,13 @@ import React from 'react'
 
 import { Rating } from '@interfaces/index'
 
+const getDisappointmentBg = (disappointment: number) =>
+  disappointment < 0
+    ? 'bg-green-500'
+    : disappointment === 0
+    ? 'bg-zinc-300'
+    : 'bg-zinc-700'
+
 const RatingComponent = ({ rating }: { rating: Rating }) => {
   const { Enjoyment, Quality, Disappointment } = rating
 
@@ -11,12 +18,7 @@ const RatingComponent = ({ rating }: { rating: Rating }) => {
 
   const score = (quality + enjoyment) / (20 + disappointment)
 
-  const disappointmentBg =
-    disappointment < 0
-      ? 'bg-green-200 dark:bg-green-800 bg-opacity-50 dark:bg-opacity-50'
-      : disappointment === 0
-      ? 'bg-gray-300 dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-50'
-      : 'bg-gray-200'
+  const disappointmentBg = getDisappointmentBg(disappointment)
 
   return (
     <div className="flex w-full flex-col space-y-4">
@@ -103,12 +105,7 @@ export const SmallRatingComponent = ({ rating }: { rating: Rating }) => {
 
   const score = (quality + enjoyment) / (20 + disappointment)
 
-  const disappointmentBg =
-    disappointment < 0
-      ? 'bg-green-200 dark:bg-green-800 bg-opacity-50 dark:bg-opacity-50'
-      : disappointment === 0
-      ? 'bg-gray-300 dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-50'
-      : 'bg-gray-200'
+  const disappointmentBg = getDisappointmentBg(disappointment)
 
   if (!enjoyment || !quality)
     return (
@@ -119,29 +116,31 @@ export const SmallRatingComponent = ({ rating }: { rating: Rating }) => {
     <div className="flex w-full flex-col space-y-4">
       <div>
         <h4 className="sr-only">Status</h4>
-        <p className="text-xs font-medium text-gray-300">Quality ({quality})</p>
+        <p className="text-xs font-medium text-gray-300 group-hover:text-teal-500">
+          Quality ({quality})
+        </p>
         <div className="mt-1" aria-hidden="true">
-          <div className="flex bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 rounded-full overflow-hidden">
+          <div className="flex  bg-gradient-to-r from-green-200 to-green-500 rounded-full overflow-hidden">
             <div
-              className="h-2  bg-transparent rounded-full transition-all duration-200 ease-in-out"
+              className="h-2 bg-transparent rounded-full transition-all duration-200 ease-in-out"
               style={{ width: `${(quality / 10) * 100}%` }}
             />
-            <div className="h-2  flex-1 bg-gray-200 transition-all duration-200 ease-in-out"></div>
+            <div className="h-2 flex-1 bg-zinc-700 transition-all duration-200 ease-in-out"></div>
           </div>
         </div>
       </div>
       <div>
         <h4 className="sr-only">Status</h4>
-        <p className="text-xs font-medium text-gray-300 ">
+        <p className="text-xs font-medium text-gray-300 group-hover:text-teal-500">
           Enjoyment ({enjoyment})
         </p>
         <div className="mt-1" aria-hidden="true">
-          <div className="flex bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 rounded-full overflow-hidden">
+          <div className="flex bg-gradient-to-r from-green-200 to-green-500 rounded-full overflow-hidden">
             <div
               className="h-2  bg-transparent rounded-full transition-all duration-200 ease-in-out"
               style={{ width: `${(enjoyment / 10) * 100}%` }}
             />
-            <div className="h-2  flex-1 bg-gray-200 transition-all duration-200 ease-in-out"></div>
+            <div className="h-2  flex-1 bg-zinc-700 transition-all duration-200 ease-in-out"></div>
           </div>
         </div>
       </div>
@@ -155,7 +154,7 @@ export const SmallRatingComponent = ({ rating }: { rating: Rating }) => {
             <div
               className={`flex ${
                 disappointment > 0
-                  ? 'bg-gradient-to-r from-red-300 via-red-500 to-red-900'
+                  ? 'bg-gradient-to-r from-red-500 to-red-800'
                   : 'bg-transparent'
               } rounded-full overflow-hidden`}>
               <div
@@ -170,7 +169,7 @@ export const SmallRatingComponent = ({ rating }: { rating: Rating }) => {
           </div>
         </div>
       )}
-      <p className="text-base font-medium text-gray-300">
+      <p className="text-base font-medium text-gray-300 group-hover:text-teal-500">
         Score <span className="font-semibold">{(score * 100).toFixed(0)}%</span>
       </p>
     </div>
@@ -184,12 +183,7 @@ export const TinyRatingComponent = ({ rating }: { rating: Rating }) => {
   const quality = parseInt(Quality)
   const disappointment = parseInt(Disappointment)
 
-  const disappointmentBg =
-    disappointment < 0
-      ? 'bg-green-200 dark:bg-green-800 bg-opacity-50 dark:bg-opacity-50'
-      : disappointment === 0
-      ? 'bg-gray-300 dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-50'
-      : 'bg-gray-200'
+  const disappointmentBg = getDisappointmentBg(disappointment)
 
   if (!enjoyment || !quality)
     return (
@@ -200,12 +194,12 @@ export const TinyRatingComponent = ({ rating }: { rating: Rating }) => {
     <div className="flex row w-full justify-start space-x-4">
       <div className={disappointment ? 'w-1/3' : 'w-1/2'}>
         <p className="text-xs font-medium text-gray-200">Quality ({quality})</p>
-        <div className="flex bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 rounded-full overflow-hidden">
+        <div className="flex  bg-gradient-to-r from-green-200 to-green-500 rounded-full overflow-hidden">
           <div
             className="h-2  bg-transparent rounded-full transition-all duration-200 ease-in-out"
             style={{ width: `${(quality / 10) * 100}%` }}
           />
-          <div className="h-2  flex-1 bg-gray-200 transition-all duration-200 ease-in-out"></div>
+          <div className="h-2  flex-1 bg-zinc-700 transition-all duration-200 ease-in-out"></div>
         </div>
       </div>
       <div className={disappointment ? 'w-1/3' : 'w-1/2'}>
@@ -213,12 +207,12 @@ export const TinyRatingComponent = ({ rating }: { rating: Rating }) => {
           Enjoyment ({enjoyment})
         </p>
 
-        <div className="flex bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 rounded-full overflow-hidden">
+        <div className="flex  bg-gradient-to-r from-green-200 to-green-500 rounded-full overflow-hidden">
           <div
             className="h-2  bg-transparent rounded-full transition-all duration-200 ease-in-out"
             style={{ width: `${(enjoyment / 10) * 100}%` }}
           />
-          <div className="h-2  flex-1 bg-gray-200 transition-all duration-200 ease-in-out"></div>
+          <div className="h-2  flex-1 bg-zinc-700 transition-all duration-200 ease-in-out"></div>
         </div>
       </div>
       {disappointment !== 0 && (
@@ -230,7 +224,7 @@ export const TinyRatingComponent = ({ rating }: { rating: Rating }) => {
             <div
               className={`flex ${
                 disappointment > 0
-                  ? 'bg-gradient-to-r from-red-300 via-red-500 to-red-900'
+                  ? 'bg-gradient-to-r from-red-500 to-red-800'
                   : 'bg-transparent'
               } rounded-full overflow-hidden`}>
               <div

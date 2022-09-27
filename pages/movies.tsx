@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 
+import { Card } from '@components/Card'
 import Layout from '@components/Layout'
-import { PlatformTag, RewatchTag, WhereWatchTag } from '@components/Movie'
+import { RewatchTag } from '@components/Movie'
 import { SmallRatingComponent } from '@components/Rating'
 import { Disclosure } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
@@ -92,85 +93,42 @@ const Movies = ({ reviews }: { reviews: Movie[] }) => {
           </div>
         </div>
         <div className="max-w-5xl mx-auto px-4 space-y-4 sm:px-6 lg:px-8 w-full flex flex-col justify-center items-center">
-          <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 overflow-hidden">
-            {reviews.map((review, index) => {
+          <ul className="grid p-6 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 overflow-hidden">
+            {reviews.map(review => {
               const date = new Date(review.Seen)
               return (
-                <li
-                  className="col-span-1 bg-zinc-800 flex flex-col items-center w-full rounded-lg shadow divide-y divide-zinc-700 divide-opacity-50"
-                  key={index}>
-                  <Link href={`/movies/${review.Name}/${review.id}`} passHref>
-                    <a
-                      href={`/movies/${review.Name}/${review.id}`}
-                      className="col-span-1 bg-zinc-800 flex flex-col items-center w-full rounded-lg shadow divide-y divide-zinc-700 divide-opacity-50">
-                      <div className="w-full flex flex-col items-center justify-between p-6 space-y-2">
-                        <img
-                          className="aspect-w-16 max-w-[248px]"
-                          src={review.poster}
-                          alt=""
-                        />
-                        <div className="flex-1 w-full">
-                          <div className="flex justify-start items-center space-x-3">
-                            <h3 className="text-gray-300 text-sm font-medium truncate">
-                              {review.Name}
-                            </h3>
-                          </div>
-                        </div>
-                        <div className="flex-1 w-full">
-                          <div className="flex justify-start items-center space-x-3">
-                            <h3 className="text-gray-400 text-sm font-medium truncate">
-                              {date.toLocaleString('default', {
-                                month: 'long'
-                              })}{' '}
-                              {date.getFullYear()}
-                            </h3>
-                          </div>
-                        </div>
-                        <div className="flex-1 w-full">
-                          <div className="flex justify-start items-center space-x-3">
-                            <h3 className="text-gray-900 text-sm font-medium truncate">
-                              <RewatchTag reWatch={review.Rewatch}></RewatchTag>
-                            </h3>
-                          </div>
-                        </div>
-                        <div className="flex-1 w-full">
-                          <div className="flex justify-start items-center space-x-3">
-                            <h3 className="text-gray-400 text-sm font-medium truncate">
-                              <PlatformTag
-                                platform={
-                                  review['Device/Location']
-                                }></PlatformTag>
-                            </h3>
-                          </div>
-                        </div>
-
-                        <div className="flex-1 w-full">
-                          <div className="flex justify-start items-center space-x-3">
-                            <h3 className="text-gray-400 text-sm font-medium  flex space-x-2 overflow-auto">
-                              {review['Where did you watch'].map(
-                                (where, index) => {
-                                  return (
-                                    <WhereWatchTag
-                                      key={index}
-                                      platform={where}></WhereWatchTag>
-                                  )
-                                }
-                              )}
-                            </h3>
-                          </div>
+                <Card as="li" key={review.id} className="w-full">
+                  <img
+                    className="w-full object-contain h-auto"
+                    src={review.poster}
+                    alt=""
+                  />
+                  <div className="flex-1 flex flex-col w-full justify-end">
+                    <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100 group-hover:text-teal-500">
+                      <Card.Link href={`/movies/${review.Name}/${review.id}`}>
+                        {review.Name}
+                      </Card.Link>
+                    </h2>
+                    <Card.Description className="w-full">
+                      <SmallRatingComponent rating={{ ...review }} />
+                    </Card.Description>
+                    <div className="relative w-full z-20 mt-6 flex items-center text-sm font-medium text-zinc-400 dark:text-zinc-200">
+                      <div className="flex w-full max-w-[50%] items-center">
+                        <div className="flex space-x-2">
+                          <RewatchTag reWatch={review.Rewatch}></RewatchTag>
                         </div>
                       </div>
-                      <div className="w-full">
-                        <div className="-mt-px p-4 flex divide-x divide-zinc-800">
-                          {review.Tier !== 'Meta' && (
-                            <SmallRatingComponent
-                              rating={{ ...review }}></SmallRatingComponent>
-                          )}
-                        </div>
+                      <div className="flex-1 flex justify-end divide-x-2 divide-gray-500 divide-opacity-30 group-hover:text-teal-500">
+                        <p className="px-2 capitalize ">
+                          {date.toLocaleString('default', {
+                            month: 'long'
+                          })}{' '}
+                          {date.getFullYear()}
+                        </p>
                       </div>
-                    </a>
-                  </Link>
-                </li>
+                    </div>
+                  </div>
+                </Card>
               )
             })}
           </ul>

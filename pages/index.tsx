@@ -324,7 +324,7 @@ export default function Home({
           name="description"
           content=" I’m Rahul, a engineer and entrepreneur based in Bangalore.
           I’m the founder of modfy.video, where we reinventing video
-          editing to be more collaborative and accessible ."
+          editing to be more collaborative and accessible"
         />
       </Head>
       <div className="flex flex-col sm:min-h-screen">
@@ -389,7 +389,7 @@ export default function Home({
                   <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
                     I’m Rahul, a engineer and entrepreneur based in Bangalore.
                     I’m the founder of modfy.video, where we reinventing video
-                    editing to be more collaborative and accessible .
+                    editing to be more collaborative and accessible.
                   </p>
                   <div className="mt-6 flex gap-6">
                     <SocialLink
