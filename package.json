@@ -32,6 +32,7 @@
     "next": "12.2.5",
     "next-seo": "^4.24.0",
     "next-simple-google-analytics": "^1.1.0",
+    "next-ts-routes": "^0.1.6",
     "notion-client": "^4.6.4",
     "notion-types": "^4.10.0",
     "plaiceholder": "^2.4.0",
@@ -46,7 +47,7 @@
     "scrollex": "^2.0.0",
     "simple-linear-interpolation": "^1.0.6",
     "tailwindcss": "^3.1.5",
-    "typewriter-effect": "^2.17.0"
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@modfy/eslint": "^0.1.1",

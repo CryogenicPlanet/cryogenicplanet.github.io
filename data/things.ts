@@ -21,6 +21,15 @@ const unsortedThings: Array<{
   year: number
 }> = [
   {
+    title: 'hoveddisplay',
+    url: 'https://github.com/CryogenicPlanet/hoveddisplay',
+    year: 2022,
+    type: 'technical',
+    githubUrl: 'https://github.com/CryogenicPlanet/hoveddisplay',
+    description:
+      'macOS command line utility to pragmatically change main display'
+  },
+  {
     title: 'Typed Routes',
     url: 'https://github.com/CryogenicPlanet/typed-routes',
     githubUrl: 'https://github.com/CryogenicPlanet/typed-routes',

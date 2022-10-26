@@ -1,12 +1,17 @@
 import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import Image from 'next/future/image'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
 
 import { Header } from '@components/Header'
 import { view } from '@risingstack/react-easy-state'
 import { state } from '@utils/store'
+import {
+  useIsomorphicLayoutEffect,
+  useScrollHeight,
+  useWindowSize
+} from '@utils/useWindowSize'
 
 import 'prismjs'
 import 'prismjs/components/prism-markup'
@@ -48,39 +53,20 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
 
   const isHome = pathName === '/' || pathName === '/new'
 
-  const [vhMultiplier, setVhMultiplier] = useState(1)
+  const scrollHeight = useScrollHeight()
+  const { height } = useWindowSize()
 
-  const resizeHandler = useCallback(() => {
-    const height = Math.max(
-      document.body.scrollHeight,
-      document.documentElement.scrollHeight,
-      document.body.offsetHeight,
-      document.documentElement.offsetHeight,
-      document.documentElement.clientHeight
-    )
+  const [vhMultiplier, setVhMultiplier] = useState(-1)
 
-    const vh = window.innerHeight
-    const multiplier = Math.floor(height / vh)
-    setVhMultiplier(multiplier)
-  }, [])
+  useIsomorphicLayoutEffect(() => {
+    if (vhMultiplier !== -1) return
 
-  useEffect(() => {
-    if (state.noImageBg) return
-    setVhMultiplier(1)
-    setTimeout(() => {
-      resizeHandler()
-    }, 200)
-  }, [pathName, resizeHandler])
+    const multiplier = Math.floor(scrollHeight / height)
 
-  useEffect(() => {
-    if (state.noImageBg) return
-    resizeHandler()
-    window.addEventListener('resize', resizeHandler)
+    if (multiplier > 0) setVhMultiplier(multiplier)
+  }, [height, scrollHeight])
 
-    return () => {
-      window.removeEventListener('resize', resizeHandler)
-    }
-  }, [resizeHandler])
+  console.log({ vhMultiplier, height, scrollHeight })
 
   return (
     <>
@@ -120,7 +106,7 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
         </div>
       )}
 
-      <div className="relative w-full min-w-[100vw] ">
+      <div className="relative w-full overflow-x-hidden">
         <Header />
 
         <div className="fixed inset-0 flex justify-center sm:px-8">
@@ -138,9 +124,10 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
         <Toaster position="top-right"></Toaster>
         <main
           className={clsx(
-            'relative w-full transition-opacity duration-700 ease-in-out',
+            'relative  w-full transition-opacity duration-700 ease-in-out',
             state.showBg && 'opacity-20'
           )}>
+          {/* @ts-ignore */}
           <Component previousPathname={previousPathname} {...pageProps} />
         </main>
         {/* <Footer /> */}

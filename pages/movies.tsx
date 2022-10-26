@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 
 import { Card } from '@components/Card'
 import Layout from '@components/Layout'
@@ -10,6 +10,8 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Movie } from '@interfaces/index'
 import { view } from '@risingstack/react-easy-state'
 import { getAllMovies } from '@utils/blog'
+
+import { getPoster } from './api/movies/poster'
 
 export const Movies = view(({ reviews }: { reviews: Movie[] }) => {
   const uniqueMovies = useMemo(
@@ -142,13 +144,10 @@ export const getStaticProps = async () => {
       .map(async m => {
         try {
           if (m.posterOverwrite) return { ...m, poster: m.posterOverwrite }
-          const data = await fetch(
-            `https://omdbapi.com/?apikey=1d933979&s=${m.Name}&type=movie&${
-              m['2022 Release'] ? 'y=2022' : ''
-            }`
-          ).then(res => res.json())
-
-          const poster = data.Search[0].Poster
+          const poster = await getPoster({
+            name: m.Name,
+            release2022: m['2022 Release'] ? 'true' : 'false'
+          })
 
           if (!poster) return m
 

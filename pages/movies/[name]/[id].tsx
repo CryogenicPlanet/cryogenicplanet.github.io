@@ -2,8 +2,9 @@ import { useRouter } from 'next/router'
 import { GetServerSidePropsContext } from 'next/types'
 import { NotionAPI } from 'notion-client'
 import { ExtendedRecordMap } from 'notion-types'
+import { getPoster } from 'pages/api/movies/poster'
 import { Movies } from 'pages/movies'
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 
 import Layout from '@components/Layout'
 import { PlatformTag, RewatchTag, WhereWatchTag } from '@components/Movie'
@@ -202,13 +203,11 @@ export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
         .map(async m => {
           try {
             if (m.posterOverwrite) return { ...m, poster: m.posterOverwrite }
-            const data = await fetch(
-              `https://omdbapi.com/?apikey=1d933979&s=${m.Name}&type=movie&${
-                m['2022 Release'] ? 'y=2022' : ''
-              }`
-            ).then(res => res.json())
 
-            const poster = data.Search[0].Poster
+            const poster = await getPoster({
+              name: m.Name,
+              release2022: m['2022 Release'] ? 'true' : 'false'
+            })
 
             if (!poster) return m
 

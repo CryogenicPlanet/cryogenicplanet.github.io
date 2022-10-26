@@ -32,4 +32,6 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig
+const withNextTsRoutes = require('next-ts-routes').withNextTsRoutes
+
+module.exports = withNextTsRoutes(nextConfig)
