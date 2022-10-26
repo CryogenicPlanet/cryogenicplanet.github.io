@@ -135,6 +135,10 @@ export const Movies = view(({ reviews }: { reviews: Movie[] }) => {
 })
 
 export const getStaticProps = async () => {
+  const HOST = process.env.HOST || process.env.NEXT_PUBLIC_HOST
+
+  console.log({ HOST })
+
   try {
     const reviews = (await getAllMovies())
       .filter(m => m.Tier !== "Didn't finish - Not necessarily bad")
@@ -148,11 +152,13 @@ export const getStaticProps = async () => {
             name: m.Name,
             release2022: m['2022 Release'] ? 'true' : 'false'
           })
+          console.log('Poster for ', m.Name, poster)
 
           if (!poster) return m
 
           return { ...m, poster: poster }
         } catch (err) {
+          console.error(err)
           return m
         }
       })

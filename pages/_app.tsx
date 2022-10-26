@@ -66,8 +66,6 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
     if (multiplier > 0) setVhMultiplier(multiplier)
   }, [height, scrollHeight])
 
-  console.log({ vhMultiplier, height, scrollHeight })
-
   return (
     <>
       {!state.noImageBg && (

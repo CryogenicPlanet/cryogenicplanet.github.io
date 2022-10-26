@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next'
 import Img from 'next/future/image'
 import Link from 'next/link'
-import React from 'react'
 
 import Layout from '@components/Layout'
 import { SimpleLayout } from '@components/SimpleLayout'

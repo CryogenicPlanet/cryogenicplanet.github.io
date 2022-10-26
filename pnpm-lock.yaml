@@ -27,7 +27,7 @@ specifiers:
   next: 12.2.5
   next-seo: ^4.24.0
   next-simple-google-analytics: ^1.1.0
-  next-ts-routes: 0.1.7
+  next-ts-routes: 0.1.8
   notion-client: ^4.6.4
   notion-types: ^4.10.0
   plaiceholder: ^2.4.0
@@ -66,7 +66,7 @@ dependencies:
   next: 12.2.5_react-dom@17.0.2+react@17.0.2
   next-seo: 4.24.0_7e5936498ac221c2b911b8be658c4961
   next-simple-google-analytics: 1.1.0_next@12.2.5+react@17.0.2
-  next-ts-routes: 0.1.7_next@12.2.5
+  next-ts-routes: 0.1.8_next@12.2.5
   notion-client: 4.6.4
   notion-types: 4.10.0
   plaiceholder: 2.4.0_sharp@0.30.7
@@ -4491,8 +4491,8 @@ packages:
       react: 17.0.2
     dev: false
 
-  /next-ts-routes/0.1.7_next@12.2.5:
-    resolution: {integrity: sha512-r8rlFFoiZRT8pQiY7CAkgubD87Ar3J1Dj8OiZRQzmcj/BplmemX+AqvwqJMTVstEjH+0rblnLB+IoTFHLEdFRA==}
+  /next-ts-routes/0.1.8_next@12.2.5:
+    resolution: {integrity: sha512-Peq+8pGeWs6H9Khj1ueR9BR3XOkVVlYs7ksWjOj5OsE7aGqSq8sx7mmHHL0t1AiKhUd3ZMuWV1qPU0KpazPVlw==}
     peerDependencies:
       next: ^12.3.1
     dependencies:

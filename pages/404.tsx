@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { view } from '@risingstack/react-easy-state'
 import { state } from '@utils/store'

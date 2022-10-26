@@ -25,6 +25,8 @@ const { handler, get } = route('api/movies/poster', {
   ) => {
     const { name, release2022 } = input
 
+    console.log('Get poster of name', name)
+
     const data = await fetch(
       `https://omdbapi.com/?apikey=${API_KEYS[0]}&s=${name}&type=movie&${
         release2022 === 'true' ? 'y=2022' : ''

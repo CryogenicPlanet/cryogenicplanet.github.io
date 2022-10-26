@@ -5,7 +5,6 @@ import Link from 'next/link'
 import React, { useEffect, useRef } from 'react'
 import { isMobile } from 'react-device-detect'
 import toast from 'react-hot-toast'
-// import { Card } from '@components/Card'
 import { linearInterpolation } from 'simple-linear-interpolation'
 
 import { Button } from '@components/Button'
@@ -95,6 +94,7 @@ function SocialLink({
   return (
     // @ts-expect-error
     <Link className="group -m-1 p-1" {...props}>
+      {/* @ts-ignore */}
       <Icon className="h-6 w-6 fill-zinc-500 text-zinc-400 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
     </Link>
   )

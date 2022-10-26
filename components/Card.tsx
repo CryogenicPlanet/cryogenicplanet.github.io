@@ -19,7 +19,7 @@ function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 export function Card({
-  as: Component = 'div',
+  as: Element = 'div',
   className,
   children
 }: {
@@ -27,10 +27,11 @@ export function Card({
   className?: string
 } & React.ComponentProps<'div'>) {
   return (
-    <Component
+    // @ts-ignore
+    <Element
       className={clsx(className, 'group relative flex flex-col items-start')}>
       {children}
-    </Component>
+    </Element>
   )
 }
 
@@ -56,6 +57,7 @@ Card.Title = function CardTitle({
   children
 }: { as?: React.ElementType; href?: string } & React.ComponentProps<'h2'>) {
   return (
+    // @ts-ignore`
     <Component className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
       {href ? <Card.Link href={href}>{children}</Card.Link> : children}
     </Component>
@@ -103,6 +105,7 @@ Card.Eyebrow = function CardEyebrow({
   className?: string
 } & React.ComponentProps<'p'>) {
   return (
+    // @ts-ignore
     <Component
       className={clsx(
         className,
