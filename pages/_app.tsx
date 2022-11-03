@@ -34,6 +34,7 @@ import '@styles/global.css'
 import '@styles/animation.css'
 import '@styles/prismaTheme.css'
 import '@cryogenicplanet/react-notion-x/src/styles.css'
+import '@tremor/react/dist/esm/tremor.css'
 
 const images = [sky, dubai, sunset, bg2, bg]
 

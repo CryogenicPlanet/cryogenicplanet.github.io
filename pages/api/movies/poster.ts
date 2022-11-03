@@ -25,10 +25,12 @@ const { handler, get } = route('api/movies/poster', {
   ) => {
     const { name, release2022 } = input
 
-    console.log('Get poster of name', name)
+    const idx = Math.floor(Math.random() * API_KEYS.length)
+
+    const key = idx < API_KEYS.length ? API_KEYS[idx]! : API_KEYS[0]!
 
     const data = await fetch(
-      `https://omdbapi.com/?apikey=${API_KEYS[0]}&s=${name}&type=movie&${
+      `https://omdbapi.com/?apikey=${key}&s=${name}&type=movie&${
         release2022 === 'true' ? 'y=2022' : ''
       }`
     ).then(res => res.json())

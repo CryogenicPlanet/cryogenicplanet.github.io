@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { GetServerSidePropsContext } from 'next/types'
 import { NotionAPI } from 'notion-client'
 import { ExtendedRecordMap } from 'notion-types'
-import { getPoster } from 'pages/api/movies/poster'
+import { getReviews } from 'pages/api/movies/reviews'
 import { Movies } from 'pages/movies'
 import { Fragment } from 'react'
 
@@ -192,31 +192,7 @@ export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
   }
 
   try {
-    const reviews = await Promise.all(
-      (
-        await getAllMovies()
-      )
-        .filter(m => m.Tier !== "Didn't finish - Not necessarily bad")
-        .sort((a, b) => {
-          return new Date(b.Seen).getTime() - new Date(a.Seen).getTime()
-        })
-        .map(async m => {
-          try {
-            if (m.posterOverwrite) return { ...m, poster: m.posterOverwrite }
-
-            const poster = await getPoster({
-              name: m.Name,
-              release2022: m['2022 Release'] ? 'true' : 'false'
-            })
-
-            if (!poster) return m
-
-            return { ...m, poster: poster }
-          } catch (err) {
-            return m
-          }
-        })
-    )
+    const reviews = await getReviews()
 
     const movie = reviews.filter(
       m => m.id === params?.id || m.id.replace('-', '') === params?.id
