@@ -1,11 +1,11 @@
 import clsx from 'clsx'
 import { AppProps } from 'next/app'
-import Image from 'next/future/image'
 import { useEffect, useRef, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
 
 import { Header } from '@components/Header'
 import { view } from '@risingstack/react-easy-state'
+import { classNames } from '@utils/classNames'
 import { state } from '@utils/store'
 import {
   useIsomorphicLayoutEffect,
@@ -20,8 +20,9 @@ import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-json'
 
-import bg from '../public/images/home/bg.jpg'
-import bg2 from '../public/images/home/bg2.jpg'
+import mysuru from '../public/images/home/bg.jpg'
+import dubaiBeach from '../public/images/home/bg2.jpg'
+import bg from '../public/images/home/color-bleed.jpg'
 import dubai from '../public/images/home/dubai.jpeg'
 import sky from '../public/images/home/sky.jpeg'
 import sunset from '../public/images/home/sunsetLandscape.jpeg'
@@ -36,7 +37,13 @@ import '@styles/prismaTheme.css'
 import '@cryogenicplanet/react-notion-x/src/styles.css'
 import '@tremor/react/dist/esm/tremor.css'
 
-const images = [sky, dubai, sunset, bg2, bg]
+const images = [sky, dubai, sunset, dubaiBeach, mysuru]
+
+const randomImage = () => {
+  const idx = Math.floor(Math.random() * images.length)
+
+  return idx < images.length ? images[idx]! : images[0]!
+}
 
 function usePrevious(value: string) {
   const ref = useRef<string>()
@@ -68,44 +75,18 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
   }, [height, scrollHeight])
 
   return (
-    <>
-      {!state.noImageBg && (
-        <div className="absolute inset-0 hidden sm:block max-w-[100vw]">
-          <div className="flex flex-col items-center justify-center bg-black">
-            {isHome ? (
-              <>
-                <Image
-                  src={bg}
-                  className="object-cover filter blur-lg min-h-screen h-full w-full"
-                />
-                <Image
-                  src={bg2}
-                  className="object-cover filter blur-lg min-h-screen h-full w-full"
-                />
-              </>
-            ) : (
-              <>
-                {vhMultiplier > 0 &&
-                  Array(vhMultiplier || 1)
-                    .fill(0)
-                    .map((_, index) => {
-                      const idx = index % images.length
-
-                      return (
-                        <Image
-                          key={index}
-                          src={images[idx]!}
-                          className="object-cover filter blur-lg min-h-screen h-full w-full"
-                        />
-                      )
-                    })}
-              </>
-            )}
-          </div>
-        </div>
-      )}
-
-      <div className="relative w-full overflow-x-hidden">
+    <div className="grid bg-black">
+      <div
+        className={classNames(
+          'stackedLayer relative bg-cover min-h-screen  bg-center bg-fixed	w-full overflow-x-hidden',
+          isHome ? '' : 'filter blur-md'
+        )}
+        style={{
+          backgroundImage: isHome
+            ? `url(${bg.src})`
+            : `url(${randomImage().src})`
+        }}></div>
+      <div className="relative stackedLayer  w-full overflow-x-hidden ">
         <Header />
 
         <div className="fixed inset-0 flex justify-center sm:px-8">
@@ -131,7 +112,7 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
         </main>
         {/* <Footer /> */}
       </div>
-    </>
+    </div>
   )
 }
 
