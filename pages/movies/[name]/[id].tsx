@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import { GetServerSidePropsContext } from 'next/types'
 import { NotionAPI } from 'notion-client'
 import { ExtendedRecordMap } from 'notion-types'
-import { getReviews } from 'pages/api/movies/reviews'
 import { Movies } from 'pages/movies'
 import { Fragment } from 'react'
 
@@ -14,6 +13,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Movie } from '@interfaces/index'
 import { getAllMovies } from '@utils/blog'
+import { getReviewsStaticProps } from '@utils/reviews'
 
 const notion = new NotionAPI()
 
@@ -192,7 +192,9 @@ export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
   }
 
   try {
-    const reviews = await getReviews()
+    const { reviews } = await getReviewsStaticProps()
+
+    if (!reviews) return { props: { notFound: true } }
 
     const movie = reviews.filter(
       m => m.id === params?.id || m.id.replace('-', '') === params?.id

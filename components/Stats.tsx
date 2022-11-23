@@ -32,7 +32,9 @@ export const generateStats = (reviews: Movie[]): Stats => {
   }
   for (const review of reviews) {
     const device = review['Device/Location']
-    deviceObj[device].value += 1
+    if (deviceObj[device]) {
+      deviceObj[device].value += 1
+    }
   }
 
   const devices = Object.values(deviceObj).sort((a, b) => b.value - a.value)
@@ -64,10 +66,18 @@ export const generateStats = (reviews: Movie[]): Stats => {
   for (const review of reviews) {
     const platformNames = review['Where did you watch']
 
-    for (const platformName of platformNames) {
-      if (platformName in platforms) {
-        // @ts-ignore
-        platforms[platformName].value += 1
+    if (Array.isArray(platformNames)) {
+      for (const platformName of platformNames) {
+        // @ts-expect-error
+        if (platformName in platforms && platforms[platformName]) {
+          // @ts-expect-error
+          platforms[platformName]!.value += 1
+        }
+      }
+    } else if (typeof platformNames === 'string') {
+      if (platformNames in platforms && platforms[platformNames]) {
+        // @ts-expect-error
+        platforms[platformNames]!.value += 1
       }
     }
   }
@@ -94,7 +104,7 @@ export const generateStats = (reviews: Movie[]): Stats => {
     const date = new Date(seen)
     const month = date.getMonth()
 
-    if (month in months) {
+    if (months[month]) {
       months[month]!.value += 1
     }
   }

@@ -11,7 +11,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Movie } from '@interfaces/index'
 import { view } from '@risingstack/react-easy-state'
 
-import { getReviews } from './api/movies/reviews'
+import { getReviewsStaticProps } from '../utils/reviews'
 
 export const Movies = view(
   ({
@@ -125,18 +125,14 @@ export const Movies = view(
 )
 
 export const getStaticProps = async () => {
-  try {
-    const reviews = await getReviews()
+  const { reviews } = await getReviewsStaticProps()
 
-    return {
-      props: {
-        reviews: reviews,
-        stats: generateStats(reviews)
-      },
-      revalidate: 1
-    }
-  } catch (err) {
-    console.error(err)
+  return {
+    props: {
+      reviews: reviews,
+      stats: generateStats(reviews)
+    },
+    revalidate: 1
   }
 }
 

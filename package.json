@@ -33,7 +33,7 @@
     "next": "12.2.5",
     "next-seo": "^4.24.0",
     "next-simple-google-analytics": "^1.1.0",
-    "next-ts-routes": "0.1.8",
+    "next-ts-routes": "0.1.10",
     "notion-client": "^4.6.4",
     "notion-types": "^4.10.0",
     "plaiceholder": "^2.4.0",

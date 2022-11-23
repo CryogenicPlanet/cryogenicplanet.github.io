@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 export interface Post {
   id: string
   name: string
@@ -116,3 +118,26 @@ export interface Search {
   Type: string
   Poster: string
 }
+
+export const ratingSchema = z.object({
+  Enjoyment: z.string(),
+  Quality: z.string(),
+  Disappointment: z.string()
+})
+
+export const movieDeviceSchema = z.any()
+
+export const movieWhereWatchSchema = z.any()
+
+export const movieSchema = ratingSchema.extend({
+  id: z.string(),
+  Name: z.string(),
+  Tier: z.string(),
+  poster: z.string().optional(),
+  Seen: z.string(),
+  '2022 Release': z.boolean(),
+  'Where did you watch': z.array(movieWhereWatchSchema),
+  'Device/Location': movieDeviceSchema,
+  Rewatch: z.boolean(),
+  posterOverwrite: z.string()
+})
