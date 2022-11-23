@@ -11,7 +11,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Movie } from '@interfaces/index'
 import { view } from '@risingstack/react-easy-state'
 
-import { getReviewsStaticProps } from '../utils/reviews'
+import { getReviewsISR } from '../utils/reviews'
 
 export const Movies = view(
   ({
@@ -125,7 +125,7 @@ export const Movies = view(
 )
 
 export const getStaticProps = async () => {
-  const { reviews } = await getReviewsStaticProps()
+  const { reviews } = await getReviewsISR()
 
   return {
     props: {

@@ -28,6 +28,15 @@ export const getReviewsStaticProps = async () => {
   }
 }
 
+export const getReviewsISR = async () => {
+  try {
+    await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/health`)
+    return getReviews(false)
+  } catch {
+    return getReviewsStaticProps()
+  }
+}
+
 export const getReviews = async (getStaticProps?: boolean) => {
   const movies = await getAllMovies()
 

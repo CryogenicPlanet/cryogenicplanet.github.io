@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { GetServerSidePropsContext } from 'next/types'
+import { GetStaticProps } from 'next/types'
 import { NotionAPI } from 'notion-client'
 import { ExtendedRecordMap } from 'notion-types'
 import { Movies } from 'pages/movies'
@@ -13,7 +13,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Movie } from '@interfaces/index'
 import { getAllMovies } from '@utils/blog'
-import { getReviewsStaticProps } from '@utils/reviews'
+import { getReviewsISR } from '@utils/reviews'
 
 const notion = new NotionAPI()
 
@@ -184,15 +184,17 @@ export default function MoviePage({
   )
 }
 
-export const getStaticProps = async ({ params }: GetServerSidePropsContext) => {
+export const getStaticProps: GetStaticProps = async ctx => {
   // Get all posts again
+
+  const { params } = ctx
 
   if (!params?.id) {
     return { props: { notFound: true } }
   }
 
   try {
-    const { reviews } = await getReviewsStaticProps()
+    const { reviews } = await getReviewsISR()
 
     if (!reviews) return { props: { notFound: true } }
 
