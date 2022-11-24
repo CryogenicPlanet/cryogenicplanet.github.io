@@ -52,16 +52,18 @@ export const Movies = view(
             </p>
 
             <Disclosure defaultOpen={openStats}>
-              <Disclosure.Button className="max-w-3xl mt-2 mx-auto text-base text-gray-500 flex space-x-2">
-                So far this year {`I've`} seen {reviews.length} movies.
-                <span className="flex pl-2 hover:text-gray-300 items-center space-x-2">
+              <Disclosure.Button className="max-w-3xl mt-2 mx-auto text-base text-gray-500 flex sm:flex-row flex-col items-center space-y-2 sm:space-x-2">
+                <p>
+                  So far this year {`I've`} seen {reviews.length} movies.
+                </p>
+                <span className="flex sm:pl-2 hover:text-gray-300 items-center space-x-2">
                   More stats
                   <ChevronDownIcon className="w-4 h-4"></ChevronDownIcon>
                 </span>
               </Disclosure.Button>
-              <Disclosure.Panel className="text-gray-500 flex flex-col text-left justify-start max-w-5xl mx-auto px-20">
+              <Disclosure.Panel className="text-gray-500 flex flex-col text-left justify-start sm:max-w-5xl w-full mx-0 sm:mx-auto sm:px-20">
                 <div className="py-5"></div>
-                <div className="bg-slate-50 px-10 py-4 shadow-xl rounded-2xl">
+                <div className="bg-slate-50 px-4 sm:px-10 py-4 shadow-xl rounded-2xl">
                   <div className="flex w-full">
                     <p className="text-2xl flex-1 flex justify-start text-gray-900 font-semibold">
                       Movie Stats

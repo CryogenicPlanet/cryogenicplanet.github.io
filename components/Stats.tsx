@@ -128,7 +128,7 @@ export const StatComponent = ({
 }) => {
   const { devices, types, where, moviesByMonth } = stats
   return (
-    <div className="grid md:grid-cols-3 gap-x-8 gap-y-2">
+    <div className="sm:grid flex flex-col md:grid-cols-3 gap-x-8 gap-y-2">
       <Block>
         <p className="mt-8 text-base text-gray-700 font-bold">
           Device or Location (#)

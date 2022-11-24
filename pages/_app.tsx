@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import { useEffect, useRef, useState } from 'react'
+import { isMobile } from 'react-device-detect'
 import { Toaster } from 'react-hot-toast'
 
 import { Header } from '@components/Header'
@@ -75,20 +76,23 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
   }, [height, scrollHeight])
 
   return (
-    <div className="grid bg-black">
+    <div className="grid bg-zinc-900 sm:bg-black">
       <div
         className={classNames(
           'stackedLayer relative bg-cover min-h-screen  bg-center bg-fixed	w-full overflow-x-hidden',
           isHome ? '' : 'filter blur-md'
         )}
-        style={{
-          backgroundImage: isHome
-            ? `url(${bg.src})`
-            : `url(${randomImage().src})`
-        }}></div>
+        style={
+          isMobile
+            ? {}
+            : {
+                backgroundImage: isHome
+                  ? `url(${bg.src})`
+                  : `url(${randomImage().src})`
+              }
+        }></div>
       <div className="relative stackedLayer  w-full overflow-x-hidden ">
         <Header />
-
         <div className="fixed inset-0 flex justify-center sm:px-8">
           <div className="flex w-full max-w-7xl lg:px-8">
             <div
@@ -107,10 +111,8 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
             'relative  w-full transition-opacity duration-700 ease-in-out',
             state.showBg && 'opacity-20'
           )}>
-          {/* @ts-ignore */}
           <Component previousPathname={previousPathname} {...pageProps} />
         </main>
-        {/* <Footer /> */}
       </div>
     </div>
   )

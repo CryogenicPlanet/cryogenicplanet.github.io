@@ -261,6 +261,10 @@ export default function Home({
     }
 
     function updateAvatarStyles() {
+      if (isMobile) {
+        return
+      }
+
       const fromScale = 1
       const toScale = isMobile ? 1 / 2 : 8 / 64
 

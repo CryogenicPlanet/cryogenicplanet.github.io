@@ -224,6 +224,8 @@ export const Header = () => {
   const isInitial = useRef(true)
 
   useEffect(() => {
+    if (isMobile) return
+
     const downDelay = avatarRef.current?.offsetTop ?? 0
     const upDelay = 64
 
