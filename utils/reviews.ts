@@ -50,9 +50,9 @@ export const getReviews = async (getStaticProps?: boolean) => {
     .map(m => ({
       ...m,
       score: computeScore(m),
-      disappointmentScore: m.Disappointment ? parseInt(m.Disappointment) : 0,
-      qualityScore: parseInt(m.Quality),
-      enjoymentScore: parseInt(m.Enjoyment)
+      disappointmentScore: m.Disappointment ? parseFloat(m.Disappointment) : 0,
+      qualityScore: parseFloat(m.Quality),
+      enjoymentScore: parseFloat(m.Enjoyment)
     }))
     .map(async m => {
       try {

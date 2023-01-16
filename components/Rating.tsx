@@ -93,9 +93,9 @@ const RatingComponent = ({ rating }: { rating: Rating }) => {
 export const computeScore = (rating: RawRating) => {
   const { Enjoyment, Quality, Disappointment } = rating
 
-  const enjoymentScore = parseInt(Enjoyment)
-  const qualityScore = parseInt(Quality)
-  const disappointmentScore = parseInt(Disappointment)
+  const enjoymentScore = parseFloat(Enjoyment)
+  const qualityScore = parseFloat(Quality)
+  const disappointmentScore = Disappointment ? parseFloat(Disappointment) : 0
 
   return (qualityScore + enjoymentScore) / (20 + disappointmentScore)
 }
