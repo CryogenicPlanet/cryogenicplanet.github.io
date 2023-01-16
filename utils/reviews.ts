@@ -1,6 +1,7 @@
 import { promises } from 'fs'
 import path from 'path'
 
+import { addPosterToPage } from 'lib/notion'
 import z from 'zod'
 
 import { computeScore } from '@components/Rating'
@@ -65,6 +66,8 @@ export const getReviews = async (getStaticProps?: boolean) => {
         })
 
         if (!poster) return m
+
+        addPosterToPage(m.id, poster)
 
         return { ...m, poster: poster }
       } catch (err) {

@@ -2,7 +2,7 @@
 import { route, RouteError } from 'next-ts-routes'
 import { z } from 'zod'
 
-export const POSTER_API_KEYS = ['71788799', '1d933979']
+export const POSTER_API_KEYS = ['71788799', '1d933979', 'bfb4ad6b']
 
 export const posterApiSchema = z.object({
   Search: z.array(
