@@ -5,12 +5,12 @@ import {
   CalloutBlock as CalloutBlockType,
   ExtendedRecordMap
 } from 'notion-types'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { CopyBlock, tomorrowNight } from 'react-code-blocks'
 
 import Layout from '@components/Layout'
 import PostTitle from '@components/PostTitle'
-import RatingComponent from '@components/Rating'
+import RatingComponent, { computeScore } from '@components/Rating'
 import { Equation, NotionRenderer } from '@cryogenicplanet/react-notion-x'
 import { RawRating } from '@interfaces/index'
 import { view } from '@risingstack/react-easy-state'
@@ -84,7 +84,16 @@ const CalloutBlock = ({ block }: { block: CalloutBlockType }) => {
     }
   }
 
-  return <RatingComponent rating={rating}></RatingComponent>
+  return (
+    <RatingComponent
+      rating={{
+        ...rating,
+        disappointmentScore: parseInt(rating.Disappointment),
+        enjoymentScore: parseInt(rating.Enjoyment),
+        qualityScore: parseInt(rating.Quality),
+        score: computeScore(rating)
+      }}></RatingComponent>
+  )
 }
 
 const CodeBlock = ({ code, language }: { code: string; language: string }) => {

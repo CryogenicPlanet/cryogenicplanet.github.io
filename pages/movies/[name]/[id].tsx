@@ -6,7 +6,7 @@ import Layout from '@components/Layout'
 import { PlatformTag, RewatchTag, WhereWatchTag } from '@components/Movie'
 import { SmallRatingComponent } from '@components/Rating'
 import { NotionRenderer } from '@cryogenicplanet/react-notion-x'
-import { RawMovie } from '@interfaces/index'
+import { Movie } from '@interfaces/index'
 import { getAllMovies } from '@utils/blog'
 import { getReviewsISR } from '@utils/reviews'
 
@@ -16,7 +16,7 @@ export default function MoviePage({
   movie,
   recordMap
 }: {
-  movie: RawMovie
+  movie: Movie
   recordMap: ExtendedRecordMap
 }) {
   if (!movie) return null

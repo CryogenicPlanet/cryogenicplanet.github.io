@@ -24,9 +24,10 @@ import image4 from '@images/home/boat.jpeg'
 import avatarImage from '@images/home/headshot.jpeg'
 import image2 from '@images/home/stark.jpeg'
 import image3 from '@images/home/sunset.jpeg'
-import { Post, RawMovie } from '@interfaces/index'
-import { getAllMovies, getAllPosts } from '@utils/blog'
+import { Movie, Post } from '@interfaces/index'
+import { getAllPosts } from '@utils/blog'
 import { clsx, formatDate } from '@utils/date'
+import { getReviews } from '@utils/reviews'
 
 function MailIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -124,7 +125,7 @@ function Contact() {
   )
 }
 
-function Movies({ movies }: { movies: RawMovie[] }) {
+function Movies({ movies }: { movies: Movie[] }) {
   return (
     <div className="rounded-2xl hidden sm:block border border-zinc-100 p-6 dark:border-zinc-700/40">
       <a
@@ -249,7 +250,7 @@ export default function Home({
   movies
 }: {
   posts: Post[]
-  movies: RawMovie[]
+  movies: Movie[]
 }) {
   const avatarRef = useRef<HTMLDivElement | null>(null)
 
@@ -458,14 +459,14 @@ export const getStaticProps = async () => {
       return bDate.getTime() - aDate.getTime()
     })
 
-    const movies = await getAllMovies()
+    const { reviews } = await getReviews()
 
     const posts = dynamicPosts.slice(0, 5)
 
     return {
       props: {
         posts: posts,
-        movies: movies.slice(0, 5)
+        movies: reviews.slice(0, 5)
       },
       revalidate: 1
     }

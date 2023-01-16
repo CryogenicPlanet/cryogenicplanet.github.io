@@ -2,9 +2,9 @@ import { Movies } from 'pages/movies'
 
 import Layout from '@components/Layout'
 import { Stats } from '@components/Stats'
-import { RawMovie } from '@interfaces/index'
+import { Movie } from '@interfaces/index'
 
-const MoviePage = ({ reviews, stats }: { reviews: RawMovie[]; stats: Stats }) => {
+const MoviePage = ({ reviews, stats }: { reviews: Movie[]; stats: Stats }) => {
   return (
     <Layout
       title="Movies | Rahul Tarak"
