@@ -3,7 +3,8 @@ import path from 'path'
 
 import z from 'zod'
 
-import { Movie, movieSchema } from '@interfaces/index'
+import { computeScore } from '@components/Rating'
+import { movieSchema, RawMovie } from '@interfaces/index'
 import { getAllMovies } from '@utils/blog'
 
 import { getPoster } from './getPoster'
@@ -16,7 +17,7 @@ export const getReviewsStaticProps = async () => {
 
     const reviews = z
       .array(movieSchema)
-      .parse(await promises.readFile(reviewsPath, 'utf8')) as Movie[]
+      .parse(await promises.readFile(reviewsPath, 'utf8')) as RawMovie[]
 
     return { reviews }
   } catch {
@@ -45,6 +46,13 @@ export const getReviews = async (getStaticProps?: boolean) => {
     .sort((a, b) => {
       return new Date(b.Seen).getTime() - new Date(a.Seen).getTime()
     })
+    .map(m => ({
+      ...m,
+      score: computeScore(m),
+      disappointmentScore: m.Disappointment ? parseInt(m.Disappointment) : 0,
+      qualityScore: parseInt(m.Quality),
+      enjoymentScore: parseInt(m.Enjoyment)
+    }))
     .map(async m => {
       try {
         if (m.posterOverwrite) return { ...m, poster: m.posterOverwrite }

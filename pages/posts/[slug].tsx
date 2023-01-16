@@ -12,7 +12,7 @@ import Layout from '@components/Layout'
 import PostTitle from '@components/PostTitle'
 import RatingComponent from '@components/Rating'
 import { Equation, NotionRenderer } from '@cryogenicplanet/react-notion-x'
-import { Rating } from '@interfaces/index'
+import { RawRating } from '@interfaces/index'
 import { view } from '@risingstack/react-easy-state'
 import { getAllPosts, Post } from '@utils/blog'
 import { state } from '@utils/store'
@@ -63,7 +63,7 @@ const CalloutBlock = ({ block }: { block: CalloutBlockType }) => {
   const text = block.properties.title[0]![0]!
   const lines = text.split('\n')
 
-  const rating: Rating = { Enjoyment: '', Disappointment: '', Quality: '' }
+  const rating: RawRating = { Enjoyment: '', Disappointment: '', Quality: '' }
 
   for (const line of lines) {
     if (line.includes('Enjoyment')) {

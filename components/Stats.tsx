@@ -1,12 +1,18 @@
-import { Movie } from '@interfaces/index'
-import { BarChart, BarList, Block } from '@tremor/react'
+import { useState } from 'react'
+
+import { RawMovie, ReleaseYear, UsableReleaseYear } from '@interfaces/index'
+import { BarChart, BarList, Block, Tab, TabList } from '@tremor/react'
 import { Review } from '@utils/blog'
 
-export type Stats = {
+export type SingleYearStats = {
   devices: BarListData[]
   types: BarListData[]
   where: BarListData[]
   moviesByMonth: BarListData[]
+}
+
+export type Stats = { all: SingleYearStats } & {
+  [_ in Exclude<ReleaseYear, 'Pre 2022'>]: SingleYearStats
 }
 
 type BarListData = {
@@ -21,7 +27,29 @@ const dataFormatter = (number: number) => {
   return Intl.NumberFormat('us').format(number).toString()
 }
 
-export const generateStats = (reviews: Movie[]): Stats => {
+export const generateStats = (reviews: RawMovie[]): Stats => {
+  const all = generateStatsForOneYear(reviews, 'all')
+
+  const twentyTwentyTwo = generateStatsForOneYear(
+    reviews.filter(r => new Date(r.Seen).getFullYear() === 2022),
+    '2022'
+  )
+  const twentyTwentyThree = generateStatsForOneYear(
+    reviews.filter(r => new Date(r.Seen).getFullYear() === 2023),
+    '2023'
+  )
+
+  return {
+    all,
+    '2022': twentyTwentyTwo,
+    '2023': twentyTwentyThree
+  }
+}
+
+export const generateStatsForOneYear = (
+  reviews: RawMovie[],
+  year: Exclude<ReleaseYear, 'Pre 2022'> | 'all'
+): SingleYearStats => {
   const deviceObj: Record<Review['Device/Location'], BarListData> = {
     '💺Imax': { name: '💺Imax', value: 0 },
     '🛋️ Private theatre': { name: '🛋️ Private theatre', value: 0 },
@@ -44,15 +72,20 @@ export const generateStats = (reviews: Movie[]): Stats => {
   )
   const firstWatch = reviews.filter(review => review.Rewatch !== true)
   const reWatch = reviews.filter(review => review.Rewatch === true)
-  const twentyTwentyTwo = reviews.filter(
-    review => review['2022 Release'] === true
+  const releasedThisYear = reviews.filter(
+    r =>
+      r['Release Year'] ===
+      (year === 'all' ? `${new Date().getFullYear()}` : year)
   )
 
   const types = [
     { name: 'Total movies', value: reviews.length },
     { name: 'First Watch', value: firstWatch.length },
     { name: 'Rewatch', value: reWatch.length },
-    { name: '2022 Release', value: twentyTwentyTwo.length },
+    {
+      name: `Released in ${year === 'all' ? new Date().getFullYear() : year}`,
+      value: releasedThisYear.length
+    },
     { name: 'Unique Movies', value: uniqueMovies.length }
   ].sort((a, b) => b.value - a.value)
 
@@ -121,9 +154,34 @@ export const generateStats = (reviews: Movie[]): Stats => {
 
 export const StatComponent = ({
   stats,
-  stateless = false
+  stateless
 }: {
   stats: Stats
+  stateless?: boolean
+}) => {
+  const [year, setYear] = useState<UsableReleaseYear | 'all'>('all')
+
+  return (
+    <div className="flex flex-col w-full">
+      <TabList
+        defaultValue={'all'}
+        handleSelect={value => setYear(value)}
+        marginTop="mt-6">
+        <Tab value={'all'} text="All years" />
+        <Tab value={'2023'} text="2023" />
+        <Tab value={'2022'} text="2022" />
+      </TabList>
+
+      <SingleYearStatComponent stateless={stateless} stats={stats[year]} />
+    </div>
+  )
+}
+
+const SingleYearStatComponent = ({
+  stats,
+  stateless = false
+}: {
+  stats: SingleYearStats
   stateless?: boolean
 }) => {
   const { devices, types, where, moviesByMonth } = stats

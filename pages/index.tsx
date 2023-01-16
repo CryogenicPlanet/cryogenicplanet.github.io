@@ -1,6 +1,6 @@
 import copy from 'copy-to-clipboard'
-import Image from 'next/future/image'
 import Head from 'next/head'
+import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useRef } from 'react'
 import { isMobile } from 'react-device-detect'
@@ -24,7 +24,7 @@ import image4 from '@images/home/boat.jpeg'
 import avatarImage from '@images/home/headshot.jpeg'
 import image2 from '@images/home/stark.jpeg'
 import image3 from '@images/home/sunset.jpeg'
-import { Movie, Post } from '@interfaces/index'
+import { Post, RawMovie } from '@interfaces/index'
 import { getAllMovies, getAllPosts } from '@utils/blog'
 import { clsx, formatDate } from '@utils/date'
 
@@ -124,7 +124,7 @@ function Contact() {
   )
 }
 
-function Movies({ movies }: { movies: Movie[] }) {
+function Movies({ movies }: { movies: RawMovie[] }) {
   return (
     <div className="rounded-2xl hidden sm:block border border-zinc-100 p-6 dark:border-zinc-700/40">
       <a
@@ -249,7 +249,7 @@ export default function Home({
   movies
 }: {
   posts: Post[]
-  movies: Movie[]
+  movies: RawMovie[]
 }) {
   const avatarRef = useRef<HTMLDivElement | null>(null)
 

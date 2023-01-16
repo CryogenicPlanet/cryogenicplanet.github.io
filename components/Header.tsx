@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import Image from 'next/future/image'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { Fragment, useEffect, useRef } from 'react'
@@ -203,7 +203,6 @@ function Avatar({
       {...props}>
       <Image
         src={avatarImage}
-        alt=""
         sizes={large ? '16rem' : '2.25rem'}
         className={clsx(
           'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',

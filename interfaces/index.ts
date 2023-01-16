@@ -78,7 +78,10 @@ export const whereWatch = {
 
 export type MovieWhereWatch = keyof typeof whereWatch
 
-export interface Movie extends Rating {
+export type ReleaseYear = '2023' | '2022' | 'Pre 2022'
+export type UsableReleaseYear = Exclude<ReleaseYear, 'Pre 2022'>
+
+export interface RawMovie extends RawRating {
   id: string
   Name: string
   Tier: string
@@ -87,9 +90,11 @@ export interface Movie extends Rating {
   '2022 Release': boolean
   'Where did you watch': MovieWhereWatch[]
   'Device/Location': MovieDevice
+  'Release Year': ReleaseYear
   Rewatch: boolean
   posterOverwrite: string
 }
+export type Movie = RawMovie & Rating
 
 export interface Author {
   id: string
@@ -99,10 +104,17 @@ export interface Author {
   profilePhoto: string
 }
 
-export interface Rating {
+export interface RawRating {
   Enjoyment: string
   Quality: string
   Disappointment: string
+}
+
+export type Rating = RawRating & {
+  score: number
+  disappointmentScore: number
+  qualityScore: number
+  enjoymentScore: number
 }
 
 export interface OmdbSearch {

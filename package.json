@@ -40,10 +40,10 @@
     "plaiceholder": "^2.4.0",
     "postcss": "^8.2.15",
     "postcss-focus-visible": "^6.0.4",
-    "react": "17",
+    "react": "^18.2.0",
     "react-code-blocks": "^0.0.8",
     "react-device-detect": "^2.2.2",
-    "react-dom": "17",
+    "react-dom": "^18.2.0",
     "react-hot-toast": "^1.0.2",
     "react-spinners-kit": "^1.9.1",
     "scrollex": "^2.0.0",
@@ -64,7 +64,7 @@
     "prettier": "^2.3.0",
     "prettier-config-standard": "^1.0.1",
     "sharp": "^0.30.7",
-    "typescript": "4.3.5"
+    "typescript": "4.9.4"
   },
   "license": "MIT",
   "husky": {
