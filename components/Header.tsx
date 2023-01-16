@@ -243,8 +243,6 @@ export const Header = () => {
       )
 
       if (isInitial.current) {
-        console.log('Updating header styles', 'sticky')
-
         setProperty('--header-position', 'sticky')
       }
 

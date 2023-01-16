@@ -23,8 +23,6 @@ export default function MoviePage({
 
   const date = new Date(movie.Seen)
 
-  console.log({ recordMap })
-
   return (
     <Layout
       title={`${movie.Name} | Rahul Tarak`}
