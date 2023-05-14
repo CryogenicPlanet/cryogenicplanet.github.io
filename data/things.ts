@@ -43,7 +43,7 @@ const unsortedThings: Array<{
     type: 'technical',
     year: 2022,
     description: 'A TypeScript library for nominal typing.',
-    githubUrl: 'https://github.com/modfy/nominal'
+    githubUrl: 'https://github.com/scalarhq/nominal'
   },
   {
     title: 'Socialify',
@@ -251,10 +251,10 @@ The short film was made for the India film project season 8. It was a part of th
   },
   {
     title: 'Go Fluent FFmpeg',
-    url: 'https://github.com/modfy/go-fluent-ffmpeg',
+    url: 'https://github.com/scalarhq/go-fluent-ffmpeg',
     year: 2021,
     type: 'technical',
-    githubUrl: 'https://github.com/modfy/go-fluent-ffmpeg',
+    githubUrl: 'https://github.com/scalarhq/go-fluent-ffmpeg',
     description: ' A Go implementation of fluent-ffmpeg '
   },
   {

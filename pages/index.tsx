@@ -26,6 +26,10 @@ import { getAllPosts } from '@utils/blog'
 import { clsx, formatDate } from '@utils/date'
 import { getReviews } from '@utils/reviews'
 
+const description = `I’m Rahul, an entrepreneur and engineer based in Bangalore.
+Currently building scalar.video, where we reinventing video
+editing to be more collaborative and accessible`
+
 function MailIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -111,11 +115,11 @@ function Contact() {
       <div className="mt-6 flex">
         <Button
           onClick={() => {
-            copy('rahul@modfy.video')
+            copy('hey@cryo.wtf')
             toast.success('Copied email to clipboard')
           }}
           className="ml-4 flex-none">
-          rahul@modfy.video
+          hey@cryo.wtf
         </Button>
       </div>
     </div>
@@ -159,7 +163,7 @@ function Links() {
     {
       title: 'My company',
       logo: BriefcaseIcon,
-      link: 'https://modfy.video'
+      link: 'https://scalar.video'
     },
     {
       title: 'My random hacks',
@@ -254,12 +258,7 @@ export default function Home({
         <title>
           Rahul Tarak - Founder, engineer, filmmaker and technologist.
         </title>
-        <meta
-          name="description"
-          content=" I’m Rahul, a engineer and entrepreneur based in Bangalore.
-          I’m the founder of modfy.video, where we reinventing video
-          editing to be more collaborative and accessible"
-        />
+        <meta name="description" content={description} />
       </Head>
       <div className="flex flex-col sm:min-h-screen">
         <div className="flex justify-center w-full sm:px-8">
@@ -289,9 +288,7 @@ export default function Home({
                     Founder, engineer, and amateur filmmaker.
                   </p>
                   <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-                    I’m Rahul, a engineer and entrepreneur based in Bangalore.
-                    I’m the founder of modfy.video, where we reinventing video
-                    editing to be more collaborative and accessible.
+                    {description}
                   </p>
                   <div className="mt-6 flex gap-6">
                     <SocialLink

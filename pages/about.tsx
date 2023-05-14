@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import copy from 'copy-to-clipboard'
-import Image from 'next/image'
 import Head from 'next/head'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import toast from 'react-hot-toast'
@@ -71,8 +71,12 @@ export default function About() {
             <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
               <p>
                 {`I've`} already given the TLDR of who I am, but this is just
-                diving a bit deeper. I am a 21 year old (at the time of writing)
+                diving a bit deeper. I am a 22 year old (at the time of writing)
                 dropout building a startup.
+              </p>
+              <p className="italic">
+                I fully realise this is a bit pretentious and ostentatious, but
+                it is what it is
               </p>
               <p>
                 {`I've`} been writing code for as long as I can remember

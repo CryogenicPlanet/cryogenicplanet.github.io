@@ -4,7 +4,7 @@ export const navigation = {
   main: [
     { name: 'Projects', href: '/things', local: true },
     { name: 'Posts', href: '/posts', local: true },
-    { name: 'Work with me!', href: 'https://modfy.video/jobs' },
+    { name: 'Work with me!', href: 'mailto:rahul@scalar.video' },
     { name: 'Resume', href: '/files/techincal_resume.pdf' }
   ],
   social: [
