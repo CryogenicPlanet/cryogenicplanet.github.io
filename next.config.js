@@ -1,11 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    newNextLinkBehavior: true,
-    scrollRestoration: true,
-    images: {
-      allowFutureImage: true
-    }
+    scrollRestoration: true
   },
   // Target must be serverless
   async rewrites() {

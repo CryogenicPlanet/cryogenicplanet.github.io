@@ -36,11 +36,9 @@ const PostTitle = ({ post }: { post: Post }) => {
 
           <div className="text-sm text-gray-400 flex flex-nowrap items-center space-x-2 overflow-hidden">
             <div className="flex items-center space-x-1">
-              <Link href="/posts" passHref>
-                <a href="/" className="w-full flex items-center">
-                  <ArrowLeftIcon className="w-5 h-5" />
-                  <span className="text-lg pl-2">Back</span>
-                </a>
+              <Link href="/posts" className="w-full flex items-center">
+                <ArrowLeftIcon className="w-5 h-5" />
+                <span className="text-lg pl-2">Back</span>
               </Link>
             </div>
             <div className="flex items-center space-x-1">

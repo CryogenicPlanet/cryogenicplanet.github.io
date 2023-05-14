@@ -67,12 +67,10 @@ export const Movies = view(
             </p>
             <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
               This is a list of movie {`I've`} watched rated in my new{' '}
-              <Link href="/posts/rating">
-                <a
-                  href="/posts/rating"
-                  className="text-gray-800 underline z-10 dark:text-gray-50 pr-3 font-inter text-lg font-medium">
-                  rating format
-                </a>
+              <Link
+                href="/posts/rating"
+                className="text-gray-800 underline z-10 dark:text-gray-50 pr-3 font-inter text-lg font-medium">
+                rating format
               </Link>
             </p>
             <p className="max-w-xl mx-auto text-base text-gray-500">

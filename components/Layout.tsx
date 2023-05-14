@@ -82,12 +82,10 @@ const Layout = ({
             {navigation.main.map(item => (
               <div key={item.name} className="px-5 py-2">
                 {item.local ? (
-                  <Link href={item.href} passHref>
-                    <a
-                      href={item.href}
-                      className="text-base text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-50">
-                      {item.name}
-                    </a>
+                  <Link
+                    href={item.href}
+                    className="text-base text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-50">
+                    {item.name}
                   </Link>
                 ) : (
                   <a

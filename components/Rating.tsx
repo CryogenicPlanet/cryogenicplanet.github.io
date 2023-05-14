@@ -1,4 +1,7 @@
+/* eslint-disable react/prop-types */
 import clsx from 'clsx'
+import React from 'react'
+import colors from 'tailwindcss/colors'
 
 import { Rating, RawRating } from '@interfaces/index'
 
@@ -181,9 +184,7 @@ export const SmallRatingComponent = ({ rating }: { rating: Rating }) => {
 }
 
 export const TinyRatingComponent = ({ rating }: { rating: Rating }) => {
-  const { enjoymentScore, qualityScore, disappointmentScore } = rating
-
-  const disappointmentBg = getDisappointmentBg(disappointmentScore)
+  const { enjoymentScore, qualityScore } = rating
 
   if (!enjoymentScore || !qualityScore)
     return (
@@ -191,58 +192,59 @@ export const TinyRatingComponent = ({ rating }: { rating: Rating }) => {
     )
 
   return (
-    <div className="flex row w-full justify-start space-x-4">
-      <div className={disappointmentScore ? 'w-1/3' : 'w-1/2'}>
-        <p className="text-xs font-medium text-gray-200">
-          Quality ({qualityScore})
-        </p>
-        <div className="flex  bg-gradient-to-r from-green-200 to-green-500 rounded-full overflow-hidden">
+    <div className="flex row w-full justify-start space-x-4 py-1">
+      <div className="w-1/2 flex  items-center justify-center space-x-2">
+        <p className="text-xs font-medium text-gray-400">Quality</p>
+        <CircularProgress
+          className="h-8 w-8 text-gray-50"
+          value={qualityScore}
+          max={10}></CircularProgress>
+
+        {/* <div className="flex  bg-gradient-to-r from-green-200 to-green-500 rounded-full overflow-hidden">
           <div
             className="h-2  bg-transparent rounded-full transition-all duration-200 ease-in-out"
             style={{ width: `${(qualityScore / 10) * 100}%` }}
           />
           <div className="h-2  flex-1 bg-zinc-700 transition-all duration-200 ease-in-out"></div>
-        </div>
+        </div> */}
       </div>
-      <div className={disappointmentScore ? 'w-1/3' : 'w-1/2'}>
-        <p className="text-xs font-medium text-gray-200 ">
-          Enjoyment ({enjoymentScore})
-        </p>
+      <div className="w-1/2 flex items-center justify-center space-x-2">
+        <p className="text-xs font-medium text-gray-400 ">Enjoyment</p>
 
-        <div className="flex  bg-gradient-to-r from-green-200 to-green-500 rounded-full overflow-hidden">
-          <div
-            className="h-2  bg-transparent rounded-full transition-all duration-200 ease-in-out"
-            style={{ width: `${(enjoymentScore / 10) * 100}%` }}
-          />
-          <div className="h-2  flex-1 bg-zinc-700 transition-all duration-200 ease-in-out"></div>
-        </div>
+        <CircularProgress
+          className="h-8 w-8 text-gray-50"
+          value={enjoymentScore}
+          max={10}></CircularProgress>
       </div>
-      {disappointmentScore !== 0 && (
-        <div className="flex-1 w-full">
-          <p className="text-xs font-medium text-gray-200">
-            Disappointment ({disappointmentScore})
-          </p>
-          <div className="mt-1" aria-hidden="true">
-            <div
-              className={`flex ${
-                disappointmentScore > 0
-                  ? 'bg-gradient-to-r from-red-500 to-red-800'
-                  : 'bg-transparent'
-              } rounded-full overflow-hidden`}>
-              <div
-                className="h-2  bg-transparent rounded-full transition-all duration-200 ease-in-out"
-                style={{
-                  width: `${(disappointmentScore / 5) * 100}%`
-                }}
-              />
-              <div
-                className={`h-2  flex-1 ${disappointmentBg} transition-all duration-300 ease-in-out`}></div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
 
 export default RatingComponent
+
+const CircularProgress = ({
+  value,
+  max
+}: {
+  value: number
+  max: number
+  className?: string
+}) => {
+  const percent = (value / max) * 100
+
+  const progressBarStyles = {
+    background: `conic-gradient(${colors.indigo[500]} ${percent}%, #E5E7EB ${percent}% 100%)`
+  }
+
+  return (
+    <div className="relative w-8 h-8 p-1 rounded-full opacity-70">
+      <div
+        className="absolute inset-0 rounded-full bg-slate-900"
+        style={progressBarStyles}></div>
+      <div className="absolute inset-1 rounded-full  bg-slate-900 border-2 border-transparent"></div>
+      <div className="absolute inset-0 flex w-full h-full justify-center items-center text-gray-50 text-xs">
+        {value}
+      </div>
+    </div>
+  )
+}

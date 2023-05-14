@@ -79,28 +79,26 @@ function ThingsNav({ filter }: { filter?: string }) {
         <div className="border-b border-gray-200">
           <nav className="-mb-px flex space-x-8" aria-label="Tabs">
             {tabs.map(tab => (
-              <Link key={tab.name} href={tab.href} passHref>
-                <a
-                  key={tab.name}
-                  href={tab.href}
+              <Link
+                key={tab.name}
+                href={tab.href}
+                className={classNames(
+                  tab.name === currentTabName
+                    ? 'border-teal-500 text-teal-300'
+                    : 'border-transparent text-gray-300 hover:text-gray-200  hover:border-gray-300',
+                  'group inline-flex items-center py-4 capitalize px-1 border-b-2 font-medium text-sm'
+                )}>
+                {/* @ts-ignore */}
+                <tab.icon
                   className={classNames(
                     tab.name === currentTabName
-                      ? 'border-teal-500 text-teal-300'
-                      : 'border-transparent text-gray-300 hover:text-gray-200  hover:border-gray-300',
-                    'group inline-flex items-center py-4 capitalize px-1 border-b-2 font-medium text-sm'
-                  )}>
-                  {/* @ts-ignore */}
-                  <tab.icon
-                    className={classNames(
-                      tab.name === currentTabName
-                        ? 'text-teal-300'
-                        : 'text-gray-300 group-hover:text-gray-200 ',
-                      '-ml-0.5 mr-2 h-5 w-5'
-                    )}
-                    aria-hidden="true"
-                  />
-                  <span>{tab.name}</span>
-                </a>
+                      ? 'text-teal-300'
+                      : 'text-gray-300 group-hover:text-gray-200 ',
+                    '-ml-0.5 mr-2 h-5 w-5'
+                  )}
+                  aria-hidden="true"
+                />
+                <span>{tab.name}</span>
               </Link>
             ))}
           </nav>
