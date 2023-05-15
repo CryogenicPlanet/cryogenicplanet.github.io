@@ -101,6 +101,7 @@ const PhotoPage = ({
                     </button>
                     <div className="mt-3 flex-1 text-center sm:mt-5 aspect-w-16 aspect-h-9 max-h-[60vh]">
                       <Img
+                        alt="image"
                         layout="fill"
                         blurDataURL={currentImage.base64}
                         placeholder="blur"

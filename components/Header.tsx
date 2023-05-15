@@ -202,6 +202,7 @@ function Avatar({
       className={clsx(className, 'pointer-events-auto')}
       {...props}>
       <Image
+        alt="avatar"
         src={avatarImage}
         sizes={large ? '16rem' : '2.25rem'}
         className={clsx(

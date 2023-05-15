@@ -30,6 +30,7 @@ export default function PhotosPage({ images }: { images: Photos }) {
                             'group block w-full  object-cover object-center overflow-hidden'
                           }>
                           <Img
+                            alt="image"
                             placeholder="blur"
                             {...image.img}
                             blurDataURL={image.base64}
