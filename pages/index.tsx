@@ -255,10 +255,18 @@ export default function Home({
   return (
     <div className="dark">
       <Head>
-        <title>
-          Rahul Tarak - Founder, engineer, filmmaker and technologist.
-        </title>
+        <title>Rahul Tarak - Founder, engineer, and amateur filmmaker.</title>
         <meta name="description" content={description} />
+        <meta
+          name="og:image"
+          content="https://user-images.githubusercontent.com/10355479/238221217-0199f17c-8f20-4e9e-b64b-dec0e2a625e7.jpeg"
+        />
+        <meta
+          name="og:title"
+          content="Rahul Tarak - Founder, engineer, and amateur filmmaker."
+        />
+        <meta name="og:description" content={description} />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <div className="flex flex-col sm:min-h-screen">
         <div className="flex justify-center w-full sm:px-8">
