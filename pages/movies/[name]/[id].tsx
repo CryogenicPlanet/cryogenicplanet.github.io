@@ -12,6 +12,23 @@ import { getReviewsISR } from '@utils/reviews'
 
 const notion = new NotionAPI()
 
+const getUrl = (movie: Movie) => {
+  if (!movie.poster) return ''
+
+  const url = new URL('https://cryogenicplanet.tech/api/movies/og')
+  url.searchParams.append('name', movie.Name)
+
+  url.searchParams.append('poster', movie.poster)
+  url.searchParams.append('enjoyment', movie.Enjoyment)
+  url.searchParams.append('quality', movie.Quality)
+
+  const date = new Date(movie.Seen)
+
+  url.searchParams.append('date', date.toLocaleDateString('en-US'))
+
+  return url.toString()
+}
+
 export default function MoviePage({
   movie,
   recordMap
@@ -27,7 +44,7 @@ export default function MoviePage({
     <Layout
       title={`${movie.Name} | Rahul Tarak`}
       description={`Review of ${movie.Name} by Rahul Tarak`}
-      ogImage={movie.poster}>
+      ogImage={getUrl(movie)}>
       <div className="min-h-screen flex flex-col">
         <div className="container mx-auto px-4 sm:px-6 justify-center flex-grow max-w-6xl">
           <div className="my-16">

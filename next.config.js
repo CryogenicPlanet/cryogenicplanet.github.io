@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    scrollRestoration: true
-  },
   // Target must be serverless
   async rewrites() {
     return [
