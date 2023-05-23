@@ -26,7 +26,7 @@ import { getAllPosts } from '@utils/blog'
 import { clsx, formatDate } from '@utils/date'
 import { getReviews } from '@utils/reviews'
 
-const description = `I’m Rahul, an entrepreneur and engineer based in Bangalore.
+const description = `I’m Rahul, an entrepreneur and engineer.
 Currently building scalar.video, where we reinventing video
 editing to be more collaborative and accessible`
 

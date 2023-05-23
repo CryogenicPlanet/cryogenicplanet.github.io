@@ -23,8 +23,8 @@ import 'prismjs/components/prism-json'
 
 import mysuru from '../public/images/home/bg.jpg'
 import dubaiBeach from '../public/images/home/bg2.jpg'
-import bg from '../public/images/home/color-bleed.jpg'
 import dubai from '../public/images/home/dubai.jpeg'
+import bg from '../public/images/home/experimental.jpeg'
 import sky from '../public/images/home/sky.jpeg'
 import sunset from '../public/images/home/sunsetLandscape.jpeg'
 
@@ -79,7 +79,7 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
     <div className="grid bg-zinc-900 sm:bg-black">
       <div
         className={classNames(
-          'stackedLayer relative bg-cover min-h-screen  bg-center bg-fixed	w-full overflow-x-hidden',
+          'stackedLayer relative bg-cover min-h-screen bg-center bg-fixed	w-full overflow-x-hidden',
           isHome ? '' : 'filter blur-md'
         )}
         style={

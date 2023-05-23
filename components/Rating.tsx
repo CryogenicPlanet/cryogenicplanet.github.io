@@ -242,7 +242,7 @@ const CircularProgress = ({
         className="absolute inset-0 rounded-full bg-slate-900"
         style={progressBarStyles}></div>
       <div className="absolute inset-1 rounded-full  bg-slate-900 border-2 border-transparent"></div>
-      <div className="absolute inset-0 flex w-full h-full justify-center items-center text-gray-50 text-xs">
+      <div className="absolute inset-0 flex w-full h-full justify-center items-center text-gray-50 text-[8px]">
         {value}
       </div>
     </div>
