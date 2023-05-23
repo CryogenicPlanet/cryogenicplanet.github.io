@@ -45,6 +45,7 @@ const Layout = ({
               name="og:description"
               content={description || 'Personal space on the internet'}></meta>
             <meta name="og:type" content="website"></meta>
+            <meta name="twitter:card" content="summary_large_image" />
             <meta
               name="og:image"
               content={

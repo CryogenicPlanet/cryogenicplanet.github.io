@@ -67,7 +67,7 @@ export default async function (request: NextRequest) {
         <div
           style={{
             backgroundImage:
-              'linear-gradient(to right, rgb(251, 146, 60), rgb(251, 113, 133))'
+              'linear-gradient(to right, rgb(236, 72, 153), rgb(239, 68, 68), rgb(234, 179, 8))'
           }}
           tw="h-full w-full bg-zinc-900 flex">
           <div tw="flex flex-col md:flex-row w-full md:items-center justify-between h-full">
