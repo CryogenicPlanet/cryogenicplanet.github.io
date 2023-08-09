@@ -42,13 +42,11 @@ function CircularProgress({
 export default async function (request: NextRequest) {
   const { searchParams } = request.nextUrl
 
-  const movieName = searchParams.get('name') || 'Moneyball'
   const moviePoster =
     searchParams.get('poster') ||
     'https://m.media-amazon.com/images/M/MV5BMjAxOTU3Mzc1M15BMl5BanBnXkFtZTcwMzk1ODUzNg@@._V1_SX300.jpg'
-  const enjoymentScore = parseFloat(searchParams.get('enjoyment') || '0')
-  const qualityScore = parseFloat(searchParams.get('quality') || '0')
-  const date = searchParams.get('date') || '22nd May 2023'
+  const enjoymentScore = parseFloat(searchParams.get('enjoyment') || '9')
+  const qualityScore = parseFloat(searchParams.get('quality') || '9')
 
   // const username = searchParams.get('username')
 
@@ -64,57 +62,35 @@ export default async function (request: NextRequest) {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <div
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, rgb(236, 72, 153), rgb(239, 68, 68), rgb(234, 179, 8))'
-          }}
-          tw="h-full w-full bg-zinc-900 flex">
-          <div tw="flex flex-col md:flex-row w-full md:items-center justify-between h-full">
-            <div tw="h-full flex items-center">
+        <div tw="h-full w-full bg-zinc-900 flex">
+          <img
+            alt=""
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0
+            }}
+            width={1200}
+            src={'https://cryogenicplanet.tech/images/movieOg.png'}
+            height={630}></img>
+          <div tw="flex w-full md:items-center justify-between h-full">
+            <div tw="flex w-1/3 flex-col items-center justify-center space-y-4">
+              <p tw="text-4xl text-zinc-300">Quality</p>
+              <CircularProgress
+                percentage={qualityScore * 10}
+                color="text-zinc-500"></CircularProgress>
+            </div>
+
+            <div tw="h-full flex w-1/3 items-center">
               <img src={moviePoster} alt="" width={430} height={636} />
             </div>
-            <div
-              tw="flex-1 flex flex-col px-8 w-full justify-center"
-              style={{}}>
-              <p tw="text-8xl text-gray-50 leading-8 capitalize">{movieName}</p>
-              <p tw="text-2xl text-gray-50 leading-8 capitalize">{date}</p>
 
-              <div tw="flex py-4 items-center w-full">
-                <div tw="flex flex-col space-y-4">
-                  <p tw="text-4xl text-gray-50">Quality</p>
-                  <CircularProgress
-                    percentage={qualityScore * 10}
-                    color="text-indigo-500"></CircularProgress>
-                </div>
-                <div tw="flex flex-col space-y-4 px-8">
-                  <p tw="text-4xl text-gray-50">Enjoyment</p>
-                  <CircularProgress
-                    percentage={enjoymentScore * 10}
-                    color="text-indigo-500"></CircularProgress>
-                </div>
-
-                {/* <div
-                  tw="h-2 flex  bg-transparent rounded-full transition-all duration-200 ease-in-out"
-                  style={{ width: `${(8 / 10) * 100}%` }}
-                />
-                <div tw="h-2  flex-1 bg-zinc-700 transition-all duration-200 ease-in-out"></div> */}
-              </div>
+            <div tw="flex flex-col w-1/3 items-center justify-center space-y-4 px-8">
+              <p tw="text-4xl text-zinc-300">Enjoyment</p>
+              <CircularProgress
+                percentage={enjoymentScore * 10}
+                color="text-zinc-500"></CircularProgress>
             </div>
-            {/* <div tw="mt-8 flex md:mt-0">
-              <div tw="flex rounded-md shadow">
-                <div tw="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white">
-                  Get started
-                </div>
-              </div>
-              <div tw="ml-3 flex rounded-md shadow">
-                <div
-                  // href="#"
-                  tw="flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600">
-                  Learn more
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
