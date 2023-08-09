@@ -40,6 +40,8 @@ export const PlatformTag = ({ platform }: { platform: MovieDevice }) => {
 export const WhereWatchTag = ({ platform }: { platform: MovieWhereWatch }) => {
   const hex = whereWatch[platform]
 
+  if (!hex) return null
+
   return (
     <span
       className="flex-shrink-0 inline-block px-2 py-0.5 text-white text-xs font-medium  rounded-full"

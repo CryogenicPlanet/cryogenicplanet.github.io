@@ -69,6 +69,11 @@ export const whereWatch = {
     color: 'default',
     rgba: '80,85,88'
   },
+  Plane: {
+    name: 'Plane',
+    color: 'purple',
+    rgba: '154,109,215,0.5'
+  },
   'Not from this year': {
     name: 'Not from this year',
     color: 'gray',
