@@ -233,7 +233,7 @@ const CircularProgress = ({
   const percent = (value / max) * 100
 
   const progressBarStyles = {
-    background: `conic-gradient(${colors.indigo[500]} ${percent}%, #E5E7EB ${percent}% 100%)`
+    background: `conic-gradient(${colors.zinc[500]} ${percent}%, #E5E7EB ${percent}% 100%)`
   }
 
   return (
