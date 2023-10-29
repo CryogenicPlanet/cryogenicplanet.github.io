@@ -13,6 +13,7 @@ import {
   useScrollHeight,
   useWindowSize
 } from '@utils/useWindowSize'
+import { Analytics } from '@vercel/analytics/react'
 
 import 'prismjs'
 import 'prismjs/components/prism-markup'
@@ -104,6 +105,8 @@ const ModfyApp = ({ Component, pageProps, router }: AppProps) => {
             />
           </div>
         </div>
+
+        <Analytics></Analytics>
 
         <Toaster position="top-right"></Toaster>
         <main
