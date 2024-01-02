@@ -168,6 +168,7 @@ export const StatComponent = ({
         handleSelect={value => setYear(value)}
         marginTop="mt-6">
         <Tab value={'all'} text="All years" />
+        <Tab value={'2024'} text="2024" />
         <Tab value={'2023'} text="2023" />
         <Tab value={'2022'} text="2022" />
       </TabList>
