@@ -71,8 +71,14 @@ export default function About() {
             <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
               <p>
                 {`I've`} already given the TLDR of who I am, but this is just
-                diving a bit deeper. I am a 22 year old (at the time of writing)
-                dropout building a startup.
+                diving a bit deeper. I am{' '}
+                {new Date().getFullYear() -
+                  2000 -
+                  (new Date().getMonth() < 11 ||
+                  (new Date().getMonth() === 11 && new Date().getDate() < 5)
+                    ? 1
+                    : 0)}{' '}
+                years old dropout building a startup.
               </p>
               <p className="italic">
                 I fully realise this is a bit pretentious and ostentatious, but
