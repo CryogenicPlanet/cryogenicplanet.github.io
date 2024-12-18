@@ -32,7 +32,7 @@
     "clsx": "^1.2.1",
     "copy-to-clipboard": "^3.3.1",
     "feed": "^4.2.2",
-    "next": "13.4.2",
+    "next": "14.2.15",
     "next-seo": "^4.24.0",
     "next-simple-google-analytics": "^1.1.0",
     "next-ts-routes": "0.1.10",
